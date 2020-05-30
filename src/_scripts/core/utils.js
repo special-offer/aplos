@@ -397,6 +397,10 @@ export function decodeEntities(encodedString) {
   return textArea.value;
 }
 
+export function isTouch() {
+  return ((Modernizr && Modernizr.touchevents) || 'ontouchstart' in window);
+}
+
 export function credits() {
   if (window && window.location && window.location.hostname !== 'localhost') {
     // eslint-disable-next-line no-console, max-len

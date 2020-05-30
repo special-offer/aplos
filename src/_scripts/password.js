@@ -1,15 +1,7 @@
 import $ from 'jquery';
-
-import * as Animations  from './core/animations';
-import * as Breakpoints from './core/breakpoints';
-
-// Sections
-import SectionManager  from './sections/sectionManager';
+import { userAgentBodyClass } from './core/utils';
+import SectionManager from './sections/sectionManager';
 import PasswordSection from './sections/password';
-
-// Do this ASAP
-Animations.initialize();
-Breakpoints.initialize();
 
 ((Modernizr) => {
   const $body = $(document.body);
@@ -17,12 +9,7 @@ Breakpoints.initialize();
 
   sectionManager.register('password', PasswordSection);
 
-  setTimeout(() => {
-    $body.removeClass('is-loading').addClass('is-loaded');
-  }, 500);
+  userAgentBodyClass(); // Apply UA classes to the document
 
-  // Add "development mode" class for CSS hook
-  if (window.location.hostname === 'localhost') {
-    document.body.classList.add('development-mode');
-  }
+  $body.removeClass('is-loading').addClass('is-loaded');
 })(Modernizr);
