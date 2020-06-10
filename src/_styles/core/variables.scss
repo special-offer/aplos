@@ -996,8 +996,8 @@ $minimal-input-height-large:            60px;
 // Drawer
 
 $drawer-max-width:                      400px;
-$drawer-bg:                             $white;
-$drawer-border-color:                   darken($drawer-bg, 5%);
+$drawer-bg:                             $black;
+$drawer-color:                          $white;
 $drawer-padding-vertical:               $grid-gutter-width;
 $drawer-padding-horizontal:             $grid-gutter-width;
 $drawer-backdrop-color:                 #888;

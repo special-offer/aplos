@@ -14,10 +14,20 @@
         "type": "header",
         "content": "Accounts"
       },
+        {
+        "type": "text",
+        "id": "social_handle_instagram",
+        "label": "Instagram Handle"
+      },
       {
         "type": "text",
-        "id": "social_twitter_handle",
+        "id": "social_handle_twitter",
         "label": "Twitter Handle"
+      },
+      {
+        "type": "text",
+        "id": "social_handle_facebook",
+        "label": "Facebook Handle"
       }
     ]
   },

@@ -7,18 +7,17 @@
   & + & {
     margin-top: 30px;
   }
-
-  &--primary {
-
-  }
-
-  &--secondary {
-
-  }
 }
 
 .mobile-menu-list {
   @include list-unstyled;
   margin-bottom: 0;
-  text-align: center;
+
+  &--primary {
+    font-size: 24px;
+  }
+
+  &--secondary {
+    font-family: $font-family-sans-serif;
+  }
 }

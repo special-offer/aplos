@@ -1,63 +1,69 @@
 <div data-section-id="{{ section.id }}" data-section-type="mobile-menu">
 
-  <div class="drawer" data-mobile-menu>
-
+  <div class="drawer drawer--left" data-mobile-menu>
     <div class="drawer__inner">
       <div class="drawer__header">
         <a href="#" class="drawer__close" data-drawer-close>
           {% include 'icon-close' %}
         </a>        
-        <h5 class="drawer__header-title">Mobile Menu</h5>
+        <h5 class="drawer__header-title">{{ shop.name }}</h5>
       </div>
       <div class="drawer__body">
         <div class="drawer__body-contents">
           {% comment %} Menus {% endcomment %}
           <div class="mobile-menu-block mobile-menu-block--primary">
-            {% if section.settings.primary_linklist and linklists[section.settings.primary_linklist].links.size > 0 %}
-              {% for link in linklists[section.settings.primary_linklist].links %}
-                {% assign sublist_id = 'mobile-primary-menu-' | append: forloop.index %}
-                <div class="panel">
-                  <div class="expandable-list">
-                    <div class="expandable-list__header">
-                      {% if link.links.size > 0 %}
-                        <a href="#{{ sublist_id }}" class="expandable-list__header-title" data-toggle="collapse" aria-expanded="false" aria-controls="{{ sublist_id }}">
-                          {{ link.title }} {% include 'icon-caret-down' %}
-                        </a>
-                      {% else %}
-                        <a href="{{ link.url }}" class="expandable-list__header-title">{{ link.title }}</a>                      
-                      {% endif %}
-                    </div>
-                    {% if link.links.size > 0 %}
-                      <div id="{{ sublist_id }}" class="collapse">
-                        <div class="expandable-list__body">
-                          {% for sublink in link.links %}
-                            <div class="expandable-list__item">
-                              <a href="{{ sublink.url }}" class="expandable-list__item-title">{{ sublink.title }}</a>                          
-                            </div>
-                          {% endfor %}
-                        </div>
-                      </div>
-                    {% endif %}
-                  </div>
-                </div>
-              {% endfor %}
+            {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
+              <ul class="mobile-menu-list mobile-menu-list--primary">
+                {% for link in linklists[section.settings.linklist].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
             {% endif %}
           </div>
-  
-          <div class="mobile-menu-block mobile-menu-block--secondary">
-            <ul class="mobile-menu-list">
-              {% if shop.customer_accounts_enabled %}
-                {% if customer %}
-                  <li><a href="/account">My Account</a></li>
-                  <li>{{ 'Log out' | customer_logout_link }}</li>
-                {% else %}
-                  <li><a href="/account/login">Login or Register</a></li>
-                {% endif %}
+    
+          {% if section.settings.show_social_accounts %}
+            {%- capture social_menu_html %}
+              {% if settings.social_handle_instagram != blank %}
+                <li>
+                  <a href="https://instagram.com/{{ settings.social_handle_instagram }}" target="_blank">Instagram</a>
+                </li>
               {% endif %}
-              {% for link in linklists[section.settings.secondary_linklist].links %}
-                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-              {% endfor %}
-            </ul>
+              {% if settings.social_handle_facebook != blank %}
+                <li>
+                  <a href="https://facebook.com/{{ settings.social_handle_facebook }}" target="_blank">Facebook</a>
+                </li>
+              {% endif %}
+              {% if settings.social_handle_twitter != blank %}
+                <li>
+                  <a href="https://twitter.com/{{ settings.social_handle_twitter }}" target="_blank">Twitter</a>
+                </li>
+              {% endif %}
+            {%- endcapture -%}
+
+            {% if social_menu_html != blank %}
+              <div class="mobile-menu-block">
+                <ul class="mobile-menu-list mobile-menu-list--secondary">
+                  {{ social_menu_html }}
+                </ul>
+              </div>
+            {% endif %}
+          {% endif %}
+
+          <div>
+            {% if section.settings.footer_text != blank %}
+              {% assign year = 'now' | date: "%Y" %}
+              <div>
+                {{ section.settings.footer_text | replace: '$year$', year | replace: '$shop$', shop.name | replace: '&nbsp;', ' ' | strip }}
+              </div>
+            {% endif %}
+
+            {% if section.settings.footer_linklist and linklists[section.settings.footer_linklist].links.size > 0 %}
+              <ul class="list-unstyled list-inline">
+                {% for link in linklists[section.settings.footer_linklist].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}            
           </div>
         </div>
       </div>
@@ -69,16 +75,32 @@
 {% schema %}
   {
     "name": "Mobile Menu",
-    "settings": [   
+    "settings": [
       {
         "type": "link_list",
-        "id": "primary_linklist",
-        "label": "Primary Menu"
+        "id": "linklist",
+        "label": "Menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social_accounts",
+        "label": "Show social account links",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "richtext",
+        "id": "footer_text",
+        "label": "Text",
+        "info": "Use '$year$' to include the current year.  Use $shop$ to include the name of your shop."
       },
       {
         "type": "link_list",
-        "id": "secondary_linklist",
-        "label": "Secondary Menu"
+        "id": "footer_linklist",
+        "label": "Menu"
       }
     ]
   }
