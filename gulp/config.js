@@ -8,8 +8,8 @@ module.exports = {
       src: '/_styles',
       dest: '../dist/assets',
       filePattern: ['src/_styles/**/*.scss'],
-      // files: ['theme.scss'],
-      files: ['password.scss'],
+      files: ['theme.scss'],
+      // files: ['password.scss'],
       // files: ['checkout.scss'],
       // files: ['theme.scss', 'checkout.scss'],
       watchTask: 'styles',
@@ -20,10 +20,10 @@ module.exports = {
       dest: '../dist/assets',
       extensions: ['js'],
       bundles: [{
-        // entries: 'theme.js',
-        // outputName: 'theme.js'
-        entries: 'password.js',
-        outputName: 'password.js'        
+        entries: 'theme.js',
+        outputName: 'theme.js'
+        // entries: 'password.js',
+        // outputName: 'password.js'        
       }]  
       // bundles: [{
       //   entries: 'theme.js',
