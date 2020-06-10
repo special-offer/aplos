@@ -5,11 +5,7 @@
 {% endif %}
 
 <a href="/" itemprop="url" class="header-logo">
-   {% assign logo_img = 'logo.png' %}
-   {% assign logo_img_size = '200x' %}
-    <img src="{{ logo_img | asset_img_url: logo_img_size }}"
-         srcset="{{ logo_img | asset_img_url: logo_img_size }} 1x, {{ logo_img | asset_img_url: logo_img_size, scale: 2 }} 2x"
-         alt="{{ shop.name }}"
-         class="header-logo__image"
-         itemprop="logo">
+  <span class="header-logo__image">
+    {% include 'icon-logo' %}
+  </span>
 </a>

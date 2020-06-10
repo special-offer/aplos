@@ -928,9 +928,9 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 // Variables to adjust site-wide components that are *not* part of bootstrap
 
 // Pencil Banner
-$pencil-banner-padding-vertical:        8px;
-$pencil-banner-bg:                      $black;
-$pencil-banner-text-color:              $white;
+$pencil-banner-padding-vertical:        15px;
+$pencil-banner-bg:                      rgb(230, 226, 113);
+$pencil-banner-text-color:              $black;
 
 
 // Header
@@ -938,12 +938,9 @@ $pencil-banner-text-color:              $white;
 $header-bp-min:                         map-get($grid-breakpoints, "md") !default; // Above this breakpoint, switch to the full desktop nav
 $header-height-small:                   65px !default;
 $header-height-base:                    75px !default;
-$header-bg:                             $white !default;
+$header-bg:                             rgb(248, 250, 204);
 $header-text-color:                     $body-color !default;
 $header-logo-width:                     120px !default;
-$header-dropdown-bg:                    $header-bg !default;
-$header-dropdown-box-shadow:            0 8px 15px -10px transparentize($black, 0.85) !default;
-$header-dropdown-menu-spacing:          25px !default; // Horizontal spacing between dropdown menus
 
 
 // Footer

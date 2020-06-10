@@ -1,0 +1,60 @@
+<div data-section-id="{{ section.id }}" data-section-type="header">
+  <header class="header" role="banner" data-header>
+    <div class="header-container">
+      {% comment %} Header nav on desktop {% endcomment %}
+      <div class="header-nav header-nav--left header-nav--hide-on-mobile">
+        {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
+          <ul class="header-nav__menu">
+            {% for link in linklists[section.settings.linklist].links %}
+              <li class="header-nav__menu-item">        
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}         
+          </ul>
+        {% endif %}
+      </div>
+      {% comment %} Header nav on mobile {% endcomment %}
+      <div class="header-nav header-nav--left header-nav--hide-on-desktop">
+        <ul class="header-nav__menu">
+          <li class="header-nav__menu-item">
+            <a href="#" title="Toggle menu" data-mobile-menu-toggle>
+              Menu
+            </a>
+          </li>
+        </ul>
+      </div>      
+      
+      {% comment %} Logo {% endcomment %}
+      <div class="header-nav header-nav--center header-nav--logo">
+        {% include 'header-logo' %}
+      </div>
+
+      {% comment %} Cart {% endcomment %}
+      <div class="header-nav header-nav--right">
+        <ul class="header-nav__menu">
+          <li class="header-nav__menu-item">   
+            <a href="/cart" data-ajax-cart-trigger>
+              <div class="header-cart__badge{% if cart.item_count > 0 %} has-items{% endif %}" data-cart-badge>
+                {% include 'icon-cart' %}
+                <span class="header-cart__badge-count" data-cart-badge-count>{{ cart.item_count }}</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+</div>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "linklist",
+        "label": "Menu"
+      }
+    ]
+  }
+{% endschema %}
