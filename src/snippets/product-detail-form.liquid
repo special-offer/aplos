@@ -18,7 +18,10 @@
 
 <div data-product-detail-form>
   <h1>{{ product.title }}</h1>
-  <p>{{ product.vendor }}</p>
+
+  <div class="rte">
+    {{ product.description }}
+  </div>  
 
   {% include 'product-detail-price', product: product, current_variant: current_variant %}
 
@@ -135,10 +138,6 @@
       </form>
     </div>
 
-  </div>
-
-  <div class="rte">
-    {{ product.description }}
   </div>
 
   {% unless product == empty %}

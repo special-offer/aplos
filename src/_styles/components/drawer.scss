@@ -95,6 +95,7 @@ body.drawer-open {
   left: 0;
   z-index: $zindex-drawer-backdrop;
   background-color: $drawer-backdrop-color;
+  mix-blend-mode: hard-light;
   opacity: 0;
   pointer-events: none;
   transition: all $transition-duration-slide $transition-timing-function-slide-out;

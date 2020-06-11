@@ -15,19 +15,7 @@
                 ph_subtitle: collection.description
     %}
 
-    {% if collection.products.size > 0 %}
-      <div class="collection-filter-bar">
-        <div class="collection-filter-bar__grouping">
-          {% if section.settings.enable_sort %}
-            {% include 'collection-sort' %}
-          {% endif %}
-        </div>
-      </div>
-
-      <p class="d-none d-md-block">
-        <small>Showing {{ collection.products.size }} {{ collection.products.size | pluralize: 'Item', 'Items' }}</small>
-      </p>      
-
+    {% if collection.products.size > 0 %}     
       <div class="content-grid">
         {% for product in collection.products %}
 
@@ -79,13 +67,6 @@
 {% schema %}
   {
     "name": "Collection",
-    "settings": [
-      {
-        "id": "enable_sort",
-        "type": "checkbox",
-        "label": "Enable Sort",
-        "default": true
-      }
-    ]
+    "settings": []
   }
 {% endschema %}

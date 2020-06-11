@@ -1,1 +1,11 @@
-{% section 'cart' %}
+{% assign is_theme_editor = false %}
+{% if content_for_header contains 'designMode' or content_for_header contains 'preview_host' or content_for_header contains 'designModeScript' %}
+  {% assign is_theme_editor = true %}
+{% endif %}
+
+{% if is_theme_editor %}
+  {% section 'cart' %}
+{% else %}
+  {% layout none %}
+  <script type="text/javascript">window.location = '/?cart';</script>
+{% endif %}

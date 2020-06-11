@@ -15,12 +15,15 @@ body.ajax-cart-open {
   width: 100%;
   max-height: 100%;
   background: $ajax-cart-bg;
-  border: 1px solid $ajax-cart-border-color;
   pointer-events: none;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   transform: translateX(100%);
   transition: all $transition-duration-slide $transition-timing-function-slide-out;
+
+  &, h1, h2, h3, h4, h5, h6, a {
+    color: $ajax-cart-color;
+  }
 
   &.is-open {
     pointer-events: auto;
@@ -99,6 +102,7 @@ body.ajax-cart-open {
 
 .ajax-cart__close {
   float: right;
+  width: 20px;
 }
 
 .ajax-cart__empty-message {
@@ -107,7 +111,6 @@ body.ajax-cart-open {
   align-items: center;
   justify-content: center;
   padding: $ajax-cart-padding-vertical*2 0;
-  opacity: 0.5;
 }
 
 .ajax-cart__list {
@@ -186,6 +189,7 @@ body.ajax-cart-open {
   left: 0;
   z-index: $zindex-ajax-cart-backdrop;
   background-color: $ajax-cart-backdrop-color;
+  mix-blend-mode: hard-light;
   opacity: 0;
   pointer-events: none;
   transition: all $transition-duration-slide $transition-timing-function-slide-out;

@@ -89,12 +89,11 @@
  * Try to use the body template class as a CSS hook
  *
  */
-@import 'templates/cart.scss';
-@import 'templates/collection.scss';
-@import 'templates/404.scss';
-@import 'templates/gift-card.scss';
-@import 'templates/customer.scss';
-@import 'templates/challenge.scss';
+@import 'templates/collection';
+@import 'templates/404';
+@import 'templates/gift-card';
+@import 'templates/customer';
+@import 'templates/challenge';
 
 .development-mode {
   /* stylelint-disable-next-line selector-max-id */

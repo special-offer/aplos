@@ -1000,8 +1000,8 @@ $drawer-bg:                             $black;
 $drawer-color:                          $white;
 $drawer-padding-vertical:               $grid-gutter-width;
 $drawer-padding-horizontal:             $grid-gutter-width;
-$drawer-backdrop-color:                 #888;
-$drawer-backdrop-opacity:               0.6;
+$drawer-backdrop-color:                 #feffdf;
+$drawer-backdrop-opacity:               1;
 $drawer-header-font-size:               $h5-font-size;
 $drawer-header-border-color:            $black;
 
@@ -1009,8 +1009,8 @@ $drawer-header-border-color:            $black;
 // AJAX Cart
 
 $ajax-cart-width:                       400px;
-$ajax-cart-bg:                          $white;
-$ajax-cart-border-color:                darken($ajax-cart-bg, 5%);
+$ajax-cart-bg:                          $black;
+$ajax-cart-color:                       $white;
 $ajax-cart-padding-vertical:            $grid-gutter-width;
 $ajax-cart-padding-horizontal:          $grid-gutter-width;
 $ajax-cart-backdrop-color:              $drawer-backdrop-color;

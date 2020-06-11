@@ -127,15 +127,16 @@
   }
 
   svg {
-    width: 30px;
+    width: 40px;
   }
 }
 
 .header-cart__badge-count {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  top: -7px;
+  right: -10px;
   opacity: 0;
+  transition: opacity 300ms ease-out;
 
   .has-items & {
     opacity: 1;
