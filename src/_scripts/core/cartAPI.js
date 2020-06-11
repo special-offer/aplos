@@ -1,15 +1,11 @@
 import $ from 'jquery';
-import {
-  formatMoney,
-  stripZeroCents
-} from './currency';
+import { formatMoney } from './currency';
 import { getSizedImageUrl } from './image';
 
 class CartAPI {
   constructor() {
     this.name = 'cartAPI';
     this.cart = {}; // Keep a reference to the cart at all times - this can either be the default shopify JSON representation for our custom one
-
     this.getCart(); // Fetches the latest cart and updates this.cart;
   }
 
@@ -26,12 +22,11 @@ class CartAPI {
 
     // Make adjustments to the cart object contents before we pass it off to the handlebars template
     cart.total_price = formatMoney(cart.total_price, theme.moneyFormat);
-    cart.total_price = stripZeroCents(cart.total_price);
 
     cart.items.map((item) => {
-      item.image = getSizedImageUrl(item.image, '200x');
-      item.price = formatMoney(item.price, theme.moneyFormat);
-      item.price = stripZeroCents(item.price);
+      item.image      = getSizedImageUrl(item.image, '400x');
+      item.price      = formatMoney(item.price, theme.moneyFormat);
+      item.line_price = formatMoney(item.line_price, theme.moneyFormat);
 
       // Adjust the item's variant options to add "name" and "value" properties
       if (item.hasOwnProperty('product')) {

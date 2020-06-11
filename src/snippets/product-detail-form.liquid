@@ -21,9 +21,7 @@
 
   <div class="rte">
     {{ product.description }}
-  </div>  
-
-  {% include 'product-detail-price', product: product, current_variant: current_variant %}
+  </div>
 
   <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
     <meta itemprop="priceCurrency" content="{{ shop.currency }}">
@@ -130,6 +128,8 @@
             <span data-add-to-cart-text>
               {% if current_variant.available %}
                 {{ 'products.product.add_to_cart' | t }}
+                &mdash;
+                {% render 'product-detail-price', product: product, current_variant: current_variant %}
               {% else %}
                 {{ 'products.product.sold_out' | t }}
               {% endif %}
@@ -142,7 +142,7 @@
 
   {% unless product == empty %}
     <script type="application/json" data-product-json>
-      {% include 'product-json', product: product %}
+      {% render 'product-json', product: product %}
     </script>
   {% endunless %}
 </div>

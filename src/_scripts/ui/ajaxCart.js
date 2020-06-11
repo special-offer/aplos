@@ -20,7 +20,6 @@ const selectors = {
   footer: '[data-ajax-cart-footer]',
   footerTop: '[data-ajax-cart-footer-top]',
   item: '[data-ajax-item][data-key][data-qty]',
-  itemRemove: '[data-ajax-cart-item-remove]',
   itemQuantityInput: '[data-ajax-cart-body] input[type="number"]',
   quantityAdjuster: '[data-quantity-adjuster]',
   cartBadge: '[data-cart-badge]',
@@ -77,7 +76,7 @@ export default class AJAXCart {
     this.stateIsOpen          = null; // Store visibilty state of the cart so we dont' have to query DOM for a class name
     this.hasBeenRendered      = false; // Lock to prevent displaying the cart before anything has been rendered
     this.qaInteractionTimeout = null;
-    this.qaInteractionDelay   = 350; // Delay before triggering the quantityadjuster change event (allows user to increment / decrement quickly)
+    this.qaInteractionDelay   = 200; // Delay before triggering the quantityadjuster change event (allows user to increment / decrement quickly)
     this.transitionEndEvent   = whichTransitionEnd();
     this.rendered             = false; // Keep track of whether or not the cart has rendered yet, don't open if it hasn't been
 
@@ -96,7 +95,6 @@ export default class AJAXCart {
 
     $body.on(this.events.CLICK, selectors.trigger, this.onTriggerClick.bind(this));
     $body.on(this.events.CLICK, selectors.close, this.onCloseClick.bind(this));
-    $body.on(this.events.CLICK, selectors.itemRemove, this.onItemRemoveClick.bind(this));
     $body.on(this.events.CHANGE, selectors.itemQuantityInput, this.onItemQuantityInputChange.bind(this));
     $window.on(this.events.RENDER, this.onRender.bind(this));
     $window.on(this.events.DESTROY, this.onDestroy.bind(this));
@@ -310,38 +308,6 @@ export default class AJAXCart {
    */
   onDestroy(e) {
 
-  }
-
-  /**
-   * Remove the item from the cart.  Extract this into a separate method if there becomes more ways to delete an item
-   *
-   * @param {event} e - Click event
-   */
-  onItemRemoveClick(e) {
-    e.preventDefault();
-
-    const attrs = this.getItemRowAttributes(e.target);
-
-    this.lockUI();
-
-    CartAPI.changeLineItemQuantityByKey(attrs.key, 0).then((cart) => {
-      // this.render(cart);
-      if (cart.item_count > 0) {
-        // We only need to re-render the footer
-        attrs.$row.slideUp(250, () => {
-          this.render(cart, 'footer');
-        });
-      }
-      else {
-        this.render(cart);
-      }
-    })
-      .fail(() => {
-        console.warn('something went wrong...');
-      })
-      .always(() => {
-        this.unlockUI();
-      });
   }
 
   /**

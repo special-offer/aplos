@@ -14,7 +14,7 @@
           </div>
           <div class="ajax-cart__footer-bottom">
             <div class="ajax-cart__footer-row">
-              <button type="submit" name="checkout" class="btn btn-block btn-primary">
+              <button type="submit" name="checkout" class="btn btn-block btn-secondary">
                 {{ 'cart.general.checkout' | t }}
               </button>
             </div>
@@ -62,9 +62,7 @@
                   Quantity: {{ quantity }}
                 {{/if}}
               </li>
-              <li>
-                <a href="#" class="ajax-cart__item-remove" data-ajax-cart-item-remove>Remove</a>
-              </li>            
+              <li>Line Price: {{ line_price }}</li>        
             </ul>
           </div>
         </li>

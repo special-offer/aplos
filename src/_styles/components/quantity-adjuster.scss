@@ -6,6 +6,7 @@
   display: inline-block;
   height: $quantity-adjuster-height;
   border: $quantity-adjuster-border-width solid $quantity-adjuster-border-color;
+  border-radius: 8px;
   font-size: 0; // remove spacing between elements without using floats
 
   button {
@@ -14,7 +15,7 @@
     -webkit-appearance: none;
     padding: 0;
     height: $quantity-adjuster-inner-height;
-    width: 30px;
+    width: 45px;
     text-align: center;
     vertical-align: top;
     cursor: pointer;
@@ -30,6 +31,8 @@
     padding: 0;
     border: none;
     border-radius: 0;
+    background-color: transparent;
+    color: $quantity-adjuster-border-color; // @TODO - Target this better?
     text-align: center;
     font-size: $quantity-adjuster-font-size;
     height: $quantity-adjuster-inner-height;
@@ -57,8 +60,8 @@
     &:after {
       content: '';
       position: absolute;
-      height: 2px;
-      width: 9px;
+      height: 1px;
+      width: 12px;
       background-color: $quantity-adjuster-border-color;
       top: 50%;
       left: 50%;
@@ -67,6 +70,13 @@
 
     &:after {
       transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
+
+  .quantity-adjuster__decrement {
+    &:before,
+    &:after {
+      width: 8px;
     }
   }
 
