@@ -18,21 +18,6 @@
       {% assign product = item.product %}
       {% assign variant = item.variant %}
 
-      {% comment %}
-        - Variant quantity logic may also be contained in sections/cart.liquid
-        - If you make changes here, make sure those changes are reflected there and vice-versa
-      {% endcomment %}
-      {% assign variant_quantity_limit = 0 %}
-      {% if variant.available %}
-        {% assign variant_quantity_limit = 10 %}
-        {% if variant.inventory_quantity < variant_quantity_limit and variant.inventory_policy == "deny" %}
-          {% assign variant_quantity_limit = variant.inventory_quantity %}
-        {% endif %}
-        {% if item.quantity >= variant_quantity_limit %}
-          {% assign variant_quantity_limit = item.quantity %}
-        {% endif %}
-      {% endif %}
-
       {
         "id": {{ item.variant_id }},
         "key": {{ item.key | json }},
@@ -69,7 +54,6 @@
         "product_description": {{ product.description | json }},
         "product_type": {{ product.type | json }},
         "variant_title": {{ item.variant.title | json }},
-        "variant_quantity_limit": {{ variant_quantity_limit }},
         "variant_options": [
           {% if item.variant.option1 != blank %}{{ item.variant.option1 | json }}{% endif %}
           {% if item.variant.option2 != blank %}, {{ item.variant.option2 | json }}{% endif %}

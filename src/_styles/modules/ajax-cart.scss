@@ -21,6 +21,9 @@ body.ajax-cart-open {
   transform: translateX(100%);
   transition: all $transition-duration-slide $transition-timing-function-slide-out;
 
+  font-family: $font-family-sans-serif;
+  font-size: 13px;
+
   &, h1, h2, h3, h4, h5, h6, a {
     color: $ajax-cart-color;
   }
@@ -61,17 +64,19 @@ body.ajax-cart-open {
 }
 
 .ajax-cart__header,
-.ajax-cart__body,
 .ajax-cart__footer {
   padding: $ajax-cart-padding-vertical $ajax-cart-padding-horizontal;
 }
 
 .ajax-cart__header {
-  padding-bottom: 0;
-
-  h4 {
-    margin-bottom: 0;
-  }
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .ajax-cart__body {
@@ -101,8 +106,7 @@ body.ajax-cart-open {
 }
 
 .ajax-cart__close {
-  float: right;
-  width: 20px;
+  width: 40px;
 }
 
 .ajax-cart__empty-message {
@@ -120,7 +124,6 @@ body.ajax-cart-open {
 }
 
 .ajax-cart__item {
-  @include clearfix;
   margin-bottom: 15px;
 
   &:last-child {
@@ -129,34 +132,41 @@ body.ajax-cart-open {
 }
 
 .ajax-cart__item-image {
-  width: 110px;
-  height: auto;
-  float: left;
+  width: 100%;
+  max-height: 420px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
 }
 
-.ajax-cart__item-info {
-  padding-left: 110px + 30px; // Make room for the image floated left
+.ajax-cart__item-contents {
+  margin: 0 $ajax-cart-padding-horizontal;
+  padding: $ajax-cart-padding-vertical 0;
+  border-bottom: 1px solid $ajax-cart-border-color;
 }
 
 .ajax-cart__item-header {
+  margin-bottom: 10px;
+  font-size: 31px; // @TODO - remove
+  font-family: $font-family-serif;
+}
 
+.ajax-cart__item-title {
+
+}
+
+.ajax-cart__item-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: $ajax-cart-padding-vertical;
 }
 
 .ajax-cart__item-price {
   float: right;
   padding-left: 5px;
-}
-
-.ajax-cart__item-title {
-  margin-bottom: 10px;
-}
-
-.ajax-cart__item-options {
-  @include list-unstyled;
-}
-
-.ajax-cart__item-qty {
-
 }
 
 .ajax-cart__footer {
@@ -166,6 +176,9 @@ body.ajax-cart-open {
 }
 
 .ajax-cart__footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   padding-top: $ajax-cart-padding-vertical / 2;
 
   &:not(:last-child) {
