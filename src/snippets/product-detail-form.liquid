@@ -19,6 +19,11 @@
 <div data-product-detail-form>
   <h1>{{ product.title }}</h1>
 
+  <p class="small" style="margin-bottom: 2.5rem;">
+    Non-Alcoholic Spirit<br />
+    500 ml / 16.9 fl oz
+  </p>
+
   <div class="rte">
     {{ product.description }}
   </div>
@@ -127,13 +132,15 @@
           {% unless current_variant.available %}disabled="disabled"{% endunless %}>
             <span data-add-to-cart-text>
               {% if current_variant.available %}
-                {{ 'products.product.add_to_cart' | t }}
-                &mdash;
-                {% render 'product-detail-price', product: product, current_variant: current_variant %}
+                {{ 'products.product.add_to_cart' | t }}              
               {% else %}
                 {{ 'products.product.sold_out' | t }}
               {% endif %}
             </span>
+            &mdash;
+            <span data-product-price>
+              {{ current_variant.price | money }}
+            </span>            
         </button>
       </form>
     </div>

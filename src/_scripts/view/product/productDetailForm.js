@@ -6,8 +6,6 @@ import Variants from './variants';
 const selectors = {
   addToCart: '[data-add-to-cart]',
   addToCartText: '[data-add-to-cart-text]',
-  comparePrice: '[data-compare-price]',
-  comparePriceText: '[data-compare-text]',
   originalSelectorId: '[data-product-select]',
   priceWrapper: '[data-price-wrapper]',
   productJson: '[data-product-json]',
@@ -61,10 +59,7 @@ export default class ProductDetailForm {
     this.$quantitySelect         = $(selectors.quantitySelect, this.$container); // Quantity dropdown
     this.$addToCartBtn           = $(selectors.addToCart, this.$container);
     this.$addToCartBtnText       = $(selectors.addToCartText, this.$container); // Text inside the add to cart button
-    this.$priceWrapper           = $(selectors.priceWrapper, this.$container); // Contains all price elements
     this.$productPrice           = $(selectors.productPrice, this.$container);
-    this.$comparePrice           = $(selectors.comparePrice, this.$container);
-    this.$compareEls             = this.$comparePrice.add($(selectors.comparePriceText, this.$container));
     this.$singleOptionSelectors  = $(selectors.singleOptionSelector, this.$container); // Dropdowns for each variant option containing all values for that option
     this.$variantOptionValueList = $(selectors.variantOptionValueList, this.$container); // Alternate UI that takes the place of a single option selector (could be swatches, dots, buttons, whatever..)
     /* eslint-enable */
@@ -105,22 +100,12 @@ export default class ProductDetailForm {
    */
   updateAddToCartState(variant) {
     if (variant) {
-      this.$priceWrapper.removeClass(classes.hide);
+      this.$addToCartBtn.prop('disabled', !variant.available);
+      this.$addToCartBtnText.html(theme.strings[`${variant.available ? 'addToCart' : 'soldOut'}`]);
     }
     else {
-      this.$addToCartBtn.prop('disabled', true);
       this.$addToCartBtnText.html(theme.strings.unavailable);
-      this.$priceWrapper.addClass(classes.hide);
-      return;
-    }
-
-    if (variant.available) {
-      this.$addToCartBtn.prop('disabled', false);
-      this.$addToCartBtnText.html(theme.strings.addToCart);
-    }
-    else {
       this.$addToCartBtn.prop('disabled', true);
-      this.$addToCartBtnText.html(theme.strings.soldOut);
     }
   }
 
@@ -146,15 +131,6 @@ export default class ProductDetailForm {
   updateProductPrices(variant) {
     if (variant) {
       this.$productPrice.html(formatMoney(variant.price, window.theme.moneyFormat));
-
-      if (variant.compare_at_price > variant.price) {
-        this.$comparePrice.html(formatMoney(variant.compare_at_price, theme.moneyFormat));
-        this.$compareEls.removeClass(classes.hide);
-      }
-      else {
-        this.$comparePrice.html('');
-        this.$compareEls.addClass(classes.hide);
-      }
     }
   }
 

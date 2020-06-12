@@ -1,6 +1,5 @@
 // jQuery
 import $ from 'jquery';
-import 'jquery-zoom';
 import 'chosen-js';
 import 'jquery-unveil';
 
@@ -133,9 +132,9 @@ Breakpoints.initialize();
   // END - Global handler for collapse plugin to add state class for open expandable lists
 
   // Add "development mode" class for CSS hook
-  if (window.location.hostname === 'localhost') {
-    $body.addClass('development-mode');
-  }
+  // if (window.location.hostname === 'localhost') {
+  $body.addClass('development-mode');
+  // }
 
   credits();
 })(Modernizr);

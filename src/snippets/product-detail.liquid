@@ -13,22 +13,18 @@
 
 {% assign current_variant = product.selected_or_first_available_variant %}
 
-<div data-product-detail>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-lg-7">
-        {% include 'product-detail-galleries',
-                    product: product,
-                    current_variant: current_variant
-        %}
-      </div>
+<div style="display: flex;" data-product-detail>
+  <div style="flex: 1; max-width: 50%;">
+    {% include 'product-detail-gallery',
+                product: product,
+                current_variant: current_variant
+    %}
+  </div>
 
-      <div class="col-md-6 col-lg-5">
-        {% include 'product-detail-form',
-                    product: product,
-                    current_variant: current_variant
-        %}  
-      </div>
-    </div>
+  <div style="flex: 1; max-width: 50%; padding: 60px;">
+    {% include 'product-detail-form',
+                product: product,
+                current_variant: current_variant
+    %}  
   </div>
 </div>

@@ -6,7 +6,6 @@ import AJAXFormManager from '../managers/ajaxForm';
 import AJAXCartUI from '../ui/ajaxCart';
 
 const $window = $(window);
-const $body = $(document.body);
 
 /**
  * Ajax Cart Section Script
@@ -43,7 +42,7 @@ export default class AJAXCartSection extends BaseSection {
       // If redirected from the cart, show the ajax cart after a short delay
       if (getQueryParams().cart) {
         this.ajaxCartUI.open();
-      }      
+      }
     });
   }
 
