@@ -2,6 +2,8 @@
 // Drawer
 // -------------------------
 
+$drawer-vertical-spacing: 70px;
+
 body.drawer-open {
   overflow: hidden;
 }
@@ -13,6 +15,9 @@ body.drawer-open {
   right: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   background: $drawer-bg;
   pointer-events: none;
   overflow: scroll;
@@ -41,49 +46,58 @@ body.drawer-open {
   &, h1, h2, h3, h4, h5, h6, a {
     color: $drawer-color;
   }
+}
 
-  .drawer__inner {
-    padding: $drawer-padding-vertical $drawer-padding-horizontal;
+.drawer__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 20px;
+  padding: $drawer-padding-vertical $drawer-padding-horizontal 0;
+
+  .drawer__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
   }
+}
 
-  .drawer__header {
-    position: relative;
-    margin-bottom: 20px;
-    padding: 30px 0 $headings-margin-bottom;
+.drawer__header-title {
+  font-size: $drawer-header-font-size;
+  font-family: $font-family-sans-serif; // @TODO
+}
 
-    .drawer__close {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 20px;
-    }
+.drawer__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: $drawer-padding-vertical $drawer-padding-horizontal 0;
+}
+
+.drawer__block {
+  & + & {
+    margin-top: $drawer-vertical-spacing;
   }
+}
 
-  .drawer__header-title {
+.drawer__footer {
+  margin-top: $drawer-vertical-spacing;
+  padding: 0 $drawer-padding-horizontal $drawer-padding-vertical;
+  
+  ul {
+    @include list-unstyled;
     margin: 0;
-    padding: 0;
-    font-size: $drawer-header-font-size;
-  }
 
-  .drawer__body {
+    li {
+      display: inline-block;
 
-    &--flush {
-      margin-left: -#{$drawer-padding-horizontal};
-      margin-right: -#{$drawer-padding-horizontal};
+      &:not(:last-child):after {
+        content: '/';
+      }
     }
-  }
-
-  .drawer__body-contents {
-
-    .drawer__body--flush & {
-      padding-left: $drawer-padding-horizontal;
-      padding-right: $drawer-padding-horizontal;
-    }
-  }
-
-  .drawer__footer {
-    margin-top: 20px;
-    padding: $headings-margin-bottom 0 0;
   }
 }
 

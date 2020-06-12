@@ -78,19 +78,6 @@
     flex-grow: inherit;
     flex-basis: auto;
   }
-
-  // Some menus don't need to be shown all the time
-  &.header-nav--hide-on-mobile {
-    @media (max-width: $header-bp-min - 1px) {
-      display: none;
-    }
-  }
-
-  &.header-nav--hide-on-desktop {
-    @media (min-width: $header-bp-min) {
-      display: none;
-    }
-  }
 }
 
 // List of menu items
@@ -98,11 +85,24 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  // Some menus don't need to be shown all the time
+  &.for-mobile {
+    @media (min-width: $header-bp-min) {
+      display: none;
+    }
+  }
+
+  &.for-desktop {
+    @media (max-width: $header-bp-min - 1px) {
+      display: none;
+    }
+  }  
 }
 
 .header-nav__menu-item {
   display: inline-block;
-  margin: 0 6px;
+  margin: 0 26px;
 
   &:first-child {
     margin-left: 0;
@@ -112,8 +112,14 @@
     margin-right: 0;
   }
 
-  > a {
-    padding: 27px 4px; // use vertical padding to match the height of the header
+  a {
+    display: inline-block;
+    padding: 10px 0;
+    border-bottom: 1px solid transparent;
+
+    &.is-active {
+      border-bottom-color: currentColor;
+    }
   }
 }
 

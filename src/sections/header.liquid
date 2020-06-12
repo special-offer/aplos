@@ -1,28 +1,28 @@
 <div data-section-id="{{ section.id }}" data-section-type="header">
   <header class="header" role="banner" data-header>
     <div class="header-container">
-      {% comment %} Header nav on desktop {% endcomment %}
-      <div class="header-nav header-nav--left header-nav--hide-on-mobile">
+      <div class="header-nav header-nav--left">
+
+        {% comment %} Header nav menu on desktop {% endcomment %}
         {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
-          <ul class="header-nav__menu">
+          <ul class="header-nav__menu for-desktop">
             {% for link in linklists[section.settings.linklist].links %}
               <li class="header-nav__menu-item">        
-                <a href="{{ link.url }}">{{ link.title }}</a>
+                <a href="{{ link.url }}" {% if link.active %}class="is-active"{% endif %}>{{ link.title }}</a>
               </li>
             {% endfor %}         
           </ul>
         {% endif %}
-      </div>
-      {% comment %} Header nav on mobile {% endcomment %}
-      <div class="header-nav header-nav--left header-nav--hide-on-desktop">
-        <ul class="header-nav__menu">
+
+        {% comment %} Header nav menu on mobile {% endcomment %}
+        <ul class="header-nav__menu for-mobile">
           <li class="header-nav__menu-item">
             <a href="#" title="Toggle menu" data-mobile-menu-toggle>
               Menu
             </a>
           </li>
-        </ul>
-      </div>      
+        </ul>        
+      </div>   
       
       {% comment %} Logo {% endcomment %}
       <div class="header-nav header-nav--center header-nav--logo">

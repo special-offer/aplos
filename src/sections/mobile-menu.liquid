@@ -1,75 +1,68 @@
 <div data-section-id="{{ section.id }}" data-section-type="mobile-menu">
-
   <div class="drawer drawer--left" data-mobile-menu>
-    <div class="drawer__inner">
-      <div class="drawer__header">
-        <a href="#" class="drawer__close" data-drawer-close>
-          {% include 'icon-close' %}
-        </a>        
-        <h5 class="drawer__header-title">{{ shop.name }}</h5>
-      </div>
-      <div class="drawer__body">
-        <div class="drawer__body-contents">
-          {% comment %} Menus {% endcomment %}
-          <div class="mobile-menu-block mobile-menu-block--primary">
-            {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
-              <ul class="mobile-menu-list mobile-menu-list--primary">
-                {% for link in linklists[section.settings.linklist].links %}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          </div>
-    
-          {% if section.settings.show_social_accounts %}
-            {%- capture social_menu_html %}
-              {% if settings.social_handle_instagram != blank %}
-                <li>
-                  <a href="https://instagram.com/{{ settings.social_handle_instagram }}" target="_blank">Instagram</a>
-                </li>
-              {% endif %}
-              {% if settings.social_handle_facebook != blank %}
-                <li>
-                  <a href="https://facebook.com/{{ settings.social_handle_facebook }}" target="_blank">Facebook</a>
-                </li>
-              {% endif %}
-              {% if settings.social_handle_twitter != blank %}
-                <li>
-                  <a href="https://twitter.com/{{ settings.social_handle_twitter }}" target="_blank">Twitter</a>
-                </li>
-              {% endif %}
-            {%- endcapture -%}
-
-            {% if social_menu_html != blank %}
-              <div class="mobile-menu-block">
-                <ul class="mobile-menu-list mobile-menu-list--secondary">
-                  {{ social_menu_html }}
-                </ul>
-              </div>
-            {% endif %}
-          {% endif %}
-
-          <div>
-            {% if section.settings.footer_text != blank %}
-              {% assign year = 'now' | date: "%Y" %}
-              <div>
-                {{ section.settings.footer_text | replace: '$year$', year | replace: '$shop$', shop.name | replace: '&nbsp;', ' ' | strip }}
-              </div>
-            {% endif %}
-
-            {% if section.settings.footer_linklist and linklists[section.settings.footer_linklist].links.size > 0 %}
-              <ul class="list-unstyled list-inline">
-                {% for link in linklists[section.settings.footer_linklist].links %}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                {% endfor %}
-              </ul>
-            {% endif %}            
-          </div>
-        </div>
-      </div>
+    <div class="drawer__header">
+      <a href="#" class="drawer__close" data-drawer-close>
+        {% include 'icon-close' %}
+      </a>        
+      <h5 class="drawer__header-title">{{ shop.name }}</h5>
     </div>
-  </div>
+    <div class="drawer__body">
+      {% comment %} Menus {% endcomment %}
+      <div class="drawer__block">
+        {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
+          <ul class="mobile-menu-list mobile-menu-list--primary">
+            {% for link in linklists[section.settings.linklist].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
 
+      {% if section.settings.show_social_accounts %}
+        {%- capture social_menu_html %}
+          {% if settings.social_handle_instagram != blank %}
+            <li>
+              <a href="https://instagram.com/{{ settings.social_handle_instagram }}" target="_blank">Instagram</a>
+            </li>
+          {% endif %}
+          {% if settings.social_handle_facebook != blank %}
+            <li>
+              <a href="https://facebook.com/{{ settings.social_handle_facebook }}" target="_blank">Facebook</a>
+            </li>
+          {% endif %}
+          {% if settings.social_handle_twitter != blank %}
+            <li>
+              <a href="https://twitter.com/{{ settings.social_handle_twitter }}" target="_blank">Twitter</a>
+            </li>
+          {% endif %}
+        {%- endcapture -%}
+
+        {% if social_menu_html != blank %}
+          <div class="drawer__block">
+            <ul class="mobile-menu-list mobile-menu-list--secondary">
+              {{ social_menu_html }}
+            </ul>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="drawer__footer">
+      {% if section.settings.footer_text != blank %}
+        {% assign year = 'now' | date: "%Y" %}
+        <div>
+          {{ section.settings.footer_text | replace: '$year$', year | replace: '$shop$', shop.name | replace: '&nbsp;', ' ' | strip }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.footer_linklist and linklists[section.settings.footer_linklist].links.size > 0 %}
+        <ul class="list-unstyled list-inline">
+          {% for link in linklists[section.settings.footer_linklist].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}            
+    </div>    
+  </div>
 </div>
 
 {% schema %}
