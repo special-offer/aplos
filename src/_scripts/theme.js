@@ -1,6 +1,6 @@
 // jQuery
 import $ from 'jquery';
-import 'jquery-zoom';
+// import 'jquery-zoom';
 import 'chosen-js';
 import 'jquery-unveil';
 

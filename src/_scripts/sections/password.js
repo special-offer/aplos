@@ -44,13 +44,13 @@ export default class PasswordSection extends BaseSection {
 
     this.$input.on({
       'focus': () => this.setInteracting(true),
-      'blur': () => this.setInteracting(false),
+      'blur': () => this.onBlur(),
       'keydown keyup': e => this.onInputChange(e)
     });
 
     this.$submit.on({
       'focus mouseenter': () => this.setInteracting(true),
-      'blur': () => this.setInteracting(false)
+      'blur': () => this.onBlur()
     });
 
     const interactionEvent = isTouch() ? 'touchstart' : 'mouseenter';
@@ -104,6 +104,12 @@ export default class PasswordSection extends BaseSection {
 
   onInputChange() {
     this.$inputWrapper.toggleClass(classes.hidePlaceholder, this.$input.val().length > 0);
+  }
+
+  onBlur() {
+    if (this.$input.val().length === 0) {
+      this.setInteracting(false);
+    }
   }
 
   onBloomInteractionStart(e) {
