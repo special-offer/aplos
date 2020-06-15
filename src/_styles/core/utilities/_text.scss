@@ -5,6 +5,8 @@
 //
 
 .text-monospace { font-family: $font-family-monospace !important; }
+.text-sans-serif { font-family: $font-family-sans-serif !important; }
+.text-serif { font-family: $font-family-serif !important; }
 
 // Alignment
 
@@ -40,9 +42,6 @@
 .font-weight-bold    { font-weight: $font-weight-bold !important; }
 .font-weight-bolder  { font-weight: $font-weight-bolder !important; }
 .font-italic         { font-style: italic !important; }
-
-// Letterspacing
-.letter-spacing-base { letter-spacing: $letter-spacing-base !important; }
 
 // Contextual colors
 

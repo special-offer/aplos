@@ -1,10 +1,14 @@
 <div data-section-id="{{ section.id }}" data-section-type="pencil-banner">
   {% if section.settings.banner_enabled %}
-    <div class="pencil-banner">
-      <div class="container">
+    <div class="pencil-banner p2">
+      {% comment %}@TODO - Replace container fluid max? {% endcomment %}
+      <div class="container-fluid-max">
+        <span class="small text-uppercase" style="letter-spacing: 0.05em">Notice</span>
         <div class="d-none d-md-block">{{ section.settings.banner_content }}</div>
         <div class="d-block d-md-none">{{ section.settings.banner_mobile_content | default: section.settings.banner_content }}</div>
-        {% comment %}<a href="#" class="pencil-banner__close" data-pencil-banner-close>&times;</a>{% endcomment %}
+        <a href="#" class="pencil-banner__close" title="Close" data-pencil-banner-close>
+          {% include 'icon-close' %}
+        </a>
       </div>
     </div>
   {% endif %}

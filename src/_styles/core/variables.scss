@@ -14,6 +14,11 @@ $gray-darker:  #494949 !default;
 $gray-darkest: #212529 !default;
 $black:        #000 !default;
 
+// Aplos Colors
+$butter:       #FAFAD6;
+$butter-dark:  #EBE583;
+$gray:         #B4AEAC;
+
 $blue:    #4e85e6 !default;
 $indigo:  #6610f2 !default;
 $purple:  #8174cd !default;
@@ -156,6 +161,13 @@ $sizes: map-merge(
 );
 
 
+// These are the spacings we need for Aplos grid
+$spacing-sm:  12px;
+$spacing-smd: 36px;
+$spacing-md:  48px;
+$spacing-lg:  96px;
+
+
 // Body
 //
 // Settings for the `<body>` element.
@@ -214,7 +226,7 @@ $container-max-widths: (
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
 
-$largest-container-width: map-get($container-max-widths, last(map_keys($container-max-widths)));
+$largest-container-width: 1300px; // map-get($container-max-widths, last(map_keys($container-max-widths)));
 
 
 // Grid columns
@@ -222,7 +234,7 @@ $largest-container-width: map-get($container-max-widths, last(map_keys($containe
 // Set the number of columns and specify the width of the gutters.
 
 $grid-columns:                12 !default;
-$grid-gutter-width:           30px !default;
+$grid-gutter-width:           $spacing-md !default;
 
 
 // Components
@@ -273,17 +285,17 @@ $embed-responsive-aspect-ratios: join(
 // Font, line-height, and color for body text, headings, and more.
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif:      'Univers', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-sans-serif:      'Univers', -apple-system, sans-serif !default;
 $font-family-serif:           'Goudy Old Style', serif;
-$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-monospace:       SFMono-Regular, 'Courier New', monospace !default;
 $font-family-base:            $font-family-serif !default;
 // stylelint-enable value-keyword-case
 
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
-$font-size-lg:                $font-size-base * 1.25 !default;
+$font-size-lg:                $font-size-base * (20/16) !default;
 $font-size-md:                $font-size-base * 1.125 !default;
-$font-size-sm:                $font-size-base * .875 !default;
-$font-size-xs:                $font-size-base * 0.75 !default;
+$font-size-sm:                $font-size-base * (12/16) !default;
+$font-size-xs:                $font-size-base * (10/16) !default;
 
 $font-weight-lighter:         lighter !default;
 $font-weight-light:           300 !default;
@@ -293,25 +305,24 @@ $font-weight-bolder:          bolder !default;
 
 $font-weight-base:            $font-weight-normal !default;
 $line-height-base:            1.5 !default;
-$letter-spacing-base:         0.01em !default;
 
 // Headings
-$h1-font-size:                $font-size-base * 2.5 !default;
-$h2-font-size:                $font-size-base * 2 !default;
-$h3-font-size:                $font-size-base * 1.75 !default;
-$h4-font-size:                $font-size-base * 1.5 !default;
-$h5-font-size:                $font-size-base * 1.25 !default;
-$h6-font-size:                $font-size-base !default;
+$h1-font-family:              $font-family-serif;
+$h2-font-family:              $font-family-sans-serif;
+$h3-font-family:              $font-family-sans-serif;
+$h4-font-family:              $font-family-sans-serif;
+$h5-font-family:              $font-family-sans-serif;
+$h6-font-family:              $font-family-sans-serif;
 
-$h1-letter-spacing:           0 !default;
-$h2-letter-spacing:           0 !default;
-$h3-letter-spacing:           0 !default;
-$h4-letter-spacing:           0 !default;
-$h5-letter-spacing:           0 !default;
-$h6-letter-spacing:           0 !default;
+$h1-font-size:                40px; // $font-size-base * 2.5 !default;
+$h2-font-size:                25px; // $font-size-base * 2 !default;
+$h3-font-size:                22px; // $font-size-base * 1.75 !default;
+$h4-font-size:                18px; // $font-size-base * 1.5 !default;
+$h5-font-size:                15px; // $font-size-base * 1.25 !default;
+$h6-font-size:                12px; // $font-size-base !default;
 
 $h1-line-height:              1.2 !default;
-$h2-line-height:              1.2 !default;
+$h2-line-height:              1.12 !default;
 $h3-line-height:              1.2 !default;
 $h4-line-height:              1.2 !default;
 $h5-line-height:              1.2 !default;
@@ -319,41 +330,38 @@ $h6-line-height:              1.2 !default;
 
 $headings-margin-bottom:      $spacer !default;
 $headings-font-family:        null !default;
-$headings-font-weight:        $font-weight-bold !default;
+$headings-font-weight:        $font-weight-normal !default;
 $headings-line-height:        1.2 !default;
-$headings-color:              null !default;
+$headings-color:              $body-color !default;
 
-// p{1, 2, 3}
-$p1-font-size:                $font-size-lg;
-$p1-font-size:                $font-size-base;
-$p3-font-size:                $font-size-sm;
+$body-copy-font-size:         $font-size-lg;
+$body-copy-font-weight:       $font-weight-normal;
+$body-copy-line-height:       1.2;
 
-$p1-font-weight:              $font-weight-normal;
-$p2-font-weight:              $font-weight-normal;
-$p3-font-weight:              $font-weight-normal;
+// p{2, 3}
+$p2-font-size:                $font-size-sm;
+$p3-font-size:                $font-size-xs;
 
-$p1-letter-spacing:           0 !default;
-$p2-letter-spacing:           0 !default;
-$p3-letter-spacing:           0 !default;
+$p2-line-height:              1.333;
+$p3-line-height:              1.5;
 
-$p1-line-height:              1.4 !default;
-$p2-line-height:              1.4 !default;
-$p3-line-height:              1.4 !default;
+$p2-font-family:              $font-family-sans-serif;
+$p3-font-family:              $font-family-sans-serif;
 
 // Display
-$display1-size:               6rem !default;
-$display2-size:               5.5rem !default;
-$display3-size:               4.5rem !default;
-$display4-size:               3.5rem !default;
+// $display1-size:               6rem !default;
+// $display2-size:               5.5rem !default;
+// $display3-size:               4.5rem !default;
+// $display4-size:               3.5rem !default;
 
-$display1-weight:             300 !default;
-$display2-weight:             300 !default;
-$display3-weight:             300 !default;
-$display4-weight:             300 !default;
-$display-line-height:         $headings-line-height !default;
+// $display1-weight:             300 !default;
+// $display2-weight:             300 !default;
+// $display3-weight:             300 !default;
+// $display4-weight:             300 !default;
+// $display-line-height:         $headings-line-height !default;
 
-$lead-font-size:              $font-size-base * 1.25 !default;
-$lead-font-weight:            300 !default;
+// $lead-font-size:              $font-size-base * 1.25 !default;
+// $lead-font-weight:            300 !default;
 
 // Misc
 $small-font-size:             80% !default;
@@ -927,31 +935,13 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg") !default;
 //
 // Variables to adjust site-wide components that are *not* part of bootstrap
 
-// Pencil Banner
-$pencil-banner-padding-vertical:        15px;
-$pencil-banner-bg:                      rgb(230, 226, 113);
-$pencil-banner-text-color:              $black;
-
-
 // Header
 
 $header-bp-min:                         map-get($grid-breakpoints, "md") !default; // Above this breakpoint, switch to the full desktop nav
-$header-height-small:                   65px !default;
-$header-height-base:                    75px !default;
-$header-bg:                             rgb(248, 250, 204);
+$header-height-small:                   60px !default;
+$header-height-base:                    86px !default;
+$header-bg:                             $butter;
 $header-text-color:                     $body-color !default;
-$header-logo-width:                     120px !default;
-
-
-// Footer
-
-$footer-bp-min:                         map-get($grid-breakpoints, "md") !default;
-$footer-bg:                             $black;
-$footer-text-color:                     $white;
-$footer-padding-top:                    100px;
-$footer-padding-bottom:                 100px;
-$footer-menu-font-size:                 $font-size-lg;
-$footer-menu-text-color:                $white;
 
 
 // Product Card
@@ -995,13 +985,12 @@ $minimal-input-height-large:            60px;
 
 // Drawer
 
-$drawer-max-width:                      500px;
+$drawer-max-width:                      540px;
 $drawer-bg:                             $black;
 $drawer-color:                          $white;
-$drawer-padding:                        40px;
-$drawer-padding-vertical:               $drawer-padding;
-$drawer-padding-horizontal:             $drawer-padding;
-$drawer-backdrop-color:                 #feffdf;
+$drawer-padding-vertical:               24px;
+$drawer-padding-horizontal:             $spacing-md;
+$drawer-backdrop-color:                 $butter;
 $drawer-backdrop-opacity:               1;
 $drawer-header-font-size:               $h5-font-size;
 $drawer-header-border-color:            $black;
@@ -1073,27 +1062,17 @@ $overlay-transition-duration:          $transition-duration-base;
 // Dots
 
 $dot-border-width:                      1px;
-$dot-border-radius:                     0;
+$dot-border-radius:                     50%;
 $dot-border-color:                      transparent;
 $dot-active-border-color:               $black;
-$dot-size:                              30px;
+$dot-font-size:                         $font-size-xs;
+$dot-size:                              34px;
 $dot-spacing:                           6px;
-$dot-padding:                           2px;
 $dot-bottom-margin:                     $dot-spacing;
-$dot-small-font-size:                   $font-size-sm;
-$dot-small-border-width:                1px;
-$dot-small-border-radius:               0;
-$dot-small-border-color:                $dot-border-color;
-$dot-small-active-border-color:         $black;
-$dot-small-size:                        22px;
-$dot-small-spacing:                     0;
-$dot-small-padding:                     0;
-$dot-small-bottom-margin:               $dot-spacing;
-$dot-small-font-size:                   $font-size-xs;
 
 // #Quantity Adjuster
-$quantity-adjuster-height:             40px;
-$quantity-adjuster-font-size:          $font-size-base;
+$quantity-adjuster-height:             38px;
+$quantity-adjuster-font-size:          $font-size-sm;
 $quantity-adjuster-border-width:       1px;
-$quantity-adjuster-border-color:       $gray;
+$quantity-adjuster-border-color:       $white;
 $quantity-adjuster-inner-height:       $quantity-adjuster-height - (2*$quantity-adjuster-border-width);

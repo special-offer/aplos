@@ -16,136 +16,127 @@
   {% assign current_variant = product.selected_or_first_available_variant %}
 {% endif %}
 
+{% capture submit_button_contents %}
+  <span data-add-to-cart-text>
+    {% if current_variant.available %}
+      {{ 'products.product.add_to_cart' | t }}              
+    {% else %}
+      {{ 'products.product.sold_out' | t }}
+    {% endif %}
+  </span>
+  &mdash;
+  <span data-product-price>
+    {{ current_variant.price | money_without_trailing_zeros }}
+  </span>
+  USD         
+{% endcapture %}
+
 <div data-product-detail-form>
-  <h1>{{ product.title }}</h1>
+  <form action="/cart/add" method="post" enctype="multipart/form-data" data-add-to-cart-form>
+    <h1>{{ product.title }}</h1>
 
-  <p class="small" style="margin-bottom: 2.5rem;">
-    Non-Alcoholic Spirit<br />
-    500 ml / 16.9 fl oz
-  </p>
+    <div class="p2" style="margin-bottom: 2.5rem;">
+      Non-Alcoholic Spirit<br />
+      500 ml / 16.9 fl oz
+    </div>
 
-  <div class="rte">
-    {{ product.description }}
-  </div>
+    <div class="rte" style="max-width: 22em;">
+      {{ product.description }}
+    </div>
 
-  <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-    <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-    <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
-    <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+      <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+      <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+      
+      {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}         
+          <div class="selector-wrapper form-group js">
+            <label for="SingleOptionSelector-{{ forloop.index0 }}">
+              {{ option.name }}
+            </label>
 
-    <div data-add-to-cart-form-wrapper>
-      <form action="/cart/add" method="post" enctype="multipart/form-data" data-add-to-cart-form>
-        {% unless product.has_only_default_variant %}
-          {% for option in product.options_with_values %}
-            
-            {% assign option_name_downcase = option.name | downcase %}
-
-            {% capture option_alt_ui %}
-              {% if option_name_downcase == "color" %}
-                {% include 'product-dots-color', product: product, selected_color: option.selected_value %}
-              {% endif %}
-            {% endcapture %}
-
-            <div class="selector-wrapper form-group js">
-
-              <label for="SingleOptionSelector-{{ forloop.index0 }}">
-                {{ option.name }}
-              </label>
-
-
-              <select
-                id="SingleOptionSelector-{{ forloop.index0 }}"
-                class="form-control"
-                data-single-option-selector
-                data-index="option{{ option.position }}"
-                {% if option_alt_ui != blank %}style="display: none" data-no-chosen{% endif %}>
-                {% for value in option.values %}
-                  <option
-                    value="{{ value | escape }}"
-                    {% if option.selected_value == value %}selected="selected"{% endif %}>
-                      {{ value }}
-                  </option>
-                {% endfor %}
-              </select>
-
-              {% comment %} Output alternative option UI here {% endcomment %}
-              {{ option_alt_ui }}
-
-            </div>
-
-            {% comment %}
-              To enable alternative variant option value select UI, create your markup here with the following data attributes.
-
-              parent - 'data-option-position="{{ option.position }}" data-variant-option-value-list'
-                child - 'data-variant-option-value="{{ value }}"'
-
-              These data attributes are used to attach click events and update the selected variant when one is clicked.
-              The child element should respond to some sort of 'active' class to reflect the selected value.
-
-              See: `_scripts/view/product/productDetailForm.js:onVariantOptionValueClick`
-
-              For example, to show a list of sizes..
-
-              {% if option.name == "Size" %}
-                <div data-option-position="{{ option.position }}" data-variant-option-value-list>
-                  {% for value in option.values %}
-                    <span class="{% if option.selected_value == value %} is-active{% endif %}" data-variant-option-value="{{ value }}">
-                      {{ value }}
-                    </span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-
-              Be sure to hide the corresponding select tag for that option
-            {% endcomment %}
-
-          {% endfor %}
-        {% endunless %}
-
-        <select name="id" class="no-js" data-product-select>
-          {% for variant in product.variants %}
-            <option
-              {% if variant == current_variant %}selected="selected"{% endif %}
-              {% unless variant.available %}disabled="disabled"{% endunless %}
-              value="{{ variant.id }}">
-                {{ variant.title }}
-            </option>
-          {% endfor %}
-        </select>
-
-        <div class="selector-wrapper form-group" style="min-width: 0;">
-          <label for="Quantity">{{ 'products.product.quantity' | t }}:</label>
-          <div style="max-width: 80px;">
-            <select id="Quantity" name="quantity" class="form-control" {% if current_variant.available == false %}disabled="true"{% endif %} data-product-quantity-select>
-              {% for i in (1..5) %}
-                <option value="{{ i }}">{{ i }}</option>
+            <select
+              id="SingleOptionSelector-{{ forloop.index0 }}"
+              class="form-control"
+              data-single-option-selector
+              data-index="option{{ option.position }}">
+              {% for value in option.values %}
+                <option
+                  value="{{ value | escape }}"
+                  {% if option.selected_value == value %}selected="selected"{% endif %}>
+                    {{ value }}
+                </option>
               {% endfor %}
             </select>
           </div>
-        </div>
+        {% endfor %}
+      {% endunless %}
 
+      <div class="form-group" style="display: flex; align-items: center;">
+        <label class="p2" style="margin: 0 15px;">Qty:</label>
+        <div class="dots" style="display: inline-block;">
+          <div class="dot is-active" data-dot-qty="1">1</div>
+          <div class="dot" data-dot-qty="2">2</div>
+          <div class="dot" data-dot-qty="4">4</div>
+        </div>
+      </div>
+
+      <select name="id" class="no-js" data-product-select>
+        {% for variant in product.variants %}
+          <option
+            {% if variant == current_variant %}selected="selected"{% endif %}
+            {% unless variant.available %}disabled="disabled"{% endunless %}
+            value="{{ variant.id }}">
+              {{ variant.title }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <input type="number" name="quantity" value="1" class="no-js" data-product-quantity>        
+
+      <button
+        type="submit"
+        name="add"
+        class="btn btn-primary"
+        data-add-to-cart
+        {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+        {{ submit_button_contents }}
+      </button>
+    </div>
+
+    <div class="pdf-bar">
+      <div class="pdf-bar__unit">
+        <label class="p2" style="margin: 0 15px;">Qty:</label>
+        <div class="dots" style="display: inline-block;">
+          <div class="dot is-active" data-dot-qty="1">1</div>
+          <div class="dot" data-dot-qty="2">2</div>
+          <div class="dot" data-dot-qty="4">4</div>
+        </div>
+      </div>
+      <div class="pdf-bar__unit">
         <button
           type="submit"
           name="add"
-          class="btn btn-primary"
+          class="btn btn-block btn-primary-alt"
           data-add-to-cart
           {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-            <span data-add-to-cart-text>
-              {% if current_variant.available %}
-                {{ 'products.product.add_to_cart' | t }}              
-              {% else %}
-                {{ 'products.product.sold_out' | t }}
-              {% endif %}
-            </span>
-            &mdash;
-            <span data-product-price>
-              {{ current_variant.price | money }}
-            </span>            
+          {{ submit_button_contents }}
         </button>
-      </form>
+      </div>
     </div>
 
-  </div>
+    <div class="pdf-cards-holder">
+      <div class="pdf-card">
+        <div class="container" style="padding-top: 30px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+      </div>
+    </div>   
+  </form>
 
   {% unless product == empty %}
     <script type="application/json" data-product-json>

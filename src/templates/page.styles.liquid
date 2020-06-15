@@ -42,15 +42,8 @@
 
 
         <h2 id="docs-type" class="docs-title">Type</h2>
-        <div class="font-weight-bold" style="font-size: 18px;">
-          <p>SYSTEM / HELVETICA NEUE BOLD</p>
-          <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-          <p>abcdefghijklmnopqrstuvwxyz</p>
-          <p>0123456789</p>
-        </div>
-        <br />
         <div style="font-size: 18px;">
-          <p>SYSTEM / HELVETICA NEUE</p>
+          <p>Goudy Old Style</p>
           <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
           <p>abcdefghijklmnopqrstuvwxyz</p>
           <p>0123456789</p>    
@@ -100,18 +93,16 @@
         <h2 id="docs-typography" class="docs-title">Typography</h2>
 
         <h4 class="docs-subtitle">Headings</h4>
-        <h1>H1 System / Helvetica Neue Bold</h1>
-        <h2>H2 System / Helvetica Neue Bold</h2>
-        <h3>H3 System / Helvetica Neue Bold</h3>
-        <h4>H4 System / Helvetica Neue Bold</h4>
-        <h5>H5 System / Helvetica Neue Bold</h5>
-        <h6>H6 System / Helvetica Neue Bold</h6>
+        <h1>H1 Goudy Old Style</h1>
+        <h2>H2 Univers</h2>
+        <h3>H3 Univers</h3>
+        <h4>H4 Univers</h4>
+        <h5>H5 Univers</h5>
+        <h6>H6 Univers</h6>
 
         <h4 class="docs-subtitle">Type variations</h4>
-        <p class="lead">Lead System / Helvetica Neue Regular</p>
-        <p class="p1">P1 System / Helvetica Neue Regular</p>
-        <p class="p2">P2 System / Helvetica Neue Regular</p>
-        <p class="p3">P3 System / Helvetica Neue Regular</p>
+        <p class="p2">P2 Univers</p>
+        <p class="p3">P3 Univers</p>
 
         <h4 class="docs-subtitle">Paragraphs</h4>
         <p>
@@ -529,23 +520,16 @@
         <div class="docs-well">
           <p>
             <a href="#" class="btn btn-primary">Primary button</a>
+            <a href="#" class="btn btn-primary-alt">Primary Alt button</a>
             <a href="#" class="btn btn-secondary">Secondary button</a>
-            <a href="#" class="btn btn-outline-primary">Primary Outline button</a>
-            <a href="#" class="btn btn-outline-secondary">Secondary Outline button</a>          
+            <a href="#" class="btn btn-tertiary">Tertiary button</a>
           </p>
           <p>
             <a href="#" class="btn btn-primary disabled">Primary button (Disabled)</a>
+            <a href="#" class="btn btn-primary-alt disabled">Primary Alt button (Disabled)</a>
             <a href="#" class="btn btn-secondary disabled">Secondary button (Disabled)</a>
-            <a href="#" class="btn btn-outline-primary disabled">Primary Outline button (Disabled)</a>
-            <a href="#" class="btn btn-outline-secondary disabled">Secondary Outline button (Disabled)</a>          
+            <a href="#" class="btn btn-tertiary disabled">Tertiary button (Disabled)</a>
           </p>
-        </div>
-
-        <div class="docs-well">
-          <a href="#" class="btn btn-block btn-primary">Block Level Primary Button</a>
-          <a href="#" class="btn btn-block btn-secondary">Block Level Secondary Button</a>
-          <a href="#" class="btn btn-block btn-outline-primary">Primary Outline button</a>
-          <a href="#" class="btn btn-block btn-outline-secondary">Secondary Outline button</a>              
         </div>
 
         <div class="docs-well">
@@ -1016,83 +1000,18 @@
 
         <h4 id="docs-dots" class="docs-subtitle">Dots</h4>
 
-        <p>Dots are an alternate UI used primarily for displaying / selecting variant option values. They respond to the two state classes <code>.is-active</code> and <code>.is-disabled</code>.  Active dots will show a border around them, disabled dots will show with partial opacity and a strike through.</p>
+        <p>Dots are an alternate UI used primarily for displaying / selecting variant option values. They respond to the single state classe <code>.is-active</code>.</p>
         <div class="dots">
-          <div class="dot is-active" title="Small">
-            <div class="dot__inner">S</div>
+          <div class="dot is-active">
+            1
           </div>
-          <div class="dot" title="Medium">
-            <div class="dot__inner">M</div>
+          <div class="dot">
+            2
           </div>
-          <div class="dot" title="Large">
-            <div class="dot__inner">L</div>
-          </div>
-          <div class="dot" title="Extra Large">
-            <div class="dot__inner">XL</div>
-          </div>
-          <div class="dot is-disabled" title="Extra Large">
-            <div class="dot__inner">OS</div>
-          </div>          
+          <div class="dot">
+            4
+          </div>         
         </div>
-
-        <br /><br />
-
-        <p>Use the <code>.dots--small</code> modifier class to create smaller dots when space is tight.</p>
-
-        <div class="dots dots--small">
-          <div class="dot is-active" title="Small">
-            <div class="dot__inner">S</div>
-          </div>
-          <div class="dot" title="Medium">
-            <div class="dot__inner">M</div>
-          </div>
-          <div class="dot" title="Large">
-            <div class="dot__inner">L</div>
-          </div>
-          <div class="dot" title="Extra Large">
-            <div class="dot__inner">XL</div>
-          </div>
-          <div class="dot is-disabled" title="Extra Large">
-            <div class="dot__inner">OS</div>
-          </div>          
-        </div>
-
-        <br /><br />
-
-        <p>Apply a background color or background image to the <code>.dot__inner</code> element to use them as swatches.</p>
-        <div class="dots">
-          <div class="dot is-active" title="Navy">
-            <div class="dot__inner" style="background-color:#081847;"></div>
-          </div>
-          <div class="dot" title="Maroon">
-            <div class="dot__inner" style="background-color:#AD172B;"></div>
-          </div>
-          <div class="dot" title="Maude">
-            <div class="dot__inner" style="background-color:#A06B6B;"></div>
-          </div>
-          <div class="dot" title="Gold">
-            <div class="dot__inner" style="background-image: url({{ 'test-swatch-1.png' | asset_img_url: '50x50', crop: 'center' }})"></div>
-          </div>
-          <div class="dot" title="Multi Plaid">
-            <div class="dot__inner" style="background-image: url({{ 'test-swatch-2.png' | asset_img_url: '50x50', crop: 'center' }})"></div>
-          </div>
-          <div class="dot" title="Red Plaid">
-            <div class="dot__inner" style="background-image: url({{ 'test-swatch-3.png' | asset_img_url: '50x50', crop: 'center' }})"></div>
-          </div>                              
-        </div>
-        <br /><br />
-        <p>Or apply a modifier class to apply a background color as defined in the swatch palette.  The list of available color-modifier classes is below.</p>
-        
-        {% assign colors = 'blue:indigo:purple:pink:red:orange:yellow:green:teal:cyan:khaki:brown:tan:white:gray:gray-dark:black' | split: ':' %}
-
-        <div class="dots">
-          {% for c in colors %}
-            <div class="dot dot--solid dot--{{ c }}">
-              <div class="dot__inner"></div>
-            </div>
-          {% endfor %}
-        </div>
-
       </div>
     </div>
   </div>

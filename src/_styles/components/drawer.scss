@@ -88,12 +88,9 @@ body.drawer-open {
   padding: 0 $drawer-padding-horizontal $drawer-padding-vertical;
   
   ul {
-    @include list-unstyled;
-    margin: 0;
+    @include list-inline;
 
     li {
-      display: inline-block;
-
       &:not(:last-child):after {
         content: '/';
       }

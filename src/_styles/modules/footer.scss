@@ -3,50 +3,36 @@
 // -------------------------
 
 .footer {
-  padding-top: $footer-padding-top;
-  padding-bottom: $footer-padding-bottom;
-  background-color: $footer-bg;
-
-  &, a, h1, h2, h3, h4, h5, h6 {
-    color: $footer-text-color;
-  }
-
   p:last-child {
     margin-bottom: 0;
   }
-
-  svg {
-    width: 150px;
-    height: auto;
-    margin-bottom: 40px;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
 }
 
+.footer__upper {
+  padding: 97px 0 70px;
+  background-color: $black;
 
-.footer-menu {
-  @extend .list-unstyled;
-  font-size: $footer-menu-font-size;
-  margin-bottom: 40px;
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: $footer-menu-text-color;
+  &, a, h1, h2, h3, h4, h5, h6 {
+    color: $white;
   }
 }
 
 .footer-text {
-  font-size: $font-size-xs;
-  font-family: $font-family-sans-serif;
+  @extend .p2; 
+}
+
+.footer-menu {
+  @include list-inline;
+  @include body-copy;
+  margin-bottom: 75px;
+
+  li {
+
+  }
+}
+
+.footer__lower {
+  padding: 19px 0 14px;
+  background-color: $butter;
+  @extend .p2;
 }

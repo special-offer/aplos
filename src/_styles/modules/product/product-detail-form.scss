@@ -1,3 +1,61 @@
 // -------------------------
 // Product Detail Form
 // -------------------------
+
+// @TODO - Set a fixed height to the pdf bar
+
+.pdf-bar {
+  position: fixed;
+  z-index: 2;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px; // @TODO - Store this as a var, it gets shared with the buttons
+  background-color: $white;
+
+  .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    // Something small, it's stretch to full width anyways
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.pdf-bar__unit {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.pdf-cards-holder {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - 90px);
+  transform: translateY(92%);
+  transition: transform 0.8s cubic-bezier(0.32, -0.25, 0.64, 0.81);
+
+  &.is-active {
+    transform: translateY(0%);
+    transition: transform 0.8s cubic-bezier(0.19, -0.01, 0, 1.02);
+  }
+}
+
+.pdf-card {
+  background-color: #f8facc;
+  border-radius: 12px 12px 0 0;
+  height: 100%;
+  overflow: scroll;
+  padding-bottom: 88px; // make room for the pdf-bar
+  box-shadow: 0 2px 14px transparent;
+  transition: box-shadow 0.8s ease-out;
+
+  .is-active & {
+    box-shadow: 0 2px 14px #93947f;
+  }
+}

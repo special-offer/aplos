@@ -19,10 +19,9 @@ body.ajax-cart-open {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   transform: translateX(100%);
-  transition: all $transition-duration-slide $transition-timing-function-slide-out;
+  transition: transform $transition-duration-slide $transition-timing-function-slide-out;
 
-  font-family: $font-family-sans-serif;
-  font-size: 13px;
+  @extend .p2;
 
   &, h1, h2, h3, h4, h5, h6, a {
     color: $ajax-cart-color;
@@ -31,7 +30,7 @@ body.ajax-cart-open {
   &.is-open {
     pointer-events: auto;
     transform: translateX(0%);
-    transition: all $transition-duration-slide $transition-timing-function-slide-in;
+    transition: transform $transition-duration-slide $transition-timing-function-slide-in;
   }
 
   &.is-empty .ajax-cart__footer {
@@ -77,6 +76,7 @@ body.ajax-cart-open {
   top: 0;
   left: 0;
   right: 0;
+  padding-top: 32px;
 }
 
 .ajax-cart__body {
@@ -103,23 +103,45 @@ body.ajax-cart-open {
 
 .ajax-cart__footer {
   padding-top: 0;
+  padding-bottom: $ajax-cart-padding-horizontal;
 }
 
 .ajax-cart__close {
-  width: 40px;
+  width: 27px;
+
+  svg {
+    stroke: $ajax-cart-color;
+  }
 }
 
-.ajax-cart__empty-message {
+.ajax-cart__empty {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
 
-  p {
-    font-size: 30px;
-    padding: 0 $ajax-cart-padding-horizontal;
-    margin-bottom: $ajax-cart-padding-vertical;
+  .container {
+    padding-left: $ajax-cart-padding-horizontal;
+    padding-right: $ajax-cart-padding-horizontal;
+
+    h2 {
+      margin-bottom: $ajax-cart-padding-horizontal;
+    }
+  }
+}
+
+.ajax-cart__empty-image {
+  height: 50%;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object: {
+      fit: cover;
+      position: bottom;
+    }
   }
 }
 
@@ -139,7 +161,7 @@ body.ajax-cart-open {
 
 .ajax-cart__item-image {
   width: 100%;
-  max-height: 420px;
+  max-height: 510px;
   overflow: hidden;
 
   img {
@@ -149,14 +171,16 @@ body.ajax-cart-open {
 
 .ajax-cart__item-contents {
   margin: 0 $ajax-cart-padding-horizontal;
-  padding: $ajax-cart-padding-vertical 0;
+  // padding: $ajax-cart-padding-vertical 0;
+  padding: 36px 0 33px;
   border-bottom: 1px solid $ajax-cart-border-color;
 }
 
 .ajax-cart__item-header {
-  margin-bottom: 10px;
-  font-size: 31px; // @TODO - remove
+  margin-bottom: 1px;
+  font-size: 30px; // @TODO - remove
   font-family: $font-family-serif;
+  line-height: 1;
 }
 
 .ajax-cart__item-title {
@@ -181,15 +205,15 @@ body.ajax-cart-open {
   }
 }
 
+.ajax-cart__footer-top,
+.ajax-cart__footer-bottom {
+  padding-top: 51px;
+}
+
 .ajax-cart__footer-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-top: $ajax-cart-padding-vertical / 2;
-
-  &:not(:last-child) {
-    margin-bottom: 15px;
-  }
 
   p:last-child {
     margin-bottom: 0;

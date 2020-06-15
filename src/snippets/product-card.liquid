@@ -8,7 +8,6 @@
   {% include 'product-card',
               product: { product } - required
               lazy_load: { boolean } - optional, defaults to false,
-              show_swatches: { boolean } - optional, defaults to true
               show_reviews: { boolean } - optional, defaults to false
   %}
 
@@ -17,10 +16,6 @@
 {% comment %} Defaults {% endcomment %}
 {% if lazy_load == blank %}
   {% assign lazy_load = false %}
-{% endif %}
-
-{% if show_swatches == blank %}
-  {% assign show_swatches = true %}
 {% endif %}
 
 {% if show_reviews == blank %}
@@ -75,21 +70,6 @@
       {% endif %}
 
       <div class="product-card__info">
-
-        {% if show_swatches %}
-        
-          {% capture swatches_html %}
-            {% include 'product-dots-color' %}
-          {% endcapture %}
-
-          {% if swatches_html != blank %}
-            <div class="product-card__info-swatches">
-              {{ swatches_html }}
-            </div>
-          {% endif %}
-
-        {% endif %}
-
         <h3 class="product-card__info-title">
           <a href="{{ product_url }}">{{ product.title }}</a>
         </h3>

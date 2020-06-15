@@ -1,6 +1,9 @@
 import $ from 'jquery';
 import { chosenSelects } from '../../core/utils';
-import { formatMoney } from '../../core/currency';
+import {
+  formatMoney,
+  stripZeroCents
+} from '../../core/currency';
 import Variants from './variants';
 
 const selectors = {
@@ -13,12 +16,14 @@ const selectors = {
   singleOptionSelector: '[data-single-option-selector]',
   variantOptionValueList: '[data-variant-option-value-list][data-option-position]',
   variantOptionValue: '[data-variant-option-value]',
-  quantitySelect: '[data-product-quantity-select]'
+  productQuantity: '[data-product-quantity]',
+  dotQty: '[data-dot-qty]'
 };
 
 const classes = {
   hide: 'hide',
-  variantOptionValueActive: 'is-active'
+  variantOptionValueActive: 'is-active',
+  dotActive: 'is-active'
 };
 
 export default class ProductDetailForm {
@@ -62,6 +67,8 @@ export default class ProductDetailForm {
     this.$productPrice           = $(selectors.productPrice, this.$container);
     this.$singleOptionSelectors  = $(selectors.singleOptionSelector, this.$container); // Dropdowns for each variant option containing all values for that option
     this.$variantOptionValueList = $(selectors.variantOptionValueList, this.$container); // Alternate UI that takes the place of a single option selector (could be swatches, dots, buttons, whatever..)
+    this.$productQuantity        = $(selectors.productQuantity, this.$container); // Hidden quantity input
+    this.$dotQtys                = $(selectors.dotQty, this.$container); // Dot quantity UI, click them to change the selected quantity
     /* eslint-enable */
 
     this.productSingleObject  = JSON.parse($(selectors.productJson, this.$container).html());
@@ -76,6 +83,7 @@ export default class ProductDetailForm {
 
     this.$container.on('variantChange', this.onVariantChange.bind(this));
     this.$container.on(this.events.CLICK, selectors.variantOptionValue, this.onVariantOptionValueClick.bind(this));
+    this.$dotQtys.on('click', this.onDotQuantityClick.bind(this));
 
     chosenSelects(this.$container);
   }
@@ -130,7 +138,7 @@ export default class ProductDetailForm {
    */
   updateProductPrices(variant) {
     if (variant) {
-      this.$productPrice.html(formatMoney(variant.price, window.theme.moneyFormat));
+      this.$productPrice.html(stripZeroCents(formatMoney(variant.price, window.theme.moneyFormat)));
     }
   }
 
@@ -180,5 +188,22 @@ export default class ProductDetailForm {
 
     $option.addClass(classes.variantOptionValueActive);
     $option.siblings().removeClass(classes.variantOptionValueActive);
+  }
+
+  onDotQuantityClick(e) {
+    const $dotQty = $(e.currentTarget);
+
+    if ($dotQty.hasClass(classes.dotActive)) return;
+
+    const value = $dotQty.data('dot-qty');
+
+    this.$dotQtys
+      .removeClass(classes.dotActive)
+      .filter((i, el) => {
+        return $(el).data('dot-qty') === value;
+      })
+      .addClass(classes.dotActive);
+
+    this.$productQuantity.val(value);
   }
 }

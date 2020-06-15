@@ -27,32 +27,36 @@ h4, .h4 { @include h4; }
 h5, .h5 { @include h5; }
 h6, .h6 { @include h6; }
 
-.lead {
-  @include font-size($lead-font-size);
-  font-weight: $lead-font-weight;
-}
+// .p1 { @include p1; }
+.p2 { @include p2; }
+.p3 { @include p3; }
+
+// .lead {
+//   @include font-size($lead-font-size);
+//   font-weight: $lead-font-weight;
+// }
 
 // Type display classes
-.display-1 {
-  @include font-size($display1-size);
-  font-weight: $display1-weight;
-  line-height: $display-line-height;
-}
-.display-2 {
-  @include font-size($display2-size);
-  font-weight: $display2-weight;
-  line-height: $display-line-height;
-}
-.display-3 {
-  @include font-size($display3-size);
-  font-weight: $display3-weight;
-  line-height: $display-line-height;
-}
-.display-4 {
-  @include font-size($display4-size);
-  font-weight: $display4-weight;
-  line-height: $display-line-height;
-}
+// .display-1 {
+//   @include font-size($display1-size);
+//   font-weight: $display1-weight;
+//   line-height: $display-line-height;
+// }
+// .display-2 {
+//   @include font-size($display2-size);
+//   font-weight: $display2-weight;
+//   line-height: $display-line-height;
+// }
+// .display-3 {
+//   @include font-size($display3-size);
+//   font-weight: $display3-weight;
+//   line-height: $display-line-height;
+// }
+// .display-4 {
+//   @include font-size($display4-size);
+//   font-weight: $display4-weight;
+//   line-height: $display-line-height;
+// }
 
 
 //
@@ -93,16 +97,9 @@ mark,
 }
 
 // Inline turns list items into inline-block
-.list-inline {
-  @include list-unstyled;
-}
-.list-inline-item {
-  display: inline-block;
-
-  &:not(:last-child) {
-    margin-right: $list-inline-padding;
-  }
-}
+// .list-inline {
+//   @include list-inline;
+// }
 
 
 //

@@ -55,7 +55,7 @@
       {% endif %}
 
       {% if section.settings.footer_linklist and linklists[section.settings.footer_linklist].links.size > 0 %}
-        <ul class="list-unstyled list-inline">
+        <ul>
           {% for link in linklists[section.settings.footer_linklist].links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}

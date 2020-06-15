@@ -2,24 +2,31 @@
 // Pencil Banner
 // -------------------------
 
-
 .pencil-banner {
   position: relative;
   z-index: $zindex-pencil-banner;
-  padding: $pencil-banner-padding-vertical 0;
-  background-color: $pencil-banner-bg;
-  font-size: $font-size-sm;
+  padding: 19px 0 16px;
+  background-color: $butter-dark;
   text-align: center;
 
-  &, a {
-    color: $pencil-banner-text-color;
-  }
+  @extend .p2;
 
   p:last-child {
     margin-bottom: 0;
   }
+
+  .container-fluid-max {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .pencil-banner__close {
+  width: 13px;
 
+  svg {
+    stroke: $body-color;
+    stroke-width: 2px;
+  }
 }

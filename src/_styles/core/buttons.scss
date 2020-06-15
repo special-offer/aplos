@@ -9,16 +9,16 @@
 .btn {
   display: inline-block;
   font-family: $font-family-sans-serif; // $btn-font-family;
-  font-weight: $font-weight-bold; // $btn-font-weight;
+  font-weight: $btn-font-weight;
   color: $body-color;
   text-align: center;
   vertical-align: middle;
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent; // $btn-border-width solid transparent;
-  padding: 1.575rem 3.85rem 1.3rem;
-  font-size: $font-size-xs;
-  line-height: 1.15;
+  padding: 25px 93px;
+  font-size: $font-size-sm;
+  line-height: 1;
   border-radius: 4px;
   // @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
   @include transition($btn-transition);
@@ -58,10 +58,10 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  background-color: #f8facc;
+  background-color: $butter;
 
   @include hover {
-    background-color: #e6e271;
+    background-color: $butter-dark;
   }
 }
 
@@ -71,17 +71,19 @@ fieldset:disabled a.btn {
 
   @include hover {
     color: $black;
-    background-color: #e6e271;
+    background-color: $butter-dark;
   }  
 }
 
 .btn-secondary {
   border-color: $gray;
   background-color: $white;
+  padding: 20px 50px 18px;
 }
 
 .btn-tertiary {
   border-color: $black;
+  padding: 19px 30px 15px;
 }
 
 

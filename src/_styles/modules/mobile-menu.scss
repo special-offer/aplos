@@ -4,7 +4,6 @@
 
 .mobile-menu-list {
   @include list-unstyled;
-  margin-bottom: 0;
 
   &--primary {
     font-size: 38px;

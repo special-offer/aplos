@@ -1,21 +1,66 @@
 <footer class="footer" data-section-id="{{ section.id }}" data-section-type="footer">
-  <div class="container">
-    {% include 'icon-logo' %}
+  <div class="footer__upper">
+    <div class="container-fluid-max">
+      <div class="row">
+        <div class="col-7" style="display: flex; align-items: flex-end;">
+          {% if section.settings.footer_text != blank %}
+            <div class="footer-text">
+              {{ section.settings.footer_text | replace: '&nbsp;', ' ' | strip }}
+            </div>
+          {% endif %}
+        </div>
+        <div class="col-5">
+          {% if section.settings.upper_linklist and linklists[section.settings.upper_linklist].links.size > 0 %}
+            <ul class="footer-menu">
+              {% for link in linklists[section.settings.upper_linklist].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
 
-    {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
-      <ul class="footer-menu">
-        {% for link in linklists[section.settings.linklist].links %}
-          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    {% if section.settings.footer_text != blank %}
-      {% assign year = 'now' | date: "%Y" %}
-      <div class="footer-text">
-        {{ section.settings.footer_text | replace: '$year$', year | replace: '$shop$', shop.name | replace: '&nbsp;', ' ' | strip }}
+          <div class="minimal-input-box">
+            <input type="search" placeholder="Email Address" class="minimal-input-box__input" style="border-radius: 0;" />
+            <button type="submit" class="minimal-input-box__submit">
+              {% include 'icon-arrow' %}
+              <span class="icon-fallback-text">Submit</span>
+            </button>
+          </div>        
+        </div>
       </div>
-    {% endif %}
+    </div>
+  </div>
+  <div class="footer__lower">
+    <div class="container-fluid-max">
+      <div class="row">
+        <div class="col-7">
+          {% if section.settings.contact_email != blank %}
+            <a href="mailto:{{ section.settings.contact_email }}" target="_blank" title="Email Us">
+              {{ section.settings.contact_email }}
+            </a>
+          {% endif %}
+        </div>
+        <div class="col-5" style="display: flex; justify-content: space-between;">
+          <span>
+            {% if section.settings.copyright_text != blank %}
+              {% assign year = 'now' | date: "%Y" %}
+                {{ section.settings.copyright_text | replace: '$year$', year |
+                                                     replace: '$shop$', shop.name |
+                                                     replace: '$copy$', '&copy;' |
+                                                     replace: '&nbsp;', ' ' | 
+                                                     strip
+                }}
+            {% endif %}
+          </span>
+          {% if section.settings.lower_linklist and linklists[section.settings.lower_linklist].links.size > 0 %}
+            <div>
+              {% for link in linklists[section.settings.lower_linklist].links %}
+                <a href="{{ link.url }}">{{ link.title }}</a>{% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -24,15 +69,38 @@
     "name": "Footer",
     "settings": [
       {
+        "type": "header",
+        "content": "Upper Footer"
+      },    
+      {
         "type": "link_list",
-        "id": "linklist",
+        "id": "upper_linklist",
         "label": "Menu"
       },
       {
         "type": "richtext",
         "id": "footer_text",
-        "label": "Footer Text",
-        "info": "Use '$year$' to include the current year.  Use $shop$ to include the name of your shop."
+        "label": "Footer Text"
+      },
+      {
+        "type": "header",
+        "content": "Lower Footer"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact Email"
+      },
+      {
+        "type": "richtext",
+        "id": "copyright_text",
+        "label": "Copyright Text",
+        "info": "Use the following text replacements: '$year$' = the current year, '$shop$' = the name of your shop, $copy$ = copyright symbol"
+      },
+      {
+        "type": "link_list",
+        "id": "lower_linklist",
+        "label": "Menu"
       }
     ]
   }

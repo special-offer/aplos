@@ -1,7 +1,7 @@
 <div data-section-id="{{ section.id }}" data-section-type="ajax-cart">
   <div class="ajax-cart-container" data-ajax-cart-container>
       <form action="/cart" method="post" class="ajax-cart-form" novalidate>
-        <div class="ajax-cart__header">
+        <div class="ajax-cart__header" style="font-size: 12px;">
           {{ 'cart.general.title' | t }}
           <a href="#" class="ajax-cart__close" data-ajax-cart-close>
             {% include 'icon-close' %}
@@ -37,11 +37,11 @@
             <img src="{{ image }}">
           </div>
           <div class="ajax-cart__item-contents">
-            <a href="{{ url }}" class="ajax-cart__item-header">
-              <div class="ajax-cart__item-title">{{ product_title }}</div>
-            </a>
+            <h3 class="ajax-cart__item-header">
+              <a href="{{ url }}" class="ajax-cart__item-title">{{ product_title }}</a>
+            </h3>
             <div class="ajax-cart__item-body">
-              <div>
+              <div style="line-height: 1;">
                 {{ price }}
                 <br />
                 Ships Sept 21, 2020
@@ -62,16 +62,22 @@
       {{/each}}
     </ul>
   {{else}}
-    <div class="ajax-cart__empty-message">
+    <div class="ajax-cart__empty">
       {% endraw %}
-      {% if section.settings.empty_text != blank %}
-        {{ section.settings.empty_text }}
-      {% else %}
-        {{ 'cart.general.empty' | t }}
-      {% endif %}
+      <div class="container">
+        <h2 class="text-serif">
+          {% if section.settings.empty_text != blank %}
+            {{ section.settings.empty_text }}
+          {% else %}
+            {{ 'cart.general.empty' | t }}
+          {% endif %}
+        </h2>
+      </div>
 
       {% if section.settings.empty_image %}
-        <img src="{{ section.settings.empty_image | img_url: '600x' }}" />
+        <div class="ajax-cart__empty-image">
+          <img src="{{ section.settings.empty_image | img_url: '600x' }}" />
+        </div>
       {% endif %}
       {% raw %}
     </div>

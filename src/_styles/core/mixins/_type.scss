@@ -4,60 +4,62 @@
 //
 
 @mixin h1 {
+  font-family: $h1-font-family;
   font-size: $h1-font-size;
-  letter-spacing: $h1-letter-spacing;
   line-height: $h1-line-height;
 }
 
 @mixin h2 {
+  font-family: $h2-font-family;
   font-size: $h2-font-size;
-  letter-spacing: $h2-letter-spacing;
   line-height: $h2-line-height;
 }
 
 @mixin h3 {
+  font-family: $h3-font-family;
   font-size: $h3-font-size;
-  letter-spacing: $h3-letter-spacing;
   line-height: $h3-line-height;
 }
 
 @mixin h4 {
+  font-family: $h4-font-family;
   font-size: $h4-font-size;
-  letter-spacing: $h4-letter-spacing;
   line-height: $h4-line-height;
 }
 
 @mixin h5 {
+  font-family: $h5-font-family;
   font-size: $h5-font-size;
-  letter-spacing: $h5-letter-spacing;
   line-height: $h5-line-height;
 }
 
 @mixin h6 {
+  font-family: $h6-font-family;
   font-size: $h6-font-size;
-  letter-spacing: $h6-letter-spacing;
   line-height: $h6-line-height;
 }
 
-@mixin p1 {
-  font-size: $p1-font-size;
-  letter-spacing: $p1-letter-spacing;
-  line-height: $p1-line-height;
-  font-weight: $p1-font-weight;
+@mixin body-copy {
+  font-size: $body-copy-font-size;
+  font-weight: $body-copy-font-weight;
+  line-height: $body-copy-line-height;
 }
+
+// @mixin p1 {
+//   font-size: $p1-font-size;
+//   line-height: $p1-line-height;
+// }
 
 @mixin p2 {
   font-size: $p2-font-size;
-  letter-spacing: $p2-letter-spacing;
   line-height: $p2-line-height;
-  font-weight: $p2-font-weight;
+  font-family: $p2-font-family;
 }
 
 @mixin p3 {
   font-size: $p3-font-size;
-  letter-spacing: $p3-letter-spacing;
   line-height: $p3-line-height;
-  font-weight: $p3-font-weight;
+  font-family: $p2-font-family;
 }
 
 // RTE styling for long form content

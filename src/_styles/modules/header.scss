@@ -27,7 +27,6 @@
   }
 }
 
-// Make a special version of .container that is fluid w/ max width and vertical flex-alignment of child elements
 .header-container {
   @extend .container-fluid-max;
   display: flex;
@@ -36,12 +35,19 @@
 }
 
 .header-logo {
-  max-width: $header-logo-width;
+  height: 100%;
+  padding: 11px 0;
 }
 
 .header-logo__image {
-  width: 100%;
-  transform: translateZ(0); // Prevent bluriness from scaling
+  display: block;
+  height: 100%;
+  transform: translateY(-5%); // Logo has an accent at the top that we need to avvount for visually
+
+  svg {
+    height: 100%;
+    width: auto;
+  }
 }
 
 // .header-container > .header-nav
@@ -85,6 +91,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  @extend .p2;
 
   // Some menus don't need to be shown all the time
   &.for-mobile {
@@ -102,7 +109,7 @@
 
 .header-nav__menu-item {
   display: inline-block;
-  margin: 0 26px;
+  margin: 0 30px;
 
   &:first-child {
     margin-left: 0;
@@ -133,14 +140,18 @@
   }
 
   svg {
-    width: 40px;
+    width: 26px;
+
+    @media (min-width: $header-bp-min) {
+      width: 32px;
+    }
   }
 }
 
 .header-cart__badge-count {
   position: absolute;
-  top: -7px;
-  right: -10px;
+  top: 3px;
+  right: -12px;
   opacity: 0;
   transition: opacity 300ms ease-out;
 
