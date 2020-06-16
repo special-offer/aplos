@@ -44,7 +44,7 @@
 }
 
 .header-logo__image {
-  display: block;
+  display: inline-block;
   height: 100%;
   transform: translateY(-5%); // Logo has an accent at the top that we need to avvount for visually
 

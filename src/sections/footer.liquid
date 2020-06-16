@@ -2,14 +2,14 @@
   <div class="footer__upper">
     <div class="container-fluid-max">
       <div class="row">
-        <div class="col-7" style="display: flex; align-items: flex-end;">
+        <div class="col-6 col-xl-7" style="display: flex; align-items: flex-end;">
           {% if section.settings.footer_text != blank %}
             <div class="footer-text">
               {{ section.settings.footer_text | replace: '&nbsp;', ' ' | strip }}
             </div>
           {% endif %}
         </div>
-        <div class="col-5">
+        <div class="col-12 col-md-6 col-xl-5">
           {% if section.settings.upper_linklist and linklists[section.settings.upper_linklist].links.size > 0 %}
             <ul class="footer-menu">
               {% for link in linklists[section.settings.upper_linklist].links %}
@@ -32,14 +32,14 @@
   <div class="footer__lower">
     <div class="container-fluid-max">
       <div class="row">
-        <div class="col-7">
+        <div class="col-6 col-xl-7 d-none d-md-block">
           {% if section.settings.contact_email != blank %}
             <a href="mailto:{{ section.settings.contact_email }}" target="_blank" title="Email Us">
               {{ section.settings.contact_email }}
             </a>
           {% endif %}
         </div>
-        <div class="col-5" style="display: flex; justify-content: space-between;">
+        <div class="col-12 col-md-6 col-xl-5" style="display: flex; justify-content: space-between;">
           <span>
             {% if section.settings.copyright_text != blank %}
               {% assign year = 'now' | date: "%Y" %}
