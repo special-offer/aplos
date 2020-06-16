@@ -5,16 +5,20 @@
 .header {
   position: relative;
   z-index: $zindex-header;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: $spacing-sm;
+  left: $spacing-sm;
+  right: $spacing-sm;
   height: $header-height-small;
+  border-radius: $border-radius;
   background-color: $header-bg;
   color: $header-text-color;
-  backface-visibility: hidden;
 
   @media (min-width: $header-bp-min) {
+    top: 0;
+    left: 0;
+    right: 0;
     height: $header-height-base;
+    border-radius: 0;
   }
 
   // If the fixed header behavior is turned on...
@@ -89,7 +93,7 @@
 // List of menu items
 .header-nav__menu {
   list-style: none;
-  margin: 0;
+  margin: 2px 0 0;
   padding: 0;
   @extend .p2;
 

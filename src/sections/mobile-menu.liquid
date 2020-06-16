@@ -4,10 +4,8 @@
       <a href="#" class="drawer__close" data-drawer-close>
         {% include 'icon-close' %}
       </a>        
-      <h5 class="drawer__header-title">{{ shop.name }}</h5>
     </div>
     <div class="drawer__body">
-      {% comment %} Menus {% endcomment %}
       <div class="drawer__block">
         {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
           <ul class="mobile-menu-list mobile-menu-list--primary">
@@ -47,20 +45,18 @@
       {% endif %}
     </div>
     <div class="drawer__footer">
-      {% if section.settings.footer_text != blank %}
-        {% assign year = 'now' | date: "%Y" %}
-        <div>
-          {{ section.settings.footer_text | replace: '$year$', year | replace: '$shop$', shop.name | replace: '&nbsp;', ' ' | strip }}
-        </div>
+      {% if settings.klaviyo_list_id != blank %}
+        {% comment %} TODO - Implement this{% endcomment %}
+        <form>
+          <div class="minimal-input-box">
+            <input type="search" placeholder="Enter your email address for updates" class="minimal-input-box__input" style="border-radius: 0;" />
+            <button type="submit" class="minimal-input-box__submit">
+              {% include 'icon-arrow' %}
+              <span class="icon-fallback-text">Submit</span>
+            </button>
+          </div>          
+        </form>
       {% endif %}
-
-      {% if section.settings.footer_linklist and linklists[section.settings.footer_linklist].links.size > 0 %}
-        <ul>
-          {% for link in linklists[section.settings.footer_linklist].links %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-          {% endfor %}
-        </ul>
-      {% endif %}            
     </div>    
   </div>
 </div>
@@ -79,21 +75,6 @@
         "id": "show_social_accounts",
         "label": "Show social account links",
         "default": false
-      },
-      {
-        "type": "header",
-        "content": "Footer"
-      },
-      {
-        "type": "richtext",
-        "id": "footer_text",
-        "label": "Text",
-        "info": "Use '$year$' to include the current year.  Use $shop$ to include the name of your shop."
-      },
-      {
-        "type": "link_list",
-        "id": "footer_linklist",
-        "label": "Menu"
       }
     ]
   }

@@ -105,8 +105,18 @@
       </button>
     </div>
 
-    <div class="pdf-bar">
-      <div class="pdf-bar__unit">
+    {% comment %} Maybe move this to a snippet? {% endcomment %}
+    <div class="transaction-bar">
+      <div class="transaction-bar__unit">
+        <h2 class="h1" style="margin: 0;">{{ product.title }}</h2>
+      </div>
+      <div class="transaction-bar__unit">
+        <div class="p2">
+          Non-Alcoholic Spirit<br />
+          500 ml / 16.9 fl oz
+        </div>
+      </div>      
+      <div class="transaction-bar__unit">
         <label class="p2" style="margin: 0 15px;">Qty:</label>
         <div class="dots" style="display: inline-block;">
           <div class="dot is-active" data-dot-qty="1">1</div>
@@ -114,7 +124,7 @@
           <div class="dot" data-dot-qty="4">4</div>
         </div>
       </div>
-      <div class="pdf-bar__unit">
+      <div class="transaction-bar__unit">
         <button
           type="submit"
           name="add"

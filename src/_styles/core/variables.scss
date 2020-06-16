@@ -247,8 +247,8 @@ $line-height-sm:              1.5 !default;
 $border-width:                1px !default;
 $border-color:                $gray-light !default;
 
-$border-radius:               .25rem !default;
-$border-radius-lg:            .3rem !default;
+$border-radius:               4px !default;
+$border-radius-lg:            8px !default;
 $border-radius-sm:            .2rem !default;
 
 $rounded-pill:                50rem !default;
@@ -988,13 +988,20 @@ $minimal-input-height-large:            60px;
 $drawer-max-width:                      540px;
 $drawer-bg:                             $black;
 $drawer-color:                          $white;
-$drawer-padding-vertical:               24px;
-$drawer-padding-horizontal:             $spacing-md;
+$drawer-padding-vertical-mobile:        26px;
+$drawer-padding-vertical-desktop:       46px;
+$drawer-padding-horizontal-mobile:      36px;
+$drawer-padding-horizontal-desktop:     $spacing-md;
 $drawer-backdrop-color:                 $butter;
 $drawer-backdrop-opacity:               1;
 $drawer-header-font-size:               $h5-font-size;
 $drawer-header-border-color:            $black;
+$drawer-vertical-spacing:               115px;
 
+
+/* Remove these */
+$drawer-padding-vertical:       46px;
+$drawer-padding-horizontal:     $spacing-md;
 
 // AJAX Cart
 
@@ -1065,9 +1072,8 @@ $dot-border-width:                      1px;
 $dot-border-radius:                     50%;
 $dot-border-color:                      transparent;
 $dot-active-border-color:               $black;
-$dot-font-size:                         $font-size-xs;
-$dot-size:                              34px;
-$dot-spacing:                           6px;
+$dot-size:                              36px;
+$dot-spacing:                           7px;
 $dot-bottom-margin:                     $dot-spacing;
 
 // #Quantity Adjuster
@@ -1075,4 +1081,5 @@ $quantity-adjuster-height:             38px;
 $quantity-adjuster-font-size:          $font-size-sm;
 $quantity-adjuster-border-width:       1px;
 $quantity-adjuster-border-color:       $white;
+$quantity-adjuster-border-radius:      $border-radius-lg;
 $quantity-adjuster-inner-height:       $quantity-adjuster-height - (2*$quantity-adjuster-border-width);

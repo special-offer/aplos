@@ -22,10 +22,8 @@
   border-radius: $dot-border-radius;
   overflow: hidden;
 
-  line-height: $dot-size - 2px;
-  font-size: $dot-font-size;
-  font-family: $font-family-sans-serif;
-  text-transform: uppercase;
+  @extend .p2;
+  line-height: $dot-size;
   text-align: center;
 
   &.is-active {

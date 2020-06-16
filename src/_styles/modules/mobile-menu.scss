@@ -6,13 +6,12 @@
   @include list-unstyled;
 
   &--primary {
-    font-size: 38px;
+    font-size: 32px;
+    line-height: 1.28;
   }
 
   &--secondary {
-    // @TODO - Formalize text styles
-    font-family: $font-family-sans-serif;
-    font-size: 14px;
+    @extend .p2;
     line-height: 2;
   }
 }
