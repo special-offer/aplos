@@ -46,16 +46,30 @@
     </div>
     <div class="drawer__footer">
       {% if settings.klaviyo_list_id != blank %}
-        {% comment %} TODO - Implement this{% endcomment %}
-        <form>
-          <div class="minimal-input-box">
-            <input type="search" placeholder="Enter your email address for updates" class="minimal-input-box__input" style="border-radius: 0;" />
-            <button type="submit" class="minimal-input-box__submit">
-              {% include 'icon-arrow' %}
-              <span class="icon-fallback-text">Submit</span>
-            </button>
-          </div>          
-        </form>
+        <form method="post"
+              class="newsletter-form"
+              data-newsletter-form
+              data-klaviyo-list-id="{{ settings.klaviyo_list_id }}"
+              data-klaviyo-source="Mobile menu"
+        >
+          <div class="newsletter-form-contents" data-form-contents>
+            <div class="newsletter-form-inputs">
+              <div class="minimal-input-box">
+                <input type="email" placeholder="Enter your email address for updates" class="minimal-input-box__input" />
+                <button type="submit" class="minimal-input-box__submit">
+                  {% include 'icon-arrow' %}
+                  <span class="icon-fallback-text">Submit</span>
+                </button>
+              </div>
+            </div>
+            <div class="newsletter-form-message"
+                data-form-message
+                data-success="{% render 'newsletter-form-message', type: 'success' %}"
+                data-already-subscribed="{% render 'newsletter-form-message', type: 'already-subscribed' %}"
+                data-fail="{% render 'newsletter-form-message', type: 'fail' %}">
+            </div>  
+          </div>
+        </form>  
       {% endif %}
     </div>    
   </div>

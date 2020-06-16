@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const noop = () => { };
+const noop = () => {};
 
 /**
  * AJAX Klaviyo Library

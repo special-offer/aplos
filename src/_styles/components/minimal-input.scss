@@ -8,65 +8,22 @@
 
 .minimal-input-box__input {
   @extend .form-control;
-  padding: 0 30px 0 0;
-  border-width: 0 0 2px;
-  height: $minimal-input-height;
-
-  &,
-  &:focus {
-    background-color: transparent;
-  }
+  padding-right: 30px;
 }
 
 .minimal-input-box__submit {
   @extend .btn-link;
   position: absolute;
-  top: -7px;
+  top: 0px;
   bottom: 0;
   right: 0;
   padding: 0;
   width: 30px;
   text-align: right;
-  cursor: pointer;
 
-  svg {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-// White form controls for placement on dark backgrounds
-.minimal-input-box--inverted {
-
-  .minimal-input-box__input {
-    color: $white;
-
-    &:focus {
-      color: $white;
-      border-color: $white;
-    }
-  }
-
-
-  .minimal-input-box__submit {
-    svg {
-      fill: $white;
-    }
-  }
-}
-
-// Large minimal input
-.minimal-input-box--large {
-
-  .minimal-input-box__input {
-    height: $minimal-input-height-large;
-    font-size: $font-size-lg;
-  }
-
-  .minimal-input-box__submit {
-    svg {
-      height: 25px;
-      width: 25px;
-    }
+  svg.icon-arrow {
+    width: 10px;
+    height: 9px;
+    transform: translateY(-4px);
   }
 }

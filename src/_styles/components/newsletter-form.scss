@@ -17,6 +17,9 @@ $t-d-end: 500ms;
 .newsletter-form-message {
   @include stretch-within();
   z-index: 1;
+  display: flex;
+  align-items: center;
+  @extend .p2;
 
   opacity: 0;
   pointer-events: none;
@@ -28,16 +31,20 @@ $t-d-end: 500ms;
   .newsletter-form-inputs {
     opacity: 0;
     pointer-events: none;
-    transition-duration: $t-d-start;
-    transition-delay: 0ms;
-    transition-timing-function: ease-in;
+    transition: {
+      duration: $t-d-start;
+      delay: 0ms;
+      timing-function: ease-in;
+    }
   }
 
   .newsletter-form-message {
     opacity: 1;
     pointer-events: auto;
-    transition-duration: $t-d-end;
-    transition-delay: $t-d-start;
-    transition-timing-function: ease-out;
+    transition: {
+      duration: $t-d-end;
+      delay: $t-d-start;
+      timing-function: ease-out;
+    }
   }
 }

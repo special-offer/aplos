@@ -13,7 +13,7 @@ import { getTransitionTimingDuration } from '../core/animations';
 const selectors = {
   form: 'form',
   formContents: '[data-form-contents]',
-  formMessage: '[data-form-message][data-message-success][data-message-fail]'
+  formMessage: '[data-form-message]' // needs data-success, data-already-subscribed, data-fail
 };
 
 const classes = {
@@ -102,7 +102,7 @@ export default class NewsletterForm {
 
   onSubscribeSuccess(response) {
     const isSubscribed = response && response.data && response.data.is_subscribed;
-    const successMsg = this.$formMessage.data(isSubscribed ? 'message-already-subscribed' : 'message-success');
+    const successMsg = this.$formMessage.data(isSubscribed ? 'already-subscribed' : 'success');
 
     if (!isThemeEditor() && this.settings.setCookies) {
       setCookie(this.cookies.emailCollected);
@@ -120,7 +120,7 @@ export default class NewsletterForm {
   }
 
   onSubscribeFail() {
-    this.$formMessage.html(this.$formMessage.data('message-fail'));
+    this.$formMessage.html(this.$formMessage.data('fail'));
     this.showMessageWithTimeout();
   }
 }
