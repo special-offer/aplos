@@ -3,17 +3,22 @@
 // -----------------------------------------------------------------------------
 
 .dots {
-  margin: 0 -#{($dot-spacing / 2)} -#{$dot-bottom-margin}; // account for the 2px padding + 1px border on the dot
+  margin: 0 -#{($dot-spacing-mobile / 2)} -#{$dot-bottom-margin}; // account for the 2px padding + 1px border on the dot
   padding: 0;
   overflow: hidden;
+
+  @include media-breakpoint-up(md) {
+    margin-left: -$dot-spacing/2;
+    margin-right: -$dot-spacing/2;
+  }
 }
 
 .dot {
   display: inline-block;
   position: relative;
-  margin-left: $dot-spacing / 2;
-  margin-right: $dot-spacing / 2;
-  margin-bottom: $dot-spacing;
+  margin-left: $dot-spacing-mobile/2;
+  margin-right: $dot-spacing-mobile/2;
+  margin-bottom: $dot-bottom-margin;
   height: $dot-size;
   width: $dot-size;
   cursor: pointer;
@@ -21,12 +26,42 @@
   border: $dot-border-width solid $dot-border-color;
   border-radius: $dot-border-radius;
   overflow: hidden;
+  opacity: 0.25;
+  transition: opacity 150ms ease-out, border-color 150ms ease-out;
+
+  @include media-breakpoint-up(md) {
+    margin-left: $dot-spacing/2;
+    margin-right: $dot-spacing/2;
+  }
 
   @extend .p2;
   line-height: $dot-size;
   text-align: center;
 
+  &:hover {
+    opacity: 1;
+  }
+
   &.is-active {
     border-color: $dot-active-border-color;
+    opacity: 1;
+  }
+}
+
+// Wraps dots + label
+.dot-group {
+  display: flex;
+  align-items: center;
+  
+  label {
+    margin: 0 13px 0 0;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-right: 45px;
+  }
+
+  .dots {
+    display: inline-block;
   }
 }

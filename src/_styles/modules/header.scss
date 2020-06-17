@@ -49,8 +49,10 @@
   transform: translateY(-5%); // Logo has an accent at the top that we need to avvount for visually
 
   svg {
+    // iOS safari has trouble with height: 100%; width: auto;
+    display: block;
     height: 100%;
-    width: auto;
+    width: 100%;
   }
 }
 

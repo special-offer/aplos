@@ -249,6 +249,7 @@ $border-color:                $gray-light !default;
 
 $border-radius:               4px !default;
 $border-radius-lg:            8px !default;
+$border-radius-xl:            12px !default;
 $border-radius-sm:            .2rem !default;
 
 $rounded-pill:                50rem !default;
@@ -266,7 +267,7 @@ $caret-spacing:               $caret-width * .85 !default;
 
 $transition-base:             all .2s ease-in-out !default;
 $transition-fade:             opacity .15s linear !default;
-$transition-collapse:         height .35s ease !default;
+$transition-collapse:         height .23s ease-out !default;
 
 $embed-responsive-aspect-ratios: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -1036,9 +1037,11 @@ $arrow-icon-tip-skew:                   45deg;
 
 // Slideshow
 
-$slideshow-dot-size:                    10px;
-$slideshow-dot-color:                   $white;
-$slideshow-dot-active-color:            #f00;
+$swiper-bullet-size:                       4px;
+$swiper-bullet-spacing:                    8px;
+$swiper-bullet-color:                      $black;
+$swiper-bullet-opacity:                    0.25;
+$swiper-bullet-active-opacity:             1;
 
 
 // Panel
@@ -1049,12 +1052,6 @@ $panel-margin-vertical:                 $grid-gutter-width;
 $panel-border:                          1px solid #efefef;
 $panel-expand-icon-size:                20px;
 $panel-expand-icon-stroke-width:        2px;
-
-
-// Expandable List
-
-$expandable-list-item-padding-vertical: 12px;
-$expandable-list-item-border:           1px solid #efefef;
 
 
 // Overlays
@@ -1071,6 +1068,7 @@ $dot-border-color:                      transparent;
 $dot-active-border-color:               $black;
 $dot-size:                              36px;
 $dot-spacing:                           7px;
+$dot-spacing-mobile:                    0;
 $dot-bottom-margin:                     $dot-spacing;
 
 // #Quantity Adjuster

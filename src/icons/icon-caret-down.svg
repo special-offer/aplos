@@ -1,27 +1,26 @@
-<svg version="1.1" id="Layer_1"
-   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 20"
-   style="enable-background:new 0 0 30 20;" xml:space="preserve">
-  <g>
-    <g>
-      <defs>
-        <polygon id="SVGID_2_" points="62.1,-2415.3 55.8,-2421.6 55.1,-2422.3 56.5,-2423.7 57.2,-2423 63.5,-2416.7 69.8,-2423 
-          70.5,-2423.7 71.9,-2422.3 71.2,-2421.6 64.2,-2414.6 63.5,-2413.9        "/>
-      </defs>
-      <clipPath id="SVGID_3_">
-        <use xlink:href="#SVGID_2_"  style="overflow:visible;"/>
-      </clipPath>
-      <g class="st0">
-        <defs>
-          <rect id="SVGID_4_" x="-268" y="-3050" width="375" height="8298"/>
-        </defs>
-        <clipPath id="SVGID_5_">
-          <use xlink:href="#SVGID_4_"  style="overflow:visible;"/>
-        </clipPath>
-        <polygon class="st1" points="62.1,-2415.3 55.8,-2421.6 55.1,-2422.3 56.5,-2423.7 57.2,-2423 63.5,-2416.7 69.8,-2423 
-          70.5,-2423.7 71.9,-2422.3 71.2,-2421.6 64.2,-2414.6 63.5,-2413.9        "/>
-      </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="21px" viewBox="0 0 27 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Combined Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M194,104 L200,109 M206,104 L200,109" id="path-1"></path>
+        <filter x="-114.2%" y="-234.1%" width="328.4%" height="648.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowInner" result="shadowInner"></feOffset>
+            <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"></feComposite>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Design-Final" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="Product-Detail-Page-—-Mobile-Expanded" transform="translate(-187.000000, -98.000000)">
+            <g id="Combined-Shape">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use stroke="#FFFFFF" stroke-width="1" xlink:href="#path-1"></use>
+            </g>
+        </g>
     </g>
-    <polygon class="st2" points="12.5,16.2 1.3,5 0,3.8 2.5,1.2 3.8,2.5 15,13.7 26.2,2.5 27.5,1.2 30,3.8 28.7,5 16.3,17.5 15,18.8 
-          "/>
-  </g>
 </svg>

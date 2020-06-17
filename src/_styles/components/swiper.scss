@@ -1,0 +1,18 @@
+// -------------------------
+// Swiper styles
+// -------------------------
+.swiper-pagination-bullet {
+  height: $swiper-bullet-size;
+  width: $swiper-bullet-size;  
+  margin: 0 $swiper-bullet-spacing/2;
+  background-color: $swiper-bullet-color;
+  opacity: $swiper-bullet-opacity;
+  transition: opacity $transition-duration-fast $transition-timing-function-out;
+
+  &:hover,
+  &:focus,
+  &.swiper-pagination-bullet-active {
+    opacity: $swiper-bullet-active-opacity;
+    transition: opacity $transition-duration-fast $transition-timing-function-in;  
+  }
+}

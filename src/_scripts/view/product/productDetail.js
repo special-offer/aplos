@@ -1,10 +1,12 @@
 import $ from 'jquery';
 import ProductDetailForm from './productDetailForm';
 import ProductDetailGallery from './productDetailGallery';
+import StoryPopup from './storyPopup';
 
 const selectors = {
   productDetailForm: '[data-product-detail-form]',
-  productDetailGallery: '[data-product-detail-gallery]'
+  productDetailGallery: '[data-product-detail-gallery]',
+  storyPopup: '[data-story-popup]'
 };
 
 export default class ProductDetail {
@@ -28,11 +30,13 @@ export default class ProductDetail {
 
     this.$pdg = $(selectors.productDetailGallery, this.$el);
     this.$pdf = $(selectors.productDetailForm, this.$el);
+    this.$storyPopup = $(selectors.storyPopup, this.$el);
     
     this.gallery = new ProductDetailGallery(this.$pdg);
     this.form    = new ProductDetailForm({
       $container: this.$pdf,
       enableHistoryState: enableHistoryState
     });
+    this.storyPopup = new StoryPopup(this.$storyPopup);
   }
 }

@@ -4,3 +4,151 @@
 
 @import 'product/product-detail-gallery';
 @import 'product/product-detail-form';
+
+.product-detail {
+  display: flex;
+
+  .product-detail-form {
+    max-width: calc(1440px/2 - #{$spacing-lg*2}); // @TODO - variable-ize 1440
+  }  
+}
+
+// These are wrapper elements
+.product-detail__child {
+  flex: 1;
+  max-width: 50%;
+
+  &--form {
+    padding: $spacing-lg;
+  }
+}
+
+body.story-popup-open {
+  overflow: hidden;
+}
+
+.story-popup {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  max-height: 800px;
+  padding-top: 86px;
+  transform: translateY(83%);
+  transition: transform 0.45s cubic-bezier(0.36, 0.8, 0.64, 0.96);
+
+  &.is-active {
+    transform: translateY(0%);
+    transition: transform 0.7s cubic-bezier(0.19, -0.01, 0, 1.02);
+  }
+
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}
+
+.story-popup__contents,
+.story-cards-container,
+// .story-cards-container .swiper-wrapper,
+.story-card {
+  height: 100%;
+}
+
+.story-popup__contents {
+  position: relative;
+
+  .story-cards-pagination {
+    position: absolute;
+    z-index: 1;
+    bottom: 83px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.story-popup__close {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: red;
+
+  svg {
+    width: 12px;
+    stroke: $white;
+    background-color: red; // @TODO - Figure out this svg
+  }
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  background-color: $butter;
+  border-radius: $border-radius-xl $border-radius-xl 0 0;
+  overflow: hidden;
+  padding-bottom: 110px; // make room for the pdf-bar + pagination
+  box-shadow: 0 -1px 23px transparent;
+  transition: box-shadow 0.8s ease-out;
+
+  .is-active & {
+    box-shadow: 0 -1px 23px transparentize($black, 0.5);
+  }
+}
+
+.story-card__header-image {
+  height: 100%;
+  min-height: 15vh;
+  max-height: 30vh;
+  overflow: hidden;
+  margin-bottom: -22px; // Since there is more vertical spacing for cards without header images, use negative margins here to pull the title closer to the image
+
+  img {
+    height: 100%;
+    width: 100%;
+    object: {
+      fit: cover;
+      position: center;
+    }
+  }
+}
+
+.story-card__body {
+  padding: 0 $spacing-sm; // @TODO - this is the horizontal padding on grid for small screens.. 
+  flex: 1;
+}
+
+.story-card__body-contents {
+  height: 100%;
+  padding-bottom: 21px;
+  border-bottom: 1px solid $black;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.story-card__title {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 46px 0 3px;
+  border-bottom: 1px solid $black;
+  margin-bottom: 14px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+// temp styles
+.product-detail {
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+    
+    .product-detail__child {
+      max-width: 100%;
+    }
+  }
+}

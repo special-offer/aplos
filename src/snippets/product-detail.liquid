@@ -13,18 +13,21 @@
 
 {% assign current_variant = product.selected_or_first_available_variant %}
 
-<div style="display: flex;" data-product-detail>
-  <div style="flex: 1; max-width: 50%;">
+<div class="product-detail" data-product-detail>
+  <div class="product-detail__child product-detail__child--gallery">
     {% include 'product-detail-gallery',
                 product: product,
                 current_variant: current_variant
     %}
   </div>
 
-  <div style="flex: 1; max-width: 50%; padding: 60px;">
+  <div class="product-detail__child product-detail__child--form">
     {% include 'product-detail-form',
                 product: product,
                 current_variant: current_variant
-    %}  
+    %}
+    <a href="#" class="btn btn-tertiary" data-story-popup-open>Open Popup</a>
   </div>
+
+  {% include 'story-popup', product: product %}
 </div>
