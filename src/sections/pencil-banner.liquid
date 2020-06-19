@@ -1,11 +1,19 @@
 <div data-section-id="{{ section.id }}" data-section-type="pencil-banner">
   {% if section.settings.banner_enabled %}
     <div class="pencil-banner p2">
-      {% comment %}@TODO - Replace container fluid max? {% endcomment %}
+      {% comment %}
+        @TODO
+          - Replace container fluid max?
+          - Make sure content is centered with/without accent text
+      {% endcomment %}
       <div class="container-fluid-max">
-        <span class="small text-uppercase" style="letter-spacing: 0.05em">Notice</span>
-        <div class="d-none d-md-block">{{ section.settings.banner_content }}</div>
-        <div class="d-block d-md-none">{{ section.settings.banner_mobile_content | default: section.settings.banner_content }}</div>
+        <span class="pencil-banner__accent">
+          {{ section.settings.banner_accent_text }}
+        </span>
+        <div>
+          <div class="d-none d-md-block">{{ section.settings.banner_content }}</div>
+          <div class="d-block d-md-none">{{ section.settings.banner_mobile_content | default: section.settings.banner_content }}</div>
+        </div>
         <a href="#" class="pencil-banner__close" title="Close" data-pencil-banner-close>
           {% include 'icon-close' %}
         </a>
@@ -25,15 +33,25 @@
         "default": true
       },
       {
+        "id": "banner_accent_text",
+        "type": "text",
+        "label": "Accent Text",
+        "default": "Notice"
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
         "id": "banner_content",
         "type": "richtext", 
-        "label": "Content",
+        "label": "Desktop Text",
         "default": "<p>Default Banner Text</p>"
       },
       {
         "id": "banner_mobile_content",
         "type": "richtext", 
-        "label": "Mobile Content",
+        "label": "Mobile Text",
         "info": "Alternate text for small screens, will fall back to regular content if left blank"
       }
     ]

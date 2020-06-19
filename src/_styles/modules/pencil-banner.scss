@@ -22,6 +22,12 @@
   }
 }
 
+.pencil-banner__accent {
+  @extend .p3;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .pencil-banner__close {
   width: 13px;
 

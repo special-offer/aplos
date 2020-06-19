@@ -29,6 +29,18 @@
   &.is-fixed {
     position: fixed;
   }
+
+  // On these templates the header is styled a bit differently..
+  // @TODO - Move these modifiers further down in this file since they affect a few different parts of the header
+  .template-index &,
+  .template-philosophy &,
+  .template-page & {
+    background-color: transparent;
+  }
+
+  .template-404 & {
+    background-color: white;
+  }
 }
 
 .header-container {
