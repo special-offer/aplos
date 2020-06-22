@@ -1,0 +1,197 @@
+// -------------------------
+// Drawer - AJAX Cart
+// -------------------------
+
+.drawer--ajax-cart {
+  @extend .p2;
+
+  form,
+  .drawer__contents {
+    height: 100%;
+  }
+
+  .drawer__header {
+    position: absolute;
+    z-index: 5; // Push it above empty state
+    top: 0;
+  }
+
+  .drawer__body {
+    display: block; // kill display: flex;
+    flex: 0 1 auto; // Reset flex from base drawer
+    padding-left: 0;
+    padding-right: 0;
+    overflow: scroll;
+    -webkit-overlay-scrolling: touch;
+
+    // Ajax cart loading shield
+    &:before {
+      content: '';
+      @include stretch-within;
+      z-index: 1;
+      background: transparentize($drawer-bg, 0.75);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity $transition-duration-base $transition-timing-function-base;
+    }
+  }
+
+  &.lock-ui .drawer__body:before {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: $cursor-disabled;
+  }
+
+  .drawer__footer {
+    flex: 1; // make sure it's pushed to the bottom
+    margin-top: 0;
+  }
+}
+
+// AJAX Cart styles (not having to do with the drawer part)
+.ajax-cart__empty {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  background-color: $drawer-bg;
+  opacity: 0;
+  pointer-events: none;
+
+  @include h1;
+  font-size: 30px;
+
+  .is-empty & {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 400ms ease-out;
+  }
+}
+
+.ajax-cart__empty-contents {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.ajax-cart__empty-text {
+  padding: 150px $drawer-padding-horizontal-mobile 0;
+
+  @include media-breakpoint-up(md) {
+    padding-left: $drawer-padding-horizontal-desktop;
+    padding-right: $drawer-padding-horizontal-desktop;    
+  }  
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.ajax-cart__empty-image {
+  height: 50%;
+  overflow: hidden;
+  margin-top: $drawer-padding-vertical-desktop; // 32px;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object: {
+      fit: cover;
+      position: bottom;
+    }
+  }
+}
+
+.ajax-cart__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 32px;
+}
+
+.ajax-cart__item {
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.ajax-cart__item-image {
+  width: 100%;
+  height: 50vh;
+  max-height: 510px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+}
+
+.ajax-cart__item-contents {
+  margin: 0 $drawer-padding-horizontal-desktop;
+  // padding: $ajax-cart-padding-vertical 0;
+  padding: 39px 0 33px;
+  border-bottom: 1px solid $drawer-border-color;
+
+  .ajax-cart__item:last-child & {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.ajax-cart__item-header {
+  margin-bottom: 1px;
+  font-size: 30px; // @TODO - remove
+  font-family: $font-family-serif;
+  line-height: 1;
+}
+
+.ajax-cart__item-title {
+
+}
+
+.ajax-cart__item-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 24px; // $ajax-cart-padding-vertical;
+}
+
+.ajax-cart__item-price {
+  float: right;
+  padding-left: 5px;
+}
+
+.ajax-cart__footer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-top: 1px solid $white;
+  padding-top: 6vh;
+
+  .additional-checkout-button {
+    width: 100%;
+  }
+}
+
+.ajax-cart__footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  &:not(:first-child) {
+    padding-top: 39px;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
