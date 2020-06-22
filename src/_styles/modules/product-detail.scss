@@ -58,6 +58,8 @@ body.story-popup-open {
 
 .story-popup__contents {
   position: relative;
+  border-radius: $border-radius-xl $border-radius-xl 0 0;
+  overflow: hidden;
 
   .story-cards-pagination {
     position: absolute;
@@ -83,27 +85,41 @@ body.story-popup-open {
   }
 }
 
+.story-cards__container {
+  height: 100%;
+  overflow: hidden;  
+}
+
 .story-card {
   display: flex;
   flex-direction: column;
-  background-color: $butter;
-  border-radius: $border-radius-xl $border-radius-xl 0 0;
   overflow: hidden;
-  padding-bottom: 110px; // make room for the pdf-bar + pagination
-  box-shadow: 0 -1px 23px transparent;
-  transition: box-shadow 0.8s ease-out;
+  background-color: $butter;
+  
+  // @TODO - Figure out how to do this box shadow - probably need another wrapper element?
+  // box-shadow: 0 -1px 23px transparent;
+  // transition: box-shadow 0.8s ease-out;
 
-  .is-active & {
-    box-shadow: 0 -1px 23px transparentize($black, 0.5);
+  // .story-popup.is-active & {
+  //   box-shadow: 0 -1px 23px transparentize($black, 0.5);
+  // }  
+
+  .swiper-slide:first-child & {
+    border-top-left-radius: $border-radius-xl;
   }
+
+  .swiper-slide:last-child & {
+    border-top-right-radius: $border-radius-xl;
+  }  
 }
 
 .story-card__header-image {
+  position: relative;
+  z-index: 1; // Pushes it over the 
   height: 100%;
   min-height: 15vh;
   max-height: 30vh;
   overflow: hidden;
-  margin-bottom: -22px; // Since there is more vertical spacing for cards without header images, use negative margins here to pull the title closer to the image
 
   img {
     height: 100%;
@@ -117,7 +133,9 @@ body.story-popup-open {
 
 .story-card__body {
   padding: 0 $spacing-sm; // @TODO - this is the horizontal padding on grid for small screens.. 
+  padding-bottom: 110px; // make room for the pdf-bar + pagination
   flex: 1;
+  overflow: hidden;
 }
 
 .story-card__body-contents {
@@ -132,12 +150,17 @@ body.story-popup-open {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 46px 0 3px;
+  padding: 0 0 3px;
   border-bottom: 1px solid $black;
-  margin-bottom: 14px;
+  margin: 43px 0 14px;
 
   h2 {
     margin: 0;
+  }
+
+  // If there's a header image, reduce the top margin
+  .story-card__header-image + .story-card__body & {
+    margin-top: 21px;
   }
 }
 
