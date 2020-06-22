@@ -1,19 +1,21 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
 import BaseSection from './base';
-import DropdownManager from '../managers/dropdown';
+import AJAXCartDrawer from '../ui/ajaxCartDrawer';
 
 const $window = $(window);
 const $body   = $(document.body);
 
 const selectors = {
   header: '[data-header]',
-  dropdownTrigger: '[data-dropdown-trigger][data-block]'
+  cartBadge: '[data-cart-badge]',
+  cartBadgeCount: '[data-cart-badge-count]'
 };
 
 const classes = {
   headerFixed: 'is-fixed',
-  siteHasFixedHeader: 'site-fixed-header'
+  siteHasFixedHeader: 'site-fixed-header',
+  cartBadgeHasItems: 'has-items'
 };
 
 export default class HeaderSection extends BaseSection {
@@ -21,60 +23,45 @@ export default class HeaderSection extends BaseSection {
     super(container, 'header');
 
     this.$el = $(selectors.header, this.$container);
-
-    this.$container.on(this.events.MOUSELEAVE, this.onMouseLeave.bind(this));
-
-    // Register each dropdown trigger
-    $(selectors.dropdownTrigger, this.$container).each((i, trigger) => {
-      DropdownManager.register($(trigger));
-    });
+    this.$cartBadge      = $(selectors.cartBadge, this.$container);
+    this.$cartBadgeCount = $(selectors.cartBadgeCount, this.$container);
 
     // We pass in the fixed behavior as a class on the body of the site
     if ($body.hasClass(classes.siteHasFixedHeader)) {
-      $window.on(this.events.SCROLL, throttle(20, this.onScroll.bind(this)));
+      $window.on('scroll', throttle(50, this.onScroll.bind(this)));
       this.onScroll(); // hit this one time on init to make sure everything is good
     }
+
+    $window.on(AJAXCartDrawer.events.RENDER, this.onAJAXCartRender.bind(this));
+  }
+
+  onAJAXCartRender(e) {
+    if (e.cart) {
+      this.updateCartCount(e.cart.item_count);
+    }
+  }
+
+  /**
+   * Update the cart badge + count
+   *
+   * @param {Number} count
+   */
+  updateCartCount(count) {
+    this.$cartBadgeCount.html(count);
+    this.$cartBadge.toggleClass(classes.cartBadgeHasItems, count > 0);
   }
 
   scrollCheck() {
     // Do measurements outside of rAF.
     const scrollTop = $window.scrollTop();
     const actualOffset = this.$container.offset().top - this.$el.outerHeight();
+    const toggle = !(scrollTop < actualOffset);
 
     // Do DOM updates inside.
-    requestAnimationFrame(() => {
-      if (scrollTop < actualOffset) {
-        this.$el.removeClass(classes.headerFixed);
-      }
-      else {
-        this.$el.addClass(classes.headerFixed);
-      }
-    });
+    requestAnimationFrame(() => this.$el.toggleClass(classes.headerFixed, toggle));
   }
 
   onScroll() {
     this.scrollCheck();
-  }
-
-  onMouseLeave() {
-    DropdownManager.closeAllDropdowns();
-  }
-
-  onBlockSelect(e) {
-    const dropdown = DropdownManager.getDropdownByBlockId(e.detail.blockId);
-
-    // Bypass dropdown manager since we're inside the theme editor
-    if (dropdown) {
-      dropdown.forceOpen();
-    }
-  }
-
-  onBlockDeselect(e) {
-    const dropdown = DropdownManager.getDropdownByBlockId(e.detail.blockId);
-
-    // Bypass dropdown manager since we're inside the theme editor
-    if (dropdown) {
-      dropdown.forceClose();
-    }
   }
 }

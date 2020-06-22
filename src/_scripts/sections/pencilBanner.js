@@ -1,5 +1,5 @@
-import $ from 'jquery';
-import { isThemeEditor } from '../core/utils';
+// import $ from 'jquery';
+// import { isThemeEditor } from '../core/utils';
 import BaseSection from './base';
 
 const selectors = {
@@ -16,8 +16,6 @@ export default class PencilBannerSection extends BaseSection {
   onCloseClick(e) {
     e.preventDefault();
 
-    if(isThemeEditor()) return;
-
-    console.log('close pencil banner');
+    // if (isThemeEditor()) return;
   }
 }

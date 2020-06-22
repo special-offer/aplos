@@ -1,31 +1,65 @@
 <div data-section-id="{{ section.id }}" data-section-type="ajax-cart">
-  <div class="ajax-cart-container" data-ajax-cart-container>
-      <form action="/cart" method="post" class="ajax-cart-form" novalidate>
-        <div class="ajax-cart__header" style="font-size: 12px;">
-          {{ 'cart.general.title' | t }}
-          <a href="#" class="ajax-cart__close" data-ajax-cart-close>
-            {% include 'icon-close' %}
-          </a>
-        </div>
-        <div class="ajax-cart__body" data-ajax-cart-body>
-          {% comment %} Filled in via JS {% endcomment %}
-        </div>
-        <div class="ajax-cart__footer" data-ajax-cart-footer>
-          <div class="ajax-cart__footer-top" data-ajax-cart-footer-top>
-            {% comment %} Filled in via JS {% endcomment %}
+  <div class="drawer drawer--ajax-cart">
+    <div class="drawer-overflow">
+      <a href="#" class="drawer__close" data-drawer-close>
+        {% include 'icon-close' %}
+      </a>
+      <form action="/cart" method="post" novalidate>      
+        <div class="drawer__contents">          
+          <div class="drawer__header">
+            <h6>{{ 'cart.general.title' | t }} - {{ section.settings.cart_style }}</h6>
           </div>
-          <div class="ajax-cart__footer-bottom">
-            <div class="ajax-cart__footer-row">
-              <button type="submit" name="checkout" class="btn btn-block btn-secondary">
-                {{ 'cart.general.checkout' | t }}
-              </button>
+          <div class="drawer__body">
+            <div data-ajax-cart-body>
+              {% comment %} Filled in via JS {% endcomment %}
             </div>
           </div>
+          <div class="drawer__footer">
+            <div class="ajax-cart__footer">
+              <div class="ajax-cart__footer-row">
+                <div>
+                  Taxes & Shipping<br />calculated at checkout
+                </div>
+                <div>
+                  <span style="display: inline-block; margin-right: 15px;">Subtotal:</span>
+                  <span style="display: inline-block; min-width: 50px; text-align: right;" data-ajax-cart-total>{{ total_price }}</span>
+                </div>
+              </div>
+
+              <div class="ajax-cart__footer-row">
+                <button type="submit" name="checkout" class="btn btn-block btn-secondary">
+                  {{ 'cart.general.checkout' | t }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ajax-cart__empty">
+            <div class="ajax-cart__empty-contents">
+              <div class="ajax-cart__empty-text">
+                {% if section.settings.empty_text != blank %}
+                  {{ section.settings.empty_text }}
+                {% else %}
+                  <p>{{ 'cart.general.empty' | t }}</p>
+                {% endif %}
+              </div>
+
+              {% if section.settings.empty_image %}
+                <div class="ajax-cart__empty-image">
+                  <img src="{{ section.settings.empty_image | img_url: '900x' }}" />
+                </div>
+              {% endif %}
+            </div>
+          </div>          
         </div>
       </form>
     </div>
   </div>
 </div>
+
+{% comment %}
+  @TODO - instead of complete body template, maybe we just need a line item template?
+{% endcomment %}
 
 {% raw %}
   <script type="text/x-handlebars-template" data-ajax-cart-body-template>
@@ -53,7 +87,7 @@
                   <button class="quantity-adjuster__increment" data-increment>+</button>
                 </div>                
               </div>
-              <div style="align-self: center">
+              <div style="align-self: center; min-width: 50px; text-align: right;">
                 {{ line_price }}
               </div>
             </div>
@@ -61,47 +95,25 @@
         </li>
       {{/each}}
     </ul>
-  {{else}}
-    <div class="ajax-cart__empty">
-      {% endraw %}
-      <div class="container">
-        <h2 class="text-serif">
-          {% if section.settings.empty_text != blank %}
-            {{ section.settings.empty_text }}
-          {% else %}
-            {{ 'cart.general.empty' | t }}
-          {% endif %}
-        </h2>
-      </div>
-
-      {% if section.settings.empty_image %}
-        <div class="ajax-cart__empty-image">
-          <img src="{{ section.settings.empty_image | img_url: '600x' }}" />
-        </div>
-      {% endif %}
-      {% raw %}
-    </div>
   {{/if}}
-  </script>
-
-  <script type="text/x-handlebars-template" data-ajax-cart-footer-top-template>
-    <div class="ajax-cart__footer-row">
-      <div>
-        Taxes & Shipping<br />calculated at checkout
-      </div>
-      <div>
-        <span style="display: inline-block; margin-right: 15px;">Subtotal:</span>
-        {{ total_price }}
-      </div>
-    </div>
   </script>
 {% endraw %}
 
 
 {% schema %}
   {
-    "name": "Ajax Cart",
+    "name": "AJAX Cart",
     "settings": [
+      {
+         "type": "select",
+         "id": "cart_style",
+         "options": [
+            { "value": "single_product", "label": "Single Product"},
+            { "value": "multi_product", "label": "Multi Product"}
+         ],
+         "label": "Cart Style",
+         "default": "single_product"
+      },
       {
         "type": "header",
         "content": "Empty Cart"

@@ -21,6 +21,6 @@ export default class FooterSection extends BaseSection {
       onSubmitFail: errors => this.newsletterForm.onSubmitFail(errors),
       onSubscribeSuccess: response => this.newsletterForm.onSubscribeSuccess(response),
       onSubscribeFail: response => this.newsletterForm.onSubscribeFail(response)
-    }); 
+    });
   }
 }

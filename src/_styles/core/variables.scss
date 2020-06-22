@@ -743,8 +743,6 @@ $zindex-header:                     2100 !default;
 $zindex-pencil-banner:              2101 !default;
 $zindex-drawer-backdrop:            2200 !default;
 $zindex-drawer:                     2201 !default;
-$zindex-ajax-cart-backdrop:         2300 !default;
-$zindex-ajax-cart:                  2301 !default;
 $zindex-overlay:                    2400 !default;
 $zindex-modal-backdrop:             2500 !default;
 $zindex-modal:                      3000 !default;
@@ -983,9 +981,11 @@ $banner-panel-overlay-dark-color:       transparentize($black, 0.5);
 
 // Drawer
 
+$drawer-width:                          85%;
 $drawer-max-width:                      540px;
 $drawer-bg:                             $black;
 $drawer-color:                          $white;
+$drawer-border-color:                   $white;
 $drawer-padding-vertical-mobile:        26px;
 $drawer-padding-vertical-desktop:       46px;
 $drawer-padding-horizontal-mobile:      36px;
@@ -995,22 +995,12 @@ $drawer-backdrop-opacity:               1;
 $drawer-header-font-size:               $h5-font-size;
 $drawer-header-border-color:            $black;
 $drawer-vertical-spacing:               115px;
+$drawer-transition:                     transform $transition-duration-base $transition-timing-function-base;
 
 
 /* Remove these */
 $drawer-padding-vertical:       46px;
 $drawer-padding-horizontal:     $spacing-md;
-
-// AJAX Cart
-
-$ajax-cart-width:                       $drawer-max-width;
-$ajax-cart-bg:                          $black;
-$ajax-cart-color:                       $white;
-$ajax-cart-border-color:                $white;
-$ajax-cart-padding-vertical:            $drawer-padding-vertical;
-$ajax-cart-padding-horizontal:          $drawer-padding-horizontal;
-$ajax-cart-backdrop-color:              $drawer-backdrop-color;
-$ajax-cart-backdrop-opacity:            $drawer-backdrop-opacity;
 
 
 // Page Hero

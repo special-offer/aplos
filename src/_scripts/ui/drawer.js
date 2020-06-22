@@ -28,21 +28,17 @@ export default class Drawer {
     this.namespace = `.${this.name}`;
 
     this.$el = $(el);
+    this.$backdrop = null;
+
     this.stateIsOpen            = false;
     this.transitionEndEvent     = whichTransitionEnd();
     this.supportsCssTransitions = !!Modernizr.csstransitions;
+    this.bodyShiftClass = `drawer-shift--${this.$el.hasClass('drawer--left') ? 'left' : 'right'}`;
 
     if (this.$el === undefined || !this.$el.hasClass(classes.drawer)) {
       console.warn(`[${this.name}] - Element with class ${classes.drawer} required to initialize.`);
       return;
     }
-
-    const defaults = {
-      closeSelector: selectors.close,
-      backdrop: true
-    };
-
-    this.settings = $.extend({}, defaults, options);
 
     this.events = {
       HIDE:   'hide'   + this.namespace,
@@ -51,18 +47,20 @@ export default class Drawer {
       SHOWN:  'shown'  + this.namespace
     };
 
-    this.$el.on('click', this.settings.closeSelector, this.onCloseClick.bind(this));
+    this.$el.on('click', selectors.close, this.onCloseClick.bind(this));
   }
 
-  addBackdrop(callback) {
-    const cb = callback || $.noop;
+  destroy() {
+    this.$backdrop && this.$backdrop.remove();
+  }
 
+  addBackdrop(callback = () => {}) {
     if (this.stateIsOpen) {
       this.$backdrop = $(document.createElement('div'));
 
       this.$backdrop.addClass(classes.backdrop).appendTo($body);
 
-      this.$backdrop.one(this.transitionEndEvent, cb);
+      this.$backdrop.one(this.transitionEndEvent, callback);
       this.$backdrop.one('click', this.hide.bind(this));
 
       // debug this...
@@ -72,18 +70,16 @@ export default class Drawer {
       }, 10);
     }
     else {
-      cb();
+      callback();
     }
   }
 
-  removeBackdrop(callback) {
-    const cb = callback || $.noop;
-
+  removeBackdrop(callback = () => {}) {
     if (this.$backdrop) {
       this.$backdrop.one(this.transitionEndEvent, () => {
         this.$backdrop && this.$backdrop.remove();
         this.$backdrop = null;
-        cb();
+        callback();
       });
 
       setTimeout(() => {
@@ -92,7 +88,7 @@ export default class Drawer {
       }, 10);
     }
     else {
-      cb();
+      callback();
     }
   }
   
@@ -113,26 +109,6 @@ export default class Drawer {
     this.$el.trigger(e);
   }
 
-  hide() {
-    const e = $.Event(this.events.HIDE);
-    this.$el.trigger(e);
-
-    if (!this.stateIsOpen) return;
-
-    this.$el.removeClass(classes.visible);
-
-    if (this.settings.backdrop) {
-      this.removeBackdrop();
-    }
-
-    if (this.supportsCssTransitions) {
-      this.$el.one(this.transitionEndEvent, this.onHidden.bind(this));
-    }
-    else {
-      this.onHidden();
-    }
-  }
-
   show() {
     const e = $.Event(this.events.SHOW);
     this.$el.trigger(e);
@@ -142,16 +118,34 @@ export default class Drawer {
     this.stateIsOpen = true;
 
     this.$el.addClass(classes.visible);
+    $body.addClass(this.bodyShiftClass);
 
-    if (this.settings.backdrop) {
-      this.addBackdrop();
-    }
+    this.addBackdrop();
 
     if (this.supportsCssTransitions) {
       this.$el.one(this.transitionEndEvent, this.onShown.bind(this));
     }
     else {
       this.onShown();
+    }
+  }  
+
+  hide() {
+    const e = $.Event(this.events.HIDE);
+    this.$el.trigger(e);
+
+    if (!this.stateIsOpen) return;
+
+    this.$el.removeClass(classes.visible);
+    $body.removeClass(this.bodyShiftClass);
+
+    this.removeBackdrop();
+
+    if (this.supportsCssTransitions) {
+      this.$el.one(this.transitionEndEvent, this.onHidden.bind(this));
+    }
+    else {
+      this.onHidden();
     }
   }
 

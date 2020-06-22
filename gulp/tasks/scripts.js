@@ -48,6 +48,7 @@ const browserifyThis = (bundleConfig) => {
 
   b.transform(babelify, {
       presets: ["@babel/preset-env"],
+      "plugins": ["@babel/plugin-proposal-class-properties"],
       ignore: [
         "./node_modules/",
         "../../node_modules/"

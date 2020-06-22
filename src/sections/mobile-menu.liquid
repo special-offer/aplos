@@ -1,77 +1,64 @@
 <div data-section-id="{{ section.id }}" data-section-type="mobile-menu">
   <div class="drawer drawer--left" data-mobile-menu>
-    <div class="drawer__header">
+    <div class="drawer-overflow">
       <a href="#" class="drawer__close" data-drawer-close>
         {% include 'icon-close' %}
-      </a>        
-    </div>
-    <div class="drawer__body">
-      <div class="drawer__block">
-        {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
-          <ul class="mobile-menu-list mobile-menu-list--primary">
-            {% for link in linklists[section.settings.linklist].links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </div>
-
-      {% if section.settings.show_social_accounts %}
-        {%- capture social_menu_html %}
-          {% if settings.social_handle_instagram != blank %}
-            <li>
-              <a href="https://instagram.com/{{ settings.social_handle_instagram }}" target="_blank">Instagram</a>
-            </li>
-          {% endif %}
-          {% if settings.social_handle_facebook != blank %}
-            <li>
-              <a href="https://facebook.com/{{ settings.social_handle_facebook }}" target="_blank">Facebook</a>
-            </li>
-          {% endif %}
-          {% if settings.social_handle_twitter != blank %}
-            <li>
-              <a href="https://twitter.com/{{ settings.social_handle_twitter }}" target="_blank">Twitter</a>
-            </li>
-          {% endif %}
-        {%- endcapture -%}
-
-        {% if social_menu_html != blank %}
+      </a>      
+      <div class="drawer__contents">   
+        <div class="drawer__header">     
+        </div>
+        <div class="drawer__body">
           <div class="drawer__block">
-            <ul class="mobile-menu-list mobile-menu-list--secondary">
-              {{ social_menu_html }}
-            </ul>
+            {% if section.settings.linklist_primary and linklists[section.settings.linklist_primary].links.size > 0 %}
+              <ul class="mobile-menu-list mobile-menu-list--primary">
+                {% for link in linklists[section.settings.linklist_primary].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div>
-        {% endif %}
-      {% endif %}
-    </div>
-    <div class="drawer__footer">
-      {% if settings.klaviyo_list_id != blank %}
-        <form method="post"
-              class="newsletter-form"
-              data-newsletter-form
-              data-klaviyo-list-id="{{ settings.klaviyo_list_id }}"
-              data-klaviyo-source="Mobile menu"
-        >
-          <div class="newsletter-form-contents" data-form-contents>
-            <div class="newsletter-form-inputs">
-              <div class="minimal-input-box">
-                <input type="email" placeholder="Enter your email address for updates" class="minimal-input-box__input" />
-                <button type="submit" class="minimal-input-box__submit">
-                  {% include 'icon-arrow' %}
-                  <span class="icon-fallback-text">Submit</span>
-                </button>
-              </div>
+
+          {% if section.settings.linklist_secondary and linklists[section.settings.linklist_secondary].links.size > 0 %}
+            <div class="drawer__block">
+              <ul class="mobile-menu-list mobile-menu-list--secondary">
+                {% for link in linklists[section.settings.linklist_secondary].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
             </div>
-            <div class="newsletter-form-message"
-                data-form-message
-                data-success="{% render 'newsletter-form-message', type: 'success' %}"
-                data-already-subscribed="{% render 'newsletter-form-message', type: 'already-subscribed' %}"
-                data-fail="{% render 'newsletter-form-message', type: 'fail' %}">
-            </div>  
-          </div>
-        </form>  
-      {% endif %}
-    </div>    
+          {% endif %}
+        </div>
+
+        <div class="drawer__footer">
+          {% if settings.klaviyo_list_id != blank %}
+            <form method="post"
+                  class="newsletter-form"
+                  data-newsletter-form
+                  data-klaviyo-list-id="{{ settings.klaviyo_list_id }}"
+                  data-klaviyo-source="Mobile menu"
+            >
+              <div class="newsletter-form-contents" data-form-contents>
+                <div class="newsletter-form-inputs">
+                  <div class="minimal-input-box">
+                    <input type="email" placeholder="Enter your email address for updates" class="minimal-input-box__input" />
+                    <button type="submit" class="minimal-input-box__submit">
+                      {% include 'icon-arrow' %}
+                      <span class="icon-fallback-text">Submit</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="newsletter-form-message"
+                    data-form-message
+                    data-success="{% render 'newsletter-form-message', type: 'success' %}"
+                    data-already-subscribed="{% render 'newsletter-form-message', type: 'already-subscribed' %}"
+                    data-fail="{% render 'newsletter-form-message', type: 'fail' %}">
+                </div>  
+              </div>
+            </form>  
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -81,14 +68,13 @@
     "settings": [
       {
         "type": "link_list",
-        "id": "linklist",
-        "label": "Menu"
+        "id": "linklist_primary",
+        "label": "Primary Menu"
       },
       {
-        "type": "checkbox",
-        "id": "show_social_accounts",
-        "label": "Show social account links",
-        "default": false
+        "type": "link_list",
+        "id": "linklist_secondary",
+        "label": "Secondary Menu"
       }
     ]
   }
