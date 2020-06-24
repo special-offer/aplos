@@ -1,6 +1,14 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
 
+{% assign block = blank %}
+{% for b in section.blocks %}
+  {% if b.settings.product == product.handle %}
+    {% assign block = b %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
 <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
 <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
 <meta itemprop="brand" content="{{ product.vendor }}">
@@ -8,12 +16,86 @@
 <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
 <div data-section-id="{{ section.id }}" data-section-type="product" itemscope itemtype="http://schema.org/Product">
-  {% include 'product-detail', product: product %}
+  {% render 'product-detail', product: product, block: block %}
 </div>
 
 {% schema %}
   {
     "name": "Product Page",
-    "settings": []
+    "settings": [],
+    "blocks": [
+      {
+        "type": "product_info",
+        "name": "Product Info",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product",
+            "info": "The settings below with only display for the product selected here"
+          },
+          {
+            "type": "richtext",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "textarea",
+            "id": "subtitle_mobile",
+            "label": "Subtitle (Mobile)",
+            "info": "Displays inside the popup card."
+          },          
+          {
+            "type": "header",
+            "content": "Images"
+          },
+          {
+            "type": "image_picker",
+            "id": "product_image",
+            "label": "Product Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "product_background_image",
+            "label": "Product Background Image"
+          },          
+          {
+            "type": "header",
+            "content": "Additional Details",
+            "info": "These details display as an expandable list"
+          },
+          {
+            "type": "text",
+            "id": "detail_title_1",
+            "label": "Detail #1 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "detail_content_1",
+            "label": "Detail #1 Content"
+          },
+          {
+            "type": "text",
+            "id": "detail_title_2",
+            "label": "Detail #2 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "detail_content_2",
+            "label": "Detail #2 Content"
+          },
+          {
+            "type": "text",
+            "id": "detail_title_3",
+            "label": "Detail #3 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "detail_content_3",
+            "label": "Detail #3 Content"
+          }
+        ]
+      }
+    ]
   }
 {% endschema %}

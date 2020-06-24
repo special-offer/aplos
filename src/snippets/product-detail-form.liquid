@@ -8,6 +8,7 @@
   {% include 'product-detail-form',
               product: { product } - required
               current_variant: { variant} - optional
+              block: { block } - optional
   %}
 
 {% endcomment -%}
@@ -33,11 +34,14 @@
 
 <div class="product-detail-form" data-product-detail-form>
   <form action="/cart/add" method="post" enctype="multipart/form-data" data-add-to-cart-form>
-    <h1>{{ product.title }}</h1>
+    <div class="product-titles" style="margin-bottom: 4.6rem">
+      <h1 style="margin: 0;">{{ product.title }}</h1>
 
-    <div class="p2" style="margin-bottom: 2.5rem;">
-      Non-Alcoholic Spirit<br />
-      500 ml / 16.9 fl oz
+      {% if block.settings.subtitle != blank %}
+        <div class="p2" style="margin-top: 1.1rem;">
+          {{ block.settings.subtitle }}
+        </div>
+      {% endif %}
     </div>
 
     <div class="rte" style="max-width: 22em; margin-bottom: 60px;">
@@ -108,81 +112,94 @@
     </div>
 
     {% comment %} Maybe move this to a snippet? {% endcomment %}
-    <div class="transaction-bar">
-      <div class="transaction-bar__unit d-none d-md-block">
-        <div class="transaction-bar__pad">
-          <h2 class="h1" style="margin: 0;">{{ product.title }}</h2>
-        </div>
-      </div>
-      <div class="transaction-bar__unit d-none d-lg-block">
-        <div class="transaction-bar__pad">
-          <div class="p2">
-            Non-Alcoholic Spirit<br />
-            500 ml / 16.9 fl oz
-          </div>
-        </div>
-      </div>      
-      <div class="transaction-bar__unit">
-        <div class="transaction-bar__pad">
-          <div class="dot-group">
-            <label>
-              <span class="d-none d-md-inline">Quantity:</span>
-              <span class="d-md-none">Qty:</span>
-            </label>
-            <div class="dots">
-              <div class="dot is-active" data-dot-qty="1">1</div>
-              <div class="dot" data-dot-qty="2">2</div>
-              <div class="dot" data-dot-qty="4">4</div>
+    <div class="transaction-bar-holder">
+      <div class="container">
+        <div class="transaction-bar">
+          <div class="transaction-bar__unit transaction-bar__unit--title">
+            <div class="transaction-bar__pad">
+              <h2 class="h1">{{ product.title }}</h2>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="transaction-bar__unit">
-        <button
-          type="submit"
-          name="add"
-          class="btn btn-block btn-primary-alt"
-          data-add-to-cart
-          {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-          {{ submit_button_contents }}
-        </button>
-      </div>
-    </div> 
-  </form>
 
-  {% comment %} @TODO - Turn this into section settings {% endcomment %}
-  <div class="d-none d-md-block" style="margin-top: 87px;">
-    <div class="expandable-list">
-      <a href="#" class="expandable-list__header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-        <span class="d-inline-block" style="margin-right: 15px">01.</span> Recommended Use
-      </a>
-      <div id="collapseOne" class="collapse">
-        <div class="expandable-list__body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          {% if block.settings.subtitle != blank %}
+            <div class="transaction-bar__unit transaction-bar__unit--subtitle">
+              <div class="transaction-bar__pad">
+                <div class="p2">
+                  {{ block.settings.subtitle }}
+                </div>
+              </div>
+            </div>  
+          {% endif %}
+
+          <div class="transaction-bar__unit transaction-bar__unit--quantity">
+            <div class="transaction-bar__pad">
+              <div class="dot-group">
+                <label>
+                  <span class="d-none d-md-inline">Select Qty:</span>
+                  <span class="d-md-none">Qty:</span>
+                </label>
+                <div class="dots">
+                  <div class="dot is-active" data-dot-qty="1">1</div>
+                  <div class="dot" data-dot-qty="2">2</div>
+                  <div class="dot" data-dot-qty="4">4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="transaction-bar__unit transaction-bar__unit--add-to-cart">
+            <button
+              type="submit"
+              name="add"
+              class="btn btn-block btn-primary-alt"
+              data-add-to-cart
+              {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+              {{ submit_button_contents }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="expandable-list">
-      <a href="#" class="expandable-list__header" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        <span class="d-inline-block" style="margin-right: 15px">02.</span> Ingredients &amp; Nutrition
-      </a>
-      <div id="collapseTwo" class="collapse">
-        <div class="expandable-list__body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
+  </form>
+
+  {% if block %}
+    {% capture expandable_details_html %}
+      {% for i in (1..3) %}
+        {% assign detail_title_handle = 'detail_title_' | append: i %}
+        {% assign detail_content_handle = 'detail_content_' | append: i %}
+        {% assign detail_title = block.settings[detail_title_handle] %}
+        {% assign detail_content = block.settings[detail_content_handle] %}
+        {% assign expandable_id = 'expand-' | append: block.id | append: '-' | append: i %}
+
+        {% if detail_title != blank or detail_content != blank %}
+          <div class="expandable-list">
+            <a href="#"
+               class="expandable-list__header"
+               data-toggle="collapse"
+               data-target="#{{ expandable_id }}"
+               aria-expanded="false"
+               aria-controls="{{ expandable_id }}"
+            >
+              <span class="d-inline-block" style="margin-right: 15px">
+                {{ i | prepend: '0' | append: '.' }}
+              </span>
+              {{ detail_title }}
+            </a>
+            <div id="{{ expandable_id }}" class="collapse">
+              <div class="expandable-list__body">
+                {{ detail_content }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endcapture %}
+
+    {% if expandable_details_html != blank %}
+      <div class="d-none d-md-block" style="margin-top: 87px;">
+        {{ expandable_details_html }}
       </div>
-    </div>    
-  </div>
+    {% endif %}
+  {% endif %}
 
   {% unless product == empty %}
     <script type="application/json" data-product-json>

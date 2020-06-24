@@ -13,16 +13,20 @@
   }
 }
 
-.transaction-bar {
+.transaction-bar-holder {
   position: fixed;
   z-index: 2;
+  left: 0;
+  right: 0;
   bottom: $spacing-sm;
-  left: $spacing-sm;
-  right: $spacing-sm;
+}
+
+.transaction-bar {
+  width: 100%;
   display: flex;
   align-items: center;
-  border-radius: $border-radius; // @TODO - Store this as a var, it gets shared with the buttons
-  background-color: $white;
+  border-radius: $border-radius;
+  background-color: $white;  
 }
 
 .transaction-bar__unit {
@@ -30,7 +34,27 @@
   display: flex;
   align-items: center;
 
-  &:last-child {
+  &--title {
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+
+  &--subtitle {
+    // flex: 0 0 auto;
+    
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }  
+
+  &--quantity {
+    @include media-breakpoint-up(md) {
+      justify-content: flex-end;
+    }
+  }
+
+  &--add-to-cart {
     align-self: stretch;
     padding: 0;
 
@@ -43,11 +67,21 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
 
+      @include media-breakpoint-down(lg) {
+        padding-left: 40px;
+        padding-right: 40px;
+      }      
+
       @include media-breakpoint-down(sm) {
         padding-left: 17px;
         padding-right: 18px;        
       }
     }  
+  }
+
+  h2,
+  p:last-child {
+    margin-bottom: 0;
   }
 }
 

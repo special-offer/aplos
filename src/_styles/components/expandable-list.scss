@@ -24,4 +24,8 @@
 
 .expandable-list__body {
   padding: 12px 0 23px;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }

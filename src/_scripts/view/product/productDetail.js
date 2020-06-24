@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import ProductDetailForm from './productDetailForm';
-import ProductDetailGallery from './productDetailGallery';
+// import ProductDetailGallery from './productDetailGallery';
 import StoryPopup from './storyPopup';
 
 const selectors = {
   productDetailForm: '[data-product-detail-form]',
-  productDetailGallery: '[data-product-detail-gallery]',
+  // productDetailGallery: '[data-product-detail-gallery]',
   storyPopup: '[data-story-popup]'
 };
 
@@ -28,11 +28,11 @@ export default class ProductDetail {
       return;
     }
 
-    this.$pdg = $(selectors.productDetailGallery, this.$el);
+    // this.$pdg = $(selectors.productDetailGallery, this.$el);
     this.$pdf = $(selectors.productDetailForm, this.$el);
     this.$storyPopup = $(selectors.storyPopup, this.$el);
     
-    this.gallery = new ProductDetailGallery(this.$pdg);
+    // this.gallery = new ProductDetailGallery(this.$pdg);
     this.form    = new ProductDetailForm({
       $container: this.$pdf,
       enableHistoryState: enableHistoryState

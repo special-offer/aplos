@@ -7,26 +7,17 @@
 
   {% include 'product-detail-gallery',
               product: { product } - required
-              current_variant: { current_variant }
+              product_image: { image }
+              product_background_image: { image }
   %}  
 
 {% endcomment -%}
 
-{% comment %} Defaults {% endcomment %}
-{% assign current_variant = current_variant | default: product.selected_or_first_available_variant %}
-
 <div class="product-detail-gallery" data-product-detail-gallery>
-  <div id="slideshow-{{ product.id }}" class="product-detail-gallery__slideshow swiper-container" data-slideshow>
-    <div class="swiper-wrapper">
-      {% for image in product.images %}
-        <div
-          class="swiper-slide"
-          data-image="{{ image.id }}"
-          {% if image.id == current_variant.featured_image.id %} data-initial-slide{% endif %}
-        >
-          <img src="{{ image | img_url: '900x' }}" class="img-fluid" alt="{{ image.alt | escape }}">
-        </div>
-      {% endfor %}
-    </div>
+  <div class="gallery-image gallery-image--background">
+    <img src="{{ product_background_image | img_url: '1600x' }}" />
   </div>
+  <div class="gallery-image gallery-image--foreground">
+    <img src="{{ product_image | img_url: '1600x' }}" />
+  </div>  
 </div>

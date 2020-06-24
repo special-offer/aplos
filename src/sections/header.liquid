@@ -1,5 +1,18 @@
+{%- capture header_class -%}
+  header
+  {% if 'index page' contains template.name %}
+    header--transparent
+  {% elsif '404' contains template.name %}
+    header--white
+  {% endif %}
+
+  {% if 'product' contains template.name %}
+    header--white-mobile
+  {% endif %}
+{% endcapture %}
+
 <div data-section-id="{{ section.id }}" data-section-type="header">
-  <header class="header" role="banner" data-header>
+  <header class="{{ header_class | strip | strip_newlines }}" role="banner" data-header>
     <div class="header-container">
       <div class="header-nav header-nav--left">
 

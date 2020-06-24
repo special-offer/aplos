@@ -32,7 +32,8 @@ export default class StoryPopup {
       pagination: {
         el: this.$pagination.get(0),
         type: 'bullets'
-      }
+      },
+      simulateTouch: false
     });    
 
     this.$el.on('click', selectors.close, this.onCloseClick.bind(this));

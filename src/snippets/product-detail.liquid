@@ -6,7 +6,8 @@
   Usage:
 
   {% include 'product-detail',
-              product: { product } - required
+              product: { product } - required,
+              block: { block }
   %}
 
 {% endcomment -%}
@@ -14,20 +15,35 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 
 <div class="product-detail" data-product-detail>
-  <div class="product-detail__child product-detail__child--gallery">
-    {% include 'product-detail-gallery',
-                product: product,
-                current_variant: current_variant
-    %}
+  <div class="product-detail__grid">
+    <div class="product-detail__child product-detail__child--gallery">
+      {% render 'product-detail-gallery',
+                  product: product,
+                  product_image: block.settings.product_image,
+                  product_background_image: block.settings.product_background_image
+      %}
+    </div>
+
+    <div class="product-detail__child product-detail__child--form">
+      {% render 'product-detail-form',
+                 product: product,
+                 current_variant: current_variant,
+                 block: block
+      %}
+      <a href="#" class="btn btn-tertiary" data-story-popup-open>Open Popup</a>
+    </div>
+  </div>
+  <div class="product-detail__grid" style="display: none;">
+    <div class="product-detail__child product-detail__child--gallery">
+      Other gallery
+    </div>
+    <div class="product-detail__child">
+      Story
+    </div>
   </div>
 
-  <div class="product-detail__child product-detail__child--form">
-    {% include 'product-detail-form',
-                product: product,
-                current_variant: current_variant
-    %}
-    <a href="#" class="btn btn-tertiary" data-story-popup-open>Open Popup</a>
-  </div>
-
-  {% include 'story-popup', product: product %}
+  {% render 'story-popup',
+             product: product
+             block: block
+  %}
 </div>

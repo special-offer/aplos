@@ -68,7 +68,7 @@ class AJAXCartDrawer extends Drawer {
    * Clean up any event listeners added to elements outside of this.$el
    */
   destroy() {
-    super.destroy()
+    super.destroy();
     $body.off('click', selectors.trigger, this.onTriggerClick);
     $window.off(events.RENDER, this.onRender);    
   }

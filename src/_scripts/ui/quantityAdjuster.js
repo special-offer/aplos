@@ -4,6 +4,7 @@ import $ from 'jquery';
  * Quantity Adjuster Scripts
  * -----------------------------------------------------------------------------
  * Handles any events associated with the quantity adjuster component
+ * Quantity Adjuster for Aplos is unique because it only accepts values 0, 1, 2, and 4
  *
  *  [data-quantity-adjuster]
  *    [data-increment]
@@ -29,7 +30,7 @@ export default class QuantityAdjuster {
    */  
   constructor(el) {
     this.name = 'quantityAdjuster';
-    this.namespace = `.${this.name}`;
+    // this.namespace = `.${this.name}`;
 
     this.$el = $(el).is(selectors.adjuster) ? $(el) : $(el).parents(selectors.adjuster);
 
@@ -42,34 +43,14 @@ export default class QuantityAdjuster {
     this.$decrement = $(selectors.decrement, this.$el);
     this.$input     = $(selectors.input, this.$el);
 
+    this.min = parseInt(this.$input.attr('min')) || 0;
+    this.max = parseInt(this.$input.attr('max')) || 4;
+
     this.$increment.on('click', this.onIncrementClick.bind(this));
     this.$decrement.on('click', this.onDecrementClick.bind(this));
     this.$input.on('change', this.onInputChange.bind(this));
 
-    this._addMutationObserver(this.$input.get(0));
-
     this._updateDisabledState();
-  }
-
-  _addMutationObserver(el) {
-    if (!el) return;
-
-    const config = { attributes: true };
-
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes') {
-          if (mutation.attributeName === 'max' || mutation.attributeName === 'min') {
-            this.onMinMaxAttributeChange();
-          }
-          else if (mutation.attributeName === 'disabled') {
-            this.onDisabledAttributeChange();
-          }
-        }
-      });
-    });
-
-    observer.observe(el, config);
   }
 
   _updateDisabledState() {
@@ -81,15 +62,15 @@ export default class QuantityAdjuster {
       return;
     }
 
-    if (val === this.getMax() && val === this.getMin()) {
+    if (val === this.max && val === this.min) {
       this.$increment.prop('disabled', true);
       this.$decrement.prop('disabled', true);
     }
-    else if (val >= this.getMax()) {
+    else if (val >= this.max) {
       this.$increment.prop('disabled', true);
       this.$decrement.prop('disabled', false);
     }
-    else if (val <= this.getMin()) {
+    else if (val <= this.min) {
       this.$increment.prop('disabled', false);
       this.$decrement.prop('disabled', true);
     }
@@ -99,16 +80,13 @@ export default class QuantityAdjuster {
     }
   }
 
-  _changeValue(amount) {
-    if (this.$input.is(':disabled') || typeof amount === 'undefined') return;
+  _changeValue(newVal) {
+    if (this.$input.is(':disabled') || typeof newVal === 'undefined') return;
 
-    amount = parseInt(amount);
-
-    const val = parseInt(this.$input.val());
-    const newVal = val + amount;
+    newVal = parseInt(newVal);
 
     // Don't change if the value is the same or invalid
-    if (newVal === val || newVal > this.getMax() || newVal < this.getMin()) return;
+    if (newVal === this.$input.val() || newVal > this.max || newVal < this.min) return;
 
     this.$input.val(newVal);
     this.$input.trigger('change');
@@ -116,8 +94,8 @@ export default class QuantityAdjuster {
 
   _clampInputVal() {
     const currVal = parseInt(this.$input.val());
-    const max = this.getMax();
-    const min = this.getMin();
+    const max = this.max;
+    const min = this.min;
 
     if (currVal > max) {
       this.$input.val(max);
@@ -127,21 +105,48 @@ export default class QuantityAdjuster {
     }
   }
 
-  getMin() {
-    return parseInt(this.$input.attr('min')) || 0;
+  getIncrementedValue() {
+    const currVal = parseInt(this.$input.val());
+
+    let newValue;
+
+    switch (currVal) {
+      case 0:
+        newValue = 1;
+        break;
+      case 1:
+        newValue = 2;
+        break;
+      case 2:
+        newValue = 4;
+        break;
+      default:
+        newValue = currVal;
+    }
+
+    return newValue;    
   }
 
-  getMax() {
-    return parseInt(this.$input.attr('max')) || 999;
-  }
+  getDecrementedValue() {
+    const currVal = parseInt(this.$input.val());
+    let newValue;
 
-  onDisabledAttributeChange() {
-    this._updateDisabledState();
-  }
+    switch (currVal) {
+      case 0:
+      case 1:
+        newValue = 0;
+        break;
+      case 2:
+        newValue = 1;
+        break;
+      case 4:
+        newValue = 2;
+        break;
+      default:
+        newValue = currVal;        
+    }
 
-  onMinMaxAttributeChange() {
-    this._clampInputVal();
-    this._updateDisabledState();
+    return newValue;
   }
 
   onInputChange() {
@@ -151,12 +156,12 @@ export default class QuantityAdjuster {
 
   onIncrementClick(e) {
     e.preventDefault();
-    this._changeValue(1);
+    this._changeValue(this.getIncrementedValue());
   }
 
   onDecrementClick(e) {
     e.preventDefault();
-    this._changeValue(-1);
+    this._changeValue(this.getDecrementedValue());
   }
 
   static ensure(el) {

@@ -4,174 +4,36 @@
 
 @import 'product/product-detail-gallery';
 @import 'product/product-detail-form';
+@import 'product/story-popup';
 
 .product-detail {
-  display: flex;
-
   .product-detail-form {
-    max-width: calc(1440px/2 - #{$spacing-lg*2}); // @TODO - variable-ize 1440
+    @include media-breakpoint-up(md) {
+      max-width: calc(1440px/2 - #{$spacing-lg*2}); // @TODO - variable-ize 1440
+    }
   }  
 }
 
-// These are wrapper elements
-.product-detail__child {
-  flex: 1;
-  max-width: 50%;
-
-  &--form {
-    padding: $spacing-lg;
-  }
-}
-
-body.story-popup-open {
-  overflow: hidden;
-}
-
-.story-popup {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100vh;
-  max-height: 800px;
-  padding-top: 86px;
-  transform: translateY(83%);
-  transition: transform 0.45s cubic-bezier(0.36, 0.8, 0.64, 0.96);
-
-  &.is-active {
-    transform: translateY(0%);
-    transition: transform 0.7s cubic-bezier(0.19, -0.01, 0, 1.02);
-  }
-
+.product-detail__grid {
   @include media-breakpoint-up(md) {
-    display: none;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: relative;
   }
 }
 
-.story-popup__contents,
-.story-cards-container,
-// .story-cards-container .swiper-wrapper,
-.story-card {
-  height: 100%;
-}
+.product-detail__child {
+  &--form {
+    background-color: $butter;
+    padding-top: $spacing-md;
 
-.story-popup__contents {
-  position: relative;
-  border-radius: $border-radius-xl $border-radius-xl 0 0;
-  overflow: hidden;
-
-  .story-cards-pagination {
-    position: absolute;
-    z-index: 1;
-    bottom: 83px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-.story-popup__close {
-  position: absolute;
-  z-index: 2;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: red;
-
-  svg {
-    width: 12px;
-    stroke: $white;
-    background-color: red; // @TODO - Figure out this svg
-  }
-}
-
-.story-cards__container {
-  height: 100%;
-  overflow: hidden;  
-}
-
-.story-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background-color: $butter;
-  
-  // @TODO - Figure out how to do this box shadow - probably need another wrapper element?
-  // box-shadow: 0 -1px 23px transparent;
-  // transition: box-shadow 0.8s ease-out;
-
-  // .story-popup.is-active & {
-  //   box-shadow: 0 -1px 23px transparentize($black, 0.5);
-  // }  
-
-  .swiper-slide:first-child & {
-    border-top-left-radius: $border-radius-xl;
-  }
-
-  .swiper-slide:last-child & {
-    border-top-right-radius: $border-radius-xl;
-  }  
-}
-
-.story-card__header-image {
-  position: relative;
-  z-index: 1; // Pushes it over the 
-  height: 100%;
-  min-height: 15vh;
-  max-height: 30vh;
-  overflow: hidden;
-
-  img {
-    height: 100%;
-    width: 100%;
-    object: {
-      fit: cover;
-      position: center;
+    @include media-breakpoint-up(md) {
+      padding: $spacing-lg;
+      background-color: $white;
     }
   }
 }
 
-.story-card__body {
-  padding: 0 $spacing-sm; // @TODO - this is the horizontal padding on grid for small screens.. 
-  padding-bottom: 110px; // make room for the pdf-bar + pagination
-  flex: 1;
-  overflow: hidden;
-}
+.product-detail__child--gallery {
 
-.story-card__body-contents {
-  height: 100%;
-  padding-bottom: 21px;
-  border-bottom: 1px solid $black;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-}
-
-.story-card__title {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 0 0 3px;
-  border-bottom: 1px solid $black;
-  margin: 43px 0 14px;
-
-  h2 {
-    margin: 0;
-  }
-
-  // If there's a header image, reduce the top margin
-  .story-card__header-image + .story-card__body & {
-    margin-top: 21px;
-  }
-}
-
-// temp styles
-.product-detail {
-
-  @include media-breakpoint-down(md) {
-    flex-direction: column;
-    
-    .product-detail__child {
-      max-width: 100%;
-    }
-  }
 }

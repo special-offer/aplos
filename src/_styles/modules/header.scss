@@ -29,18 +29,6 @@
   &.is-fixed {
     position: fixed;
   }
-
-  // On these templates the header is styled a bit differently..
-  // @TODO - Move these modifiers further down in this file since they affect a few different parts of the header
-  .template-index &,
-  .template-philosophy &,
-  .template-page & {
-    background-color: transparent;
-  }
-
-  .template-404 & {
-    background-color: white;
-  }
 }
 
 .header-container {
@@ -157,6 +145,10 @@
 
   }
 
+  @include media-breakpoint-down(sm) {
+    top: -2px;
+  }
+
   svg {
     width: 26px;
 
@@ -173,8 +165,35 @@
   opacity: 0;
   transition: opacity 300ms ease-out;
 
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-xs;
+    top: 1px;
+    right: -9px;
+  }
+
   .has-items & {
     opacity: 1;
   }
 }
+
+// Alternate colors
+// Putting these modifiers at the bottom of this page because they affect header child elements
+.header--transparent {
+  background-color: transparent;
+
+  .header-nav--left a {
+    color: $white;
+  }
+}
+
+.header--white {
+  background-color: $white;
+}
+
+.header--white-mobile {
+  @include media-breakpoint-down(md) {
+    background-color: $white;
+  }
+}
+
 
