@@ -1,0 +1,98 @@
+// --------------------------------------------------------
+// Transacion Bar
+// --------------------------------------------------------
+
+.transaction-bar {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: $spacing-sm;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+
+  &.is-active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
+
+.transaction-bar__unit-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: $border-radius;
+  background-color: $white;  
+}
+
+.transaction-bar__unit {
+  flex: 1;
+  display: flex;
+  align-items: center;
+
+  &--title {
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+
+  &--subtitle {
+    // flex: 0 0 auto;
+    
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
+
+  &--subscription {
+    @include media-breakpoint-up(md) {
+      flex: 0 0 auto;
+    }
+  }
+
+  &--quantity {
+    @include media-breakpoint-up(md) {
+      flex: 0 0 auto
+    }
+  }
+
+  &--add-to-cart {
+    align-self: stretch;
+    padding: 0;
+
+    @include media-breakpoint-up(md) {
+      flex: 0 0 auto;
+    }
+
+    .btn {
+      height: 100%;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      @include media-breakpoint-down(lg) {
+        padding-left: 40px;
+        padding-right: 40px;
+      }      
+
+      @include media-breakpoint-down(sm) {
+        padding-left: 17px;
+        padding-right: 18px;        
+      }
+    }  
+  }
+
+  h2,
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Padding has to go *inside* the __unit element for flex:1 to set the elements with equal width
+.transaction-bar__pad {
+  padding: 12px 18px;
+
+  @include media-breakpoint-up(md) {
+    padding: 19px 20px;
+  }
+}

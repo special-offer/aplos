@@ -17,13 +17,15 @@ const selectors = {
   variantOptionValueList: '[data-variant-option-value-list][data-option-position]',
   variantOptionValue: '[data-variant-option-value]',
   productQuantity: '[data-product-quantity]',
-  dotQty: '[data-dot-qty]'
+  dotQty: '[data-dot-qty]',
+  transactionBar: '[data-transaction-bar]'
 };
 
 const classes = {
   hide: 'hide',
   variantOptionValueActive: 'is-active',
-  dotActive: 'is-active'
+  dotActive: 'is-active',
+  transactionBarActive: 'is-active'
 };
 
 export default class ProductDetailForm {
@@ -69,6 +71,7 @@ export default class ProductDetailForm {
     this.$variantOptionValueList = $(selectors.variantOptionValueList, this.$container); // Alternate UI that takes the place of a single option selector (could be swatches, dots, buttons, whatever..)
     this.$productQuantity        = $(selectors.productQuantity, this.$container); // Hidden quantity input
     this.$dotQtys                = $(selectors.dotQty, this.$container); // Dot quantity UI, click them to change the selected quantity
+    this.$transactionBar         = $(selectors.transactionBar, this.$container);
     /* eslint-enable */
 
     this.productSingleObject  = JSON.parse($(selectors.productJson, this.$container).html());
@@ -86,6 +89,10 @@ export default class ProductDetailForm {
     this.$dotQtys.on('click', this.onDotQuantityClick.bind(this));
 
     chosenSelects(this.$container);
+
+    setTimeout(() => {
+      this.$transactionBar.addClass(classes.transactionBarActive)
+    }, 2000);
   }
 
   onVariantChange(evt) {
