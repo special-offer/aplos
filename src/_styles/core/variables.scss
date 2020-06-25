@@ -1054,8 +1054,7 @@ $overlay-transition-duration:          $transition-duration-base;
 
 $dot-border-width:                      1px;
 $dot-border-radius:                     50%;
-$dot-border-color:                      transparent;
-$dot-active-border-color:               $black;
+$dot-border-color:                      $black;
 $dot-size:                              36px;
 $dot-spacing:                           7px;
 $dot-spacing-mobile:                    0;

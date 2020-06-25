@@ -23,11 +23,10 @@
   width: $dot-size;
   cursor: pointer;
   vertical-align: top;
-  border: $dot-border-width solid $dot-border-color;
+  border: $dot-border-width solid transparent;
   border-radius: $dot-border-radius;
   overflow: hidden;
-  opacity: 0.25;
-  transition: opacity 150ms ease-out, border-color 150ms ease-out;
+  transition: color 0.1s ease-out, border-color 0.25s ease-out;
 
   @include media-breakpoint-up(md) {
     margin-left: $dot-spacing/2;
@@ -37,14 +36,15 @@
   @extend .p2;
   line-height: $dot-size;
   text-align: center;
+  color: $body-color;
 
   &:hover {
-    opacity: 1;
+    color: transparentize($body-color, 0.75);
   }
 
   &.is-active {
-    border-color: $dot-active-border-color;
-    opacity: 1;
+    border-color: $dot-border-color;
+    color: $body-color;
   }
 }
 
