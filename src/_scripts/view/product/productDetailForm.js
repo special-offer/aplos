@@ -63,7 +63,6 @@ export default class ProductDetailForm {
     /* eslint-disable */
     /* temporarily disable to allow long lines for element descriptions */
     this.$container              = this.settings.$container; // Scoping element for all DOM lookups
-    this.$quantitySelect         = $(selectors.quantitySelect, this.$container); // Quantity dropdown
     this.$addToCartBtn           = $(selectors.addToCart, this.$container);
     this.$addToCartBtnText       = $(selectors.addToCartText, this.$container); // Text inside the add to cart button
     this.$productPrice           = $(selectors.productPrice, this.$container);
@@ -100,7 +99,6 @@ export default class ProductDetailForm {
 
     this.updateProductPrices(variant);
     this.updateAddToCartState(variant);
-    this.updateQuantitySelect(variant);
     this.updateVariantOptionValues(variant);
 
     this.$singleOptionSelectors.trigger('chosen:updated');
@@ -122,20 +120,6 @@ export default class ProductDetailForm {
       this.$addToCartBtnText.html(theme.strings.unavailable);
       this.$addToCartBtn.prop('disabled', true);
     }
-  }
-
-  /**
-   * Updates the disabled property of the quantity select based on the availability of the selected variant
-   *
-   * @param {Object} variant - Shopify variant object
-   */
-  updateQuantitySelect(variant) {
-    // Close the select while we make changes to it
-    this.$quantitySelect.trigger('chosen:close');
-
-    this.$quantitySelect.prop('disabled', !(variant && variant.available));
-
-    this.$quantitySelect.trigger('chosen:updated');
   }
 
   /**

@@ -59,7 +59,7 @@ class AJAXCartDrawer extends Drawer {
     this.onTriggerClick = this.onTriggerClick.bind(this);
     this.onRender = this.onRender.bind(this);
 
-    this.$el.on('change', selectors.itemQuantityInput, this.onItemQuantityInputChange.bind(this));
+    this.$el.on('change.quantityAdjuster', this.onQuantityAdjusterChange.bind(this));
     $body.on('click', selectors.trigger, this.onTriggerClick);
     $window.on(events.RENDER, this.onRender);
   }
@@ -187,31 +187,33 @@ class AJAXCartDrawer extends Drawer {
 
   /**
    * Triggered when someone changes the value of the quantity input through the quantity adjuster
-   * We tap into the quantityAdjuster instance through the data attribute to retrieve the normalized max / min 
-   * (in case they don't exist as html attributes) and adjust the interaction timeout accordingly
+   * Event is triggered by the qa instance *on* the qa element.  The instance is passed as a property on the event
    *
    * @param {event} e - Change event
+   * @param {QuantityAdjuster} e.instance
    */
-  onItemQuantityInputChange(e) {
-    const attrs      = this.getItemRowAttributes(e.target);
-    const $input     = $(e.currentTarget);
-    const $qa        = $input.closest(selectors.quantityAdjuster);
-    const qaInstance = $qa.data(QuantityAdjuster.getDataKey());
-    const qty        = $input.val();
+  onQuantityAdjusterChange(e) {
+    const instance = e.instance;
+
+    if (!instance) return;
+    
+    const $qa = instance.$el;
+    const attrs = this.getItemRowAttributes($qa);
+    const qty = instance.getVal();
 
     let d = this.qaInteractionDelay;
 
     // If we hit the max or min on the input, trigger the quantity update request immediately;
-    if (qaInstance && (qaInstance.getMax() === qty || qaInstance.getMin() === qty)) {
+    if (instance.isMax() || instance.isMin()) {
       d = 0;
     }
 
     clearTimeout(this.qaInteractionTimeout);
+
     this.qaInteractionTimeout = setTimeout(() => {
       this.lockUI();
 
       // @TODO - Check if qty is 0 => use delete method instead
-
       CartAPI.changeLineItemQuantityByKey(attrs.key, qty).then((cart) => {
         this.render(cart);
       })

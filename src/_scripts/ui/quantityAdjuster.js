@@ -14,10 +14,10 @@ import $ from 'jquery';
  */
 
 const selectors = {
-  adjuster: '[data-quantity-adjuster]',
+  adjuster:  '[data-quantity-adjuster]',
   increment: '[data-increment]',
   decrement: '[data-decrement]',
-  input: 'input[type="number"]'
+  input:     'input[type="number"]'
 };
 
 const dataKey = 'quantity-adjuster';
@@ -30,7 +30,7 @@ export default class QuantityAdjuster {
    */  
   constructor(el) {
     this.name = 'quantityAdjuster';
-    // this.namespace = `.${this.name}`;
+    this.namespace = `.${this.name}`;
 
     this.$el = $(el).is(selectors.adjuster) ? $(el) : $(el).parents(selectors.adjuster);
 
@@ -48,19 +48,19 @@ export default class QuantityAdjuster {
 
     this.$increment.on('click', this.onIncrementClick.bind(this));
     this.$decrement.on('click', this.onDecrementClick.bind(this));
-    this.$input.on('change', this.onInputChange.bind(this));
+    this.$input.on('change',    this.onInputChange.bind(this));
 
     this._updateDisabledState();
   }
 
   _updateDisabledState() {
-    const val = parseInt(this.$input.val());
-
     if (this.$input.is(':disabled')) {
       this.$increment.prop('disabled', true);
       this.$decrement.prop('disabled', true);
       return;
     }
+
+    const val = this.getVal();
 
     if (val === this.max && val === this.min) {
       this.$increment.prop('disabled', true);
@@ -105,10 +105,21 @@ export default class QuantityAdjuster {
     }
   }
 
-  getIncrementedValue() {
-    const currVal = parseInt(this.$input.val());
+  getVal() {
+    return parseInt(this.$input.val());
+  }
 
+  isMin() {
+    return this.getVal() === this.min;
+  }  
+
+  isMax() {
+    return this.getVal() === this.max;
+  }
+
+  getIncrementedValue() {
     let newValue;
+    const currVal = this.getVal();
 
     switch (currVal) {
       case 0:
@@ -128,8 +139,8 @@ export default class QuantityAdjuster {
   }
 
   getDecrementedValue() {
-    const currVal = parseInt(this.$input.val());
     let newValue;
+    const currVal = this.getVal();
 
     switch (currVal) {
       case 0:
@@ -152,6 +163,7 @@ export default class QuantityAdjuster {
   onInputChange() {
     this._clampInputVal();
     this._updateDisabledState();
+    this.$el.trigger($.Event(`change${this.namespace}`, { instance: this }));
   }
 
   onIncrementClick(e) {
@@ -184,10 +196,6 @@ export default class QuantityAdjuster {
     $(selectors.adjuster, $container).each((i, el) => {
       QuantityAdjuster.ensure(el);
     });
-  }
-
-  static getDataKey() {
-    return dataKey;
   }
 }
 

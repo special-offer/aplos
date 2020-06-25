@@ -6,14 +6,8 @@ body.drawer-open {
   overflow: hidden;
 }
 
-// @TODO - Is there a way to make this better?
-// probably need to make another wrapper to respond to the shifting so we can mirror the transition settings
-// Possibly another wrapper entirely for *all* elements that need to get shifted when opened (i.e. pencil banner...)
-.pencil-banner,
-.header-container,
-.layout-main-content,
-.transaction-bar,
-.footer {
+// Any elements with this class are shifted when the drawer opens/close
+.drawer-shifter {
   transition: $drawer-transition;
 
   body.drawer-shift--left & {
