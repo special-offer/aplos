@@ -77,8 +77,12 @@
             <div class="ajax-cart__item-body">
               <div style="line-height: 1;">
                 {{ price }}
-                <br />
-                Ships Sept 21, 2020
+                {% endraw %}
+                {% if section.settings.item_text %}
+                  <br />
+                  {{ section.settings.item_text }}
+                {% endif %}
+                {% raw %}
               </div>
               <div>
                 <div class="quantity-adjuster" data-quantity-adjuster>
@@ -113,6 +117,12 @@
          ],
          "label": "Cart Style",
          "default": "single_product"
+      },
+      {
+        "id": "item_text",
+        "type": "text",
+        "label": "Item Text",
+        "info": "Shows on every item.  E.g. 'Ships Sept 20, 2021'"
       },
       {
         "type": "header",
