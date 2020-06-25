@@ -153,11 +153,10 @@ body.drawer-open {
   mix-blend-mode: hard-light;
   opacity: 0;
   pointer-events: none;
-  transition: all $transition-duration-slide $transition-timing-function-slide-out;
+  transition: $drawer-backdrop-transition;
 
   &.is-visible {
     opacity: $drawer-backdrop-opacity;
     pointer-events: auto;
-    transition: all $transition-duration-slide $transition-timing-function-slide-in;
   }
 }

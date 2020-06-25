@@ -1,0 +1,71 @@
+{%- comment %}
+
+  Transaction Bar Snippet
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% include 'transaction-bar',
+              product: { product } - required
+              current_variant: { variant} - optional
+              subtitle: { string } - optional
+              submit_button_contents: { string } - required
+  %}
+
+{% endcomment -%}
+
+<div class="transaction-bar" data-transaction-bar>
+  <div class="container drawer-shifter">
+    <div class="transaction-bar__unit-container">
+      <div class="transaction-bar__unit transaction-bar__unit--title">
+        <div class="transaction-bar__pad">
+          <h2 class="h1">{{ product.title }}</h2>
+        </div>
+      </div>
+
+      <!-- if product is subscription product -->
+      {% if true %}
+        <div class="transaction-bar__unit transaction-bar__unit--subscription">
+          <div class="transaction-bar__pad">
+            <div class="p2" style="border: 1px solid rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.25); border-radius: 18px;padding: 12px 29px 7px; display: inline-block; margin: 0 6px; cursor: pointer;">Purchase Once</div>
+            <div class="p2" style="border: 1px solid black;border-radius: 18px;padding: 12px 29px 7px; display: inline-block; margin: 0 6px; cursor: pointer;">Recurring Order</div>
+          </div>
+        </div> 
+      {% elsif subtitle != blank %}
+        <div class="transaction-bar__unit transaction-bar__unit--subtitle">
+          <div class="transaction-bar__pad">
+            <div class="p2">
+              {{ subtitle }}
+            </div>
+          </div>
+        </div>  
+      {% endif %}
+
+      <div class="transaction-bar__unit transaction-bar__unit--quantity">
+        <div class="transaction-bar__pad">
+          <div class="dot-group">
+            <label>
+              <span class="d-none d-md-inline">Select Qty:</span>
+              <span class="d-md-none">Qty:</span>
+            </label>
+            <div class="dots">
+              <div class="dot is-active" data-dot-qty="1">1</div>
+              <div class="dot" data-dot-qty="2">2</div>
+              <div class="dot" data-dot-qty="4">4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="transaction-bar__unit transaction-bar__unit--add-to-cart">
+        <button
+          type="submit"
+          name="add"
+          class="btn btn-block btn-primary-reverse"
+          data-add-to-cart
+          {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+          {{ submit_button_contents }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

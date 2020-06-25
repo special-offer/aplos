@@ -17,29 +17,27 @@ const selectors = {
   variantOptionValueList: '[data-variant-option-value-list][data-option-position]',
   variantOptionValue: '[data-variant-option-value]',
   productQuantity: '[data-product-quantity]',
-  dotQty: '[data-dot-qty]',
-  transactionBar: '[data-transaction-bar]'
+  dotQty: '[data-dot-qty]'
 };
 
 const classes = {
   hide: 'hide',
   variantOptionValueActive: 'is-active',
-  dotActive: 'is-active',
-  transactionBarActive: 'is-active'
+  dotActive: 'is-active'
 };
 
-export default class ProductDetailForm {
+export default class ProductForm {
   /**
-   * ProductDetailForm constructor
+   * ProductForm constructor
    *
+   * @param { jQuery } $container - Main element containing all form elements   
    * @param { Object } config
-   * @param { jQuery } config.$container - Main element, see snippets/product-detail-form.liquid
    * @param { Function } config.onVariantChange -  Called when a new variant has been selected from the form,
    * @param { Boolean } config.enableHistoryState - If set to "true", turns on URL updating when switching variant
    */
-  constructor(config) {
+  constructor($container, config) {
     this.settings = {};
-    this.name = 'productDetailForm';
+    this.name = 'productForm';
     this.namespace = `.${this.name}`;
 
     this.events = {
@@ -48,21 +46,21 @@ export default class ProductDetailForm {
     };
     
     const defaults = {
-      $container: null,
       onVariantChange: $.noop,
       enableHistoryState: true
     };
 
     this.settings = $.extend({}, defaults, config);
 
-    if (!this.settings.$container || this.settings.$container.length === 0) {
-      console.warn(`[${this.name}] - config.$container required to initialize`);
+    this.$container = $container; // Scoping element for all DOM lookups
+
+    if (!this.$container || this.$container.length === 0) {
+      console.warn(`[${this.name}] - $container required to initialize`);
       return;
     }
 
     /* eslint-disable */
     /* temporarily disable to allow long lines for element descriptions */
-    this.$container              = this.settings.$container; // Scoping element for all DOM lookups
     this.$addToCartBtn           = $(selectors.addToCart, this.$container);
     this.$addToCartBtnText       = $(selectors.addToCartText, this.$container); // Text inside the add to cart button
     this.$productPrice           = $(selectors.productPrice, this.$container);
@@ -70,7 +68,6 @@ export default class ProductDetailForm {
     this.$variantOptionValueList = $(selectors.variantOptionValueList, this.$container); // Alternate UI that takes the place of a single option selector (could be swatches, dots, buttons, whatever..)
     this.$productQuantity        = $(selectors.productQuantity, this.$container); // Hidden quantity input
     this.$dotQtys                = $(selectors.dotQty, this.$container); // Dot quantity UI, click them to change the selected quantity
-    this.$transactionBar         = $(selectors.transactionBar, this.$container);
     /* eslint-enable */
 
     this.productSingleObject  = JSON.parse($(selectors.productJson, this.$container).html());
@@ -88,10 +85,6 @@ export default class ProductDetailForm {
     this.$dotQtys.on('click', this.onDotQuantityClick.bind(this));
 
     chosenSelects(this.$container);
-
-    setTimeout(() => {
-      this.$transactionBar.addClass(classes.transactionBarActive)
-    }, 2000);
   }
 
   onVariantChange(evt) {

@@ -9,23 +9,100 @@
   {% endif %}
 {% endfor %}
 
-<meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
-<meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
-<meta itemprop="brand" content="{{ product.vendor }}">
-<meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
-<meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+{% capture submit_button_contents %}
+  <span data-add-to-cart-text>
+    {% if current_variant.available %}
+      {{ 'products.product.add_to_cart' | t }}              
+    {% else %}
+      {{ 'products.product.sold_out' | t }}
+    {% endif %}
+  </span>
+  <span class="emdash"></span>
+  <span data-product-price>
+    {{ current_variant.price | money_without_trailing_zeros }}
+  </span>
+  USD         
+{% endcapture %}
 
 <div data-section-id="{{ section.id }}" data-section-type="product" itemscope itemtype="http://schema.org/Product">
-  {% render 'product-detail', product: product, block: block %}
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+  <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+  <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+  <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
 
-  <!--
-    <form>
-      <div>2 col grid</div>
-      <div>2 col grid</div>
-      <storyPopup />
-      <transactionBar />
-    </form>
-  -->
+  <form action="/cart/add" method="post" enctype="multipart/form-data" data-product-form>
+
+    <!-- Product Detail -->
+    <div class="product-detail drawer-shifter">
+      <div class="product-detail__grid">
+        <div class="product-detail__child product-detail__child--gallery">
+          {% render 'product-detail-gallery',
+                      product: product,
+                      product_image: block.settings.product_image,
+                      product_background_image: block.settings.product_background_image
+          %}
+        </div>
+
+        <div class="product-detail__child product-detail__child--form">
+          {% render 'product-detail-form',
+                     product: product,
+                     current_variant: current_variant,
+                     block: block,
+                     submit_button_contents: submit_button_contents
+          %}
+          <a href="#" class="btn btn-tertiary" data-story-popup-open>Open Popup</a>
+        </div>
+      </div>
+      <div class="product-detail__grid" style="display: none;">
+        <div class="product-detail__child product-detail__child--gallery">
+          Other gallery
+        </div>
+        <div class="product-detail__child">
+          Story
+        </div>
+      </div>
+    </div>
+    <!-- END Product Detail -->
+
+    <!-- Story Popup -->
+    {% render 'story-popup',
+               product: product
+               block: block
+    %}
+
+    <!-- Transaction Bar -->
+    {% render 'transaction-bar'
+               product: product,
+               current_variant: current_variant,
+               subtitle: block.settings.subtitle,
+               submit_button_contents: submit_button_contents
+    %}
+
+    <!-- Bare form elements, hidden for JS enabled browsers -->
+    <!-- Is this where itemprop="offers" is supposed to go? -->
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <select name="id" class="no-js" data-product-select>
+        {% for variant in product.variants %}
+          <option
+            {% if variant == current_variant %}selected="selected"{% endif %}
+            {% unless variant.available %}disabled="disabled"{% endunless %}
+            value="{{ variant.id }}">
+              {{ variant.title }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <input type="number" name="quantity" value="1" class="no-js" data-product-quantity>     
+    </div>   
+
+    <script type="application/json" data-product-json>
+      {% render 'product-json', product: product %}
+    </script>
+  </form>
 </div>
 
 {% schema %}

@@ -6,8 +6,9 @@
   @include media-breakpoint-down(sm) {
     text-align: center;
 
+    // This is temp
     .rte,
-    [itemprop="offers"] {
+    .form-group {
       display: none;
     }
   }
