@@ -3,35 +3,54 @@
 // -------------------------
 
 .header {
-  position: relative;
+  position: absolute;
   z-index: $zindex-header;
-  top: $spacing-sm;
-  left: $spacing-sm;
-  right: $spacing-sm;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: opacity 0.3s ease-out;
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition-duration: 0.5s;
+  }
+
+  // Used temporarily when closing the pencil banner
+  &.is-shifting {
+    transition: top 0.2s ease-out;
+  }
+}
+
+.header-main {
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: $spacing-sm;
+  padding-bottom: 0;
+
+  &.is-fixed {
+    position: fixed;
+  }
+
+  @media (min-width: $header-bp-min) {
+    padding: 0;
+  }
+}
+
+.header-bar {
   height: $header-height-small;
   border-radius: $border-radius;
   background-color: $header-bg;
   color: $header-text-color;
 
   @media (min-width: $header-bp-min) {
-    top: 0;
-    left: 0;
-    right: 0;
     height: $header-height-base;
     border-radius: 0;
-  }
-
-  // If the fixed header behavior is turned on...
-  .site-fixed-header & {
-    position: absolute;
-  }
-
-  &.is-fixed {
-    position: fixed;
-  }
+  }   
 }
 
-.header-container {
+.header-bar__content {
   @extend .container-fluid-max;
   display: flex;
   justify-content: space-between;
@@ -198,7 +217,7 @@
 
 // Alternate colors
 // Putting these modifiers at the bottom of this page because they affect header child elements
-.header--transparent {
+.header--transparent .header-bar {
   background-color: transparent;
 
   a, a:hover {
@@ -210,11 +229,11 @@
   }
 }
 
-.header--white {
+.header--white .header-bar {
   background-color: $white;
 }
 
-.header--white-mobile {
+.header--white-mobile .header-bar {
   @include media-breakpoint-down(md) {
     background-color: $white;
   }

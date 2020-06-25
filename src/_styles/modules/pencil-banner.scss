@@ -9,6 +9,10 @@
   background-color: $butter-dark;
   text-align: center;
 
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }  
+
   @extend .p2;
 
   p:last-child {

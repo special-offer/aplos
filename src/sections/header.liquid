@@ -13,47 +13,73 @@
 
 <div data-section-id="{{ section.id }}" data-section-type="header">
   <header class="{{ header_class | strip | strip_newlines }}" role="banner" data-header>
-    <div class="header-container drawer-shifter">
-      <div class="header-nav header-nav--left">
-
-        {% comment %} Header nav menu on desktop {% endcomment %}
-        {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
-          <ul class="header-nav__menu for-desktop">
-            {% for link in linklists[section.settings.linklist].links %}
-              <li class="header-nav__menu-item">        
-                <a href="{{ link.url }}" {% if link.active %}class="is-active"{% endif %}>{{ link.title }}</a>
-              </li>
-            {% endfor %}         
-          </ul>
-        {% endif %}
-
-        {% comment %} Header nav menu on mobile {% endcomment %}
-        <ul class="header-nav__menu for-mobile">
-          <li class="header-nav__menu-item">
-            <a href="#" title="Toggle menu" data-mobile-menu-toggle>
-              Menu
-            </a>
-          </li>
-        </ul>        
-      </div>   
-      
-      {% comment %} Logo {% endcomment %}
-      <div class="header-nav header-nav--center header-nav--logo">
-        {% include 'header-logo' %}
+    {% if section.settings.banner_enabled %}
+      <div class="pencil-banner drawer-shifter" data-pencil-banner>
+        {% comment %}
+          @TODO
+            - Replace container fluid max?
+            - Make sure content is centered with/without accent text
+        {% endcomment %}
+        <div class="container-fluid-max">
+          <span class="pencil-banner__accent">
+            {{ section.settings.banner_accent_text }}
+          </span>
+          <div>
+            <div class="d-none d-md-block">{{ section.settings.banner_content }}</div>
+            <div class="d-block d-md-none">{{ section.settings.banner_mobile_content | default: section.settings.banner_content }}</div>
+          </div>
+          <a href="#" class="pencil-banner__close" title="Close" data-pencil-banner-close>
+            {% include 'icon-close' %}
+          </a>
+        </div>
       </div>
+    {% endif %}
 
-      {% comment %} Cart {% endcomment %}
-      <div class="header-nav header-nav--right">
-        <ul class="header-nav__menu">
-          <li class="header-nav__menu-item">   
-            <a href="/cart" data-ajax-cart-trigger>
-              <div class="header-cart__badge{% if cart.item_count > 0 %} has-items{% endif %}" data-cart-badge>
-                {% include 'icon-bloom-4' %}
-                <span class="header-cart__badge-count p2" data-cart-badge-count>{{ cart.item_count }}</span>
-              </div>
-            </a>
-          </li>
-        </ul>
+    <div class="header-main" data-header-main>
+      <div class="header-bar drawer-shifter">
+        <div class="header-bar__content">
+          <nav class="header-nav header-nav--left">
+
+            {% comment %} Header nav menu on desktop {% endcomment %}
+            {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
+              <ul class="header-nav__menu for-desktop">
+                {% for link in linklists[section.settings.linklist].links %}
+                  <li class="header-nav__menu-item">        
+                    <a href="{{ link.url }}" {% if link.active %}class="is-active"{% endif %}>{{ link.title }}</a>
+                  </li>
+                {% endfor %}         
+              </ul>
+            {% endif %}
+
+            {% comment %} Header nav menu on mobile {% endcomment %}
+            <ul class="header-nav__menu for-mobile">
+              <li class="header-nav__menu-item">
+                <a href="#" title="Toggle menu" data-mobile-menu-toggle>
+                  Menu
+                </a>
+              </li>
+            </ul>        
+          </nav>   
+          
+          {% comment %} Logo {% endcomment %}
+          <div class="header-nav header-nav--center header-nav--logo">
+            {% include 'header-logo' %}
+          </div>
+
+          {% comment %} Cart {% endcomment %}
+          <div class="header-nav header-nav--right">
+            <ul class="header-nav__menu">
+              <li class="header-nav__menu-item">   
+                <a href="/cart" data-ajax-cart-trigger>
+                  <div class="header-cart__badge{% if cart.item_count > 0 %} has-items{% endif %}" data-cart-badge>
+                    {% include 'icon-bloom-4' %}
+                    <span class="header-cart__badge-count p2" data-cart-badge-count>{{ cart.item_count }}</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -67,6 +93,38 @@
         "type": "link_list",
         "id": "linklist",
         "label": "Menu"
+      },
+      {
+        "type": "header",
+        "content": "Pencil Banner"
+      },
+      {
+        "id": "banner_enabled",
+        "type": "checkbox",
+        "label": "Show Pencil Banner",
+        "default": true
+      },
+      {
+        "id": "banner_accent_text",
+        "type": "text",
+        "label": "Accent Text",
+        "default": "Notice"
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "id": "banner_content",
+        "type": "richtext", 
+        "label": "Desktop Text",
+        "default": "<p>Default Banner Text</p>"
+      },
+      {
+        "id": "banner_mobile_content",
+        "type": "richtext", 
+        "label": "Mobile Text",
+        "info": "Alternate text for small screens, will fall back to regular content if left blank"
       }
     ]
   }

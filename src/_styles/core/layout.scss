@@ -18,16 +18,6 @@
 
 .layout-wrapper {
 
-  // If we have a fixed header, make enough room at the top of the page for it.
-  .site-fixed-header & {
-    position: relative;
-    padding-top: $header-height-small;
-
-    @include media-breakpoint-up(md) {
-      padding-top: $header-height-base;
-    }
-  }
-
 }
 
 .layout-main-content {

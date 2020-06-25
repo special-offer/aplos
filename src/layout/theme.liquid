@@ -50,20 +50,17 @@
   {% if template.suffix != blank %}
     template-{{ template.name | append: '-' | append: template.suffix | handle }}
   {% endif %}
-  site-fixed-header
 {% endcapture %}
 
 <body id="{{ page_title | handle }}" class="{{ body_class | strip | strip_newlines }}">
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">
     {{ 'general.accessibility.skip_to_content' | t }}
-  </a>  
+  </a>
 
-  {% section 'pencil-banner' %}
+  {% section 'header' %}  
   {% section 'mobile-menu' %}
 
   <div class="layout-wrapper">
-    {% section 'header' %}
-
     <main role="main" id="MainContent" role="main">
       <div class="layout-main-content">
         {{ content_for_layout }}
