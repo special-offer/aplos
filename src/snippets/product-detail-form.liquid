@@ -78,7 +78,8 @@
       {% endunless %}
 
       <div class="form-group dot-group">
-        <label>Quantity:</label>
+        {% comment %} @TODO - need to check if product is a subscription or not, add "Select" if we have space {% endcomment %}
+        <label>Qty:</label>
         <div class="dots">
           <div class="dot is-active" data-dot-qty="1">1</div>
           <div class="dot" data-dot-qty="2">2</div>
@@ -103,7 +104,7 @@
         <button
           type="submit"
           name="add"
-          class="btn btn-primary"
+          class="btn btn-primary-reverse"
           data-add-to-cart
           {% unless current_variant.available %}disabled="disabled"{% endunless %}>
           {{ submit_button_contents }}
@@ -150,7 +151,7 @@
             <button
               type="submit"
               name="add"
-              class="btn btn-block btn-primary-alt"
+              class="btn btn-block btn-primary-reverse"
               data-add-to-cart
               {% unless current_variant.available %}disabled="disabled"{% endunless %}>
               {{ submit_button_contents }}

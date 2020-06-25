@@ -59,6 +59,14 @@ fieldset:disabled a.btn {
   }
 }
 
+.btn-primary-reverse {
+  background-color: $butter-dark;
+
+  @include hover {
+    background-color: $butter;
+  } 
+}
+
 .btn-primary-alt {
   background-color: $black;
   color: $white;
