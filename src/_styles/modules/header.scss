@@ -167,6 +167,13 @@
       transform: scaleX(1);
       transition-duration: 180ms;
     }
+
+    // No underline on mobile
+    @include media-breakpoint-down(sm) {
+      &:after {
+        display: none;
+      }
+    }
   }
 
   // @TODO - Figure out a better way to target the cart dandelion icon?

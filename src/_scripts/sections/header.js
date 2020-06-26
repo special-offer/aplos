@@ -110,7 +110,7 @@ export default class HeaderSection extends BaseSection {
 
     this.$header.one(this.transitionEndEvent, () => {
       this.$header
-        .css('top', '');
+        .css('top', '')
         .removeClass(classes.headerIsShifting);
       this.$pencilBanner.hide();
       this.cacheDimensions();
