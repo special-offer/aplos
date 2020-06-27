@@ -51,7 +51,6 @@
 }
 
 .header-bar__content {
-  @extend .container-fluid-max;
   display: flex;
   justify-content: space-between;
   height: 100%;

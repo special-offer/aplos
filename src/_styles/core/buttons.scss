@@ -88,6 +88,26 @@ fieldset:disabled a.btn {
   padding: 19px 30px 15px;
 }
 
+// primary-alt on mobile, primary reverse on desktop
+.btn-add-to-cart {
+  background-color: $black;
+  color: $white;
+
+  @include hover {
+    color: $black;
+    background-color: $butter-dark;
+  }
+
+  @include media-breakpoint-up(md) {
+    background-color: $butter-dark;
+    color: $black;
+
+    @include hover {
+      background-color: $butter;
+    }
+  }
+}
+
 
 //
 // Alternate buttons

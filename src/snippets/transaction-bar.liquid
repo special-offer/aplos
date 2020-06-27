@@ -15,7 +15,7 @@
 {% endcomment -%}
 
 <div class="transaction-bar" data-transaction-bar>
-  <div class="container drawer-shifter">
+  <div class="aplos-4side-container drawer-shifter">
     <div class="transaction-bar__unit-container">
       <div class="transaction-bar__unit transaction-bar__unit--title">
         <div class="transaction-bar__pad">
@@ -23,14 +23,40 @@
         </div>
       </div>
 
+      <div class="transaction-bar__unit transaction-bar__unit--quantity-mobile">
+        <div class="transaction-bar__pad">
+          <div class="p2">
+            <div class="quantity-adjuster quantity-adjuster--light quantity-adjuster--mini" data-quantity-adjuster>
+              <button class="quantity-adjuster__decrement" data-decrement>-</button>
+              <input type="number" value="1" min="1" />
+              <button class="quantity-adjuster__increment" data-increment>+</button>
+            </div> 
+          </div>
+        </div>
+      </div>      
+
       <!-- if product is subscription product -->
       {% if true %}
-        <div class="transaction-bar__unit transaction-bar__unit--subscription">
+        <div class="transaction-bar__unit transaction-bar__unit--subscription d-md-none">
+          <div class="transaction-bar__pad" style="padding: 0;">
+            <div class="p2" style="width: 100%;">
+              <div style="color: rgba(0, 0, 0, 0.5); padding: 6px 18px 6px 23px; border-bottom: 1px solid black;">One-Time</div>
+              <div style="padding: 6px 18px 6px 23px;">
+                <select>
+                  <option>Weekly</option>
+                  <option>Monthly</option>
+                  <option>Bi-Monthly</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="transaction-bar__unit transaction-bar__unit--subscription d-none d-md-inline-block">
           <div class="transaction-bar__pad">
             <div class="p2" style="border: 1px solid rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.25); border-radius: 18px;padding: 12px 29px 7px; display: inline-block; margin: 0 6px; cursor: pointer;">Purchase Once</div>
             <div class="p2" style="border: 1px solid black;border-radius: 18px;padding: 12px 29px 7px; display: inline-block; margin: 0 6px; cursor: pointer;">Recurring Order</div>
           </div>
-        </div> 
+        </div>         
       {% elsif subtitle != blank %}
         <div class="transaction-bar__unit transaction-bar__unit--subtitle">
           <div class="transaction-bar__pad">
@@ -41,7 +67,7 @@
         </div>  
       {% endif %}
 
-      <div class="transaction-bar__unit transaction-bar__unit--quantity">
+      <div class="transaction-bar__unit transaction-bar__unit--quantity-desktop">
         <div class="transaction-bar__pad">
           <div class="dot-group">
             <label>
@@ -60,7 +86,7 @@
         <button
           type="submit"
           name="add"
-          class="btn btn-block btn-primary-reverse"
+          class="btn btn-add-to-cart btn-block"
           data-add-to-cart
           {% unless current_variant.available %}disabled="disabled"{% endunless %}>
           {{ submit_button_contents }}
@@ -68,4 +94,6 @@
       </div>
     </div>
   </div>
+
+  <a href="#" data-story-popup-open class="p2 p3" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -30px); color: red;">Open Story Popup</a>
 </div>

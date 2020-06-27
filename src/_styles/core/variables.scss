@@ -986,8 +986,8 @@ $drawer-backdrop-opacity:               1;
 $drawer-header-font-size:               $h5-font-size;
 $drawer-header-border-color:            $black;
 $drawer-vertical-spacing:               115px;
-$drawer-transition:                     transform $transition-duration-base $transition-timing-function-base;
-$drawer-backdrop-transition:            opacity $transition-duration-base $transition-timing-function-base;
+$drawer-transition:                     transform $transition-duration-base ease-out;
+$drawer-backdrop-transition:            opacity $transition-duration-base ease-out;
 
 
 /* Remove these */

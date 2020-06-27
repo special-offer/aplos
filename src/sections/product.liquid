@@ -36,37 +36,108 @@
 
   <form action="/cart/add" method="post" enctype="multipart/form-data" data-product-form>
 
-    <!-- Product Detail -->
-    <div class="product-detail drawer-shifter">
-      <div class="product-detail__grid">
-        <div class="product-detail__child product-detail__child--gallery">
-          {% render 'product-detail-gallery',
-                      product: product,
-                      product_image: block.settings.product_image,
-                      product_background_image: block.settings.product_background_image
-          %}
+    <!-- Product Grids -->
+    <div class="product-grids drawer-shifter">
+      <div class="product-grid">
+        <div class="product-grid__col">
+          <div class="product-detail__child product-detail__child--gallery">
+            {% render 'product-detail-gallery',
+                        product: product,
+                        product_image: block.settings.product_image,
+                        product_background_image: block.settings.product_background_image
+            %}
+          </div>
         </div>
 
-        <div class="product-detail__child product-detail__child--form">
-          {% render 'product-detail-form',
-                     product: product,
-                     current_variant: current_variant,
-                     block: block,
-                     submit_button_contents: submit_button_contents
-          %}
-          <a href="#" class="btn btn-tertiary" data-story-popup-open>Open Popup</a>
+        <div class="product-grid__col">
+          <div class="product-detail__child product-detail__child--form">
+            {% render 'product-detail-form',
+                       product: product,
+                       current_variant: current_variant,
+                       block: block,
+                       submit_button_contents: submit_button_contents
+            %}
+            <a href="#" class="btn btn-tertiary" data-story-popup-open>Open Popup</a>
+          </div>
+          <div style="background-color: #FAFAD6">
+            <div class="aplos-4side-container">
+              <h2>How To Enjoy</h2>
+              <div class="rte" style="max-width: 29em; margin-bottom: 60px;">
+                {% for i in (1..3) %}
+                  <p clas="p1">
+                    We designed Wild Citrus to replicate the ritual of drinking a spirit. It can be enjoyed neat, on the rocks, or mixed as a cocktail.  We use exceptional ingredients formulated to enhance the immediate pleasure of taste, and the slow pleasures of the mind that follow.
+                  </p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="product-detail__grid" style="display: none;">
-        <div class="product-detail__child product-detail__child--gallery">
-          Other gallery
+      <div class="product-grid">
+        <div class="product-grid__col">
+          <div class="product-detail__child product-detail__child--gallery" style="background-color: black;">
+            <img src="{{ 'test-drink.jpg' | asset_url }}" style="height: 100%; width: 100%; object-fit: cover" />
+          </div>
         </div>
-        <div class="product-detail__child">
-          Story
+        <div class="product-grid__col">
+          <div class="product-detail__child" style="background-color: #FAFAD6">
+            <div class="aplos-4side-container">
+              <h2>Recipes</h2>
+              <div class="rte" style="max-width: 29em; margin-bottom: 60px;">
+                {% for i in (1..3) %}
+                  <p>Cartel rebar futurity kanji motion sub-orbital disposable narrative franchise singularity human man soul-delay. Monofilament silent geodesic shrine euro-pop systemic smart-corporation franchise Kowloon skyscraper DIY saturation point Shibuya. Drone concrete render-farm Shibuya sentient human franchise dead tower. Numinous construct papier-mache physical systemic semiotics plastic tiger-team woman Tokyo engine nodality. Into receding cartel bicycle monofilament soul-delay refrigerator shrine warehouse kanji Tokyo decay. Bridge futurity dolphin courier San Francisco tanto sprawl drone shanty town warehouse physical-ware soul-delay office cyber-woman sunglasses. Systema augmented reality computer-ware realism boat corporation chrome marketing ablative camera. </p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-grid">
+        <div class="product-grid__col">
+          <div class="product-detail__child product-detail__child--gallery" style="background-color: red;">
+            <img src="{{ 'test-accent-1.jpg' | asset_url }}" style="height: 100%; width: 100%; object-fit: cover" />
+          </div>
+        </div>
+        <div class="product-grid__col">
+          <div class="product-detail__child" style="background-color: #FAFAD6">
+            <div class="aplos-4side-container">
+              <h2>Hemp with Higher Standards</h2>
+              <div class="rte" style="max-width: 29em; margin-bottom: 60px;">
+                <p>Cartel rebar futurity kanji motion sub-orbital disposable narrative franchise singularity human man soul-delay. Monofilament silent geodesic shrine euro-pop systemic smart-corporation franchise Kowloon skyscraper DIY saturation point Shibuya. Drone concrete render-farm Shibuya sentient human franchise dead tower. Numinous construct papier-mache physical systemic semiotics plastic tiger-team woman Tokyo engine nodality. Into receding cartel bicycle monofilament soul-delay refrigerator shrine warehouse kanji Tokyo decay. Bridge futurity dolphin courier San Francisco tanto sprawl drone shanty town warehouse physical-ware soul-delay office cyber-woman sunglasses. Systema augmented reality computer-ware realism boat corporation chrome marketing ablative camera. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>      
+      <div style="background-color: #E1E1BD; padding: 300px 0;">
+        <div class="container text-center">
+          <h3>Feedback</h3>
         </div>
       </div>
     </div>
-    <!-- END Product Detail -->
+    <!-- END Product Grid -->
+
+    <!-- Producct Mobile-->
+    <div class="product-mobile drawer-shifter">
+      <div class="product-mobile__imagery">
+        <div class="product-mobile__imagery-bg">
+          <img src="{{ block.settings.product_background_image | img_url: '800x' }}" />
+        </div>
+        <div class="product-mobile__imagery-fg">
+          <img src="{{ block.settings.product_image | img_url: '800x' }}" />
+        </div>
+      </div>
+      <div class="product-mobile__titles">
+        <div class="h1" style="margin: 0; font-size: 36px;">{{ product.title }}</div>
+
+        {% if block.settings.subtitle != blank %}
+          <div class="p2" style="margin-top: 1.1rem;">
+            {{ block.settings.subtitle }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <!-- END Product Mobile-->
 
     <!-- Story Popup -->
     {% render 'story-popup',

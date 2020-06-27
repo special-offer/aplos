@@ -1,0 +1,120 @@
+// --------------------------------------------------------
+// Product Page
+// --------------------------------------------------------
+
+@import 'product/product-detail-gallery';
+@import 'product/product-detail-form';
+@import 'product/story-popup';
+@import 'product/transaction-bar';
+
+.product-grids {
+  display: none;
+
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
+}
+
+.product-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.product-grid__col {
+
+  // @TODO - Target these better?
+  &:first-child {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  &:last-child {
+    height: auto;
+    min-height: 150vh;
+  }
+}
+
+.product-grid {
+  .product-detail-form {
+    @include media-breakpoint-up(md) {
+      max-width: calc(1440px/2 - #{$spacing-lg*2}); // @TODO - variable-ize 1440
+    }
+  }  
+}
+
+.product-detail__child {
+  height: 100%;
+
+  &--form {
+    padding: $spacing-lg;
+    padding-top: $spacing-lg + 100px;
+    background-color: $white;
+  }
+}
+
+
+.product-mobile {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $butter;
+
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}
+
+.product-mobile__imagery {
+  position: relative;
+  height: 68vh;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.product-mobile__imagery-bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.product-mobile__imagery-fg {
+  position: absolute;
+  z-index: 1; // Push above the titles that come below it
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 118px 20px 0;
+
+  img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 16%; // Make it align with the label
+    background: $butter;
+  }
+}
+
+.product-mobile__titles {
+  height: 32vh;
+  flex: 1;
+  padding: 33px $spacing-sm 0;
+  text-align: center;
+}
