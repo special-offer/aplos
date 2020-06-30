@@ -8,7 +8,7 @@ import BaseSection from './base';
 import AJAXCartDrawer from '../ui/ajaxCartDrawer';
 
 const $window = $(window);
-const $body   = $(document.body);
+// const $body   = $(document.body);
 
 const selectors = {
   header: '[data-header]',
@@ -86,9 +86,19 @@ export default class HeaderSection extends BaseSection {
 
   onScroll() {
     // Do measurements outside of rAF.
-    const scrollTop  = $window.scrollTop();
-    const fixed      = scrollTop > this.pencilBannerHeight;
-    const hideHeader = scrollTop > this.prevScrollTop && scrollTop > this.headerHeight; //  going down and scrolled past header natural height
+    const scrollTop = $window.scrollTop();
+    const direction = scrollTop > this.prevScrollTop ? 'down' : 'up';
+    const fixed     = scrollTop > this.pencilBannerHeight;
+    let hideHeader  = false;
+
+    if (direction === 'down' && scrollTop > this.headerHeight) { //  going down and scrolled past header natural height
+      hideHeader = true;
+      // @TODO - Revisit this
+    } else if (direction === 'up') {
+      // hideHeader = false;
+      // hideHeader = (this.prevScrollTop - scrollTop <= 10);  //  going up and scrolled up 10 px from last time we checked the scroll position
+      hideHeader = false;
+    }
 
     // Do DOM updates inside.
     requestAnimationFrame(() => {

@@ -3,13 +3,9 @@
 // -------------------------
 
 .product-detail-form {
-  @include media-breakpoint-down(sm) {
-    text-align: center;
-
-    // This is temp
-    .rte,
-    .form-group {
-      display: none;
-    }
-  }
+  height: calc(100vh - 250px);
+  min-height: 767px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
 }

@@ -106,6 +106,13 @@ fieldset:disabled a.btn {
       background-color: $butter;
     }
   }
+
+  // On *tiny* screens, hide the price currency
+  .currency {
+    @media (max-width: 399px) {
+      display: none;
+    }
+  }
 }
 
 

@@ -37,17 +37,25 @@
 
       <!-- if product is subscription product -->
       {% if true %}
+        <style>
+          .transaction-bar__unit svg {
+            stroke: black;
+            transform: rotate(180deg);
+          }
+        </style>
         <div class="transaction-bar__unit transaction-bar__unit--subscription d-md-none">
-          <div class="transaction-bar__pad" style="padding: 0;">
-            <div class="p2" style="width: 100%;">
-              <div style="color: rgba(0, 0, 0, 0.5); padding: 6px 18px 6px 23px; border-bottom: 1px solid black;">One-Time</div>
-              <div style="padding: 6px 18px 6px 23px;">
-                <select>
-                  <option>Weekly</option>
-                  <option>Monthly</option>
-                  <option>Bi-Monthly</option>
-                </select>
+          <div class="transaction-bar__pad p2" style="padding: 0; align-items: stretch; flex-direction: column; justify-content: space-evenly">
+            <div style="color: rgba(0, 0, 0, 0.5); padding: 6px 15px 6px 17px; border-bottom: 1px solid black;">One-Time</div>
+            <div style="padding: 6px 15px 6px 17px; min-width: 116px; display: flex; justify-content: space-between;">
+              Weekly
+              <div style="width: 11px;">
+                {% render 'icon-caret-down' %}
               </div>
+<!--                 <select>
+                <option>Weekly</option>
+                <option>Monthly</option>
+                <option>Bi-Monthly</option>
+              </select> -->
             </div>
           </div>
         </div>
@@ -71,8 +79,7 @@
         <div class="transaction-bar__pad">
           <div class="dot-group">
             <label>
-              <span class="d-none d-md-inline">Select Qty:</span>
-              <span class="d-md-none">Qty:</span>
+              Qty:
             </label>
             <div class="dots">
               <div class="dot is-active" data-dot-qty="1">1</div>
@@ -95,5 +102,7 @@
     </div>
   </div>
 
-  <a href="#" data-story-popup-open class="p2 p3" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -30px); color: red;">Open Story Popup</a>
+  <a href="#" data-story-popup-open class="story-popup-trigger" title="Open Popup">
+    {% render 'icon-caret-down' %}
+  </a>
 </div>

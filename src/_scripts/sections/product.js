@@ -48,8 +48,9 @@ export default class ProductSection extends BaseSection {
     // @TODO - Cache the first product grid height 
     const scrollTop = $window.scrollTop();
     const threshold = $('.product-grid').first().outerHeight() - window.innerHeight;
+    const shouldShow = scrollTop > threshold && scrollTop < (this.$container.outerHeight() - window.innerHeight)
 
-    scrollTop > threshold ? this.transactionBar.show() : this.transactionBar.hide();
+    shouldShow ? this.transactionBar.show() : this.transactionBar.hide();
   }
 
   onResize() {

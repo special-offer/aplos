@@ -117,6 +117,7 @@ $qa-mini-height: 43px;
 
   input[type="number"] {
     height: $qa-mini-height;
+    width: 27px;
   }
 
   .quantity-adjuster__increment,
@@ -141,5 +142,3 @@ $qa-mini-height: 43px;
     bottom: -6px;
   }
 }
-
-// @TODO - Need to make a dark version of the adjuster

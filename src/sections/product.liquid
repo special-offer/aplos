@@ -21,7 +21,30 @@
   <span data-product-price>
     {{ current_variant.price | money_without_trailing_zeros }}
   </span>
-  USD         
+  <span class="currency">USD</span>
+{% endcapture %}
+
+{% capture background_video_html %}
+  {% assign src = block.settings.product_background_video_file_url %}
+  {% assign video_type = '' %}
+
+  {% if src != blank %}
+    {% if src contains '.mp4' %}  
+      {% assign video_type = 'mp4' %} 
+    {% elsif src contains '.og' %}  
+      {% assign video_type = 'ogg' %} 
+    {% elsif src contains '.avi' %} 
+      {% assign video_type = 'avi' %} 
+    {% elsif src contains '.webm' %}  
+      {% assign video_type = 'webm' %}  
+    {% endif %}  
+  {% endif %}
+
+  {% unless video_type == '' %}
+    <video autoplay loop muted> 
+      <source src="{{ src }}" type="video/{{ video_type }}" />  
+    </video>
+  {% endunless %}
 {% endcapture %}
 
 <div data-section-id="{{ section.id }}" data-section-type="product" itemscope itemtype="http://schema.org/Product">
@@ -41,15 +64,19 @@
       <div class="product-grid">
         <div class="product-grid__col">
           <div class="product-detail__child product-detail__child--gallery">
-            {% render 'product-detail-gallery',
-                        product: product,
-                        product_image: block.settings.product_image,
-                        product_background_image: block.settings.product_background_image
-            %}
+            <div class="product-detail-gallery">
+              <div class="gallery-image gallery-image--background">
+                <img src="{{ block.settings.product_background_image | img_url: '1600x' }}" />
+                {{ background_video_html }}
+              </div>
+              <div class="gallery-image gallery-image--foreground">
+                <img src="{{ block.settings.product_image | img_url: '1600x' }}" />
+              </div>  
+            </div>            
           </div>
         </div>
 
-        <div class="product-grid__col">
+        <div class="product-grid__col" style="height: auto;">
           <div class="product-detail__child product-detail__child--form">
             {% render 'product-detail-form',
                        product: product,
@@ -57,17 +84,14 @@
                        block: block,
                        submit_button_contents: submit_button_contents
             %}
-            <a href="#" class="btn btn-tertiary" data-story-popup-open>Open Popup</a>
           </div>
           <div style="background-color: #FAFAD6">
             <div class="aplos-4side-container">
               <h2>How To Enjoy</h2>
               <div class="rte" style="max-width: 29em; margin-bottom: 60px;">
-                {% for i in (1..3) %}
-                  <p clas="p1">
-                    We designed Wild Citrus to replicate the ritual of drinking a spirit. It can be enjoyed neat, on the rocks, or mixed as a cocktail.  We use exceptional ingredients formulated to enhance the immediate pleasure of taste, and the slow pleasures of the mind that follow.
-                  </p>
-                {% endfor %}
+                <p clas="p1">
+                  We designed Wild Citrus to replicate the ritual of drinking a spirit. It can be enjoyed neat, on the rocks, or mixed as a cocktail.  We use exceptional ingredients formulated to enhance the immediate pleasure of taste, and the slow pleasures of the mind that follow.
+                </p>
               </div>
             </div>
           </div>
@@ -94,7 +118,7 @@
       </div>
       <div class="product-grid">
         <div class="product-grid__col">
-          <div class="product-detail__child product-detail__child--gallery" style="background-color: red;">
+          <div class="product-detail__child product-detail__child--gallery">
             <img src="{{ 'test-accent-1.jpg' | asset_url }}" style="height: 100%; width: 100%; object-fit: cover" />
           </div>
         </div>
@@ -102,9 +126,32 @@
           <div class="product-detail__child" style="background-color: #FAFAD6">
             <div class="aplos-4side-container">
               <h2>Hemp with Higher Standards</h2>
-              <div class="rte" style="max-width: 29em; margin-bottom: 60px;">
-                <p>Cartel rebar futurity kanji motion sub-orbital disposable narrative franchise singularity human man soul-delay. Monofilament silent geodesic shrine euro-pop systemic smart-corporation franchise Kowloon skyscraper DIY saturation point Shibuya. Drone concrete render-farm Shibuya sentient human franchise dead tower. Numinous construct papier-mache physical systemic semiotics plastic tiger-team woman Tokyo engine nodality. Into receding cartel bicycle monofilament soul-delay refrigerator shrine warehouse kanji Tokyo decay. Bridge futurity dolphin courier San Francisco tanto sprawl drone shanty town warehouse physical-ware soul-delay office cyber-woman sunglasses. Systema augmented reality computer-ware realism boat corporation chrome marketing ablative camera. </p>
-              </div>
+
+              {% for i in (1..3) %}
+                <div style="display: flex; margin: 50px 0; padding: 50px 0; {% unless i == 1 %}border-top: 1px solid black{% endunless %}">
+                  <div class="p2" style="padding-right: 7vw; flex: 0.3;">
+                    0{{ i }}.<br />
+                    {% if i == 1 %}
+                      Sourcing
+                    {% elsif i == 2 %}
+                      3rd Party Testing
+                    {% else %}
+                      Efficacy
+                    {% endif %}
+                  </div>
+                  <div class="rte" style="flex: 1; margin-bottom: 0;">
+                    {% if i == 1 %}
+                      We are committed to ethical sourcing and use only the highest quality ingredients to formulate our product.
+                      Our sun-grown, organic hemp is sourced from a bio-dynamic, regenerative farm in New York’s Hudson Valley.
+                    {% elsif i == 2 %}
+                      To ensure the purity and potency of the broad-spectrum hemp we use in every bottle of Aplós, we have developed rigorous, third-party testing protocols at essential stages throughout the production process: after extraction from the plant, at nano-emulsification, and at final bottling.
+                    {% else %}
+                      We use an organic nano-emulsification technology to convert the hemp extract oil into smaller, water-soluble particles to allow your body to absorb the active cannabinoids faster and more efficiently, resulting in a calming and uplifting effect with a rapid onset within 5-15 minutes, and shorter effect duration of 1-2 hours.
+This provides more control and a more predictable experience.
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -122,10 +169,12 @@
       <div class="product-mobile__imagery">
         <div class="product-mobile__imagery-bg">
           <img src="{{ block.settings.product_background_image | img_url: '800x' }}" />
+          {{ background_video_html }}
         </div>
         <div class="product-mobile__imagery-fg">
           <img src="{{ block.settings.product_image | img_url: '800x' }}" />
         </div>
+        <div class="product-mobile__imagery-cover"></div>
       </div>
       <div class="product-mobile__titles">
         <div class="h1" style="margin: 0; font-size: 36px;">{{ product.title }}</div>
@@ -204,7 +253,7 @@
           },          
           {
             "type": "header",
-            "content": "Images"
+            "content": "Imagery"
           },
           {
             "type": "image_picker",
@@ -215,7 +264,13 @@
             "type": "image_picker",
             "id": "product_background_image",
             "label": "Product Background Image"
-          },          
+          },
+          { 
+            "type": "url",  
+            "id": "product_background_video_file_url",  
+            "label": "Product Background Video File URL",  
+            "info": "Accepted file formats: mp4, ogg, avi, webm"  
+          },
           {
             "type": "header",
             "content": "Additional Details",

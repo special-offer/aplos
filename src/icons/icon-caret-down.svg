@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="27px" height="21px" viewBox="0 0 27 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
-    <title>Combined Shape</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M194,104 L200,109 M206,104 L200,109" id="path-1"></path>
-        <filter x="-114.2%" y="-234.1%" width="328.4%" height="648.2%" filterUnits="objectBoundingBox" id="filter-2">
-            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
-            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
-            <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
-            <feOffset dx="0" dy="2" in="shadowInner" result="shadowInner"></feOffset>
-            <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"></feComposite>
-            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
-        </filter>
-    </defs>
+<svg width="12px" height="7px" viewBox="0 0 12 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g id="Design-Final" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
-        <g id="Product-Detail-Page-—-Mobile-Expanded" transform="translate(-187.000000, -98.000000)">
-            <g id="Combined-Shape">
-                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                <use stroke="#FFFFFF" stroke-width="1" xlink:href="#path-1"></use>
-            </g>
+        <g id="Product-Detail-Page-I-—-Mobile-Copy" transform="translate(-194.000000, -669.000000)" fill="#000000" stroke="#000000">
+            <path d="M194,670 L200,675 M206,670 L200,675" id="Combined-Shape" transform="translate(200.000000, 672.500000) rotate(-180.000000) translate(-200.000000, -672.500000) "></path>
         </g>
     </g>
 </svg>
