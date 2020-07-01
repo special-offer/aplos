@@ -153,6 +153,10 @@
   padding: 8px 9px;
 
   @include media-breakpoint-up(md) {
-    padding: 19px 20px;
+    padding: 25px 20px;
   }
+
+  @include media-breakpoint-up(xl) {
+    padding: 19px 20px;
+  }  
 }

@@ -9,7 +9,7 @@
               product: { product } - required
               product_image: { image }
               product_background_image: { image }
-              product_background_video_file_url: { string }
+              background_video_html: { string }
   %}  
 
 {% endcomment -%}
@@ -32,12 +32,7 @@
 <div class="product-detail-gallery">
   <div class="gallery-image gallery-image--background">
     <img src="{{ product_background_image | img_url: '1600x' }}" />
-
-    {% unless video_type == '' %}
-      <video autoplay loop muted> 
-        <source src="{{ src }}" type="video/{{ video_type }}" />  
-      </video>
-    {% endunless %}
+    {{ background_video_html }}
   </div>
   <div class="gallery-image gallery-image--foreground">
     <img src="{{ product_image | img_url: '1600x' }}" />

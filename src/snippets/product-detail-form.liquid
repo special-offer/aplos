@@ -30,7 +30,7 @@
       {% endif %}
     </div>
 
-    <div class="rte" style="max-width: 22em; margin-bottom: 15px;">
+    <div class="rte" style="max-width: 22em; margin-bottom: 30px;">
       {{ product.description }}
     </div>
   </div>
@@ -70,11 +70,18 @@
       </div>
     </div>    
 
-    <div style="margin-top: 33px;">
+    <div class="form-group" style="margin-top: 33px;">
+      <div style="display:flex; justify-content: space-between;">
+        <div class="pill is-active" style="width: 49%">Purchase Once</div>
+        <div class="pill" style="width: 49%">Recurring Order <span class="emdash"></span> Monthly</div>
+      </div>
+    </div>
+
+    <div>
       <button
         type="submit"
         name="add"
-        class="btn btn-add-to-cart"
+        class="btn btn-add-to-cart btn-block"
         data-add-to-cart
         {% unless current_variant.available %}disabled="disabled"{% endunless %}>
         {{ submit_button_contents }}

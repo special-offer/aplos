@@ -105,3 +105,22 @@
 html {
   padding-bottom: 0 !important;
 }
+
+.pill {
+  @extend .p2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 13px 18px 11px;
+  border: 1px solid $black;
+  border-radius: 20px;
+  cursor: pointer;
+
+  opacity: 0.25;
+  transition: opacity 150ms ease-out;
+
+  &.is-active {
+    opacity: 1;
+  }
+}

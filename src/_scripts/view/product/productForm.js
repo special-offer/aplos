@@ -87,6 +87,13 @@ export default class ProductForm {
     this.$dotQtys.on('click', this.onDotQuantityClick.bind(this));
 
     chosenSelects(this.$container);
+
+    // For demo
+    this.$container.on('click', '.pill', (e) => {
+      const $p = $(e.currentTarget);
+      $p.siblings().removeClass('is-active');
+      $p.addClass('is-active');
+    });
   }
 
   onVariantChange(evt) {
