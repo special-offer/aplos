@@ -51,10 +51,15 @@
 }
 
 .header-bar__content {
-  @extend .container-fluid-max;
   display: flex;
   justify-content: space-between;
   height: 100%;
+
+  // @TODO - All these containers are slightly different?
+  @include media-breakpoint-down(sm) {
+    padding-left: $spacing-sm*2;
+    padding-right: $spacing-sm*2;
+  }
 }
 
 .header-logo {

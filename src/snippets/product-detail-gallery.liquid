@@ -9,13 +9,30 @@
               product: { product } - required
               product_image: { image }
               product_background_image: { image }
+              background_video_html: { string }
   %}  
 
 {% endcomment -%}
 
+{% assign src = product_background_video_file_url %}
+{% assign video_type = '' %}
+
+{% if src != blank %}
+  {% if src contains '.mp4' %}  
+    {% assign video_type = 'mp4' %} 
+  {% elsif src contains '.og' %}  
+    {% assign video_type = 'ogg' %} 
+  {% elsif src contains '.avi' %} 
+    {% assign video_type = 'avi' %} 
+  {% elsif src contains '.webm' %}  
+    {% assign video_type = 'webm' %}  
+  {% endif %}  
+{% endif %}
+
 <div class="product-detail-gallery">
   <div class="gallery-image gallery-image--background">
     <img src="{{ product_background_image | img_url: '1600x' }}" />
+    {{ background_video_html }}
   </div>
   <div class="gallery-image gallery-image--foreground">
     <img src="{{ product_image | img_url: '1600x' }}" />

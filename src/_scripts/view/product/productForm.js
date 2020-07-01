@@ -17,7 +17,8 @@ const selectors = {
   variantOptionValueList: '[data-variant-option-value-list][data-option-position]',
   variantOptionValue: '[data-variant-option-value]',
   productQuantity: '[data-product-quantity]',
-  dotQty: '[data-dot-qty]'
+  dotQty: '[data-dot-qty]',
+  quantityAdjuster: '[data-quantity-adjuster]'
 };
 
 const classes = {
@@ -80,11 +81,19 @@ export default class ProductForm {
       product: this.productSingleObject
     });
 
+    this.$container.on('change.quantityAdjuster', this.onQuantityAdjusterChange.bind(this));
     this.$container.on('variantChange', this.onVariantChange.bind(this));
     this.$container.on(this.events.CLICK, selectors.variantOptionValue, this.onVariantOptionValueClick.bind(this));
     this.$dotQtys.on('click', this.onDotQuantityClick.bind(this));
 
     chosenSelects(this.$container);
+
+    // For demo
+    this.$container.on('click', '.pill', (e) => {
+      const $p = $(e.currentTarget);
+      $p.siblings().removeClass('is-active');
+      $p.addClass('is-active');
+    });
   }
 
   onVariantChange(evt) {
@@ -150,6 +159,21 @@ export default class ProductForm {
     }
   }
 
+  updateQuantity(quantity) {
+    // @TODO - Store quantity as instance var to check against when "changing" ?
+
+    this.$dotQtys
+      .removeClass(classes.dotActive)
+      .filter((i, el) => {
+        return $(el).data('dot-qty') === quantity;
+      })
+      .addClass(classes.dotActive);
+
+    // @TODO - Need to get this working the other way around - update the adjuster
+
+    this.$productQuantity.val(quantity);
+  }
+
   /**
    * Handle variant option value click event.
    * Update the associated select tag and update the UI for this value
@@ -179,15 +203,14 @@ export default class ProductForm {
 
     if ($dotQty.hasClass(classes.dotActive)) return;
 
-    const value = $dotQty.data('dot-qty');
+    this.updateQuantity($dotQty.data('dot-qty'));
+  }
 
-    this.$dotQtys
-      .removeClass(classes.dotActive)
-      .filter((i, el) => {
-        return $(el).data('dot-qty') === value;
-      })
-      .addClass(classes.dotActive);
+  onQuantityAdjusterChange(e) {
+    const instance = e.instance;
 
-    this.$productQuantity.val(value);
+    if (!instance) return;
+
+    this.updateQuantity(instance.getVal());
   }
 }

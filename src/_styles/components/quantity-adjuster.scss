@@ -4,6 +4,7 @@
 
 .quantity-adjuster {
   display: inline-block;
+  position: relative;
   height: $quantity-adjuster-height;
   border: $quantity-adjuster-border-width solid $quantity-adjuster-border-color;
   border-radius: 8px;
@@ -19,6 +20,7 @@
     text-align: center;
     vertical-align: top;
     cursor: pointer;
+    transition: opacity 120ms ease-out;
 
     &[disabled] {
       opacity: 0.25;
@@ -36,7 +38,7 @@
     text-align: center;
     font-size: $quantity-adjuster-font-size;
     height: $quantity-adjuster-inner-height;
-    cursor: pointer;
+    pointer-events: none;
     -moz-appearance: textfield; // Remove the spinner - firefox + chrome
 
     &[disabled] {
@@ -85,5 +87,58 @@
       display: none;
     }
   }
+}
 
+// For quantity adjusters on light backgrounds
+.quantity-adjuster--light {
+  border-color: $black;
+
+  input[type="number"] {
+    color: $black;
+  }
+
+  .quantity-adjuster__increment,
+  .quantity-adjuster__decrement {
+    &:before,
+    &:after {
+      background-color: $black;
+    }
+  }
+}
+
+// Tiny version with increment/decrement stacked on the right
+$qa-mini-height: 43px;
+
+.quantity-adjuster--mini {
+  border: none;
+  border-radius: 0;
+  height: $qa-mini-height;
+  padding: 0 17px 0 0;
+
+  input[type="number"] {
+    height: $qa-mini-height;
+    width: 27px;
+  }
+
+  .quantity-adjuster__increment,
+  .quantity-adjuster__decrement {
+    position: absolute;
+    right: 0;
+    height: 24px;
+    width: 24px;
+
+    &:before,
+    &:after {
+      width: 8px;
+    }
+  }
+
+  .quantity-adjuster__increment {
+    top: -4px;
+  }
+
+  .quantity-adjuster__decrement {
+    top: auto;
+    bottom: -6px;
+  }
 }

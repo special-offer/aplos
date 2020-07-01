@@ -19,63 +19,74 @@
 {% endif %}
 
 <div class="product-detail-form" data-product-detail-form>
-  <div class="product-titles" style="margin-bottom: 4.6rem">
-    <h1 style="margin: 0;">{{ product.title }}</h1>
+  <div>
+    <div class="product-titles" style="margin-bottom: 4.6rem">
+      <h1 style="margin: 0;">{{ product.title }}</h1>
 
-    {% if block.settings.subtitle != blank %}
-      <div class="p2" style="margin-top: 1.1rem;">
-        {{ block.settings.subtitle }}
-      </div>
-    {% endif %}
-  </div>
-
-  <div class="rte" style="max-width: 22em; margin-bottom: 60px;">
-    {{ product.description }}
-  </div>
-
-  {% unless product.has_only_default_variant %}
-    {% for option in product.options_with_values %}         
-      <div class="selector-wrapper form-group js">
-        <label for="SingleOptionSelector-{{ forloop.index0 }}">
-          {{ option.name }}
-        </label>
-
-        <select
-          id="SingleOptionSelector-{{ forloop.index0 }}"
-          class="form-control"
-          data-single-option-selector
-          data-index="option{{ option.position }}">
-          {% for value in option.values %}
-            <option
-              value="{{ value | escape }}"
-              {% if option.selected_value == value %}selected="selected"{% endif %}>
-                {{ value }}
-            </option>
-          {% endfor %}
-        </select>
-      </div>
-    {% endfor %}
-  {% endunless %}
-
-  <div class="form-group dot-group">
-    {% comment %} @TODO - need to check if product is a subscription or not, add "Select" if we have space {% endcomment %}
-    <label>Qty:</label>
-    <div class="dots">
-      <div class="dot is-active" data-dot-qty="1">1</div>
-      <div class="dot" data-dot-qty="2">2</div>
-      <div class="dot" data-dot-qty="4">4</div>
+      {% if block.settings.subtitle != blank %}
+        <div class="p2" style="margin-top: 1.1rem;">
+          {{ block.settings.subtitle }}
+        </div>
+      {% endif %}
     </div>
-  </div>    
 
-  <div style="margin-top: 33px;">
-    <button
-      type="submit"
-      name="add"
-      class="btn btn-primary-reverse"
-      data-add-to-cart
-      {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-      {{ submit_button_contents }}
-    </button>
+    <div class="rte" style="max-width: 22em; margin-bottom: 30px;">
+      {{ product.description }}
+    </div>
+  </div>
+
+  <div style="margin: auto 0;">
+    {% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}         
+        <div class="selector-wrapper form-group js">
+          <label for="SingleOptionSelector-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+
+          <select
+            id="SingleOptionSelector-{{ forloop.index0 }}"
+            class="form-control"
+            data-single-option-selector
+            data-index="option{{ option.position }}">
+            {% for value in option.values %}
+              <option
+                value="{{ value | escape }}"
+                {% if option.selected_value == value %}selected="selected"{% endif %}>
+                  {{ value }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endfor %}
+    {% endunless %}
+
+    <div class="form-group dot-group">
+      {% comment %} @TODO - need to check if product is a subscription or not, add "Select" if we have space {% endcomment %}
+      <label>Qty:</label>
+      <div class="dots">
+        <div class="dot is-active" data-dot-qty="1">1</div>
+        <div class="dot" data-dot-qty="2">2</div>
+        <div class="dot" data-dot-qty="4">4</div>
+      </div>
+    </div>    
+
+    <div class="form-group" style="margin-top: 33px;">
+      <div style="display:flex; justify-content: space-between;">
+        <div class="pill is-active" style="width: 49%">Purchase Once</div>
+        <div class="pill" style="width: 49%">Recurring Order <span class="emdash"></span> Monthly</div>
+      </div>
+    </div>
+
+    <div>
+      <button
+        type="submit"
+        name="add"
+        class="btn btn-add-to-cart btn-block"
+        data-add-to-cart
+        {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+        {{ submit_button_contents }}
+      </button>
+    </div>
   </div>
 
   {% if block %}
@@ -112,7 +123,7 @@
     {% endcapture %}
 
     {% if expandable_details_html != blank %}
-      <div class="d-none d-md-block" style="margin-top: 87px;">
+      <div class="d-none d-md-block" style="margin-top: 30px;">
         {{ expandable_details_html }}
       </div>
     {% endif %}
