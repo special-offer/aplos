@@ -1,3 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18">
-    <path fill="#513421" fill-rule="nonzero" d="M19.806 7.739L14.547 1.68A1.015 1.015 0 1 1 16.081.35l6.68 7.696c.33.378.332.94.009 1.322l-6.681 7.885a1.015 1.015 0 0 1-1.55-1.312l5.23-6.172H1.014a1.015 1.015 0 0 1 0-2.03h18.791z"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>→</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Design-Final" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="LucidaGrande, Lucida Grande" font-size="12" font-weight="normal">
+        <g id="Homepage" transform="translate(-1333.000000, -2946.000000)" fill="#000000">
+            <text id="→">
+                <tspan x="1332" y="2954">→</tspan>
+                <tspan x="1344" y="2954" font-family="Helvetica"> </tspan>
+            </text>
+        </g>
+    </g>
 </svg>

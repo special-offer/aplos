@@ -17,8 +17,8 @@ export default class TestimonialsSection extends BaseSection {
       speed: 1200,
       effect: 'fade',
       navigation: {
-        nextEl: this.$slideshow.find('.arrow--right').get(0),
-        prevEl: this.$slideshow.find('.arrow--left').get(0)
+        nextEl: this.$slideshow.find('.swiper-arrow--prev').get(0),
+        prevEl: this.$slideshow.find('.swiper-arrow--next').get(0)
       },
       fadeEffect: {
         crossFade: true

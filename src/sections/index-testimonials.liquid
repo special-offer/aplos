@@ -1,29 +1,29 @@
 <div data-section-id="{{ section.id }}" data-section-type="testimonials">
-  <div style="background-color: #FAFAD6">
-    <div class="aplos-container" style="padding-top: 64px; padding-bottom: 61px;">
+  <div class="bg-butter">
+    <div class="testimonals-container">
       {% if section.settings.title != blank %}
-        <div class="p3 text-center">
+        <div class="testimonials-title">
           {{ section.settings.title }}
         </div>
       {% endif %}
       {% if section.blocks.size > 0 %}
-        <div class="swiper-container" id="slideshow-{{ section.id }}" data-slideshow style="padding: 34px 0 0;">
-          <div class="swiper-wrapper" style="align-items: center;">
+        <div id="slideshow-{{ section.id }}" class="swiper-container" data-slideshow>
+          <div class="swiper-wrapper">
             {% for block in section.blocks %}
-              <div class="swiper-slide" style="text-align: center; width: 100%;" {{ block.shopify_attributes }} data-block-id="{{ block.id }}">
-                <div class="h1" style="max-width: 15em; line-height: 1; margin: 0 auto 77px;">{{ block.settings.content }}</div>
-                <div class="p2">{{ block.settings.author }}</div>
+              <div class="swiper-slide" {{ block.shopify_attributes }} data-block-id="{{ block.id }}">
+                <div class="testimonial">
+                  <div class="testimonial__content">{{ block.settings.content }}</div>
+                  <div class="testimonial__author">{{ block.settings.author }}</div>
+                </div>
               </div>
             {% endfor %}
           </div>
-          <!-- 
-          <span class="swiper-arrow swiper-arrow--left">
-            <span class="arrow arrow--left"><span class="arrow__icon"></span></span>
+          <span class="swiper-arrow swiper-arrow--prev">
+            {% include 'icon-arrow-right' %}
           </span>
-          <span class="swiper-arrow swiper-arrow--right">
-            <span class="arrow arrow--right"><span class="arrow__icon"></span></span>
+          <span class="swiper-arrow swiper-arrow--next">
+            {% include 'icon-arrow-right' %}
           </span>
-          -->
         </div>
       {% endif %}
     </div>
