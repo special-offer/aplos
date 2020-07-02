@@ -38,14 +38,15 @@ import AJAXCartSection               from './sections/ajaxCart';
 import CollectionSection             from './sections/collection';
 import BlogSection                   from './sections/blog';
 import ArticleSection                from './sections/article';
-import SlideshowSection              from './sections/slideshow';
-import VideoSection                  from './sections/video';
+import TestimonialsSection           from './sections/testimonials';
+// import SlideshowSection              from './sections/slideshow';
+// import VideoSection                  from './sections/video';
 import CMSPageSection                from './sections/cmsPage';
-import CustomersLoginSection         from './sections/customersLogin';
-import CustomersAccountSection       from './sections/customersAccount';
-import CustomersAccountOrdersSection from './sections/customersAccountOrders';
-import CustomersAddressesSection     from './sections/customersAddresses';
-import CustomersOrderSection         from './sections/customersOrder';
+// import CustomersLoginSection         from './sections/customersLogin';
+// import CustomersAccountSection       from './sections/customersAccount';
+// import CustomersAccountOrdersSection from './sections/customersAccountOrders';
+// import CustomersAddressesSection     from './sections/customersAddresses';
+// import CustomersOrderSection         from './sections/customersOrder';
 
 // Templates
 import './templates/pageStyles';
@@ -69,14 +70,15 @@ Breakpoints.initialize();
   sectionManager.register('collection', CollectionSection);
   sectionManager.register('blog', BlogSection);
   sectionManager.register('article', ArticleSection);
-  sectionManager.register('slideshow', SlideshowSection);
-  sectionManager.register('video', VideoSection);
+  sectionManager.register('testimonials', TestimonialsSection);
+  // sectionManager.register('slideshow', SlideshowSection);
+  // sectionManager.register('video', VideoSection);
   sectionManager.register('cms-page', CMSPageSection);
-  sectionManager.register('customers-login', CustomersLoginSection);
-  sectionManager.register('customers-account', CustomersAccountSection);
-  sectionManager.register('customers-account-orders', CustomersAccountOrdersSection);
-  sectionManager.register('customers-addresses', CustomersAddressesSection);
-  sectionManager.register('customers-order', CustomersOrderSection);
+  // sectionManager.register('customers-login', CustomersLoginSection);
+  // sectionManager.register('customers-account', CustomersAccountSection);
+  // sectionManager.register('customers-account-orders', CustomersAccountOrdersSection);
+  // sectionManager.register('customers-addresses', CustomersAddressesSection);
+  // sectionManager.register('customers-order', CustomersOrderSection);
 
   $('.in-page-link').on('click', evt => pageLinkFocus($(evt.currentTarget.hash)));
 

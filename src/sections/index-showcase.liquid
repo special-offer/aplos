@@ -1,0 +1,54 @@
+<div data-section-id="{{ section.id }}" data-section-type="testimonials">
+  <div class="aplos-4side-container" style="position: relative; min-height: 150vh;">
+    {% if section.settings.title != blank %}
+      <div class="h1">
+        {{ section.settings.title }}
+      </div>
+    {% endif %}
+    {% if section.settings.content != blank %}
+      <div class="rte" style="max-width: 25em;">
+        {{ section.settings.content }}
+      </div>
+    {% endif %}
+    <div>
+      <a href="#" class="btn btn-primary">Add To Cart <span class="emdash"></span> $52 USD</a>
+      <a href="#" class="btn btn-primary" style="background-color: white;">Learn More</a>
+    </div>
+
+    {% if section.settings.background_image %}
+      <img src="{{ section.settings.background_image | img_url: '1500x' }}"
+           style="position: absolute; z-index: -1; top: 0; left: 0; height: 100%; width: 100%; object-fit: cover;"
+      />
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Showcase",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      }
+    ],
+    "presets": [{
+      "name": "Showcase",
+      "category": "Content",
+      "settings": {
+        "title": "Showcase Title"
+      }
+    }]
+  }
+{% endschema %}

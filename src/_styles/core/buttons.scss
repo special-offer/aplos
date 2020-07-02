@@ -88,6 +88,12 @@ fieldset:disabled a.btn {
   padding: 19px 30px 15px;
 }
 
+.btn-light-outline {
+  border-color: $white;
+  color: $white;
+  background-color: transparent;
+}
+
 // primary-alt on mobile, primary reverse on desktop
 .btn-add-to-cart {
   background-color: $black;

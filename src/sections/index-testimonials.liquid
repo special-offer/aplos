@@ -1,0 +1,79 @@
+<div data-section-id="{{ section.id }}" data-section-type="testimonials">
+  <div style="background-color: #FAFAD6">
+    <div class="aplos-container" style="padding-top: 64px; padding-bottom: 61px;">
+      {% if section.settings.title != blank %}
+        <div class="p3 text-center">
+          {{ section.settings.title }}
+        </div>
+      {% endif %}
+      {% if section.blocks.size > 0 %}
+        <div class="swiper-container" id="slideshow-{{ section.id }}" data-slideshow style="padding: 34px 0 0;">
+          <div class="swiper-wrapper" style="align-items: center;">
+            {% for block in section.blocks %}
+              <div class="swiper-slide" style="text-align: center; width: 100%;" {{ block.shopify_attributes }} data-block-id="{{ block.id }}">
+                <div class="h1" style="max-width: 15em; line-height: 1; margin: 0 auto 77px;">{{ block.settings.content }}</div>
+                <div class="p2">{{ block.settings.author }}</div>
+              </div>
+            {% endfor %}
+          </div>
+          <!-- 
+          <span class="swiper-arrow swiper-arrow--left">
+            <span class="arrow arrow--left"><span class="arrow__icon"></span></span>
+          </span>
+          <span class="swiper-arrow swiper-arrow--right">
+            <span class="arrow arrow--right"><span class="arrow__icon"></span></span>
+          </span>
+          -->
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Testimonials",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "author",
+            "label": "Author"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Testimonials",
+      "category": "Content",
+      "settings": {
+        "title": "Testimonials"
+      },
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "content": "I love Aplos...",
+            "author": "Jane Doe"
+          }
+        }
+      ]
+    }]
+  }
+{% endschema %}
