@@ -15,7 +15,6 @@
   {% include 'promo',
               p_id: section.id,
               p_layout: section.settings.layout,
-              p_type: section.settings.type,
               p_content_max_width: section.settings.content_max_width,
               p_image: section.settings.image,
               p_image_small: section.settings.image_small,
@@ -39,20 +38,7 @@
           { "value": "right", "label": "Image Right" }
         ],
         "default": "left"
-      },
-      {
-        "type": "select",
-        "id": "type",
-        "label": "Content Split",
-        "options": [
-          { "value": "1", "label": "4/8" },
-          { "value": "2", "label": "5/7" },
-          { "value": "3", "label": "6/6" },
-          { "value": "4", "label": "7/5" },
-          { "value": "5", "label": "8/4" }
-        ],
-        "default": "3"
-      },      
+      },     
       {
         "type": "text",
         "id": "title",
@@ -97,7 +83,7 @@
     "presets": [
       {
         "name": "Promo",
-        "category": "Media",
+        "category": "Content",
         "settings": {
           "title": "Promo Title",
           "text": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>"

@@ -1,0 +1,49 @@
+<div data-section-id="{{ section.id }}" data-section-type="hero">
+  <div style="height: 100vh; width: 100vw; display: flex; align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 96px;">
+    {% if section.settings.title != blank %}
+      <h2 class="h1" style="color: white; margin-bottom: 2rem;">{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.settings.content != blank %}
+      <div class="rte" style="color: white; max-width: 500px; margin: 0 auto 60px; text-align: center;">
+        {{ section.settings.content }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.cta_url != blank or section.settings.cta_text != blank %}
+      <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
+    {% endif %}
+
+    <img src="{{ 'test-bg.jpg' | asset_url }} " style="position: absolute; z-index: -1; top: 0; right: 0; height: 100%; width: 100%; object-fit: cover;" />
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Link"
+      }
+    ]
+  }
+{% endschema %}

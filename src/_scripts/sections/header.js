@@ -46,7 +46,7 @@ export default class HeaderSection extends BaseSection {
     // Bind these events so we can remove them
     this.throttledOnScroll = throttle(50, this.onScroll.bind(this));
     this.throttledOnResize = throttle(100, this.onResize.bind(this));
-    this.onAJAXCartRender = this.onAJAXCartRender.bind(this)
+    this.onAJAXCartRender = this.onAJAXCartRender.bind(this);
 
     this.$container.on('click', selectors.closePencilBanner, this.onClosePencilBannerClick.bind(this));
     $window.on(AJAXCartDrawer.events.RENDER, this.onAJAXCartRender);
@@ -94,7 +94,8 @@ export default class HeaderSection extends BaseSection {
     if (direction === 'down' && scrollTop > this.headerHeight) { //  going down and scrolled past header natural height
       hideHeader = true;
       // @TODO - Revisit this
-    } else if (direction === 'up') {
+    }
+    else if (direction === 'up') {
       // hideHeader = false;
       // hideHeader = (this.prevScrollTop - scrollTop <= 10);  //  going up and scrolled up 10 px from last time we checked the scroll position
       hideHeader = false;

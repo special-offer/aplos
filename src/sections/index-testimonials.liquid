@@ -1,0 +1,79 @@
+<div data-section-id="{{ section.id }}" data-section-type="testimonials">
+  <div class="bg-butter">
+    <div class="testimonals-container">
+      {% if section.settings.title != blank %}
+        <div class="testimonials-title">
+          {{ section.settings.title }}
+        </div>
+      {% endif %}
+      {% if section.blocks.size > 0 %}
+        <div id="slideshow-{{ section.id }}" class="swiper-container" data-slideshow>
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              <div class="swiper-slide" {{ block.shopify_attributes }} data-block-id="{{ block.id }}">
+                <div class="testimonial">
+                  <div class="testimonial__content">{{ block.settings.content }}</div>
+                  <div class="testimonial__author">{{ block.settings.author }}</div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <span class="swiper-arrow swiper-arrow--prev">
+            {% include 'icon-arrow-right' %}
+          </span>
+          <span class="swiper-arrow swiper-arrow--next">
+            {% include 'icon-arrow-right' %}
+          </span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Testimonials",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "author",
+            "label": "Author"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Testimonials",
+      "category": "Content",
+      "settings": {
+        "title": "Testimonials"
+      },
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "content": "I love Aplos...",
+            "author": "Jane Doe"
+          }
+        }
+      ]
+    }]
+  }
+{% endschema %}
