@@ -1,26 +1,48 @@
 .four04 {
   display: flex;
   align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .four04__content-wrapper {
-  width: 85%;
-  @extend .mx-auto;
   text-align: center;
 }
 
 .four04__heading {
-  margin-bottom: 45px;
+  margin-bottom: $paragraph-margin-bottom;
+  color: $white;
 }
 
 .four04__content {
+  max-width: 23em;
+  margin: 0 auto;
+  color: $white;
 
   p {
-    margin-bottom: $paragraph-margin-bottom*2;
-
     &:last-child {
       margin-bottom: 0;
     }
   }
 }
 
+.four04__bg {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.four04__bg-panel {
+  flex: 1;
+  height: 100%;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}

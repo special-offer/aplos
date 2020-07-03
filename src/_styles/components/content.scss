@@ -2,10 +2,8 @@
 // Content Sections - Grid, Header, Footer
 // -----------------------------------------------------------------------------
 
-$content-grid-item-vertical-spacing:       $grid-gutter-width;
-$content-grid-item-vertical-spacing-tight: $grid-gutter-width / 2;
-$content-grid-item-vertical-spacing-loose: $grid-gutter-width * 2;
-
+$content-grid-item-vertical-spacing-mobile: 24px;
+$content-grid-item-vertical-spacing-desktop: 32px;
 
 .content-grid {
   display: flex;
@@ -14,25 +12,14 @@ $content-grid-item-vertical-spacing-loose: $grid-gutter-width * 2;
   flex-direction: row;
   margin-left: -$grid-gutter-width/2;
   margin-right: -$grid-gutter-width/2;
-  margin-bottom: -#{$content-grid-item-vertical-spacing}; // Cancel the bottom margin
+  margin-bottom: -#{$content-grid-item-vertical-spacing-mobile}; // Cancel the bottom margin
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: -#{$content-grid-item-vertical-spacing-desktop};
+  }
 
   &--centered {
     justify-content: center;
-  }
-
-  &--flush {
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-  }
-
-  // For these modifiers, 'tight' and 'loose' refer to vertical spacing, not the horizontal spacing between grid items
-  &--tight {
-    margin-bottom: -#{$content-grid-item-vertical-spacing-tight};
-  }
-
-  &--loose {
-    margin-bottom: -#{$content-grid-item-vertical-spacing-loose};
   }
 }
 
@@ -40,8 +27,12 @@ $content-grid-item-vertical-spacing-loose: $grid-gutter-width * 2;
   flex: 1;
   flex-basis: percentage(1);
   max-width: percentage(1);
-  margin-bottom: $content-grid-item-vertical-spacing;
+  margin-bottom: $content-grid-item-vertical-spacing-mobile;
   padding: 0 $grid-gutter-width/2;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: $content-grid-item-vertical-spacing-desktop;
+  }  
 
   // Default behavior is 1 -> 2 -> 3 across
   @include media-breakpoint-up('sm') {
@@ -74,47 +65,52 @@ $content-grid-item-vertical-spacing-loose: $grid-gutter-width * 2;
     max-width: percentage(1);
   }
 
-  .content-grid--flush & {
-    padding-left: 0;
-    padding-right: 0;
-    margin-bottom: 0;
-  }
-
-  .content-grid--tight & {
-    margin-bottom: $content-grid-item-vertical-spacing-tight;
-  }
-
-  .content-grid--loose & {
-    margin-bottom: $content-grid-item-vertical-spacing-loose;
+  &.content-grid__item--header {
+    @include media-breakpoint-down(sm) {
+      flex-basis: percentage(1);
+      max-width: percentage(1);      
+    }
   }
 }
 
-.content-header,
-.content-footer {
-  text-align: center;
-  margin-top: $grid-gutter-width;
-  margin-bottom: $grid-gutter-width;
-}
+// First item in a content grid
+.content-grid__item--header {
+  .h1 {
+    transform: translateY(-9px);
+    margin-bottom: 3rem;
 
-.content-header {
-
-}
-
-.content-header__title {
-  margin-bottom: 0;
-}
-
-.content-header__subtitle {
-  font-size: $font-size-lg;
-  max-width: 40em;
-  margin-left: auto;
-  margin-right: auto;
-
-  .content-header__title + & {
-    margin-top: $spacer;
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+    }
   }
 }
 
-.content-footer {
+// .content-header,
+// .content-footer {
+//   text-align: center;
+//   margin-top: $grid-gutter-width;
+//   margin-bottom: $grid-gutter-width;
+// }
 
-}
+// .content-header {
+
+// }
+
+// .content-header__title {
+//   margin-bottom: 0;
+// }
+
+// .content-header__subtitle {
+//   font-size: $font-size-lg;
+//   max-width: 40em;
+//   margin-left: auto;
+//   margin-right: auto;
+
+//   .content-header__title + & {
+//     margin-top: $spacer;
+//   }
+// }
+
+// .content-footer {
+
+// }

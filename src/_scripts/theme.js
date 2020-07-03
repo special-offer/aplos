@@ -136,5 +136,5 @@ Breakpoints.initialize();
   $body.addClass('development-mode');
   // }
 
-  credits();
+  // credits();
 })(Modernizr);

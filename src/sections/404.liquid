@@ -1,24 +1,37 @@
-<div class="layout-content-wrapper" data-section-id="{{ section.id }}" data-section-type="fourofour">
-  <div class="container">
-    <div class="four04__content-wrapper">
-      <h1 class="h3 four04__heading">
-        {% if section.settings.title != blank %}
-          {{ section.settings.title }}
-        {% else %}
-          {{ 'general.404.title' | t }}
-        {% endif %}
-      </h1>
+<div data-section-id="{{ section.id }}" data-section-type="fourofour">
+  <div class="four04">
+    <div class="aplos-container">
+      <div class="four04__content-wrapper">
+        <h1 class="p2 four04__heading">
+          {% if section.settings.title != blank %}
+            {{ section.settings.title }}
+          {% else %}
+            {{ 'general.404.title' | t }}
+          {% endif %}
+        </h1>
 
-      {% unless section.settings.content == blank %}
-        <div class="p1 four04__content">{{ section.settings.content }}</div>
-      {% endunless %}
+        {% unless section.settings.content == blank %}
+          <div class="p2 four04__content">{{ section.settings.content }}</div>
+        {% endunless %}
+      </div>
     </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="four04__bg">
+        {% for block in section.blocks %}
+          <div class="four04__bg-panel" {{ block.shopify_attributes }}>
+            <img src="{{ block.settings.image | img_url: '1000x' }}" />
+          </div>
+        {% endfor %}    
+      </div>
+    {% endif %}
   </div>
 </div>
 
 {% schema %}
   {
     "name": "404 Page",
+    "max_blocks": 2,
     "settings": [
       {
         "id": "title",
@@ -30,6 +43,19 @@
         "type": "richtext",
         "label": "Content",
         "default": "<p>Need help finding your way?  Let us take you <a href=\"/\">home</a>.</p>"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "background_image",
+        "name": "Background Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
       }
     ]
   }

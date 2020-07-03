@@ -3,45 +3,16 @@
 // -------------------------
 
 
-// Page Header
+// Page Header - Only use to output important info to the page for SEO
 .page-header {
-  margin: $grid-gutter-width 0;
-  text-align: center;
-
-  &--left {
-    @include media-breakpoint-up('md') {
-      text-align: left;
-    }
-  }
-
-  &--right {
-    @include media-breakpoint-up('md') {
-      text-align: right;
-    }
-  }
+  display: none !important;
 }
 
 .page-header__title {
-  margin: 0;
 }
 
 .page-header__subtitle {
-  max-width: 50em;
-  margin: 0 auto;
 
-  @include media-breakpoint-up('md') {
-    .page-header--left & {
-      margin-left: 0;
-    }
-    .page-header--right & {
-      margin-right: 0;
-    }
-  }
-
-
-  .page-header__title + & {
-    margin-top: 15px;
-  }
 }
 
 // Page Hero

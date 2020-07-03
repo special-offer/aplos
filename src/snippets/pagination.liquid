@@ -1,3 +1,43 @@
+<div class="pagination" style="display:  none">
+  <ul>
+    {% if paginate.previous %}
+      <li>Previous</li>
+    {% else %}
+      <li>Prevvvvv</li>
+    {% endif %}
+
+    {% for i in (1..paginate.pages) %}
+      <div>page = {{ i }}</div>
+    {% endfor %}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <li>
+          <a href="{{ part.url }}">
+            <span class="visuallyhidden">page</span> {{ part.title }}
+          </a>
+        </li>
+      {%- else -%}
+        {%- if part.title == paginate.current_page -%}
+          <li class="active" aria-current="page">
+            <span class="visuallyhidden">page</span> {{ part.title }}
+          </li>
+        {%- else -%}
+          <li>
+            <span class="visuallyhidden">page</span> {{ part.title }}
+          </li>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}  
+
+    {% if paginate.next %}
+      <li>Next</li>
+    {% else %}
+      <li>NEXXX</li>
+    {% endif %}
+  </ul>
+</div>
+
 <div class="pagination">
   {{ paginate | default_pagination }}
 </div>

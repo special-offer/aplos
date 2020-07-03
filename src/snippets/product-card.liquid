@@ -8,7 +8,6 @@
   {% include 'product-card',
               product: { product } - required
               lazy_load: { boolean } - optional, defaults to false,
-              show_reviews: { boolean } - optional, defaults to false
   %}
 
 {% endcomment -%}
@@ -17,13 +16,7 @@
 {% if lazy_load == blank %}
   {% assign lazy_load = false %}
 {% endif %}
-
-{% if show_reviews == blank %}
-  {% assign show_reviews = false %}
-{% endif %}
 {% comment %} End Defaults {% endcomment %}
-
-{% assign alt_swatch_identifier = 'swatch' %} {% comment %} Used to find swatch images attached at the product level.  We don't want to display them in the gallery. {% endcomment %}
 
 {% if product %}
   
@@ -48,77 +41,25 @@
                 <img src="{{ product.featured_image.src | img_url: product_image_dimension }}" alt="{{ product.featured_image.alt | escape }}">
               </div>
             {% endif %}
-            {% if product.images.size > 1 %}
-              {% assign alternate_image = false %}
-              {% for i in (1..product.images.size) %}
-                {% assign img = product.images[i] %}
-                {% assign img_alt_downcase = img.alt | downcase %}
-                {% unless img_alt_downcase contains alt_swatch_identifier %}
-                  {% assign alternate_image = img %}
-                  {% break %}
-                {% endunless %}
-              {% endfor %}
-              {% if alternate_image %}
-                {% comment %} Alt product image always gets lazy loaded {% endcomment %}
-                <div class="product-card__gallery-image product-card__gallery-image--alt">
-                  <img data-src="{{ alternate_image.src | img_url: product_image_dimension }}" alt="{{ alternate_image.alt | escape }}" data-product-card-alt-lazy />
-                </div>
-              {% endif %}
-            {% endif %}
           </a>
         </div>
       {% endif %}
 
       <div class="product-card__info">
-        <h3 class="product-card__info-title">
-          <a href="{{ product_url }}">{{ product.title }}</a>
-        </h3>
+        <div class="product-card__info-top">
+          <h4 class="product-card__title">
+            <a href="{{ product_url }}">{{ product.title }}</a>
+          </h4>
 
-        <div class="product-card__info-price">
-
-          {% if product.compare_at_price > product.price %}
-            <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-            <s>{{ product.compare_at_price | money }}</s>
-          {% endif %}
-
-          {% if product.price_varies %}
-            {%- assign price = product.price | money -%}
-            {{ 'products.product.from_text_html' | t: price: price }}
-          {% else %}
-            {{ product.price | money }}
-          {% endif %}
-
-          {% unless product.available %}
-            {{ 'products.product.sold_out' | t }}
-          {% endunless %}
+          <span class="p2">
+            {{ product.price | money_without_trailing_zeros }} USD
+          </span>
         </div>
-
-        {% comment %} Check the product inventory. Display a low stock message if we're below the threshold set via theme settings {% endcomment %}
-        {% if settings.low_inventory_notice %}
-          {% assign product_has_inventory = false %}
-          {% assign product_inventory_qty = 0 %}
-          {% for variant in product.variants %}
-            {% if variant.inventory_management == "shopify" %}
-              {% assign product_has_inventory = true %}
-              {% capture i %}
-                {{ product_inventory_qty | plus:variant.inventory_quantity }}
-              {% endcapture %}
-              {% assign product_inventory_qty = i | times: 1 %} {% comment %} Coerce to a number {% endcomment %}
-            {% endif %}
-          {% endfor %}
-
-          {% if product.available
-                and product_has_inventory
-                and product_inventory_qty < settings.low_inventory_notice_qty
-                and settings.low_inventory_notice_message != blank %}
-            <p class="p3">{{ settings.low_inventory_notice_message }}</p>
-          {% endif %}
-        {% endif %}
-
-        {% if show_reviews %}
-          {% comment %} Add your review provider markup here {% endcomment %}
-        {% endif %}          
-
+        <div class="product-card__info-bottom">
+          <div class="p2">
+            This is a celebration of the little things with big impact: out in the wild.
+          </div>
+        </div>
       </div>
     </div>
   </div>

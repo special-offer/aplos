@@ -5,10 +5,10 @@
 
 {% endcomment -%}
 
-{% paginate collection.products by 6 %}
+{% paginate collection.products by 8 %}
 
 <div class="layout-content-wrapper" data-section-id="{{ section.id }}" data-section-type="collection">
-  <div class="container">
+  <div class="aplos-container">
 
     {% include 'page-header',
                 ph_title: collection.title,
@@ -17,8 +17,11 @@
 
     {% if collection.products.size > 0 %}     
       <div class="content-grid">
-        {% for product in collection.products %}
+        <div class="content-grid__item content-grid__item--header">
+          <div class="h1">Our Current<br/>Offerings</div>
+        </div>
 
+        {% for product in collection.products %}
           {% comment %} Lazy load all product images below the fold.  Adjust the limit as needed {% endcomment %}
           {% assign lazy_load = false %}
           {% if forloop.index > 10 %}
@@ -34,6 +37,14 @@
         {% endfor %}
       </div>
 
+      <hr />
+
+      <!-- 
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+      -->
+
     {% else %}
       <p>{{ 'collections.general.no_matches' | t }}</p>
 
@@ -43,23 +54,6 @@
       {% include 'pagination' %}
     {% endif %}
   </div>
-
-  {% comment %} This JSON is required for filtering and sorting {% endcomment %}
-  {% capture collection_url %}
-    {% if collection.handle == "all" %}
-      /collections/all
-    {% else %}
-      {{ collection.url }}
-    {% endif %}
-  {% endcapture %}
-
-  <script type="application/json" data-collection-json>
-    {
-      "url": {{ collection_url | strip | json }},
-      "sortDefault": {{ collection.default_sort_by | json }},
-      "sortApplied": {{ collection.sort_by | json }}
-    }
-  </script>
 </div>
 
 {% endpaginate %}

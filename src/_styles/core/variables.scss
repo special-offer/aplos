@@ -315,18 +315,18 @@ $line-height-base:            1.5 !default;
 $h1-font-family:              $font-family-serif;
 $h2-font-family:              $font-family-sans-serif;
 $h3-font-family:              $font-family-sans-serif;
-$h4-font-family:              $font-family-sans-serif;
+$h4-font-family:              $font-family-serif;
 $h5-font-family:              $font-family-sans-serif;
 $h6-font-family:              $font-family-sans-serif;
 
 $h1-font-size:                40px; // $font-size-base * 2.5 !default;
 $h2-font-size:                25px; // $font-size-base * 2 !default;
 $h3-font-size:                22px; // $font-size-base * 1.75 !default;
-$h4-font-size:                18px; // $font-size-base * 1.5 !default;
+$h4-font-size:                20px; // $font-size-base * 1.5 !default;
 $h5-font-size:                15px; // $font-size-base * 1.25 !default;
 $h6-font-size:                12px; // $font-size-base !default;
 
-$h1-line-height:              1.2 !default;
+$h1-line-height:              1.05; // 1.2 !default; - @TODO - Is this right?  Or is 1.2 right?  Might need to clean up places where line-height: 1 is applied
 $h2-line-height:              1.12 !default;
 $h3-line-height:              1.2 !default;
 $h4-line-height:              1.2 !default;
@@ -377,7 +377,7 @@ $blockquote-small-color:      $gray-dark !default;
 $blockquote-small-font-size:  $small-font-size !default;
 $blockquote-font-size:        $font-size-base * 1.25 !default;
 
-$hr-border-color:             rgba($black, .1) !default;
+$hr-border-color:             $black !default;
 $hr-border-width:             $border-width !default;
 
 $mark-padding:                .2em !default;
@@ -391,7 +391,7 @@ $list-inline-padding:         .5rem !default;
 
 $mark-bg:                     #fcf8e3 !default;
 
-$hr-margin-y:                 $spacer !default;
+$hr-margin-y:                 $spacer*5.5 !default;
 
 $breadcrumb-separator:        "\007c";
 
@@ -939,13 +939,6 @@ $header-height-small:                   60px !default;
 $header-height-base:                    86px !default;
 $header-bg:                             $butter;
 $header-text-color:                     $body-color !default;
-
-
-// Product Card
-
-$product-card-title-size:               $font-size-lg;
-$product-card-price-size:               $font-size-sm;
-$product-card-text-align:               center;
 
 
 // Content Card
