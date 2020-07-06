@@ -1,0 +1,46 @@
+{%- comment %}
+
+  Help Questions Section Renderer
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% render 'help-questions-renderer',
+              section: section
+  %}
+
+{% endcomment -%}
+
+<div data-section-id="{{ section.id }}" data-section-type="help-questions">
+  <div class="aplos-4side-container">
+    <div class="row">
+      <div class="col-3">
+        <h2 class="h1">{{ section.settings.title }}</h2>
+      </div>
+      <div class="col-9">
+        {% assign question_count = 0 %}
+        {% for block in section.blocks %}
+          <div class="help-card" style="background-color: white; border-radius: 4px;" {{ block.shopify_attributes }}>
+            {% if block.type == 'question' %}
+              {% assign question_count = question_count | plus: 1 %}
+
+              <div style="padding: 20px; min-height: 343px;">
+                <span class="p2">
+                  {% if question_count < 10 %}0{% endif %}{{ question_count }}.
+                </span>
+                <h4>{{ block.settings.title }}</h4>
+                <div class="p2">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            {% elsif block.type == 'image' %}
+              {% if block.settings.image != blank %} 
+                <img src="{{ block.settings.image | img_url: '400x' }}" style="max-width: 300px" />
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+{% render 'help-questions-renderer',
+            section: section
+%}
+
+{% schema %}
+  {
+    "name": "Help Questions - 2",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "question",
+        "name": "Question",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "answer",
+            "label": "Answer"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

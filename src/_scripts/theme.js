@@ -11,8 +11,7 @@ import 'bootstrap/js/dist/modal';
 import {
   userAgentBodyClass,
   cookiesEnabled,
-  chosenSelects,
-  credits
+  chosenSelects
 } from './core/utils';
 import {
   wrapTables,
@@ -39,6 +38,7 @@ import CollectionSection             from './sections/collection';
 import BlogSection                   from './sections/blog';
 import ArticleSection                from './sections/article';
 import TestimonialsSection           from './sections/testimonials';
+import HelpQuestionsSection          from './sections/helpQuestions';
 // import SlideshowSection              from './sections/slideshow';
 // import VideoSection                  from './sections/video';
 import CMSPageSection                from './sections/cmsPage';
@@ -71,6 +71,7 @@ Breakpoints.initialize();
   sectionManager.register('blog', BlogSection);
   sectionManager.register('article', ArticleSection);
   sectionManager.register('testimonials', TestimonialsSection);
+  sectionManager.register('help-questions', HelpQuestionsSection);
   // sectionManager.register('slideshow', SlideshowSection);
   // sectionManager.register('video', VideoSection);
   sectionManager.register('cms-page', CMSPageSection);
@@ -135,6 +136,4 @@ Breakpoints.initialize();
   // if (window.location.hostname === 'localhost') {
   $body.addClass('development-mode');
   // }
-
-  // credits();
 })(Modernizr);

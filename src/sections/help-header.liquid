@@ -1,0 +1,64 @@
+<div style="background-color: #32415E; position: relative; min-height: 400px; height: 45vh;">
+  {% if section.settings.header_image != blank %}
+    <img src="{{ section.settings.header_image | img_url: '1200x' }}" style="height: 100%; width: 100%; object-fit: cover" />
+  {% endif %}
+</div>
+
+<div class="aplos-4side-container" style="padding-bottom: 0;">
+  <div style="border-bottom: 1px solid black">
+    <h2 class="h1">{{ section.settings.title }}</h2>
+    <div style="margin-top: 95px">
+      {% for block in section.blocks %}
+        <div class="row">
+          <div class="col-2 col-md-3">
+            <span class="p2">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}.</span>
+          </div>
+          <div class="col-3">
+            <span class="p2">{{ block.settings.title }}</span>
+          </div>
+          <div class="col-7 col-md-6 col-xxl-5">
+            <div class="rte">
+              {{ block.settings.content }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>       
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Help - Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "header_image",
+        "label": "Header Image"
+      },   
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "info_block",
+        "name": "Info Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
