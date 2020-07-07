@@ -1,4 +1,4 @@
-<div class="layout-content-wrapper">
+<div class="layout-content-wrapper" data-section-id="{{ section.id }}">
   <div class="aplos-container">
     <div class="row">
       <div class="col-12 col-md-4 col-lg-3">
@@ -8,7 +8,19 @@
     <div class="col-12 col-md-8 col-lg-7 offset-lg-2">
       <div class="rte">
         {{ page.content }}
+
+        {% for block in section.blocks %}
+          <!--  -->
+        {% endfor %}
       </div>
     </div>
   </div>
 </div>
+
+
+{% schema %}
+  {
+    "name": "Legal Page",
+    "settings": []
+  }
+{% endschema %}
