@@ -8,11 +8,13 @@
   display: none !important;
 }
 
-.page-header__title {
-}
-
-.page-header__subtitle {
-
+// Page title
+.page-title {
+  margin-bottom: $spacer*4;
+  
+  @include media-breakpoint-down(sm) {
+    text-align: center;
+  }
 }
 
 // Page Hero
