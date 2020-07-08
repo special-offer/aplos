@@ -1,0 +1,43 @@
+<div data-section-id="{{ section.id }}">
+  <div style="height: 100vh; width: 100vw; display: flex; align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 96px;">
+
+    {% if section.settings.hero_bg_image %}
+      <img src="{{ section.settings.hero_bg_image | img_url: '1600x' }} " style="position: absolute; z-index: -1; top: 0; right: 0; height: 100%; width: 100%; object-fit: cover;" />
+    {% endif %}
+  </div>
+  <div class="bg-butter">
+    <div class="aplos-4side-container">
+      <div style="display: flex;">
+        <div style="flex: 1">
+          <h1>Natural Magic</h1>
+        </div>
+        <div style="flex: 1">
+          <div class="h2">
+            Our lives are so very fast.  With little time for reflection, we can be forgiven for confusing the art of living ambitiously with the art of living well.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Philosophy Page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_bg_image",
+        "label": "Background Image"
+      }
+    ]
+  }
+{% endschema %}
