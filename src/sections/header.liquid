@@ -10,6 +10,8 @@
 
 {% if template.name == 'page' and template.suffix == 'help' %}
   {% assign header_modifier_class = 'header--transparent' %}
+{% elsif template.name == 'page' and template.suffix == 'philosophy' %}
+  {% assign header_modifier_class = 'header--transparent' %}
 {% endif %}
 
 <div data-section-id="{{ section.id }}" data-section-type="header">

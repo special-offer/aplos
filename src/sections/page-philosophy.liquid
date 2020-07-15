@@ -1,11 +1,9 @@
 <div class="drawer-shifter" data-section-id="{{ section.id }}">
-  <div class="hero">
-    {% if section.settings.hero_bg_image %}
-      <div class="hero__bg">
-        <img src="{{ section.settings.hero_bg_image | img_url: '1600x' }}" />
-      </div>
-    {% endif %}
-  </div>  
+  {% render 'hero',
+            bg_image_desktop: section.settings.hero_bg_image,
+            bg_image_mobile: section.settings.hero_bg_image_mobile,
+  %}  
+ 
   <div class="bg-butter">
     <div class="aplos-4side-container">
       <div style="display: flex;">
@@ -34,7 +32,12 @@
       {
         "type": "image_picker",
         "id": "hero_bg_image",
-        "label": "Background Image"
+        "label": "Background Image (Desktop)"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_bg_image_mobile",
+        "label": "Background Image (Mobile)"
       }
     ]
   }

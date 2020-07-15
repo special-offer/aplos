@@ -1,0 +1,84 @@
+{%- comment %}
+
+  Hero
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% render 'hero',
+             title: { string }
+             content: { string }
+             cta_url: { string }
+             cta_text: { string }
+             cta_style: { string }
+             bg_image_desktop: { image }
+             bg_image_mobile: { image }
+             bg_gradient: { boolean } - defaults to false
+  %}
+
+{% endcomment -%}
+
+{% if bg_gradient == blank %}
+  {% assign bg_gradient = false %}
+{% endif %}
+
+{% if bg_image_mobile == blank %}
+  {% assign bg_image_mobile = bg_image_desktop %}
+{% endif %}
+
+<div class="hero">
+  {% if title != blank %}
+    <h2 class="hero__title">{{ title }}</h2>
+  {% endif %}
+  {% if content != blank %}
+    <div class="hero__content">
+      {{ content }}
+    </div>
+  {% endif %}
+
+  {% if cta_url != blank or cta_text != blank %}
+    <a href="{{ cta_url }}" class="btn {{ cta_style }}">{{ cta_text }}</a>
+  {% endif %}
+
+  {% if bg_image_desktop %}
+    <div class="hero__bg {% if bg_gradient %}has-gradient{% endif %}">
+      <picture>
+        <source
+            media="(min-width: 768px)"
+            srcset="
+              {{ bg_image_desktop | img_url: '768x' }} 768w,
+              {{ bg_image_desktop | img_url: '900x' }} 900w,
+              {{ bg_image_desktop | img_url: '1000x' }} 1000w,
+              {{ bg_image_desktop | img_url: '1200x' }} 1200w,
+              {{ bg_image_desktop | img_url: '1400x' }} 1400w,
+              {{ bg_image_desktop | img_url: '1600x' }} 1600w,
+              {{ bg_image_desktop | img_url: '1800x' }} 1800w,
+              {{ bg_image_desktop | img_url: '2000x' }} 2000w,
+              {{ bg_image_desktop | img_url: '2200x' }} 2200w,
+            "
+            sizes="100vw"
+        >
+
+        <source
+          media="(min-width: 400px)"
+          srcset="
+            {{ bg_image_mobile | img_url: '400x' }},
+            {{ bg_image_mobile | img_url: '600x' }} 1.5x,
+            {{ bg_image_mobile | img_url: '800x' }} 2x
+          "
+          sizes="100vw"
+        >
+        <source
+          media="(min-width: 600px)"
+          srcset="
+            {{ bg_image_mobile | img_url: '600x' }},
+            {{ bg_image_mobile | img_url: '900x' }} 1.5x,
+            {{ bg_image_mobile | img_url: '1200x' }} 2x
+          "
+          sizes="100vw"
+        >  
+        <img src="{{ bg_image_desktop | img_url: '1600x' }}" alt="{{ bg_image_desktop.alt | escape }}" />
+      </picture>
+    </div>
+  {% endif %}
+</div>

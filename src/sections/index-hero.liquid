@@ -1,24 +1,14 @@
 <div data-section-id="{{ section.id }}" data-section-type="hero">
-  <div class="hero">
-    {% if section.settings.title != blank %}
-      <h2 class="hero__title">{{ section.settings.title }}</h2>
-    {% endif %}
-    {% if section.settings.content != blank %}
-      <div class="hero__content">
-        {{ section.settings.content }}
-      </div>
-    {% endif %}
-
-    {% if section.settings.cta_url != blank or section.settings.cta_text != blank %}
-      <a href="{{ section.settings.cta_url }}" class="btn {{ section.settings.cta_style }}">{{ section.settings.cta_text }}</a>
-    {% endif %}
-
-    {% if section.settings.bg_image %}
-      <div class="hero__bg">
-        <img src="{{ section.settings.bg_image | img_url: '1600x' }}" />
-      </div>
-    {% endif %}
-  </div>
+  {% render 'hero',
+            title: section.settings.title,
+            content: section.settings.content
+            cta_url: section.settings.cta_url,
+            cta_text: section.settings.cta_text,
+            cta_style: section.settings.cta_style,
+            bg_image_desktop: section.settings.bg_image,
+            bg_image_mobile: section.settings.bg_image_mobile,
+            bg_gradient: true
+  %}
 </div>
 
 {% schema %}
@@ -28,8 +18,14 @@
       {
         "type": "image_picker",
         "id": "bg_image",
-        "label": "Background Image"
+        "label": "Background Image (Desktop)"
       },
+      {
+        "type": "image_picker",
+        "id": "bg_image_mobile",
+        "label": "Background Image (Mobile)",
+        "info": "Will fallback to desktop if left empty"
+      },      
       {
         "type": "text",
         "id": "title",
