@@ -1,5 +1,9 @@
 import $ from 'jquery';
 import Swiper from 'swiper';
+import {
+  isTouch,
+  isThemeEditor
+} from '../core/utils';
 import BaseSection from './base';
 
 const selectors = {
@@ -12,29 +16,36 @@ export default class TestimonialsSection extends BaseSection {
 
     this.$slideshow = $(selectors.slideshow, this.$container);
 
+    const $slideshowArrowPrev = this.$slideshow.find('.swiper-arrow--prev');
+    const $slideshowArrowNext = this.$slideshow.find('.swiper-arrow--next');
+
     const swiperOptions = {
       loop: true,
       speed: 1200,
-      effect: 'fade',
-      navigation: {
-        nextEl: this.$slideshow.find('.swiper-arrow--prev').get(0),
-        prevEl: this.$slideshow.find('.swiper-arrow--next').get(0)
-      },
-      fadeEffect: {
-        crossFade: true
-      },
       autoplay: {
         delay: 3500
       }
     };
 
-    // if (this.$slideshow.data('autoplay')) {
-    //   swiperOptions.autoplay = {
-    //     delay: Number.parseInt(this.$slideshow.data('speed')) || 5000
-    //   };
-    // }
+    if (isTouch()) {
+      swiperOptions.effect = 'slide';
+      $slideshowArrowPrev.remove();
+      $slideshowArrowNext.remove();
+    }
+    else {
+      swiperOptions.effect = 'fade';
+      swiperOptions.fadeEffect = { crossFade: true };
+      swiperOptions.navigation = {
+        prevEl: $slideshowArrowPrev.get(0),
+        nextEl: $slideshowArrowNext.get(0)
+      };
+    }
 
     this.swiper = new Swiper(this.$slideshow.get(0), swiperOptions);
+
+    if (!isThemeEditor()) {
+      this.swiper.autoplay.start();
+    }
   }
 
   /**

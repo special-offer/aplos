@@ -1,0 +1,150 @@
+<div id="account-drawer" class="drawer drawer--account">
+  <div class="drawer-overflow">
+    <a href="#" class="drawer__close" data-drawer-close>
+      {% include 'icon-close' %}
+    </a>
+
+    <div class="drawer__contents">   
+      <div class="drawer__header">Account</div>    
+
+      {% comment %} Create 3 different body elements to swap between {% endcomment %}
+      <div id="ad-login" class="drawer__body">
+        {% form 'customer_login' %}
+          <h3 class="drawer__body-title">Account Login</h3>
+          <div class="form-group">
+            <label for="ad-customer-email">E-Mail</label>
+            <input type="email"
+              name="customer[email]"
+              id="ad-customer-email"
+              class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off">
+          </div>
+
+          {% if form.password_needed %}
+            <div class="form-group">
+              <label for="ad-customer-password">Password</label>
+
+              <input type="password"
+                name="customer[password]"
+                id="ad-customer-password"
+                class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}"">
+            </div>
+          {% endif %}        
+          
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary-white btn-block">
+              Login
+            </button>
+          </div>
+
+          <div class="drawer__body-footer">
+            {% if form.password_needed %}
+              <a href="#" class="p2" data-show-contents="#ad-password">Forgot Password?</a>
+            {% endif %}
+            <a href="#" class="p2" data-show-contents="#ad-create-account">Create An Account</a>
+          </div>
+        {% endform %}        
+      </div>
+
+      <div id="ad-create-account" class="drawer__body" style="display: none">
+        <h3 class="drawer__body-title">Create Account</h3>
+        {% form 'create_customer' %}
+          <div class="form-group">
+            <label for="ad-create-firstname">
+              First Name
+            </label>
+            <input type="text"
+              name="customer[first_name]"
+              id="ad-create-firstname"
+              class="form-control"
+              {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+          </div>
+
+          <div class="form-group">
+            <label for="ad-create-lastname">
+              Last Name
+            </label>
+            <input type="text"
+              name="customer[last_name]"
+              id="ad-create-lastname"
+              class="form-control"
+              {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+          </div>
+
+          <div class="form-group">
+            <label for="ad-create-email">
+              E-Mail
+            </label>
+            <input type="email"
+              name="customer[email]"
+              id="ad-create-email"
+              class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
+              value="{% if form.email %}{{ form.email }}{% endif %}"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off">
+          </div>
+
+          <div class="form-group">
+            <label for="ad-create-password">
+              Password
+            </label>
+            <input type="password"
+              name="customer[password]"
+              id="ad-create-password"
+              class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}">
+          </div>
+
+          <div class="form-group">
+            <label for="ad-create-passconfirm">
+              Confirm
+            </label>
+            <input type="password"
+              name="customer[password]"
+              id="ad-create-passconfirm"
+              class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}">
+          </div>    
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary-white btn-block">
+              Create an Account
+            </button>
+          </div>
+        {% endform %}
+
+        <div class="drawer__body-footer">
+          <a href="#" class="p2" data-show-contents="#ad-login">Back To Login</a>       
+        </div>        
+      </div>
+
+      <div id="ad-password" class="drawer__body" style="display: none">
+        <h3 class="drawer__body-title">Forgot Password?</h3>
+        {% form 'recover_customer_password' %}
+          <div class="form-group">
+            <label for="ad-recover-email">
+              E-Mail
+            </label>
+            <input type="email"
+              name="email"
+              id="ad-recover-email"
+              class="form-control"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off">
+          </div>
+      
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary-white btn-block">
+              Submit
+            </button>
+          </div>  
+        {% endform %}
+        <div class="drawer__body-footer">
+          <a href="#" class="p2" data-show-contents="#ad-login">Back To Login</a>       
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>

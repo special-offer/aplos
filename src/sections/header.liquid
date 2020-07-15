@@ -1,18 +1,19 @@
-{%- capture header_class -%}
-  header
-  {% if 'index page' contains template.name %}
-    header--transparent
-  {% elsif '404' contains template.name %}
-    header--white
-  {% endif %}
+{% assign header_modifier_class = '' %}
 
-  {% if 'product' contains template.name %}
-    header--white-mobile
-  {% endif %}
-{% endcapture %}
+{% if 'index' contains template.name %}
+  {% assign header_modifier_class = 'header--transparent' %}
+{% elsif '404' contains template.name %}
+  {% assign header_modifier_class = 'header--white' %}
+{% elsif 'product' contains template.name %}
+  {% assign header_modifier_class = 'header--white-mobile' %}
+{% endif %}
+
+{% if template.name == 'page' and template.suffix == 'help' %}
+  {% assign header_modifier_class = 'header--transparent' %}
+{% endif %}
 
 <div data-section-id="{{ section.id }}" data-section-type="header">
-  <header class="{{ header_class | strip | strip_newlines }}" role="banner" data-header>
+  <header class="header {{ header_modifier_class }}" role="banner" data-header>
     {% if section.settings.banner_enabled %}
       <div class="pencil-banner drawer-shifter" data-pencil-banner>
         {% comment %}
@@ -59,7 +60,7 @@
                 </a>
               </li>
             </ul>        
-          </nav>   
+          </nav>
           
           {% comment %} Logo {% endcomment %}
           <div class="header-nav header-nav--center header-nav--logo">
@@ -69,6 +70,17 @@
           {% comment %} Cart {% endcomment %}
           <div class="header-nav header-nav--right">
             <ul class="header-nav__menu">
+              {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                  <li class="header-nav__menu-item for-desktop">
+                    <a href="/account">Account</a>
+                  </li>
+                {% else %}
+                  <li class="header-nav__menu-item for-desktop">
+                    <a href="/account/login" data-account-drawer-trigger>Login</a>
+                  </li>
+                {% endif %}
+              {% endif %}
               <li class="header-nav__menu-item">   
                 <a href="/cart" data-ajax-cart-trigger>
                   <div class="header-cart__badge{% if cart.item_count > 0 %} has-items{% endif %}" data-cart-badge>

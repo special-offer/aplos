@@ -13,7 +13,7 @@ body.drawer-open {
   body.drawer-shift--left & {
     transform: translateX(#{$drawer-width});
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(md) {
       transform: translateX($drawer-max-width);
     }
   }
@@ -21,7 +21,7 @@ body.drawer-open {
   body.drawer-shift--right & {
     transform: translateX(-#{$drawer-width});
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(md) {
       transform: translateX(-#{$drawer-max-width});
     }
   }
@@ -53,7 +53,7 @@ body.drawer-open {
   }
 
   // Ensure that the drawer is full width on screen sizes below this
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(md) {
     max-width: $drawer-max-width;
   }
 
@@ -113,6 +113,8 @@ body.drawer-open {
     padding-top: 47px;
   }
 
+  @extend .p2;
+
   h6 {
     margin: 0;
   }
@@ -136,6 +138,20 @@ body.drawer-open {
   & + & {
     margin-top: $drawer-vertical-spacing;
   }
+}
+
+.drawer__body-title {
+  margin-bottom: 45px;
+  font-family: $font-family-serif;
+  font-size: $font-size-xxl;
+}
+
+// Footer that goes *inside* the body element - see acount drawer
+.drawer__body-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+  padding-bottom: 41px;
 }
 
 .drawer__footer {

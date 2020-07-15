@@ -5,50 +5,38 @@
 
 {% endcomment -%}
 
-{% paginate collection.products by 8 %}
+{% paginate collection.products by 200 %}
 
 <div class="layout-content-wrapper" data-section-id="{{ section.id }}" data-section-type="collection">
   <div class="aplos-container">
-
-    {% include 'page-header',
-                ph_title: collection.title,
-                ph_subtitle: collection.description
-    %}
-
-    {% if collection.products.size > 0 %}     
-      <div class="content-grid">
-        <div class="content-grid__item content-grid__item--header">
-          <div class="h1">Our Current<br/>Offerings</div>
-        </div>
-
-        {% for product in collection.products %}
-          {% comment %} Lazy load all product images below the fold.  Adjust the limit as needed {% endcomment %}
-          {% assign lazy_load = false %}
-          {% if forloop.index > 10 %}
-            {% assign lazy_load = true %}
-          {% endif %}
-
-          <div class="content-grid__item">
-            {% include 'product-card',
-                        product: product,
-                        lazy_load: lazy_load
-            %}
-          </div>
-        {% endfor %}
+    <div class="content-grid">
+      <div class="content-grid__item content-grid__item--header">
+        <h1>{{ collection.title }}</h1>
       </div>
 
-      <hr />
+      {% for product in collection.products %}
+        {% comment %} Lazy load all product images below the fold.  Adjust the limit as needed {% endcomment %}
+        {% assign lazy_load = false %}
+        {% if forloop.index > 10 %}
+          {% assign lazy_load = true %}
+        {% endif %}
 
-      <!-- 
-      {% if paginate.pages > 1 %}
-        {% include 'pagination' %}
-      {% endif %}
-      -->
+        <div class="content-grid__item">
+          {% include 'product-card',
+                      product: product,
+                      lazy_load: lazy_load
+          %}
+        </div>
+      {% endfor %}
+    </div>
 
-    {% else %}
-      <p>{{ 'collections.general.no_matches' | t }}</p>
+    <hr />
 
+    <!-- 
+    {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
     {% endif %}
+    -->
 
     {% if paginate.pages > 1 %}
       {% include 'pagination' %}

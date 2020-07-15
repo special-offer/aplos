@@ -1,21 +1,6 @@
 <div data-section-id="{{ section.id }}" data-section-type="promo">
-  
-  {% comment %} 
-
-    Since the promo contains column-like elements with grid-based horozontal padding,
-    all you need to do to create a promo with a restricted width is wrap it in a container and row element like this..
-
-    <div class="container">
-      <div class="row">
-        {% include 'promo' ... %}
-      </div>
-    </div>
-  {% endcomment %}
-
-  {% include 'promo',
-              p_id: section.id,
+  {% render 'promo',
               p_layout: section.settings.layout,
-              p_content_max_width: section.settings.content_max_width,
               p_image: section.settings.image,
               p_image_small: section.settings.image_small,
               p_title: section.settings.title,
@@ -48,16 +33,6 @@
         "type": "richtext",
         "id": "text",
         "label": "Text"
-      },
-      {
-        "type": "range",
-        "id":   "content_max_width",
-        "min":  300,
-        "max":  850,
-        "step": 25,
-        "unit": "px",
-        "label": "Max Content Width",
-        "default": 450
       },
       {
         "type": "text",

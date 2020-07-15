@@ -57,7 +57,16 @@
         </div>
         <div class="product-card__info-bottom">
           <div class="p2">
-            This is a celebration of the little things with big impact: out in the wild.
+            {% comment %} This is the SEO description {% endcomment %}
+            {% if product.metafields.global.description_tag != blank %}
+              {{ product.metafields.global.description_tag}}
+            {% else %}
+              {% comment %} Else show the first paragraph in the description {% endcomment %}
+              {% if product.description contains '<p' %}
+                {% assign split = product.description | split: '<p' | last %}
+                {{ split | split: '</p>' | first | prepend: '<p' | append: '</p>' }}
+              {% endif %}            
+            {% endif %}
           </div>
         </div>
       </div>

@@ -11,7 +11,8 @@ import 'bootstrap/js/dist/modal';
 import {
   userAgentBodyClass,
   cookiesEnabled,
-  chosenSelects
+  chosenSelects,
+  getQueryParams
 } from './core/utils';
 import {
   wrapTables,
@@ -52,6 +53,9 @@ import CMSPageSection                from './sections/cmsPage';
 import './templates/pageStyles';
 import './templates/pageComponents';
 
+// UI
+import AccountDrawer from './ui/accountDrawer'; // This exists outside of any section
+
 // Do this ASAP
 Animations.initialize();
 Breakpoints.initialize();
@@ -59,6 +63,7 @@ Breakpoints.initialize();
 ((Modernizr) => {
   const $document = $(document);
   const $body = $(document.body);
+  const queryParams = getQueryParams();
 
   const sectionManager = new SectionManager();
 
@@ -131,6 +136,15 @@ Breakpoints.initialize();
     $(this).parents('.expandable-list').addClass(isOpenClass);
   });
   // END - Global handler for collapse plugin to add state class for open expandable lists
+
+  if ($('#account-drawer').length) {
+    const aD = new AccountDrawer($('#account-drawer').first());
+
+    // If redirected from an account page, show the drawer
+    if (queryParams.login || queryParams.register || queryParams.recover) {
+      aD.show();
+    }
+  }
 
   // Add "development mode" class for CSS hook
   // if (window.location.hostname === 'localhost') {

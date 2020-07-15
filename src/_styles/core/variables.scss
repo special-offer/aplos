@@ -166,6 +166,8 @@ $sizes: map-merge(
 
 
 // These are the spacings we need for Aplos grid
+// @TODO - Maybe spread these out a little more?
+// sm - 12, md - 24, lg - 36, xl - 48, xxl - 96? 
 $spacing-sm:  12px;
 $spacing-smd: 36px;
 $spacing-md:  48px;
@@ -297,6 +299,8 @@ $font-family-base:            $font-family-serif !default;
 // stylelint-enable value-keyword-case
 
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-xxl:               $font-size-base * (30/16) !default;
+// $font-size-xl:
 $font-size-lg:                $font-size-base * (20/16) !default;
 $font-size-md:                $font-size-base * 1.125 !default;
 $font-size-sm:                $font-size-base * (12/16) !default;
@@ -983,8 +987,8 @@ $drawer-backdrop-opacity:               1;
 $drawer-header-font-size:               $h5-font-size;
 $drawer-header-border-color:            $black;
 $drawer-vertical-spacing:               115px;
-$drawer-transition:                     transform $transition-duration-base ease-out;
-$drawer-backdrop-transition:            opacity $transition-duration-base ease-out;
+$drawer-transition:                     transform $transition-duration-slow cubic-bezier(0.21, 0.01, 0.13, 0.99);
+$drawer-backdrop-transition:            opacity $transition-duration-slow ease-out;
 
 
 /* Remove these */

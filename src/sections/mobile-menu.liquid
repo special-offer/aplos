@@ -19,15 +19,24 @@
             {% endif %}
           </div>
 
-          {% if section.settings.linklist_secondary and linklists[section.settings.linklist_secondary].links.size > 0 %}
-            <div class="drawer__block">
-              <ul class="mobile-menu-list mobile-menu-list--secondary">
+          <div class="drawer__block">
+            <ul class="mobile-menu-list mobile-menu-list--secondary">
+              {% if section.settings.linklist_secondary and linklists[section.settings.linklist_secondary].links.size > 0 %}                
                 {% for link in linklists[section.settings.linklist_secondary].links %}
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                 {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
+              {% endif %}
+
+                {% comment %} Add login / account link {% endcomment %}
+              {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                  <li><a href="/account">Account</a></li>
+                {% else %}
+                  <li><a href="/account/login">Login</a></li>
+                {% endif %}
+              {% endif %}                
+            </ul>
+          </div>
         </div>
 
         <div class="drawer__footer">

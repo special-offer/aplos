@@ -1,13 +1,11 @@
-<div data-section-id="{{ section.id }}">
-  <div style="height: 100vh; width: 100vw; display: flex; align-items: center;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 96px;">
-
+<div class="drawer-shifter" data-section-id="{{ section.id }}">
+  <div class="hero">
     {% if section.settings.hero_bg_image %}
-      <img src="{{ section.settings.hero_bg_image | img_url: '1600x' }} " style="position: absolute; z-index: -1; top: 0; right: 0; height: 100%; width: 100%; object-fit: cover;" />
+      <div class="hero__bg">
+        <img src="{{ section.settings.hero_bg_image | img_url: '1600x' }}" />
+      </div>
     {% endif %}
-  </div>
+  </div>  
   <div class="bg-butter">
     <div class="aplos-4side-container">
       <div style="display: flex;">

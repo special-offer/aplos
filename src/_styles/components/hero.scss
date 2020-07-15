@@ -1,0 +1,58 @@
+// -------------------------
+// Hero
+// -------------------------
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; // ?
+  padding-bottom: $spacing-lg;
+  position: relative;
+}
+
+.hero__title,
+.hero__content {
+  color: $white;
+}
+
+.hero__title {
+  @extend .h1;
+  margin-bottom: 2rem;
+}
+
+.hero__content {
+  @extend .rte;
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 0 25px;
+  text-align: center;
+
+  & + .btn {
+    margin-top: 60px;
+  }
+}
+
+.hero__bg {
+   z-index: -1;
+
+  &, &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &:before {
+    content: '';
+    background-image: linear-gradient(155deg, transparentize($white, 0.94), transparentize($black, 0.6));
+  }
+}

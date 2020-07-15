@@ -1,22 +1,23 @@
 <div data-section-id="{{ section.id }}" data-section-type="hero">
-  <div style="height: 100vh; width: 100vw; display: flex; align-items: center;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 96px;">
+  <div class="hero">
     {% if section.settings.title != blank %}
-      <h2 class="h1" style="color: white; margin-bottom: 2rem;">{{ section.settings.title }}</h2>
+      <h2 class="hero__title">{{ section.settings.title }}</h2>
     {% endif %}
     {% if section.settings.content != blank %}
-      <div class="rte" style="color: white; max-width: 500px; margin: 0 auto 60px; text-align: center;">
+      <div class="hero__content">
         {{ section.settings.content }}
       </div>
     {% endif %}
 
     {% if section.settings.cta_url != blank or section.settings.cta_text != blank %}
-      <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
+      <a href="{{ section.settings.cta_url }}" class="btn {{ section.settings.cta_style }}">{{ section.settings.cta_text }}</a>
     {% endif %}
 
-    <img src="{{ 'test-bg.jpg' | asset_url }} " style="position: absolute; z-index: -1; top: 0; right: 0; height: 100%; width: 100%; object-fit: cover;" />
+    {% if section.settings.bg_image %}
+      <div class="hero__bg">
+        <img src="{{ section.settings.bg_image | img_url: '1600x' }}" />
+      </div>
+    {% endif %}
   </div>
 </div>
 
@@ -24,6 +25,11 @@
   {
     "name": "Hero",
     "settings": [
+      {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background Image"
+      },
       {
         "type": "text",
         "id": "title",
@@ -43,6 +49,16 @@
         "type": "url",
         "id": "cta_url",
         "label": "CTA Link"
+      },
+      {
+        "type": "select",
+        "id": "cta_style",
+        "options": [
+          { "value": "btn-primary", "label": "Primary"},
+          { "value": "btn-primary-alt", "label": "Primary Alt"}
+        ],
+        "label": "CTA Style",
+        "default": "btn-primary"
       }
     ]
   }

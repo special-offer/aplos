@@ -73,5 +73,9 @@
   {% unless template == 'cart' %}
     {% section 'ajax-cart' %}
   {% endunless %}
+
+  {% if shop.customer_accounts_enabled %}
+    {% include 'drawer-account' %}
+  {% endif %}
 </body>
 </html>

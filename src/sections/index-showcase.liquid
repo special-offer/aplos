@@ -1,4 +1,4 @@
-<div data-section-id="{{ section.id }}" data-section-type="testimonials">
+<div data-section-id="{{ section.id }}" data-section-type="showcase">
   <div class="aplos-4side-container" style="position: relative; min-height: 150vh;">
     {% if section.settings.title != blank %}
       <div class="h1">
@@ -10,10 +10,27 @@
         {{ section.settings.content }}
       </div>
     {% endif %}
-    <div>
-      <a href="#" class="btn btn-primary">Add To Cart <span class="emdash"></span> $52 USD</a>
-      <a href="#" class="btn btn-primary" style="background-color: white;">Learn More</a>
-    </div>
+    {% if section.settings.related_product != blank %}
+      {% assign related_product = all_products[section.settings.related_product] %}
+      {% assign current_variant = related_product.selected_or_first_available_variant %}
+      <form action="/cart/add" method="post" enctype="multipart/form-data">
+        <div>
+          {% if related_product.available %}
+            <button type="submit" name="add" class="btn btn-primary" data-add-to-cart>
+              <span data-add-to-cart-text>
+                {{ 'products.product.add_to_cart' | t }}              
+              </span>
+              <span class="emdash"></span>
+              {{ current_variant.price | money_without_trailing_zeros }} USD
+            </button>
+          {% endif %}
+          <a href="{{ related_product.url }}" class="btn btn-primary" style="background-color: white;">Learn More</a>
+        </div>
+
+        <input type="hidden" name="id" value="{{ current_variant.id }}" />
+        <input type="hidden" name="quantity" value="1" />
+      </form>
+    {% endif %}
 
     {% if section.settings.background_image %}
       <img src="{{ section.settings.background_image | img_url: '1500x' }}"
@@ -36,6 +53,12 @@
         "type": "richtext",
         "id": "content",
         "label": "Content"
+      },
+      {
+        "type": "product",
+        "id": "related_product",
+        "label": "Related Product",
+        "info": "If set, buttons to view and purchase the product will appear"
       },
       {
         "type": "image_picker",

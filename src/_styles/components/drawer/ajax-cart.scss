@@ -78,18 +78,15 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-end;
+  padding-top: 100px; // make room for drawer title
 }
 
 .ajax-cart__empty-text {
-  padding: 150px $drawer-padding-horizontal-mobile 0;
+  padding: 0 $drawer-padding-horizontal-mobile;
 
   @include media-breakpoint-up(md) {
     padding-left: $drawer-padding-horizontal-desktop;
     padding-right: $drawer-padding-horizontal-desktop;    
-  }  
-
-  p:last-child {
-    margin-bottom: 0;
   }
 }
 

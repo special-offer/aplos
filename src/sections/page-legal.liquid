@@ -1,17 +1,48 @@
-<div class="layout-content-wrapper" data-section-id="{{ section.id }}">
+{% assign page_blocks_html = '' %}
+{% assign page_blocks_nav_html = '' %}
+
+{% for block in section.blocks %}
+  {% if block.settings.page != blank %}
+    {% assign p = pages[block.settings.page] %}
+    {% assign id = section.id | append: '-' | append: p.handle %}
+
+    {%- capture page_block_html -%}
+      <h6 id="{{ id }}">
+        <span style="display: inline-block; margin-right: 15px;">0{{ forloop.index }}.</span>
+        {{ p.title }}
+      </h6>
+      {{ p.content }}
+    {%- endcapture -%}
+
+    {%- capture page_block_nav_html -%}
+      <a href="#{{ id }}" style="display: block; border-bottom: 1px solid black; padding: 9px 0;">
+        <span style="display: inline-block; margin-right: 30px;">0{{ forloop.index }}.</span>
+        {{ p.title }}
+      </a>
+    {%- endcapture -%}
+
+    {% assign page_blocks_html = page_blocks_html | append: page_block_html %}
+    {% assign page_blocks_nav_html = page_blocks_nav_html | append: page_block_nav_html %}
+  {% endif %}
+{% endfor %}
+
+<div class="layout-content-wrapper" data-section-id="{{ section.id }}" data-section-type="page">
   <div class="aplos-container">
     <div class="row">
       <div class="col-12 col-md-4 col-lg-3">
         <h1 class="page-title">{{ page.title }}</h1>
+
+        {% if page_blocks_nav_html != blank %}
+          <div class="p2" style="border-top: 1px solid black; position: fixed; bottom: 100px; width: 100%; max-width: 300px">
+            {{ page_blocks_nav_html }}
+          </div>
+        {% endif %}
       </div>
 
       <div class="col-12 col-md-8 col-lg-7 offset-lg-2">
         <div class="rte">
           {{ page.content }}
-
-          {% for block in section.blocks %}
-            <!--  -->
-          {% endfor %}
+          {{ page_blocks_html }}
         </div>
       </div>
     </div>
@@ -22,6 +53,20 @@
 {% schema %}
   {
     "name": "Legal Page",
-    "settings": []
+    "settings": [],
+    "blocks": [
+      {
+        "type": "page_block",
+        "name": "Page Block",
+        "settings": [
+          {
+            "type": "page",
+            "id": "page",
+            "label": "Page",
+            "info": "Title and content of this page will be used"
+          }
+        ]
+      }
+    ]
   }
 {% endschema %}

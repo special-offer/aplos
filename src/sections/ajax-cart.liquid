@@ -37,11 +37,13 @@
           <div class="ajax-cart__empty">
             <div class="ajax-cart__empty-contents">
               <div class="ajax-cart__empty-text">
-                {% if section.settings.empty_text != blank %}
-                  {{ section.settings.empty_text }}
-                {% else %}
-                  <p>{{ 'cart.general.empty' | t }}</p>
-                {% endif %}
+                <h3 class="drawer__body-title">
+                  {% if section.settings.empty_text != blank %}
+                    {{ section.settings.empty_text }}
+                  {% else %}
+                    {{ 'cart.general.empty' | t }}
+                  {% endif %}
+                </h3>
               </div>
 
               {% if section.settings.empty_image %}
@@ -130,9 +132,9 @@
       },
       {
         "id": "empty_text",
-        "type": "richtext",
+        "type": "textarea",
         "label": "Text",
-        "default": "<p>There aren't any items<br/>in your cart yet.</p>"
+        "default": "There aren't any items<br/>in your cart yet."
       },
       {
         "id": "empty_image",

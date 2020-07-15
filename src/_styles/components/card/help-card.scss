@@ -17,14 +17,29 @@
     height: 100%;
     object-fit: cover;
   }
+
+  &.help-card--question {
+    cursor: pointer;
+  }
 }
 
 .help-card__content {
   padding: 27px 24px;
 }
 
+.help-card__content-title {
+  @extend .p2;
+  margin-bottom: 31px;
+}
+
+.help-card__reveal {
+  padding-top: 45px;
+
+  display: none;
+  opacity: 0;
+}
+
 .help-card__detail {
-  margin-top: 45px;
   padding-top: 67px;
   border-top: 1px solid $black;
 }
