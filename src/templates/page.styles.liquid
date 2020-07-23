@@ -953,13 +953,17 @@
         <h4 id="docs-pagination" class="docs-subtitle">Pagination</h4>
 
         <div class="pagination">
-          <span class="prev"><a href="#">Prev</a></span>
-          <span class="page"><a href="#" title="">1</a></span>
-          <span class="page current">2</span>
-          <span class="page"><a href="#" title="">3</a></span>
-          <span class="deco">…</span>
-          <span class="page"><a href="#" title="">10</a></span>
-          <span class="next"><a href="#" title="">Next</a></span>
+          <div class="pagination__nav">
+            <a href="#" class="pagination__nav--link">Prev</a>
+          </div>
+          <div class="dots">
+            <a href="#" class="dot">01</a>
+            <a href="#" class="dot dot--bordered" aria-current="page">02</a>
+            <a href="#" class="dot">03</a>
+          </div>
+          <div class="pagination__nav">
+            <a href="#" class="pagination__nav--link">Next</a>
+          </div>
         </div>        
 
         <h4 id="docs-minimal-input" class="docs-subtitle">Minimal Input</h4>

@@ -5,7 +5,7 @@
 
 {% endcomment -%}
 
-{% paginate collection.products by 200 %}
+{% paginate collection.products by 8 %}
 
 <div class="layout-content-wrapper" data-section-id="{{ section.id }}" data-section-type="collection">
   <div class="aplos-container">
@@ -30,15 +30,8 @@
       {% endfor %}
     </div>
 
-    <hr />
-
-    <!-- 
     {% if paginate.pages > 1 %}
-      {% include 'pagination' %}
-    {% endif %}
-    -->
-
-    {% if paginate.pages > 1 %}
+      <hr />
       {% include 'pagination' %}
     {% endif %}
   </div>

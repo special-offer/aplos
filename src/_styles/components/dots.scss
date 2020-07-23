@@ -42,9 +42,23 @@
     color: transparentize($body-color, 0.75);
   }
 
-  &.is-active {
+  &.is-active,
+  &.dot--bordered {
     border-color: $dot-border-color;
     color: $body-color;
+  }
+}
+
+// Keep smaller spacing for tight dots
+.dots--tight {
+  @include media-breakpoint-up(md) {
+    margin-left: -$dot-spacing-mobile/2;
+    margin-right: -$dot-spacing-mobile/2;
+
+    .dot {
+      margin-left: $dot-spacing-mobile/2;
+      margin-right: $dot-spacing-mobile/2;
+    }
   }
 }
 
