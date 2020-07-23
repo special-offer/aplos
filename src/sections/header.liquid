@@ -14,10 +14,13 @@
   {% assign header_modifier_class = 'header--transparent' %}
 {% endif %}
 
-<div data-section-id="{{ section.id }}" data-section-type="header">
+{% assign cookie_hash = section.settings.banner_content | append: section.settings.banner_mobile_content | md5 %}
+{% assign cookie_name = 'pencil_banner_seen' %}
+
+<div data-section-id="{{ section.id }}" data-section-type="header" data-cookie-name="{{ cookie_name }}" data-cookie-hash="{{ cookie_hash }}">
   <header class="header {{ header_modifier_class }}" role="banner" data-header>
     {% if section.settings.banner_enabled %}
-      <div class="pencil-banner drawer-shifter" data-pencil-banner>
+      <div id="pencil-banner" class="pencil-banner drawer-shifter" data-pencil-banner>
         {% comment %}
           @TODO
             - Replace container fluid max?
@@ -36,6 +39,22 @@
           </a>
         </div>
       </div>
+
+      <script type="text/javascript">
+        // If they've already seen the pencil banner, hide it here as soon as possible
+        (function() {
+          var getCookie = function (name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+          };
+
+          var c = getCookie('{{ cookie_name }}');
+          if(c && c === "{{ cookie_hash }}") {
+            document.getElementById('pencil-banner').style.display = 'none';
+          }
+        })();
+      </script>
     {% endif %}
 
     <div class="header-main" data-header-main>

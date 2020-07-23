@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
+import Cookies from 'js-cookie';
 import { 
   isThemeEditor,
   whichTransitionEnd
@@ -8,7 +9,6 @@ import BaseSection from './base';
 import AJAXCartDrawer from '../ui/ajaxCartDrawer';
 
 const $window = $(window);
-// const $body   = $(document.body);
 
 const selectors = {
   header: '[data-header]',
@@ -37,9 +37,15 @@ export default class HeaderSection extends BaseSection {
     this.$cartBadgeCount = $(selectors.cartBadgeCount, this.$container);
 
     this.transitionEndEvent = whichTransitionEnd();
+    this.pbCookie = {
+      name: this.$container.data('cookie-name'),
+      value: this.$container.data('cookie-hash')
+    };
 
     // Cache these values because we use them in the scroll handler
     this.prevScrollTop      = 0;
+    this.dirChangeScrollTop = 0; // Scrolltop value when the user changes scroll direction
+    this.scrollDirection    = 'down';
     this.headerHeight       = 0;
     this.pencilBannerHeight = 0;
 
@@ -87,27 +93,28 @@ export default class HeaderSection extends BaseSection {
   onScroll() {
     // Do measurements outside of rAF.
     const scrollTop = $window.scrollTop();
-    const direction = scrollTop > this.prevScrollTop ? 'down' : 'up';
+    const direction = scrollTop >= this.prevScrollTop ? 'down' : 'up';
     const fixed     = scrollTop > this.pencilBannerHeight;
     let hideHeader  = false;
 
-    if (direction === 'down' && scrollTop > this.headerHeight) { //  going down and scrolled past header natural height
-      hideHeader = true;
-      // @TODO - Revisit this
-    }
-    else if (direction === 'up') {
-      // hideHeader = false;
-      // hideHeader = (this.prevScrollTop - scrollTop <= 10);  //  going up and scrolled up 10 px from last time we checked the scroll position
-      hideHeader = false;
+    if (direction !== this.scrollDirection) {
+      this.dirChangeScrollTop = scrollTop;
     }
 
-    // Do DOM updates inside.
+    if (direction === 'down' && scrollTop > this.headerHeight) { //  going down and scrolled past header natural height
+      hideHeader = true;
+    }
+    else if (direction === 'up') {
+      hideHeader = this.dirChangeScrollTop - scrollTop <= 25; //  going up and scrolled up 15px from last time we changed scroll direction
+    }
+
     requestAnimationFrame(() => {
       this.$header.toggleClass(classes.headerHidden, hideHeader);
       this.$headerMain.toggleClass(classes.headerMainFixed, fixed);
     });
 
-    this.prevScrollTop = scrollTop;
+    this.prevScrollTop   = scrollTop;
+    this.scrollDirection = direction;
   }
 
   onResize() {
@@ -126,6 +133,10 @@ export default class HeaderSection extends BaseSection {
       this.$pencilBanner.hide();
       this.cacheDimensions();
       this.onScroll();
+
+      // set cookie so we don't show until the next session
+      Cookies.remove(this.pbCookie.name);
+      Cookies.set(this.pbCookie.name, this.pbCookie.value);      
     });
 
     this.$header
