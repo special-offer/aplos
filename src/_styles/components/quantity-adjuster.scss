@@ -16,7 +16,7 @@
     -webkit-appearance: none;
     padding: 0;
     height: $quantity-adjuster-inner-height;
-    width: 45px;
+    width: 38px;
     text-align: center;
     vertical-align: top;
     cursor: pointer;
@@ -29,7 +29,10 @@
   }
 
   input[type="number"] {
-    width: 33px;
+    width: 46px;
+    height: $quantity-adjuster-inner-height - 2px;
+    position: relative;
+    top: 1px;    
     padding: 0;
     border: none;
     border-radius: 0;
@@ -37,7 +40,6 @@
     color: $quantity-adjuster-border-color; // @TODO - Target this better?
     text-align: center;
     font-size: $quantity-adjuster-font-size;
-    height: $quantity-adjuster-inner-height;
     pointer-events: none;
     -moz-appearance: textfield; // Remove the spinner - firefox + chrome
 
@@ -63,7 +65,7 @@
       content: '';
       position: absolute;
       height: 1px;
-      width: 12px;
+      width: 6px;
       background-color: $quantity-adjuster-border-color;
       top: 50%;
       left: 50%;
@@ -76,16 +78,13 @@
   }
 
   .quantity-adjuster__decrement {
-    &:before,
-    &:after {
+    &:before {
       width: 8px;
     }
-  }
 
-  .quantity-adjuster__decrement {
     &:after {
       display: none;
-    }
+    }    
   }
 }
 

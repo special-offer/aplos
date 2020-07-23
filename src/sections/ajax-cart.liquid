@@ -77,7 +77,7 @@
               <a href="{{ url }}" class="ajax-cart__item-title">{{ product_title }}</a>
             </h3>
             <div class="ajax-cart__item-body">
-              <div style="line-height: 1;">
+              <div class="ajax-cart__item-body-price">
                 {{ price }}
                 {% endraw %}
                 {% if section.settings.item_text %}
@@ -86,15 +86,15 @@
                 {% endif %}
                 {% raw %}
               </div>
-              <div>
+              <div class="ajax-cart__item-body-controls">
                 <div class="quantity-adjuster" data-quantity-adjuster>
                   <button class="quantity-adjuster__decrement" data-decrement>-</button>
                   <input type="number" value="{{ quantity }}" min="0" />
                   <button class="quantity-adjuster__increment" data-increment>+</button>
                 </div>                
-              </div>
-              <div style="align-self: center; min-width: 50px; text-align: right;">
-                {{ line_price }}
+                <div class="ajax-cart__item-body-line-price">
+                  {{ line_price }}
+                </div>
               </div>
             </div>
           </div>
@@ -110,16 +110,6 @@
   {
     "name": "AJAX Cart",
     "settings": [
-      {
-         "type": "select",
-         "id": "cart_style",
-         "options": [
-            { "value": "single_product", "label": "Single Product"},
-            { "value": "multi_product", "label": "Multi Product"}
-         ],
-         "label": "Cart Style",
-         "default": "single_product"
-      },
       {
         "id": "item_text",
         "type": "text",

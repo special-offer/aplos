@@ -44,11 +44,14 @@ export default class QuantityAdjuster {
     this.$input     = $(selectors.input, this.$el);
 
     this.min = parseInt(this.$input.attr('min')) || 0;
-    this.max = parseInt(this.$input.attr('max')) || 4;
+    this.max = parseInt(this.$input.attr('max')) || 999;
 
     this.$increment.on('click', this.onIncrementClick.bind(this));
     this.$decrement.on('click', this.onDecrementClick.bind(this));
     this.$input.on('change',    this.onInputChange.bind(this));
+
+    this.$increment.attr('aria-label', 'Increment');
+    this.$decrement.attr('aria-label', 'Decrement');
 
     this._updateDisabledState();
   }
@@ -80,10 +83,10 @@ export default class QuantityAdjuster {
     }
   }
 
-  _changeValue(newVal) {
-    if (this.$input.is(':disabled') || typeof newVal === 'undefined') return;
+  _changeValue(amount) {
+    if (this.$input.is(':disabled') || typeof amount === 'undefined') return;
 
-    newVal = parseInt(newVal);
+    const newVal = this.getVal() + parseInt(amount);
 
     // Don't change if the value is the same or invalid
     if (newVal === this.$input.val() || newVal > this.max || newVal < this.min) return;
@@ -117,49 +120,6 @@ export default class QuantityAdjuster {
     return this.getVal() === this.max;
   }
 
-  getIncrementedValue() {
-    let newValue;
-    const currVal = this.getVal();
-
-    switch (currVal) {
-      case 0:
-        newValue = 1;
-        break;
-      case 1:
-        newValue = 2;
-        break;
-      case 2:
-        newValue = 4;
-        break;
-      default:
-        newValue = currVal;
-    }
-
-    return newValue;    
-  }
-
-  getDecrementedValue() {
-    let newValue;
-    const currVal = this.getVal();
-
-    switch (currVal) {
-      case 0:
-      case 1:
-        newValue = 0;
-        break;
-      case 2:
-        newValue = 1;
-        break;
-      case 4:
-        newValue = 2;
-        break;
-      default:
-        newValue = currVal;        
-    }
-
-    return newValue;
-  }
-
   onInputChange() {
     this._clampInputVal();
     this._updateDisabledState();
@@ -168,12 +128,12 @@ export default class QuantityAdjuster {
 
   onIncrementClick(e) {
     e.preventDefault();
-    this._changeValue(this.getIncrementedValue());
+    this._changeValue(1);
   }
 
   onDecrementClick(e) {
     e.preventDefault();
-    this._changeValue(this.getDecrementedValue());
+    this._changeValue(-1);
   }
 
   static ensure(el) {

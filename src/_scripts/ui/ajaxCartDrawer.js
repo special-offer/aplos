@@ -16,6 +16,7 @@ const selectors = {
 
 const classes = {
   cartIsEmpty: 'is-empty',
+  cartHasSingleItem: 'has-single-item',
   lockUI: 'lock-ui'
 };
 
@@ -175,8 +176,11 @@ class AJAXCartDrawer extends Drawer {
    * Allows us to add event handlers for events that don't bubble
    */
   onRender(e) {
+    // cart.item_count != cart.items.length
+    // item_count is line items * quantity for each
     if (e.cart) {
       this.$el.toggleClass(classes.cartIsEmpty, e.cart.item_count === 0);
+      this.$el.toggleClass(classes.cartHasSingleItem, e.cart.items.length === 1);
     }
 
     QuantityAdjuster.refresh(this.$el);
