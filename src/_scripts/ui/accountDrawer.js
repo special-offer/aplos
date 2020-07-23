@@ -3,7 +3,7 @@ import Drawer from './drawer';
 
 const selectors = {
   showContents: '[data-show-contents]'
-}
+};
 
 class AccountDrawer extends Drawer {
   /**

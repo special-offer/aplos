@@ -5,7 +5,8 @@ const $document = $(document);
 const $body = $(document.body);
 
 const selectors = {
-  close: '[data-drawer-close]'
+  close: '[data-drawer-close]',
+  overflow: '.drawer-overflow'
 };
 
 const classes = {
@@ -28,6 +29,7 @@ export default class Drawer {
     this.namespace = `.${this.name}`;
 
     this.$el = $(el);
+    this.$overflow = $(selectors.overflow, this.$el);
     this.$backdrop = null;
 
     this.stateIsOpen            = false;
@@ -96,6 +98,7 @@ export default class Drawer {
    * Called after the closing animation has run
    */    
   onHidden() {
+    this.$overflow.scrollTop(0);
     this.stateIsOpen = false;
     const e = $.Event(this.events.HIDDEN);
     this.$el.trigger(e);
