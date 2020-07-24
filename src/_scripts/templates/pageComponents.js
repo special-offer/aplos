@@ -6,7 +6,6 @@ import VideoPlayer from '../ui/videoPlayer';
   
 const selectors = {
   tabContainer: '[data-tab-container]',
-  qaSetMax: '[data-qa-set-max]',
   qaToggleEnabled: '[data-qa-toggle-enabled]',
   qa: '[data-quantity-adjuster]',
   newsletterForm: '#newsletter-form',
@@ -23,11 +22,6 @@ class PageComponentsTemplate extends BaseTemplate {
   addEventHandlers() {
     // Tabs
     new Tabs($(selectors.tabContainer));
-
-    // Quantity Adjuster
-    $(selectors.qaSetMax).on('click', (e) => {
-      $(selectors.qa).find('input[type="number"]').attr('max', $(e.currentTarget).data('qa-set-max'));
-    });
 
     $(selectors.qaToggleEnabled).on('click', (e) => {
       const $qaInput = $(selectors.qa).find('input[type="number"]');

@@ -20,6 +20,7 @@ $t-d-end: 500ms;
   display: flex;
   align-items: center;
   @extend .p2;
+  color: $white;
 
   opacity: 0;
   pointer-events: none;

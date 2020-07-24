@@ -3,6 +3,7 @@
 // Single component with number input and +/- buttons
 
 .quantity-adjuster {
+  @include p2;
   display: inline-block;
   position: relative;
   height: $quantity-adjuster-height;

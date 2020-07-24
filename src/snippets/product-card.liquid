@@ -59,7 +59,7 @@
           <div class="p2">
             {% comment %} This is the SEO description {% endcomment %}
             {% if product.metafields.global.description_tag != blank %}
-              {{ product.metafields.global.description_tag}}
+              {{ product.metafields.global.description_tag }}
             {% else %}
               {% comment %} Else show the first paragraph in the description {% endcomment %}
               {% if product.description contains '<p' %}

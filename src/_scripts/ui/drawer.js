@@ -22,9 +22,8 @@ export default class Drawer {
    * Drawer constructor
    *
    * @param {HTMLElement | $} el - The drawer element
-   * @param {Object} options
    */
-  constructor(el, options) {
+  constructor(el) {
     this.name = 'drawer';
     this.namespace = `.${this.name}`;
 
@@ -166,13 +165,12 @@ export default class Drawer {
 $document.on('click.drawer', '[data-toggle="drawer"]', function(e) {
   const $this   = $(this);
   const $target = $($this.attr('data-target'));
-  const options = $.extend($target.data(), $this.data());
   let data      = $this.data('drawer');
 
   if ($this.is('a')) e.preventDefault();
 
   if (!data) {
-    $this.data('drawer', (data = new Drawer($target, options)));
+    $this.data('drawer', (data = new Drawer($target)));
     data.show();
   }
   else {
