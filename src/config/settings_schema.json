@@ -92,5 +92,20 @@
         "info": "Displays if someone is already signed up to the mailing list.  Leave blank for a generic message."
       }
     ]
+  },
+  {
+    "name": "Yotpo",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Credentials"
+      },
+      {
+        "type": "text",
+        "id": "yotpo_client_id",
+        "label": "App Key",
+        "info": "See: https://support.yotpo.com/en/article/finding-your-app-key-and-your-secret-key"
+      }    
+    ]
   }
 ]

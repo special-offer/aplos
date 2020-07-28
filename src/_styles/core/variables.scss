@@ -16,6 +16,7 @@ $black:        #000 !default;
 
 // Aplos Colors
 $butter:       #FAFAD6;
+$butter-gray:  #E1E1BD;
 $butter-dark:  #EBE583;
 $gray:         #B4AEAC;
 
@@ -40,6 +41,7 @@ $colors: map-merge(
   (
     "white":        $white,
     "butter":       $butter,
+    "butter-gray":  $butter-gray,
     "butter-dark":  $butter-dark,
     "gray":         $gray,
     "black":        $black
@@ -472,6 +474,7 @@ $table-border-level:          -6 !default;
 // $btn-padding-x:               $input-btn-padding-x !default;
 $btn-font-family:               $font-family-sans-serif !default;
 $btn-font-size:                 $font-size-sm !default;
+$btn-line-height:               1;
 $btn-font-weight:               $font-weight-normal;
 $btn-border-width:              1px;
 
@@ -1061,3 +1064,7 @@ $quantity-adjuster-border-width:       1px;
 $quantity-adjuster-border-color:       $white;
 $quantity-adjuster-border-radius:      $border-radius-lg;
 $quantity-adjuster-inner-height:       $quantity-adjuster-height - (2*$quantity-adjuster-border-width);
+
+// #Yotpo
+$yotpo-icon-star:                     #{'{{ "icon-star.svg" | asset_url }}'};
+$yotpo-icon-star-half:                #{'{{ "icon-star-half.svg" | asset_url }}'};

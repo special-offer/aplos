@@ -4,6 +4,7 @@ import BaseSection from './base';
 import ProductForm from '../view/product/productForm';
 import StoryPopup from '../view/product/storyPopup';
 import TransactionBar from '../view/product/transactionBar';
+import YotpoReviewsWidget from '../view/product/yotpoReviewsWidget';
 
 const selectors = {
   productForm: 'form[data-product-form]',
@@ -28,6 +29,7 @@ export default class ProductSection extends BaseSection {
     this.productForm = new ProductForm(this.$productForm);
     this.storyPopup  = new StoryPopup(this.$storyPopup);
     this.transactionBar = new TransactionBar(this.$transactionBar);
+    this.yotpoReviewsWidget = new YotpoReviewsWidget($('.yotpo-main-widget', this.$container));    
 
     this.throttledOnScroll = throttle(50, this.onScroll.bind(this));
     this.throttledOnResize = throttle(300, this.onResize.bind(this));
