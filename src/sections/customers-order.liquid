@@ -140,7 +140,7 @@
                   <tr>
                     <td colspan="1" class="d-none d-sm-table-cell"></td>
                     <td colspan="4">
-                      <strong class="float-left">{{ 'customer.order.subtotal' | t }}:</strong>
+                      <span class="float-left">{{ 'customer.order.subtotal' | t }}:</span>
                       {{ order.subtotal_price | money }}
                     </td>
                   </tr>
@@ -148,7 +148,7 @@
                     <tr>
                       <td colspan="1"></td>
                       <td colspan="4">
-                        <strong class="float-left">{{ discount.code }} {{ 'customer.order.discount' | t }}:</strong>
+                        <span class="float-left">{{ discount.code }} {{ 'customer.order.discount' | t }}:</span>
                         {{ discount.savings | money }}
                       </td>
                     </tr>
@@ -157,7 +157,7 @@
                     <tr>
                       <td colspan="1"></td>
                       <td colspan="4">
-                        <strong class="float-left">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}):</strong>
+                        <span class="float-left">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}):</span>
                         {{ shipping_method.price | money }}
                       </td>
                     </tr>
@@ -166,7 +166,7 @@
                     <tr>
                       <td colspan="1"></td>
                       <td colspan="4">
-                        <strong class="float-left">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%):</strong>
+                        <span class="float-left">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%):</span>
                         {{ tax_line.price | money }}
                       </td>
                     </tr>
@@ -174,7 +174,7 @@
                   <tr>
                     <td colspan="1"></td>
                     <td colspan="4">
-                      <strong class="float-left">{{ 'customer.order.total' | t }}:</strong>
+                      <span class="float-left">{{ 'customer.order.total' | t }}:</span>
                       {{ order.total_price | money }}
                     </td>
                   </tr>

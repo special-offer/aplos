@@ -1,1 +1,7 @@
-{% section 'customers-login' %}
+{% if customer %}
+  {% layout 'none' %}
+  <script>window.location = '/account';</script>
+  {% break %}
+{% else %}
+  {% section 'customers-login' %}
+{% endif %}

@@ -21,7 +21,7 @@
           <div id="AddressNewForm" class="hide" data-address-new-form>
             <div class="row">
               <div class="col-md-10 col-xl-8">                
-                {% include 'customer-new-address-form' %}
+                {% render 'customer-new-address-form' %}
               </div>
             </div>
           </div>
@@ -65,14 +65,14 @@
                     </div>
                   {% endfor %}
 
-                  <button type="button" class="btn btn-block btn-primary" data-address-new-toggle>{{ 'customer.addresses.add_new' | t }}</button>           
+                  <button type="button" class="btn btn-block btn-primary-reverse" data-address-new-toggle>{{ 'customer.addresses.add_new' | t }}</button>
                 {% else %}
                   <div class="account-block">
                     <div class="account-block__content">
                       <p>{{ 'customer.addresses.none' | t }}</p>
                     </div>         
                   </div>
-                  <a href="/account/addresses#new" class="btn btn-block btn-primary" data-address-new-toggle>{{ 'customer.account.add_new_address' | t }}</a>                        
+                  <a href="/account/addresses#new" class="btn btn-block btn-primary-reverse" data-address-new-toggle>{{ 'customer.account.add_new_address' | t }}</a>                        
                 {% endif %}
               </div>
             </div>

@@ -9,12 +9,20 @@
   {% elsif template.directory == "customers" %}
     {% if template.name == "account" and template.suffix == nil %}
       Account Details
-    {% elsif template.suffix == "orders" %}
+    {% elsif template.name == "account" and template.suffix == "orders" %}
       Order History
+    {% elsif template.name == "activate_account" %}
+      Activate Account      
     {% elsif template.name == "addresses" %}
-      Addresses
+      Addresses      
+    {% elsif template.name == "login" %}
+      Account Login
     {% elsif template.name == "order" %}
       Order {{ order.name }}
+    {% elsif template.name == "register" %}
+      Account Registration
+    {% elsif template.name == "reset_password" %}
+      Reset Password
     {% endif %}
   {% else %}
     {{ page_title }}
