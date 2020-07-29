@@ -389,105 +389,77 @@
         </div>        
 
         <h2 id="docs-tables" class="docs-title">Tables</h2>
-        <h5 class="docs-subtitle">Responsive Tables</h5>
-        <p>Wrap tables with a <code>.table-responsive</code> element to enable horizontal scrolling on small screens.  All child table elements of an <code>.rte</code> element are wrapped by default via javascript.</p>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Date</th>
-                <th>Payment Status</th>
-                <th>Fulfillment Status</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>#1001</td>
-                <td>December 22, 2015</td>
-                <td>Authorized</td>
-                <td>Unfulfilled</td>
-                <td>$43.03</td>
-              </tr>
-              <tr>
-                <td>#1002</td>
-                <td>December 23, 2015</td>
-                <td>Authorized</td>
-                <td>Unfulfilled</td>
-                <td>$44.03</td>
-              </tr>
-              <tr>
-                <td>#1003</td>
-                <td>December 24, 2015</td>
-                <td>Authorized</td>
-                <td>Unfulfilled</td>
-                <td>$45.03</td>
-              </tr>
-              <tr>
-                <td>#1004</td>
-                <td>December 25, 2015</td>
-                <td>Authorized</td>
-                <td>Unfulfilled</td>
-                <td>$46.03</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h5 class="docs-subtitle">Base Tables</h5>
+        <p>All tables need the base <code>table</code> class applied to enable default styling.</p>
 
         {% capture table_contents %}
           <thead>
             <tr>
-              <th>Sizes</th>
-              <th>XXS</th>
-              <th>XS</th>
-              <th>S</th>
-              <th>M</th>
-              <th>L</th>
+              <th>Order</th>
+              <th>Date</th>
+              <th>Payment Status</th>
+              <th>Fulfillment Status</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Bust</td>
-              <td></td>
-              <td>32"-34"</td>
-              <td>34"-36"</td>
-              <td>36"-38"</td>
-              <td>38"-40"</td>
+              <td>#1001</td>
+              <td>December 22, 2015</td>
+              <td>Authorized</td>
+              <td>Unfulfilled</td>
+              <td>$43.03</td>
             </tr>
             <tr>
-              <td>Under Bust</td>
-              <td></td>
-              <td>32"-34"</td>
-              <td>34"-36"</td>
-              <td>36"-38"</td>
-              <td>38"-40"</td>
+              <td>#1002</td>
+              <td>December 23, 2015</td>
+              <td>Authorized</td>
+              <td>Unfulfilled</td>
+              <td>$44.03</td>
             </tr>
             <tr>
-              <td>Waist</td>
-              <td>23.5"-24.5"</td>
-              <td>32"-34"</td>
-              <td>34"-36"</td>
-              <td>36"-38"</td>
-              <td>38"-40"</td>
+              <td>#1003</td>
+              <td>December 24, 2015</td>
+              <td>Authorized</td>
+              <td>Unfulfilled</td>
+              <td>$45.03</td>
             </tr>
             <tr>
-              <td>Hip</td>
-              <td>33"-34"</td>
-              <td>32"-34"</td>
-              <td>34"-36"</td>
-              <td>36"-38"</td>
-              <td>38"-40"</td>
+              <td>#1004</td>
+              <td>December 25, 2015</td>
+              <td>Authorized</td>
+              <td>Unfulfilled</td>
+              <td>$46.03</td>
             </tr>
-          </tbody>
+          </tbody>        
         {% endcapture %}
 
-        <h5 class="docs-subtitle">Small Tables</h5>
+        <div class="table-responsive">
+          <table class="table">
+            {{ table_contents }}
+          </table>
+        </div>
+
+        <h5 class="docs-subtitle">Small Tables - <code>.table-sm</code></h5>
         <div class="table-responsive">
           <table class="table table-sm">
             {{ table_contents }}
           </table>
         </div>
+
+        <h5 class="docs-subtitle">Headless Tables - <code>.table-headless</code></h5>
+        <div class="table-responsive">
+          <table class="table table-headless">
+            {{ table_contents }}
+          </table>
+        </div>
+
+        <h5 class="docs-subtitle">Borderless Tables - <code>.table-headless</code></h5>
+        <div class="table-responsive">
+          <table class="table table-borderless">
+            {{ table_contents }}
+          </table>
+        </div> 
 
         <h2 id="docs-buttons" class="docs-title">Buttons</h2>
 

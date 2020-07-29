@@ -13,7 +13,7 @@
 {% paginate customer.orders by 1000 %}
 
   <div class="layout-content-wrapper" data-section-id="{{ section.id }}" data-section-type="customers-account">
-    <div class="container">
+    <div class="aplos-container drawer-shifter">
       
       {% include 'page-header', ph_title: title %}
 
@@ -26,10 +26,10 @@
           {% comment %} Account Stuff {% endcomment %}
           <div data-account-section="account">
 
-            <h3>{{ 'customer.account.details' | t }}</h1>
+            <h2 class="account-section__title">{{ 'customer.account.details' | t }}</h2>
 
             <div class="row">
-              <div class="col-md-6 col-lg-5 col-xl-4">
+              <div class="col-md-6">
                 <div class="account-block">
                   <h6 class="account-block__title">{{ 'customer.account.email' | t }}</h6>
                   <div class="account-block__content">{{ customer.email }}</div>
@@ -42,13 +42,12 @@
                       <a href="/account/addresses#edit-{{ customer.default_address.id }}">Edit</a>
                     </div>
                   </div>
-                {% endif %}            
-              </div> 
-              <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3">
-                <a href="#recover" class="btn btn-primary btn-block" data-toggle-password>{{ 'customer.recover_password.title' | t }}</a>
-                <br />
-                <a href="/account/addresses#new" class="btn btn-primary btn-block">{{ 'customer.account.add_new_address' | t }}</a>
-              </div>         
+                {% endif %}
+                <div class="account-block">
+                  <a href="#recover" class="btn btn-secondary btn-block" data-toggle-password>{{ 'customer.recover_password.title' | t }}</a>
+                  <a href="/account/addresses#new" class="btn btn-secondary btn-block">{{ 'customer.account.add_new_address' | t }}</a>
+                </div>         
+              </div>       
             </div>
 
             <div class="form-success hide" id="ResetSuccess">
@@ -64,10 +63,10 @@
           {% comment %} Password Stuff {% endcomment %}
           <div class="hide" data-account-section="password-recover">
 
-            <h3>{{ 'customer.recover_password.title' | t }}</h1>
+            <h2 class="account-section__title">{{ 'customer.recover_password.title' | t }}</h2>
 
             <div class="row">
-              <div class="col-md-6 col-lg-5 col-xl-4">
+              <div class="col-md-6">
                 <div class="account-block">
                   <div class="account-block__content">
                     <p>{{ 'customer.recover_password.subtext' | t }}</p>
@@ -81,27 +80,30 @@
                       <span class="hide reset-password-success"></span>
                     {% endif %}
 
-                    <div class="form-group">
-                      <label for="RecoverEmail" class="sr-only">
+                    <div class="form-group row">
+                      <label for="RecoverEmail" class="col-2">
                         {{ 'customer.recover_password.email' | t }}
                       </label>
-                      <input type="email"
-                        name="email"
-                        id="RecoverEmail"
-                        class="form-control"
-                        placeholder="{{ 'customer.recover_password.email' | t }}"
-                        spellcheck="false"
-                        autocomplete="off"
-                        autocapitalize="off">
+                      <div class="col-10">
+                        <input type="email"
+                          name="email"
+                          id="RecoverEmail"
+                          class="form-control"
+                          spellcheck="false"
+                          autocomplete="off"
+                          autocapitalize="off">
+                      </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group text-right">
                       <input type="submit" class="btn btn-primary" value="{{ 'customer.recover_password.submit' | t }}">
-                      <button type="button" class="btn btn-link" data-toggle-password>
-                        {{ 'customer.recover_password.cancel' | t }}
-                      </button>
                     </div>
 
+                    <div class="form-group text-right">
+                      <a href="#" class="p2" data-toggle-password>
+                        {{ 'customer.recover_password.cancel' | t }}
+                      </a>
+                    </div>
                   {% endform %}
                 </div>
               </div>

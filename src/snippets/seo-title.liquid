@@ -6,6 +6,16 @@
     {% endif %}
   {% elsif template.name == "cart" %}
     Cart
+  {% elsif template.directory == "customers" %}
+    {% if template.name == "account" and template.suffix == nil %}
+      Account Details
+    {% elsif template.suffix == "orders" %}
+      Order History
+    {% elsif template.name == "addresses" %}
+      Addresses
+    {% elsif template.name == "order" %}
+      Order {{ order.name }}
+    {% endif %}
   {% else %}
     {{ page_title }}
   {% endif %}

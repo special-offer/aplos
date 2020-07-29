@@ -407,36 +407,38 @@ $breadcrumb-separator:        "\007c";
 //
 // Customizes the `.table` component with basic values, each used across all table variations.
 
-$table-cell-padding:          .75rem !default;
-$table-cell-padding-sm:       .3rem !default;
+$table-cell-padding-x:          0.75rem !default;
+$table-cell-padding-y:          1.05rem;
+$table-cell-padding-sm-x:       .5rem !default;
+$table-cell-padding-sm-y:       .5rem !default;
 
-$table-color:                 $body-color !default;
-$table-bg:                    null !default;
-$table-accent-bg:             rgba($black, .05) !default;
-$table-hover-color:           $table-color !default;
-$table-hover-bg:              rgba($black, .075) !default;
-$table-active-bg:             $table-hover-bg !default;
+// $table-color:                 $body-color !default;
+// $table-bg:                    null !default;
+// $table-accent-bg:             rgba($black, .05) !default;
+// $table-hover-color:           $table-color !default;
+// $table-hover-bg:              rgba($black, .075) !default;
+// $table-active-bg:             $table-hover-bg !default;
 
 $table-border-width:          $border-width !default;
 $table-border-color:          $border-color !default;
 
-$table-head-bg:               $gray-light !default;
-$table-head-color:            $gray-darker !default;
+// $table-head-bg:               $gray-light !default;
+// $table-head-color:            $gray-darker !default;
 
-$table-dark-color:            $white !default;
-$table-dark-bg:               $gray-darker !default;
-$table-dark-accent-bg:        rgba($white, .05) !default;
-$table-dark-hover-color:      $table-dark-color !default;
-$table-dark-hover-bg:         rgba($white, .075) !default;
-$table-dark-border-color:     lighten($table-dark-bg, 7.5%) !default;
-$table-dark-color:            $white !default;
+// $table-dark-color:            $white !default;
+// $table-dark-bg:               $gray-darker !default;
+// $table-dark-accent-bg:        rgba($white, .05) !default;
+// $table-dark-hover-color:      $table-dark-color !default;
+// $table-dark-hover-bg:         rgba($white, .075) !default;
+// $table-dark-border-color:     lighten($table-dark-bg, 7.5%) !default;
+// $table-dark-color:            $white !default;
 
-$table-striped-order:         odd !default;
+// $table-striped-order:         odd !default;
 
 $table-caption-color:         $text-muted !default;
 
-$table-bg-level:              -9 !default;
-$table-border-level:          -6 !default;
+// $table-bg-level:              -9 !default;
+// $table-border-level:          -6 !default;
 
 
 // Buttons + Forms
@@ -583,48 +585,48 @@ $form-group-margin-bottom:              1rem !default;
 // $input-group-addon-bg:                  $gray-light !default;
 // $input-group-addon-border-color:        $input-border-color !default;
 
-// $custom-forms-transition:               background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+$custom-forms-transition:               background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-// $custom-control-gutter:                 .5rem !default;
-// $custom-control-spacer-x:               1rem !default;
-// $custom-control-vertical-spacing:       $form-check-vertical-spacing !default;
+$custom-control-gutter:                 .5rem !default;
+$custom-control-spacer-x:               1rem !default;
+$custom-control-vertical-spacing:       $form-check-vertical-spacing !default;
 
-// $custom-control-indicator-size:         1rem !default;
-// $custom-control-indicator-bg:           $input-bg !default;
+$custom-control-indicator-size:         1rem !default;
+$custom-control-indicator-bg:           $input-bg !default;
 
-// $custom-control-indicator-bg-size:      50% 50% !default;
-// $custom-control-indicator-box-shadow:   $input-box-shadow !default;
-// $custom-control-indicator-border-color: $gray !default;
-// $custom-control-indicator-border-width: $input-border-width !default;
+$custom-control-indicator-bg-size:      50% 50% !default;
+$custom-control-indicator-box-shadow:   none; // $input-box-shadow !default;
+$custom-control-indicator-border-color: $gray !default;
+$custom-control-indicator-border-width: 1px; // $input-border-width !default;
 
-// $custom-control-indicator-disabled-bg:          $input-disabled-bg !default;
-// $custom-control-label-disabled-color:           $gray-dark !default;
+$custom-control-indicator-disabled-bg:          transparent; // $input-disabled-bg !default;
+$custom-control-label-disabled-color:           $gray-dark !default;
 
-// $custom-control-indicator-checked-color:        $component-active-color !default;
-// $custom-control-indicator-checked-bg:           $component-active-bg !default;
-// $custom-control-indicator-checked-disabled-bg:  rgba(theme-color("primary"), .5) !default;
-// $custom-control-indicator-checked-box-shadow:   none !default;
-// $custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg !default;
+$custom-control-indicator-checked-color:        $component-active-color !default;
+$custom-control-indicator-checked-bg:           $component-active-bg !default;
+$custom-control-indicator-checked-disabled-bg:  rgba(theme-color("primary"), .5) !default;
+$custom-control-indicator-checked-box-shadow:   none !default;
+$custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg !default;
 
-// $custom-control-indicator-focus-box-shadow:     $input-focus-box-shadow !default;
-// $custom-control-indicator-focus-border-color:   $input-focus-border-color !default;
+$custom-control-indicator-focus-box-shadow:     none; // $input-focus-box-shadow !default;
+$custom-control-indicator-focus-border-color:   none; // $input-focus-border-color !default;
 
-// $custom-control-indicator-active-color:         $component-active-color !default;
-// $custom-control-indicator-active-bg:            lighten($component-active-bg, 35%) !default;
-// $custom-control-indicator-active-box-shadow:    none !default;
-// $custom-control-indicator-active-border-color:  $custom-control-indicator-active-bg !default;
+$custom-control-indicator-active-color:         $component-active-color !default;
+$custom-control-indicator-active-bg:            lighten($component-active-bg, 35%) !default;
+$custom-control-indicator-active-box-shadow:    none !default;
+$custom-control-indicator-active-border-color:  $custom-control-indicator-active-bg !default;
 
-// $custom-checkbox-indicator-border-radius:       $border-radius !default;
-// $custom-checkbox-indicator-icon-checked:        str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='#{$custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"), "#", "%23") !default;
+$custom-checkbox-indicator-border-radius:       $border-radius !default;
+$custom-checkbox-indicator-icon-checked:        str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='#{$custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"), "#", "%23") !default;
 
-// $custom-checkbox-indicator-indeterminate-bg:           $component-active-bg !default;
-// $custom-checkbox-indicator-indeterminate-color:        $custom-control-indicator-checked-color !default;
-// $custom-checkbox-indicator-icon-indeterminate:         str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3e%3cpath stroke='#{$custom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/%3e%3c/svg%3e"), "#", "%23") !default;
-// $custom-checkbox-indicator-indeterminate-box-shadow:   none !default;
-// $custom-checkbox-indicator-indeterminate-border-color: $custom-checkbox-indicator-indeterminate-bg !default;
+$custom-checkbox-indicator-indeterminate-bg:           $component-active-bg !default;
+$custom-checkbox-indicator-indeterminate-color:        $custom-control-indicator-checked-color !default;
+$custom-checkbox-indicator-icon-indeterminate:         str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3e%3cpath stroke='#{$custom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/%3e%3c/svg%3e"), "#", "%23") !default;
+$custom-checkbox-indicator-indeterminate-box-shadow:   none !default;
+$custom-checkbox-indicator-indeterminate-border-color: $custom-checkbox-indicator-indeterminate-bg !default;
 
-// $custom-radio-indicator-border-radius:          50% !default;
-// $custom-radio-indicator-icon-checked:           str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='#{$custom-control-indicator-checked-color}'/%3e%3c/svg%3e"), "#", "%23") !default;
+$custom-radio-indicator-border-radius:          50% !default;
+$custom-radio-indicator-icon-checked:           str-replace(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='#{$custom-control-indicator-checked-color}'/%3e%3c/svg%3e"), "#", "%23") !default;
 
 // $custom-switch-width:                           $custom-control-indicator-size * 1.75 !default;
 // $custom-switch-indicator-border-radius:         $custom-control-indicator-size / 2 !default;

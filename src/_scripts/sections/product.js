@@ -10,6 +10,7 @@ const selectors = {
   productForm: 'form[data-product-form]',
   storyPopup: '[data-story-popup]',
   transactionBar: '[data-transaction-bar]',
+  yotpoReviewsWidget: '.yotpo-main-widget'
   // productGrid: '.product-grid'
 };
 
@@ -23,13 +24,17 @@ export default class ProductSection extends BaseSection {
 
     // @TODO - Don't really need to create these instance vars?
     this.$productForm    = $(selectors.productForm, this.$container).first();
-    this.$storyPopup     = $(selectors.storyPopup, this.$el);
-    this.$transactionBar = $(selectors.transactionBar, this.$el);
+    this.$storyPopup     = $(selectors.storyPopup, this.$container).first();
+    this.$transactionBar = $(selectors.transactionBar, this.$container).first();
+    this.$yotpoReviewsWidget = $(selectors.yotpoReviewsWidget, this.$container).first();
 
     this.productForm = new ProductForm(this.$productForm);
     this.storyPopup  = new StoryPopup(this.$storyPopup);
     this.transactionBar = new TransactionBar(this.$transactionBar);
-    this.yotpoReviewsWidget = new YotpoReviewsWidget($('.yotpo-main-widget', this.$container));    
+
+    if (this.$yotpoReviewsWidget.length === 1) {
+      this.yotpoReviewsWidget = new YotpoReviewsWidget(this.$yotpoReviewsWidget);    
+    }
 
     this.throttledOnScroll = throttle(50, this.onScroll.bind(this));
     this.throttledOnResize = throttle(300, this.onResize.bind(this));

@@ -351,7 +351,10 @@ $yotpo-icon-star-half:   false !default;
     &:focus {
       background-color: $black !important;
       border: 1px solid $black !important;
-      color: $white !important;
+      
+      &, .yotpo-icon-button-text {
+        color: $white !important;
+      }
     }
 
     &.yotpo-disabled {
