@@ -109,7 +109,8 @@ export default class HeaderSection extends BaseSection {
     }
 
     // For situations where we toggle content visibility and cause page jumps
-    if (scrollTop === 0) {
+    // Or we scroll past the top on mobile
+    if (scrollTop <= 0) {
       hideHeader = false;
     }
 

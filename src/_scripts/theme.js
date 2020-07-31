@@ -2,6 +2,7 @@
 import $ from 'jquery';
 import 'chosen-js';
 import 'jquery-unveil';
+import { throttle } from 'throttle-debounce';
 
 // Bootstrap JS
 import 'bootstrap/js/dist/collapse';
@@ -136,6 +137,20 @@ Breakpoints.initialize();
     $(this).parents('.expandable-list').addClass(isOpenClass);
   });
   // END - Global handler for collapse plugin to add state class for open expandable lists
+
+  const setViewportHeightProperty = () => {
+    // If mobile / tablet, set var to window height. This fixes the 100vh iOS bug/feature.
+    const v = window.innerWidth <= 1024 ? `${window.innerHeight}px` : '100vh';
+    document.documentElement.style.setProperty('--viewport-height', v);
+  };
+  
+  window.addEventListener('resize', throttle(100, setViewportHeightProperty));
+  document.addEventListener('scroll', throttle(100, () => {
+    if (window.innerWidth > 1024) return;
+    setViewportHeightProperty();
+  }));
+
+  setViewportHeightProperty();     
 
   if ($('#account-drawer').length) {
     const aD = new AccountDrawer($('#account-drawer').first());

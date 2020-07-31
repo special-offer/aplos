@@ -1,5 +1,4 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
-{%- assign variant = current_variant -%} {% comment %} Yotpo script needs this var {% endcomment %}
 {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
 
 {% assign block = blank %}
@@ -161,25 +160,7 @@ This provides more control and a more predictable experience.
       {% unless block.settings.reviews_enabled == false %}
         <div class="bg-butter-gray" style="padding: 50px 0;">
           <div class="aplos-4side-container">
-            <div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}" data-price="{{ variant.price | money_without_currency }}"
-            data-currency=“{{ shop.currency }}” data-description=“{{ product.description | escape }}“>
-            {%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
-              {%- assign time_now = 'now' | date: '%s' %}
-              {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
-              {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
-              {%- assign yotpo_main_widget_last_updated = product.metafields.yotpo.main_widget_update_time | date: '%s' %}
-              {%- assign diff_seconds_from_last_main_widget_update = time_now | minus: yotpo_main_widget_last_updated %}
-              {%- if yotpo_live_time and diff_seconds_from_live < 86400 or yotpo_main_widget_last_updated and diff_seconds_from_last_main_widget_update < 86400 -%}
-                {%- assign yotpo_main_widget_obsolete = false %}
-              {%- else %}
-                {%- assign yotpo_main_widget_obsolete = true %}
-              {%- endif %}
-              {%- if yotpo_offload_content == 'yes' and yotpo_main_widget_obsolete != true -%}
-                {%- for field in product.metafields.yotpo_reviews -%}
-                  {{ field | last }}
-                {%- endfor -%}
-              {%- endif %}
-            </div>          
+            {% render 'yotpo-reviews-widget' %}        
           </div>
         </div>
       {% endunless %}

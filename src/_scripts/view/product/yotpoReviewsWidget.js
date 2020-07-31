@@ -39,15 +39,30 @@ export default class YotpoReviewsWidget {
 
     if (this.adjusted || $mainWidget.length !== 1) return;
 
+    const $writeReviewWrapper = $('.write-review-wrapper', this.$el);
+    const $messages = $('.yotpo-messages', this.$el);
+
+    // Create a footer for the form
+    const $footer = $(document.createElement('div')).addClass('main-widget-footer');
+
+    $footer.appendTo($mainWidget);
+
     $('.yotpo-helpful .label-helpful', this.$el).text('Was this helpful?');
 
+    // Change 'Username' -> 'Name'
     $('label[for="yotpo_input_review_username"]', this.$el).contents().filter((i, el) => el.nodeName === '#text').replaceWith(document.createTextNode('Name: '));
 
-    // Feedback button
+    // Move the feedback form to the bottom of the page
+    $writeReviewWrapper.detach().insertBefore($footer);
+
+    // Move the 'messsages' section to the above the write form
+    $messages.detach().insertBefore($writeReviewWrapper);
+
+    // Leave Feedback button
     const $writeReviewButton = $('.write-review-button', this.$el).first();
 
     $writeReviewButton.find('.yotpo-icon-button-text').text('Leave Feedback');
-    $writeReviewButton.detach().appendTo($mainWidget); // put it at the bottom of the widget
+    $writeReviewButton.detach().appendTo($footer); // put it in the footer
 
     // Nicer widget title
     const header = document.createElement('h3');
@@ -55,6 +70,12 @@ export default class YotpoReviewsWidget {
     header.innerText = 'Feedback';
 
     $('.yotpo-bottomline-2-boxes', this.$el).prepend(header);
+
+    // Update the "write review" heading
+    $('.write-review .yotpo-header-title').text('Leave Feedback');
+
+    // Update the submit review button
+    $('.write-review .submit-button .yotpo-submit').val('Submit Feedback');
 
     // Cleanup now that we're done making adjustments
     this.observer && this.observer.disconnect();
