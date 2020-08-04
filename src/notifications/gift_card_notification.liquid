@@ -1,0 +1,92 @@
+{% capture email_title %}
+Your gift card
+{% endcapture %}
+{% capture email_body %}
+Your {{ gift_card.balance | money_without_currency }} {{ shop.currency }} gift card for {{ shop.name }} is active. Keep this email or write down your gift card number.{% if gift_card.expires_on %}  This gift card expires on {{ gift_card.expires_on }}.{% endif %}
+{% endcapture %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ email_title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
+    <style>
+.body,body{background-color:#fafad6;color:#000;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}.body,.button__cell,.container p,.content__cell strong,.customer-info__item-content span,.customer-info__item-content strong,.disclaimer__subtext,.footer__cell td,.order-list__item-discount-allocation,.order-list__item-original-price,.order-list__item-price,.order-list__item-quantity,.order-list__item-refunded,.order-list__item-sku,.order-list__item-title,.order-list__item-variant,.order-list__price-cell,.order-list__product-description-cell,.order-number__cell,.order-number__text,.return-label__instruction-step,.subtotal-line__title span,.subtotal-line__value,.subtotal-line__value span,a,h1,h2,h3,h4,h5,h6,td{font-size:12px;line-height:1.333;font-weight:400;color:#000;font-family:Helvetica,-apple-system,sans-serif}td.section__cell{padding:25px 0!important}.header-img__cell{padding:60px 40px;text-align:center}.header-img__img{width:200px;height:auto}.order-numbers{margin-bottom:35px}.order-number__cell{display:table-cell;margin-top:0;padding-right:15px;text-transform:none}.subtotal-line__value strong{font-size:12px!important;color:#000!important;font-weight:400!important}.order-list__item,.row.section,.row.subtotal-lines,.row.subtotal-table{border:none!important}@media (max-width:600px){.container{width:90%!important}}.customer-info__item{display:table-cell!important;width:50%!important}.customer-info__item h4{border-bottom:1px solid #000;padding-bottom:16px;margin-bottom:16px}.customer-info__item:nth-child(odd) h4{margin-right:15%!important}.customer-info__item:last-child h4{margin-right:0!important}.order-list__header{width:100%}.order-list__header td{padding-bottom:13px}.order-list__header h3{margin:0;padding-bottom:13px;border-bottom:1px solid #000}.order-list__item__cell{padding-bottom:13px}.order-list__product-image{border-radius:0;border:none;margin-right:20px;width:102px;height:auto}.order-list__currency-cell,.order-list__price-cell,.order-list__product-description-cell{vertical-align:top}.order-list__item-original-price{color:#b4aeac;display:inline;padding-right:8px}.order-list__item-discount-allocation{color:#b4aeac}.order-list__item-discount-allocation span{margin:0}.subtotal-line td{padding-top:2px;padding-bottom:2px}.order-list__price-cell,.subtotal-line__title,.subtotal-line__value{padding-right:28px!important}.subtotal-line__title{width:100%;text-align:right;padding-right:18px!important}.row.footer,.row.section .row.footer{border-color:#000!important}.footer__cell{padding:13px 0}.footer__cell table{width:100%}.footer__cell td{padding:0;vertical-align:top}.footer__cell a{font-size:12px;color:#000;text-decoration:none}
+    </style>
+  </head>
+  <body>
+    <table class="body">
+      <tr class="header-img__row">
+        <td class="header-img__cell">
+          <img src="https://cdn.shopify.com/s/files/1/0042/3978/6113/files/Logo_Wordmark.png?v=1596567141" class="header-img__img" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="row content">
+            <tr>
+              <td class="content__cell">
+                <center>
+                  <table class="container">
+                    <tr>
+                      <td>
+                        <p>{{ email_body }}</p>
+                        <p>
+                          <a href="{{ gift_card.url }}" style="border-bottom: 1px solid;">View Your Gift Card</a>
+                          {% if gift_card.pass_url %}
+                            or <a href="{{ gift_card.pass_url }}" style="border-bottom: 1px solid;">Add to Apple Wallet</a>
+                          {% endif %}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </center>
+              </td>
+            </tr>
+          </table>
+          <center>
+            <table class="container">
+              <tr>
+                <td>
+                  <table class="row footer">
+                    <tr>
+                      <td class="footer__cell">
+                        <table>
+                          <tr>
+                            <td>
+                              {% if shop.url %}
+                              <a href="{{ shop.url }}">{{ shop.name }}</a>
+                              {% else %}
+                                {{ shop.name }}
+                              {% endif %}
+                            </td>
+                            <td>
+                              {% if shop.url %}
+                                <a href="{{ shop.url }}/pages/help">
+                                  Help
+                                </a>
+                              {% endif %}
+                              {% if shop.email %}
+                                <br />
+                                <a href="mailto:{{ shop.email }}">Contact Us</a>
+                              {% endif %}
+                            </td>
+                            <td style="text-align: right;">
+                              <a href="https://www.instagram.com/aplos.world/">Instagram</a>
+                            </td>                            
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </center>
+          <img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" height="1" />
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

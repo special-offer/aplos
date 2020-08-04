@@ -36,6 +36,11 @@ module.exports = {
     eslint: {
       filePattern: ['gulpfile.js/**/*.js', 'src/_scripts/**/*.js'],
       extensions: ['js']
+    },
+    notifications: {
+      filePattern: ['src/notifications/*.scss'],
+      src: 'src/notifications/notifications.scss',
+      dest: 'src/notifications'
     }
   }
 };

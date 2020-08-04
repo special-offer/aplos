@@ -293,7 +293,7 @@ $embed-responsive-aspect-ratios: join(
 // Font, line-height, and color for body text, headings, and more.
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif:      'Univers', -apple-system, sans-serif !default;
+$font-family-sans-serif:      'Univers', Helvetica, -apple-system, sans-serif !default;
 $font-family-serif:           'Goudy Old Style', serif;
 $font-family-monospace:       SFMono-Regular, 'Courier New', monospace !default;
 $font-family-base:            $font-family-serif !default;
