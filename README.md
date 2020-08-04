@@ -73,6 +73,17 @@ The following pages utilize the CMS page schema and renderer.  Any time changes 
 
 Since additional checkout scripts are saved in a textarea inside the checkout admin settings, they do not have versioning and are liable to be modified or removed at any time.  As a precaution, try to store the most up to date version of these scripts inside the snippet `_checkout-additional-scripts.liquid`.  This file doesn't get included on the site anywhere but is the only way to keep this content in version control.
 
+#### Notifications
+
+Inside Shopify, notification emails are second class citizens.  To make the experience of developing them *slightly* easier, a template for each can be found in the `src/notifications` directory.  The file name should match the url of the edit page for that template (`/admin/email_templates/{{ file_name }}/edit`).
+
+To style the emails you have to use an inline style block since theme assets aren't supported.  The workflow for this styling block is as follows:
+
+- Make adjustments to `notifications/notifications.scss`
+- Compile SCSS by running `gulp notifications`
+- Copy minified content from `notifications/notifications.min.css`
+- Paste inside the `<style>` tag inside the `<head>` of each notification template.
+  
 ## Theme Setup
 Be sure to fill out all the general theme settings in order to enable all the features of this theme.  These include 
 
