@@ -51,11 +51,12 @@ td.section__cell {
 }
 
 .header-img__cell {
-  padding: 0 0 35px;
+  padding: 60px 40px;
+  text-align: center;
 }
 
 .header-img__img {
-  width: 100%;
+  width: 200px;
   height: auto;
 }
 
@@ -101,6 +102,10 @@ td.section__cell {
 
   &:nth-child(2n+1) h4 {
     margin-right: 15% !important;
+  }
+
+  &:last-child h4 {
+    margin-right: 0 !important;
   }
 }
 
@@ -171,7 +176,11 @@ td.section__cell {
 }
 
 .row.footer {
-  border-color: $hr-border-color !important;
+  &,
+  .row.section & {
+    border-color: $hr-border-color !important;
+    border-top-color: $hr-border-color !important;
+  }
 }
 
 .footer__cell {

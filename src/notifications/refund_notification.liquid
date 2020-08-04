@@ -1,3 +1,22 @@
+{% if refund_line_items.size == item_count %}
+  {% capture email_title %}Your order has been refunded{% endcapture %}
+{% elsif refund_line_items.size == 0 %}
+  {% capture email_title %}You have received a refund{% endcapture %}
+{% else %}
+  {% capture email_title %}Some items in your order have been refunded{% endcapture %}
+{% endif %}
+
+{%- capture email_greeting -%}
+  {% if customer.first_name %}
+    Dear {{ customer.first_name }},<br/><br/><br/>
+  {% endif %}
+{% endcapture %}
+
+{% capture email_body %}
+  {{ email_greeting }}
+  {{ email_title }}.  Total amount refunded: {{ amount | money_without_currency }} {{ shop.currency }}.
+{% endcapture %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +34,7 @@
         <td class="header-img__cell">
           <img src="https://cdn.shopify.com/s/files/1/0042/3978/6113/files/Logo_Wordmark.png?v=1596567141" class="header-img__img" />
         </td>
-      </tr>       
+      </tr>  
       <tr>
         <td>
           <table class="header row">
@@ -57,18 +76,7 @@
                   <table class="container">
                     <tr>
                       <td>
-                        {% if customer.first_name %}
-                          Dear {{ customer.first_name }},<br/><br/><br/>
-                        {% endif %}
-                        <p>An additional payment of {{ order.total_outstanding | money_without_currency }} {{ shop.currency }} is needed to update your order.</p>
-                        {% if custom_message != blank %}
-                          <p>{{ custom_message }}</p>
-                        {% endif %}
-                        {% if checkout_payment_collection_url %}
-                          <p>
-                            <a href="{{ checkout_payment_collection_url }}" style="border-bottom: 1px solid;">Pay Now</a>
-                          </p>
-                        {% endif %}
+                        {{ email_body }}
                       </td>
                     </tr>
                   </table>
@@ -107,19 +115,10 @@
                                   {% endif %}
                                 </td>
                                 <td class="order-list__product-description-cell">
-                                  {% if line.product.title %}
-                                    {% assign line_title = line.product.title %}
-                                  {% else %}
-                                    {% assign line_title = line.title %}
-                                  {% endif %}
                                   {% if line.quantity < line.quantity %}
-                                    {% capture line_display %}
-                                      {{ line.quantity }} of {{ line.quantity }}
-                                    {% endcapture %}
+                                  {% capture line_display %} {{ line.quantity }} of {{ line.quantity }} {% endcapture %}
                                   {% else %}
-                                    {% capture line_display %}
-                                      {{ line.quantity }}
-                                    {% endcapture %}
+                                  {% assign line_display = line.quantity  %}
                                   {% endif %}
                                   <span class="order-list__item-title">
                                     {{ line.title }}
@@ -129,6 +128,10 @@
                                     <br/>
                                     <span class="order-list__item-variant">{{ line.variant_title }}</span>
                                   {% endunless %}
+                                  {% if line.refunded_quantity > 0 %}
+                                    <br/>
+                                    <span class="order-list__item-refunded">Refunded</span>
+                                  {% endif %}
                                   {% if line.discount_allocations %}
                                     {% for discount_allocation in line.discount_allocations %}
                                       {% if discount_allocation.discount_application.target_selection != 'all' %}
@@ -206,6 +209,21 @@
                                     {{ shop.currency }}
                                   </td>
                                 </tr>
+                                {% if delivery_method == 'pick-up' %}
+                                <tr class="subtotal-line">
+                                  <td class="subtotal-line__title">
+                                    <p>
+                                      <span>Pickup</span>
+                                    </p>
+                                  </td>
+                                  <td class="subtotal-line__value">
+                                    <span>{{ shipping_price | money_without_currency }}</span>
+                                  </td>
+                                  <td class="subtotal-line__currency">
+                                    {{ shop.currency }}
+                                  </td>
+                                </tr>
+                                {% else %}
                                 <tr class="subtotal-line">
                                   <td class="subtotal-line__title">
                                     <p>
@@ -219,6 +237,22 @@
                                     {{ shop.currency }}
                                   </td>
                                 </tr>
+                                {% endif %}
+                                {% if current_total_duties %}
+                                <tr class="subtotal-line">
+                                  <td class="subtotal-line__title">
+                                    <p>
+                                      <span>Duties</span>
+                                    </p>
+                                  </td>
+                                  <td class="subtotal-line__value">
+                                    <span>{{ current_total_duties | money_without_currency }}</span>
+                                  </td>
+                                  <td class="subtotal-line__currency">
+                                    {{ shop.currency }}
+                                  </td>
+                                </tr>
+                                {% endif %}
                                 <tr class="subtotal-line">
                                   <td class="subtotal-line__title">
                                     <p>
@@ -232,7 +266,7 @@
                                     {{ shop.currency }}
                                   </td>
                                 </tr>
-                                {% if total_tip_received and total_tip_received > 0 %}
+                                {% if total_tip and total_tip > 0 %}
                                 <tr class="subtotal-line">
                                   <td class="subtotal-line__title">
                                     <p>
@@ -240,7 +274,7 @@
                                     </p>
                                   </td>
                                   <td class="subtotal-line__value">
-                                    <span>{{ total_tip_received | money_without_currency }}</span>
+                                    <span>{{ total_tip | money_without_currency }}</span>
                                   </td>
                                   <td class="subtotal-line__currency">
                                     {{ shop.currency }}
@@ -250,7 +284,7 @@
                                 <tr class="subtotal-line">
                                   <td class="subtotal-line__title">
                                     <p>
-                                      <span>Updated total</span>
+                                      <span>Grand Total (incl. Tax)</span>
                                     </p>
                                   </td>
                                   <td class="subtotal-line__value">
@@ -259,36 +293,67 @@
                                   <td class="subtotal-line__currency">
                                     {{ shop.currency }}
                                   </td>
-                                </tr>
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>Already paid</span>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <span>{{ net_payment | money_without_currency }}</span>
-                                  </td>
-                                  <td class="subtotal-line__currency">
-                                    {{ shop.currency }}
-                                  </td>
-                                </tr>
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>Amount to pay</span>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <span>{{ total_outstanding | money_without_currency }}</span>
-                                  </td>
-                                  <td class="subtotal-line__currency">
-                                    {{ shop.currency }}
-                                  </td>
                                 </tr>                                  
                               </table>
+                              {% assign transaction_size = 0 %}
+                              {% assign transaction_amount = 0 %}
+                              {% for transaction in transactions %}
+                              {% unless transaction.kind == "capture" or transaction.kind == "void" %}
+                              {% assign transaction_size = transaction_size | plus: 1 %}
+                              {% assign transaction_amount = transaction_amount | plus: transaction.amount %}
+                              {% endunless %}
+                              {% endfor %}
+                              {% if transaction_size > 1 or transaction_amount < total_price %}
+                              <table class="row subtotal-table">
+                                <tr>
+                                  <td colspan="2" class="subtotal-table__small-space"></td>
+                                </tr>
+                                {% for transaction in transactions %}
+                                {% if transaction.status == "success" and transaction.kind == "authorization" or transaction.kind == "sale" %}
+                                {% if transaction.payment_details.credit_card_company %}
+                                {% capture transaction_name %}{{ transaction.payment_details.credit_card_company }} (ending in {{ transaction.payment_details.credit_card_last_four_digits }}){% endcapture %}
+                                {% else %}
+                                {% capture transaction_name %}{{ transaction.gateway_display_name }}{% endcapture %}
+                                {% endif %}
+                                <tr class="subtotal-line">
+                                  <td class="subtotal-line__title">
+                                    <p>
+                                      <span>{{transaction_name}}</span>
+                                    </p>
+                                  </td>
+                                  <td class="subtotal-line__value">
+                                    <span>{{ transaction.amount | money_without_currency }}</span>
+                                  </td>
+                                  <td class="subtotal-line__currency">
+                                    {{ shop.currency }}
+                                  </td>
+                                </tr>
+                                {% endif %}
+                                {% if transaction.kind == 'refund' %}
+                                {% if transaction.payment_details.credit_card_company %}
+                                {% assign refund_method_title = transaction.payment_details.credit_card_company %}
+                                {% else %}
+                                {% assign refund_method_title = transaction.gateway %}
+                                {% endif %}
+                                <tr class="subtotal-line">
+                                  <td class="subtotal-line__title">
+                                    <p>
+                                      <span>Refund ({{ refund_method_title | capitalize }})</span>
+                                    </p>
+                                  </td>
+                                  <td class="subtotal-line__value">
+                                    <span>{{ transaction.amount | money_without_currency }}</span>
+                                  </td>
+                                  <td class="subtotal-line__currency">
+                                    {{ shop.currency }}
+                                  </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                              </table>
+                              {% endif %}
                             </td>
-                          </tr>                          
+                          </tr>
                         </table>
                       </td>
                     </tr>
