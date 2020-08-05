@@ -32,6 +32,11 @@
       }
     }
   }
+
+  p > a {
+    padding-bottom: 1px; // This is supposed to be 5 according to the comps but then it overlaps text in subsequent rows
+    border-bottom: 1px solid;
+  }
 }
 
 .text-center.rte,
@@ -46,11 +51,11 @@
 // allow table to scroll for tables in the RTE since we don't know
 // how many columns they will contain. Class added by JS.
 // sass-lint:disable no-misspelled-properties
-.rte-table {
-  max-width: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
+// .rte-table {
+//   max-width: 100%;
+//   overflow: auto;
+//   -webkit-overflow-scrolling: touch;
+// }
 
 // This class is wrapped around YouTube/Vimeo embeds in the RTE
 // to make them responsive and prevent layout breaking
@@ -73,8 +78,8 @@
 
 // This class is wrapped around tables in the RTE
 // to prevent layout breaking with a scrollable parent
-.rte__table-wrapper {
-  max-width: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
+// .rte__table-wrapper {
+//   max-width: 100%;
+//   overflow: auto;
+//   -webkit-overflow-scrolling: touch;
+// }
