@@ -4,11 +4,13 @@ import BaseSection from './base';
 import ProductForm from '../view/product/productForm';
 import StoryPopup from '../view/product/storyPopup';
 import TransactionBar from '../view/product/transactionBar';
+import YotpoReviewsWidget from '../view/product/yotpoReviewsWidget';
 
 const selectors = {
   productForm: 'form[data-product-form]',
   storyPopup: '[data-story-popup]',
   transactionBar: '[data-transaction-bar]',
+  yotpoReviewsWidget: '.yotpo-main-widget'
   // productGrid: '.product-grid'
 };
 
@@ -22,12 +24,14 @@ export default class ProductSection extends BaseSection {
 
     // @TODO - Don't really need to create these instance vars?
     this.$productForm    = $(selectors.productForm, this.$container).first();
-    this.$storyPopup     = $(selectors.storyPopup, this.$el);
-    this.$transactionBar = $(selectors.transactionBar, this.$el);
+    this.$storyPopup     = $(selectors.storyPopup, this.$container).first();
+    this.$transactionBar = $(selectors.transactionBar, this.$container).first();
+    this.$yotpoReviewsWidgets = $(selectors.yotpoReviewsWidget, this.$container);
 
     this.productForm = new ProductForm(this.$productForm);
     this.storyPopup  = new StoryPopup(this.$storyPopup);
     this.transactionBar = new TransactionBar(this.$transactionBar);
+    this.$yotpoReviewsWidgets.each((i, el) => new YotpoReviewsWidget($(el))); // One on desktop + one inside the story popup
 
     this.throttledOnScroll = throttle(50, this.onScroll.bind(this));
     this.throttledOnResize = throttle(300, this.onResize.bind(this));

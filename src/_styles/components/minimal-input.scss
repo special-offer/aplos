@@ -8,7 +8,19 @@
 
 .minimal-input-box__input {
   @extend .form-control;
+  @include p2;
   padding-right: 30px;
+  height: 24px;
+
+  &::placeholder {
+    color: $body-color;
+  }
+
+  .form-inverted & {
+    &::placeholder {
+      color: $white;
+    }
+  }
 }
 
 .minimal-input-box__submit {

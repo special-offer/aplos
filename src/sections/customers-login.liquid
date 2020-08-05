@@ -22,7 +22,7 @@
               ph_subtitle: section.settings.subtitle
   %}
 
-  <div class="container">
+  <div class="container drawer-shifter">
 
     <div class="row justify-content-center">
       <div class="col-lg-10">
@@ -33,7 +33,7 @@
           <div class="col-md-6 col-xl-5">
 
             <div id="CustomerLoginForm">
-              <h2 class="h4">{{ 'customer.login.title' | t }}</h2>
+              <h2 class="h3">{{ 'customer.login.title' | t }}</h2>
               
               <div style="margin-bottom: 25px;">
                 {% if section.settings.login_subtitle != blank %}
@@ -47,45 +47,51 @@
 
                 {{ form.errors | default_errors }}
 
-                <div class="form-group">
-                  <label for="CustomerEmail">
+                <div class="form-group row{% if form.errors contains 'email' %} is-invalid{% endif %}">
+                  <label for="CustomerEmail" class="col-2">
                     {{ 'customer.login.email' | t }}
                   </label>
 
-                  <input type="email"
-                    name="customer[email]"
-                    id="CustomerEmail"
-                    class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
-                    spellcheck="false"
-                    autocomplete="off"
-                    autocapitalize="off">
+                  <div class="col-10">
+                    <input type="email"
+                      name="customer[email]"
+                      id="CustomerEmail"
+                      class="form-control"
+                      spellcheck="false"
+                      autocomplete="off"
+                      autocapitalize="off">
+                  </div>
                 </div>
 
                 {% if form.password_needed %}
-                  <div class="form-group">
-                    <label for="CustomerPassword">
+                  <div class="form-group row{% if form.errors contains 'password' %} is-invalid{% endif %}">
+                    <label for="CustomerPassword" class="col-2">
                       {{ 'customer.login.password' | t }}
                     </label>
 
-                    <input type="password"
-                      name="customer[password]"
-                      id="CustomerPassword"
-                      class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}"">
-                  </div>
-
-                  <div class="form-group">
-                    <a href="#recover" id="RecoverPassword" class="form-text text-right">{{ 'customer.login.forgot_password' | t }}</a>
+                    <div class="col-10">
+                      <input type="password"
+                        name="customer[password]"
+                        id="CustomerPassword"
+                        class="form-control">
+                    </div>
                   </div>
                 {% endif %}
 
-                <div class="form-group">
-                  <input type="submit" class="btn btn-primary" value="{{ 'customer.login.sign_in' | t }}">
+                <div class="form-group form-group--footer text-right">
+                  <input type="submit" class="btn btn-primary-reverse" value="{{ 'customer.login.sign_in' | t }}">
                 </div>
+
+                {% if form.password_needed %}
+                  <div class="form-text text-right">
+                    <a href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
+                  </div>
+                {% endif %}
               {% endform %}
             </div>
 
             <div id="RecoverPasswordForm" class="hide">
-              <h2 class="h4">{{ 'customer.recover_password.title' | t }}</h2>
+              <h2 class="h3">{{ 'customer.recover_password.title' | t }}</h2>
 
               <div style="margin-bottom: 25px;">
                 {% if section.settings.recover_subtitle != blank %}
@@ -109,24 +115,29 @@
                   <span class="hide reset-password-success"></span>
                 {% endif %}
 
-                <div class="form-group">
-                  <label for="RecoverEmail">
+                <div class="form-group row">
+                  <label for="RecoverEmail" class="col-2">
                     {{ 'customer.recover_password.email' | t }}
                   </label>
-                  <input type="email"
-                    name="email"
-                    id="RecoverEmail"
-                    class="form-control"
-                    spellcheck="false"
-                    autocomplete="off"
-                    autocapitalize="off">
+                  <div class="col-10">
+                    <input type="email"
+                      name="email"
+                      id="RecoverEmail"
+                      class="form-control"
+                      spellcheck="false"
+                      autocomplete="off"
+                      autocapitalize="off">
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <input type="submit" class="btn btn-primary" value="{{ 'customer.recover_password.submit' | t }}">
-                  <button type="button" class="btn btn-link" id="HideRecoverPasswordLink">
-                    {{ 'customer.recover_password.cancel' | t }}
-                  </button>
+                <div class="form-group form-group--footer text-right">
+                  <input type="submit" class="btn btn-primary-reverse" value="{{ 'customer.recover_password.submit' | t }}">
+                </div>
+
+                <div class="form-text text-right">
+                  <a href="#" id="HideRecoverPasswordLink">
+                    {{ 'customer.recover_password.back_to_login' | t }}
+                  </a>
                 </div>
               {% endform %}
 
@@ -135,7 +146,7 @@
           </div>
 
           <div class="col-md-6 col-xl-5 offset-xl-2">
-            <h2 class="h4">{{ 'customer.register.title' | t }}</h2>
+            <h2 class="h3">{{ 'customer.register.title' | t }}</h2>
             <div style="margin-bottom: 25px;">
               {% if section.settings.register_subtitle != blank %}
                 {{ section.settings.register_subtitle }}

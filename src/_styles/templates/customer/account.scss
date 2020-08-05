@@ -5,7 +5,7 @@
 // Not scoped to a specific account page
 
 .account-block {
-  margin-bottom: 25px;
+  margin-bottom: 45px;
 
   address {
     margin-bottom: $spacer;
@@ -17,7 +17,7 @@
 }
 
 .account-block__content {
-  
+  @include p2;
 }
 
 table.order-detail-totals {
@@ -33,45 +33,49 @@ table.order-detail-totals {
 
 .account-sidebar {
   @extend .col-lg-3;
-  @extend .col-xxl-2;
-  @extend .offset-xxl-1;
-
-  @include media-breakpoint-down('md') {
-    margin-bottom: 45px;
-  }  
+  @extend .col-xl-2;
 }
 
 .account-content--has-sidebar {
   @extend .col-lg-9;
-  @extend .col-xxl-8;
 }
 
 .account-sidebar__content {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid $gray;
+  margin-bottom: 4rem;
 
-  @include media-breakpoint-up('xl') {
+  @include media-breakpoint-up('lg') {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none;
   }
 }
 
+.account-section__title,
 .account-sidebar__title {
   margin-bottom: 2.5rem;
 }
 
+.account-sidebar__title {
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
 .account-sidebar__menu {
   @include list-unstyled;
+  @include p2;
 
   li {
     &:not(:last-child) {
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
+  }
+}
 
-    &.is-active {
-      font-weight: $font-weight-bold;
-    }
+.account-sidebar__menu-link {
+  padding-bottom: 4px;
+
+  &.is-active {
+    border-bottom: 1px solid currentColor;
   }
 }

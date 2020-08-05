@@ -155,12 +155,15 @@ This provides more control and a more predictable experience.
             </div>
           </div>
         </div>
-      </div>      
-      <div style="background-color: #E1E1BD; padding: 300px 0;">
-        <div class="container text-center">
-          <h3>Feedback</h3>
-        </div>
       </div>
+
+      {% unless block.settings.reviews_enabled == false %}
+        <div class="bg-butter-gray" style="padding: 50px 0;">
+          <div class="aplos-4side-container">
+            {% render 'yotpo-reviews-widget' %}        
+          </div>
+        </div>
+      {% endunless %}
     </div>
     <!-- END Product Grid -->
 
@@ -241,6 +244,10 @@ This provides more control and a more predictable experience.
             "info": "The settings below with only display for the product selected here"
           },
           {
+            "type": "header",
+            "content": "Additional Info"
+          },          
+          {
             "type": "richtext",
             "id": "subtitle",
             "label": "Subtitle"
@@ -250,7 +257,17 @@ This provides more control and a more predictable experience.
             "id": "subtitle_mobile",
             "label": "Subtitle (Mobile)",
             "info": "Displays inside the popup card."
-          },          
+          },
+          {
+            "type": "header",
+            "content": "Reviews"
+          },
+          {
+            "type": "checkbox",
+            "id": "reviews_enabled",
+            "label": "Reviews Section Enabled",
+            "default": true
+          },   
           {
             "type": "header",
             "content": "Imagery"

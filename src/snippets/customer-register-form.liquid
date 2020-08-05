@@ -15,55 +15,75 @@
 {% form 'create_customer' %}
   {{ form.errors | default_errors }}
 
-  <div class="form-group">
-    <label for="FirstName">
+  <div class="form-group row">
+    <label for="FirstName" class="col-2">
       {{ 'customer.register.first_name' | t }}
     </label>
-    <input type="text"
-      name="customer[first_name]"
-      id="FirstName"
-      class="form-control"
-      {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
-      required>
+    <div class="col-10">
+      <input type="text"
+        name="customer[first_name]"
+        id="FirstName"
+        class="form-control"
+        {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+        required>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="LastName">
+  <div class="form-group row">
+    <label for="LastName" class="col-2">
       {{ 'customer.register.last_name' | t }}
     </label>
-    <input type="text"
-      name="customer[last_name]"
-      id="LastName"
-      class="form-control"
-      {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+    <div class="col-10">
+      <input type="text"
+        name="customer[last_name]"
+        id="LastName"
+        class="form-control"
+        {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="Email">
+  <div class="form-group row">
+    <label for="Email" class="col-2">
       {{ 'customer.register.email' | t }}
     </label>
-    <input type="email"
-      name="customer[email]"
-      id="Email"
-      class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}""
-      value="{% if form.email %}{{ form.email }}{% endif %}"
-      spellcheck="false"
-      autocomplete="off"
-      autocapitalize="off">
+    <div class="col-10">
+      <input type="email"
+        name="customer[email]"
+        id="Email"
+        class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
+        value="{% if form.email %}{{ form.email }}{% endif %}"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off">
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="CreatePassword">
+  <div class="form-group row">
+    <label for="CreatePassword" class="col-2">
       {{ 'customer.register.password' | t }}
     </label>
-    <input type="password"
-      name="customer[password]"
-      id="CreatePassword"
-      class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}""
-      data-password-field>
+    <div class="col-10">
+      <input type="password"
+        name="customer[password]"
+        id="CreatePassword"
+        class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}"
+        data-password-field>
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group row">
+    <label for="ConfirmPassword" class="col-2">
+      {{ 'customer.register.confirm' | t }}
+    </label>
+    <div class="col-10">
+      <input type="password"
+        id="ConfirmPassword"
+        class="form-control"
+        data-password-confirm-field>
+    </div>
+  </div>  
+
+  <div class="form-group row">
     <div class="custom-control custom-checkbox">
       <input class="custom-control-input" type="checkbox" name="customer[accepts_marketing]" value="true" id="AcceptsMarketing">
       <label class="custom-control-label" for="AcceptsMarketing">
@@ -74,19 +94,9 @@
         {% endif %}
       </label>
     </div>   
-    <div class="custom-control custom-checkbox">
-      <input class="custom-control-input" type="checkbox" name="customer[accepts_terms]" value="true" id="AcceptsTerms" required>
-      <label class="custom-control-label" for="AcceptsTerms">
-        {% if terms_checkbox_label != blank %}
-          {{ terms_checkbox_label }}
-        {% else %}
-          I accept the Privacy Policy and agree to the Terms & Conditions
-        {% endif %}        
-      </label>
-    </div>
   </div>
   
-  <div class="form-group">
-    <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn btn-primary">
+  <div class="form-group text-right">
+    <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn btn-primary-reverse">
   </div>
 {% endform %}  

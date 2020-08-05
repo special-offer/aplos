@@ -127,7 +127,7 @@
   },
   "customer": {
     "account": {
-      "title": "My Account",
+      "title": "Account",
       "details": "Account Details",
       "view_addresses": "View Addresses",
       "addresses": "Addresses",
@@ -155,7 +155,7 @@
       "last_name": "Last Name",
       "company": "Company",
       "address1": "Address",
-      "address2": "Apt, suite, etc (optional)",
+      "address2": "Apt, suite..",
       "city": "City",
       "country": "Country",
       "province": "Province",
@@ -166,6 +166,7 @@
       "add": "Add Address",
       "update": "Update Address",
       "save": "Save",
+      "save_address": "Save Address",
       "cancel": "Cancel",
       "edit": "Edit",
       "delete": "Delete",
@@ -231,11 +232,12 @@
       "see_order_status": "See Order Status"
     },
     "recover_password": {
-      "title": "Reset your password",
+      "title": "Reset Your Password",
       "email": "Email",
       "submit": "Submit",
       "cancel": "Cancel",
-      "subtext": "We will send you an email to reset your password.",
+      "back_to_login": "Back to login",
+      "subtext": "Submit your email address and we'll send you a link to reset your password.",
       "success": "We've sent you an email with a link to update your password."
     },
     "reset_password": {
@@ -252,7 +254,8 @@
       "last_name": "Last Name",
       "email": "Email",
       "password": "Password",
-      "submit": "Create",
+      "confirm": "Confirm",
+      "submit": "Create Account",
       "cancel": "Return to Store"
     }
   },
@@ -273,8 +276,9 @@
     "customer": {
       "account": "Account",
       "logged_in_as_html": "Logged in as {{ first_name }}",
-      "log_out": "Log out",
-      "log_in": "Log in",
+      "log_out": "Log Out",
+      "log_in": "Log In",
+      "logout": "Logout",
       "create_account": "Create account"
     },
     "footer": {

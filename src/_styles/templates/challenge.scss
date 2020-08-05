@@ -3,11 +3,15 @@
 // -------------------------
 
 .shopify-challenge__container {
-  margin-top: 100px !important;
+  margin-top: 200px !important;
   margin-bottom: 100px !important;
 
   .shopify-challenge__message,
   .shopify-challenge__errors {
-    font-size: $font-size-sm;
-  }  
+    @include p2;
+  }
+
+  .shopify-challenge__button {
+    @extend .btn-primary-reverse;
+  }
 }

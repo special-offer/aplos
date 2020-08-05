@@ -108,6 +108,12 @@ export default class HeaderSection extends BaseSection {
       hideHeader = this.dirChangeScrollTop - scrollTop <= 25; //  going up and scrolled up 15px from last time we changed scroll direction
     }
 
+    // For situations where we toggle content visibility and cause page jumps
+    // Or we scroll past the top on mobile
+    if (scrollTop <= 0) {
+      hideHeader = false;
+    }
+
     requestAnimationFrame(() => {
       this.$header.toggleClass(classes.headerHidden, hideHeader);
       this.$headerMain.toggleClass(classes.headerMainFixed, fixed);

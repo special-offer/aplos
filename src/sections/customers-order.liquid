@@ -4,18 +4,18 @@
 
 {% assign created_at = order.created_at | time_tag: format: 'month_day_year' %}
 {% assign title = 'customer.order.title' | t: name: order.name %}
-{% assign subtitle = 'Placed: ' | append: created_at %}
 
 <div class="layout-content-wrapper" data-section-id="{{ section.id }}" data-section-type="customers-order">
-  <div class="container">
+  <div class="aplos-container drawer-shifter">
 
-    {% include 'page-header', ph_title: title, ph_subtitle: subtitle %}
+    {% include 'page-header', ph_title: title %}
 
     <div class="row">
 
       {{ sidebar_html }}
       
       <div class="account-content{% if sidebar_html != blank %} account-content--has-sidebar{% endif %}">
+        <h2 class="account-section__title">{{ title }}</h2>
 
         <div data-order="{{ order.id }}">
           {% if order.cancelled %}
@@ -31,21 +31,21 @@
                 <div class="account-block__content">
                   {% assign created_at_formatted = order.created_at | date: format: 'month_day_year' %}
                   <p>{{ 'customer.order.date' | t: date: created_at_formatted }}</p>
-                  <p><a href="{{ order.order_status_url }}">{{ 'customer.order.see_order_status' | t }}</a></p>
+                  <a href="{{ order.order_status_url }}" class="btn btn-tertiary">{{ 'customer.order.see_order_status' | t }}</a>
                 </div>
               </div>
               <div class="account-block">
                 <h6 class="account-block__title">{{ 'customer.order.shipping_address' | t }}</h6>
                 <div class="account-block__content">
                   {{ order.shipping_address | format_address | replace: '<p>', '<address>' | replace: '</p>', '</address>' }}
-                  <p>{{ 'customer.orders.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
+                  <p>{{ 'customer.orders.fulfillment_status' | t }}: <strong>{{ order.fulfillment_status_label }}</strong></p>
                 </div>
               </div>              
               <div class="account-block">
                 <h6 class="account-block__title">{{ 'customer.order.billing_address' | t }}</h6>
                 <div class="account-block__content">
                   {{ order.billing_address | format_address | replace: '<p>', '<address>' | replace: '</p>', '</address>' }}
-                  <p>{{ 'customer.orders.payment_status' | t }}: {{ order.financial_status_label }}</p>
+                  <p>{{ 'customer.orders.payment_status' | t }}: <strong>{{ order.financial_status_label }}</strong></p>
                 </div>
               </div>
             </div>
@@ -53,31 +53,26 @@
               <div class="d-block d-sm-none">
                 {% for line_item in order.line_items %}
                   <div class="account-block" {% unless forloop.first %}style="margin-top: 60px"{% endunless %}>          
-                    <div class="row">
-                      <div class="col-sm-5">
-                        <img src="{{ line_item.image | img_url: '250x' }}" class="img-fluid" alt="{{ line_item.title | escape }}" />
+                    <div class="p2">
+                      <img src="{{ line_item.image | img_url: '250x' }}" class="img-fluid" style="margin-bottom: 1.5rem;" alt="{{ line_item.title | escape }}" />
+                      <div>
+                        <h5>{{ line_item.product.title }}</h5>
+                        {% comment %} Only show this line if there is non-default content {% endcomment %}
+                        {% if line_item.variant.title != "Default Title" %}
+                          <div>{{ line_item.variant.title }}</div>
+                        {% endif %}
+                        {% unless line_item.properties == empty %}
+                          {% for property in line_item.properties %}
+                            {% unless property.last == blank %}
+                              <div>{{ property.last }}</div>
+                            {% endunless %}
+                          {% endfor %}
+                        {% endunless %}
                       </div>
-                      <div class="col-sm-7">
-                        <div>
-                          <strong>{{ 'customer.order.item' | t }}</strong><br />
-                          <div>{{ line_item.product.title }}</div>
-                          {% comment %} Only show this line if there is non-default content {% endcomment %}
-                          {% if line_item.variant.title != "Default Title" %}
-                            <div>{{ line_item.variant.title }}</div>
-                          {% endif %}
-                          {% unless line_item.properties == empty %}
-                            {% for property in line_item.properties %}
-                              {% unless property.last == blank %}
-                                <div>{{ property.last }}</div>
-                              {% endunless %}
-                            {% endfor %}
-                          {% endunless %}
-                        </div>
-                        <p></p>
-                        <p><strong>{{ 'customer.order.price' | t }}</strong><br />{{ line_item.price | money }}</p>
-                        <p><strong>{{ 'customer.order.quantity' | t }}</strong><br />{{ line_item.quantity }}</p>
-                        <p><strong>{{ 'customer.order.total' | t }}</strong><br />{{ line_item.line_price | money }}</p>
-                      </div>
+                      <p></p>
+                      <p><strong>{{ 'customer.order.price' | t }}</strong><br />{{ line_item.price | money }}</p>
+                      <p><strong>{{ 'customer.order.quantity' | t }}</strong><br />{{ line_item.quantity }}</p>
+                      <p><strong>{{ 'customer.order.total' | t }}</strong><br />{{ line_item.line_price | money }}</p>
                     </div>
                     {% if line_item.filfillment %}
                       <div class="text-center bg-gray-100 font-size-xs" style="padding: 8px 10px; margin: 4px 0">
@@ -91,7 +86,7 @@
                 {% endfor %}
               </div>
               <div class="d-none d-sm-block">
-                <table class="table table-borderless table-sm">
+                <table class="table">
                   <thead>
                     <th>{{ 'customer.order.item' | t }}</th>
                     <th>{{ 'customer.order.price' | t }}</th>
@@ -104,7 +99,7 @@
                         <td>
                           <div style="width: 130px; float: left"><img src="{{ line_item.image | img_url: '250x' }}" class="img-fluid" alt="{{ line_item.title | escape }}" /></div>
                           <div style="padding-left: 160px">
-                            <strong>{{ line_item.product.title }}</strong>
+                            <h6>{{ line_item.product.title }}</h6>
                             {% comment %} Only show this line if there is non-default content {% endcomment %}
                             {% if line_item.variant.title != "Default Title" %}
                               <p>{{ line_item.variant.title }}</p>
@@ -143,9 +138,9 @@
               <table class="table table-borderless table-sm order-detail-totals">
                 <tbody class="text-right">
                   <tr>
-                    <td colspan="1"></td>
+                    <td colspan="1" class="d-none d-sm-table-cell"></td>
                     <td colspan="4">
-                      <strong class="float-left">{{ 'customer.order.subtotal' | t }}:</strong>
+                      <span class="float-left">{{ 'customer.order.subtotal' | t }}:</span>
                       {{ order.subtotal_price | money }}
                     </td>
                   </tr>
@@ -153,7 +148,7 @@
                     <tr>
                       <td colspan="1"></td>
                       <td colspan="4">
-                        <strong class="float-left">{{ discount.code }} {{ 'customer.order.discount' | t }}:</strong>
+                        <span class="float-left">{{ discount.code }} {{ 'customer.order.discount' | t }}:</span>
                         {{ discount.savings | money }}
                       </td>
                     </tr>
@@ -162,7 +157,7 @@
                     <tr>
                       <td colspan="1"></td>
                       <td colspan="4">
-                        <strong class="float-left">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}):</strong>
+                        <span class="float-left">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}):</span>
                         {{ shipping_method.price | money }}
                       </td>
                     </tr>
@@ -171,7 +166,7 @@
                     <tr>
                       <td colspan="1"></td>
                       <td colspan="4">
-                        <strong class="float-left">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%):</strong>
+                        <span class="float-left">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%):</span>
                         {{ tax_line.price | money }}
                       </td>
                     </tr>
@@ -179,7 +174,7 @@
                   <tr>
                     <td colspan="1"></td>
                     <td colspan="4">
-                      <strong class="float-left">{{ 'customer.order.total' | t }}:</strong>
+                      <span class="float-left">{{ 'customer.order.total' | t }}:</span>
                       {{ order.total_price | money }}
                     </td>
                   </tr>

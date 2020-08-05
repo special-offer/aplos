@@ -58,6 +58,7 @@
 
 .product-mobile {
   height: 100vh;
+  height: var(#{'--viewport-height'});
   display: flex;
   flex-direction: column;
   background-color: $butter;
