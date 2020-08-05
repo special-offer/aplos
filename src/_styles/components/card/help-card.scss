@@ -7,7 +7,10 @@
   background-color: $white;
   border-radius: $border-radius;
   overflow: hidden;
-  min-height: 343px;
+
+  @include media-breakpoint-up(sm) {
+    min-height: 343px;
+  }
 
   img {
     position: absolute;
@@ -25,23 +28,40 @@
 
 .help-card__content {
   padding: 27px 24px;
+
+  h4 {
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-base;
+    }
+  }
 }
 
 .help-card__content-title {
   @extend .p2;
-  margin-bottom: 31px;
+  margin-bottom: 12px;
+
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 31px;    
+  }
 }
 
 .help-card__reveal {
-  padding-top: 45px;
-
   display: none;
-  opacity: 0;
+  padding-top: 4px;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 45px;
+  }
 }
 
 .help-card__detail {
-  padding-top: 67px;
+  padding-top: 50px;
   border-top: 1px solid $black;
+  opacity: 0;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 67px;
+  }  
 }
 
 //
@@ -52,9 +72,14 @@
 }
 
 .help-card-grid__item {
-  width: percentage(1/2);
+  width: 100%;
   padding: 0 24px;
-  margin-bottom: 48px;
+  margin-bottom: 13px;
+
+  @include media-breakpoint-up(sm) {
+    width: percentage(1/2);
+    margin-bottom: 48px;
+  }
 
   @include media-breakpoint-up(lg) {
     width: percentage(1/3);

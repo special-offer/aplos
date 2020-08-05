@@ -21,6 +21,11 @@ $content-grid-item-vertical-spacing-desktop: 32px;
   &--centered {
     justify-content: center;
   }
+
+  .page-title {
+    transform: translateY(-9px);
+    margin-bottom: 3rem;
+  }
 }
 
 .content-grid__item {
@@ -72,45 +77,3 @@ $content-grid-item-vertical-spacing-desktop: 32px;
     }
   }
 }
-
-// First item in a content grid
-.content-grid__item--header {
-  .h1 {
-    transform: translateY(-9px);
-    margin-bottom: 3rem;
-
-    @include media-breakpoint-down(sm) {
-      text-align: center;
-    }
-  }
-}
-
-// .content-header,
-// .content-footer {
-//   text-align: center;
-//   margin-top: $grid-gutter-width;
-//   margin-bottom: $grid-gutter-width;
-// }
-
-// .content-header {
-
-// }
-
-// .content-header__title {
-//   margin-bottom: 0;
-// }
-
-// .content-header__subtitle {
-//   font-size: $font-size-lg;
-//   max-width: 40em;
-//   margin-left: auto;
-//   margin-right: auto;
-
-//   .content-header__title + & {
-//     margin-top: $spacer;
-//   }
-// }
-
-// .content-footer {
-
-// }

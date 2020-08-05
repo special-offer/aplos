@@ -1,0 +1,54 @@
+{%- comment %}
+
+  Promo
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% render 'page-banner',
+             image: { image } - required
+  %}
+
+{% endcomment -%}
+
+{% if image != blank %}
+  <div class="page-banner">
+    <picture>
+      <source
+          media="(min-width: 768px)"
+          srcset="
+            {{ image | img_url: '768x' }} 768w,
+            {{ image | img_url: '900x' }} 900w,
+            {{ image | img_url: '1000x' }} 1000w,
+            {{ image | img_url: '1200x' }} 1200w,
+            {{ image | img_url: '1400x' }} 1400w,
+            {{ image | img_url: '1600x' }} 1600w,
+            {{ image | img_url: '1800x' }} 1800w,
+            {{ image | img_url: '2000x' }} 2000w,
+            {{ image | img_url: '2200x' }} 2200w,
+          "
+          sizes="100vw"
+      >
+
+      <source
+        media="(min-width: 400px)"
+        srcset="
+          {{ image | img_url: '400x' }},
+          {{ image | img_url: '600x' }} 1.5x,
+          {{ image | img_url: '800x' }} 2x
+        "
+        sizes="100vw"
+      >
+      <source
+        media="(min-width: 600px)"
+        srcset="
+          {{ image | img_url: '600x' }},
+          {{ image | img_url: '900x' }} 1.5x,
+          {{ image | img_url: '1200x' }} 2x
+        "
+        sizes="100vw"
+      >  
+      <img src="{{ image | img_url: '1600x' }}" alt="{{ image.alt | escape }}" />
+    </picture>    
+  </div>
+{% endif %}
