@@ -12,6 +12,7 @@ body.drawer-open {
 
   body.drawer-shift--left & {
     transform: translateX(#{$drawer-width});
+    transform: translateX(#{$drawer-width-vw});
 
     @include media-breakpoint-up(md) {
       transform: translateX($drawer-max-width);
@@ -20,6 +21,7 @@ body.drawer-open {
 
   body.drawer-shift--right & {
     transform: translateX(-#{$drawer-width});
+    transform: translateX(-#{$drawer-width-vw});
 
     @include media-breakpoint-up(md) {
       transform: translateX(-#{$drawer-max-width});
@@ -33,6 +35,7 @@ body.drawer-open {
   top: 0;
   right: 0;
   width: $drawer-width;
+  width: $drawer-width-vw;
   height: 100%;
   background: $drawer-bg;
   pointer-events: none;

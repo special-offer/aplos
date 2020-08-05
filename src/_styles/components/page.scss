@@ -10,12 +10,50 @@
 
 // Page title
 .page-title {
+  @extend .h1;
   margin-bottom: $spacer*4;
+  text-align: left;
   
   @include media-breakpoint-down(sm) {
+    margin-bottom: $spacer*3;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: $font-size-xxxl;
     text-align: center;
+
+    br {
+      display: none;
+    }
   }
 }
+
+.page-banner {
+  position: relative;
+  min-height: 400px;
+  height: 45vh;
+  margin-bottom: 30px;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 90px;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // Page Hero
 .page-hero {

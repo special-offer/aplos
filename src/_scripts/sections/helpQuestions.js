@@ -33,19 +33,24 @@ export default class HelpQuestionsSection extends BaseSection {
   onHelpCardClick(e) {
     const $card = $(e.currentTarget);
     const $cardReveal = $card.find('.help-card__reveal');
+    const $cardDetail = $card.find('.help-card__detail');
 
     if ($card.hasClass(classes.helpCardExpanded)) {
       $cardReveal.slideUp({
-        duration: 350,
-        start: () => $cardReveal.fadeTo(100, 0),
+        duration: 400,
+        easing: 'easeInOutCubic',
+        start: () => $cardDetail.fadeTo(300, 0, 'easeOutCubic'),
         progress: () => this.masonry && this.masonry.layout(),
         done: () => $card.removeClass(classes.helpCardExpanded),
       });
     }
     else {      
       $cardReveal.slideDown({
-        duration: 350,
-        start: () => $cardReveal.fadeTo(180, 1),
+        duration: 650,
+        easing: 'easeOutQuint',
+        start: () => setTimeout(() => {
+          $cardDetail.fadeTo(500, 1, 'easeOutCubic');
+        }, 150),
         progress: () => this.masonry && this.masonry.layout(),
         done: () => $card.addClass(classes.helpCardExpanded),
       });

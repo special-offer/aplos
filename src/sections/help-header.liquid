@@ -1,29 +1,35 @@
-<div style="background-color: #32415E; position: relative; min-height: 400px; height: 45vh;">
-  {% if section.settings.header_image != blank %}
-    <img src="{{ section.settings.header_image | img_url: '1200x' }}" style="height: 100%; width: 100%; object-fit: cover" />
-  {% endif %}
-</div>
+{% render 'page-banner'
+          image: section.settings.header_image
+%}
 
-<div class="aplos-4side-container" style="padding-bottom: 0;">
-  <div style="border-bottom: 1px solid black">
-    <h2 class="h1">{{ section.settings.title }}</h2>
-    <div style="margin-top: 95px">
-      {% for block in section.blocks %}
+<div class="aplos-container">
+  <h2 class="page-title">{{ section.settings.title }}</h2>
+
+  <div class="help-rows">
+    {% for block in section.blocks %}
+      {%- capture display_index -%}
+        {% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}.
+      {%- endcapture -%}
+
+      <div class="help-row" {{ block.shopify_attributes }}>
         <div class="row">
-          <div class="col-2 col-md-3">
-            <span class="p2">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}.</span>
+          <div class="d-none d-sm-block col-sm-2 col-md-3">
+            <span class="p2">{{ display_index }}</span>
           </div>
-          <div class="col-3">
-            <span class="p2">{{ block.settings.title }}</span>
+          <div class="col-sm-3">
+            <span class="p2">
+              <span class="d-sm-none">{{ display_index }}</span>
+              {{ block.settings.title }}
+            </span>
           </div>
-          <div class="col-7 col-md-6 col-xxl-5">
+          <div class="col-sm-7 col-md-6 col-xxl-5">
             <div class="rte">
               {{ block.settings.content }}
             </div>
           </div>
-        {% endfor %}
-      </div>       
-    </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </div>
 

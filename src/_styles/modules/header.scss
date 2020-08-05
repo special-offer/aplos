@@ -139,7 +139,11 @@
 
 .header-nav__menu-item {
   display: inline-block;
-  margin: 0 30px;
+  margin: 0 13px;
+
+  @include media-breakpoint-up(lg) {
+    margin: 0 30px;
+  }
 
   &:first-child {
     margin-left: 0;
@@ -230,13 +234,15 @@
 // Alternate colors
 // Putting these modifiers at the bottom of this page because they affect header child elements
 .header--transparent .header-bar {
-  background-color: transparent;
+  @media (min-width: $header-bp-min) {
+    background-color: transparent;
 
-  a, a:hover {
-    color: $white;
+    a, a:hover {
+      color: $white;
 
-    svg {
-      fill: $white;
+      svg {
+        fill: $white;
+      }
     }
   }
 }
@@ -246,7 +252,7 @@
 }
 
 .header--white-mobile .header-bar {
-  @include media-breakpoint-down(md) {
+  @media (max-width: $header-bp-min - 1px) {
     background-color: $white;
   }
 }

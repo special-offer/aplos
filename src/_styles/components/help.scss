@@ -1,0 +1,53 @@
+// ------------------
+// Help
+// ------------------
+
+.help-rows {
+
+}
+
+.help-row {
+  padding: 18px 0 13px;
+  border-top: 1px solid $hr-border-color;
+
+  @include media-breakpoint-up(md) {
+    border-top: none;
+    padding: 25px 0;
+  }
+
+  .rte {
+    @include media-breakpoint-down(sm) {
+      margin-top: 0.3rem;
+      line-height: 1.35;
+    }
+  }
+}
+
+.help-questions {
+
+  @include media-breakpoint-up(md) {
+    margin-top: 16px;
+    padding-top: 95px;
+    border-top: 1px solid $hr-border-color;
+  }
+
+  .page-title {
+    margin-top: 40px;
+
+    @include media-breakpoint-up(md) {
+      margin-top: 0;
+    }
+  }
+}
+
+.help-questions__title-image {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: $border-radius;
+  mix-blend-mode: multiply;
+
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}

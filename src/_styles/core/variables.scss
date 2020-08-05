@@ -302,6 +302,7 @@ $font-family-base:            $font-family-serif !default;
 // stylelint-enable value-keyword-case
 
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-xxxl:              $font-size-base * (36/16) !default; // @TODO - This is the mobile responsive h1 font size
 $font-size-xxl:               $font-size-base * (30/16) !default;
 // $font-size-xl:
 $font-size-lg:                $font-size-base * (20/16) !default;
@@ -981,6 +982,7 @@ $banner-panel-overlay-dark-color:       transparentize($black, 0.5);
 // Drawer
 
 $drawer-width:                          85%;
+$drawer-width-vw:                       85vw;
 $drawer-max-width:                      540px;
 $drawer-bg:                             $black;
 $drawer-color:                          $white;
