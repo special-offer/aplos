@@ -27,7 +27,7 @@
           <option value="/account" {% if is_account %}selected="selected"{% endif %}>{{ 'customer.account.account_details' | t }}</option>
           <option value="/account?view=orders" {% if is_orders %}selected="selected"{% endif %}>{{ 'customer.orders.title' | t }}</option>
           <option value="/account/addresses" {% if is_addresses %}selected="selected"{% endif %}>{{ 'customer.account.addresses' | t }}</option>
-          <option value="/account/logout">{{ 'layout.customer.log_out' | t }}</option>
+          <option value="/account/logout">{{ 'layout.customer.logout' | t }}</option>
         </select>
       </div>
     </div>    
@@ -45,7 +45,7 @@
           </a>
         </li>
         <li>
-          <a href="/account/logout" class="account-sidebar__menu-link">{{ 'layout.customer.log_out' | t }}</a>
+          <a href="/account/logout" class="account-sidebar__menu-link">{{ 'layout.customer.logout' | t }}</a>
         </li>
       </ul>
     </div>

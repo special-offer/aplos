@@ -232,10 +232,11 @@
       "see_order_status": "See Order Status"
     },
     "recover_password": {
-      "title": "Reset your password",
+      "title": "Reset Your Password",
       "email": "Email",
       "submit": "Submit",
       "cancel": "Cancel",
+      "back_to_login": "Back to login",
       "subtext": "Submit your email address and we'll send you a link to reset your password.",
       "success": "We've sent you an email with a link to update your password."
     },
@@ -277,6 +278,7 @@
       "logged_in_as_html": "Logged in as {{ first_name }}",
       "log_out": "Log Out",
       "log_in": "Log In",
+      "logout": "Logout",
       "create_account": "Create account"
     },
     "footer": {

@@ -25,8 +25,7 @@ export default class YotpoReviewsWidget {
         this.observer.observe(this.$el.get(0), observerConfig);
       }
       else {
-        // setTimeout
-        // @TODO - Add settimeout?
+        setTimeout(this.adjustWidget.bind(this), 3000); // wait a bit and hope that the widget has loaded by now
       }
     }
     else {

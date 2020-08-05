@@ -57,7 +57,7 @@ Use this area of the readme to document anything specific related to the theme's
 |---|---|---|
 | `namespace_here` | `key_here` | Description of what should go in this metafield and how it is used. |
 
-###### Tags
+##### Tags
 
 | Value | Effect |
 |---|---|
@@ -83,7 +83,7 @@ To style the emails you have to use an inline style block since theme assets are
 - Compile SCSS by running `gulp notifications`
 - Copy minified content from `notifications/notifications.min.css`
 - Paste inside the `<style>` tag inside the `<head>` of each notification template.
-  
+
 ## Theme Setup
 Be sure to fill out all the general theme settings in order to enable all the features of this theme.  These include 
 
@@ -92,3 +92,15 @@ Be sure to fill out all the general theme settings in order to enable all the fe
 - Favicon
 - Mailing List settings
 - Yotpo Credentials
+
+## Deployment
+To deploy a new version of the site, follow these steps:
+
+- Duplicate the live theme
+- Rename this duplicated theme by appending "[DEPLOY]" to the end of the theme name
+- Update `config.yml` to point the appropriate environment variables to the new theme
+- Run `slate start` which will trigger a full build and deploy.  When complete it will open a watch task which is needed for the next step
+- Once this process is complete, open another terminal window and run `npm run build`.  This will build the files in the `_scripts` and `_styles` directories and trigger an upload for these files.
+- Preview the theme and make sure that the CSS and JS files are being included and that no errors have been introduced in the build process.
+- Kill the `slate watch` process
+- Enjoy your new website

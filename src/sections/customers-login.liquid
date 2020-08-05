@@ -47,7 +47,7 @@
 
                 {{ form.errors | default_errors }}
 
-                <div class="form-group row">
+                <div class="form-group row{% if form.errors contains 'email' %} is-invalid{% endif %}">
                   <label for="CustomerEmail" class="col-2">
                     {{ 'customer.login.email' | t }}
                   </label>
@@ -56,7 +56,7 @@
                     <input type="email"
                       name="customer[email]"
                       id="CustomerEmail"
-                      class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
+                      class="form-control"
                       spellcheck="false"
                       autocomplete="off"
                       autocapitalize="off">
@@ -64,7 +64,7 @@
                 </div>
 
                 {% if form.password_needed %}
-                  <div class="form-group row">
+                  <div class="form-group row{% if form.errors contains 'password' %} is-invalid{% endif %}">
                     <label for="CustomerPassword" class="col-2">
                       {{ 'customer.login.password' | t }}
                     </label>
@@ -73,18 +73,18 @@
                       <input type="password"
                         name="customer[password]"
                         id="CustomerPassword"
-                        class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}">
+                        class="form-control">
                     </div>
                   </div>
                 {% endif %}
 
-                <div class="form-group text-right">
+                <div class="form-group form-group--footer text-right">
                   <input type="submit" class="btn btn-primary-reverse" value="{{ 'customer.login.sign_in' | t }}">
                 </div>
 
                 {% if form.password_needed %}
-                  <div class="form-group text-right">
-                    <a href="#recover" id="RecoverPassword" class="p2">{{ 'customer.login.forgot_password' | t }}</a>
+                  <div class="form-text text-right">
+                    <a href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
                   </div>
                 {% endif %}
               {% endform %}
@@ -130,13 +130,13 @@
                   </div>
                 </div>
 
-                <div class="form-group text-right">
+                <div class="form-group form-group--footer text-right">
                   <input type="submit" class="btn btn-primary-reverse" value="{{ 'customer.recover_password.submit' | t }}">
                 </div>
 
-                <div class="form-group text-right">
-                  <a href="#" class="p2" id="HideRecoverPasswordLink">
-                    {{ 'customer.recover_password.cancel' | t }}
+                <div class="form-text text-right">
+                  <a href="#" id="HideRecoverPasswordLink">
+                    {{ 'customer.recover_password.back_to_login' | t }}
                   </a>
                 </div>
               {% endform %}

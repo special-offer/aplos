@@ -501,7 +501,8 @@
 
         <h5 class="docs-subtitle">Default Forms</h5>
 
-        <p>Use the <code>.row</code> class to form groups and use the <code>.col-*-*</code> classes to specify the width of your labels and controls.</p></p>
+        <p>Use the <code>.row</code> class to form groups and use the <code>.col-*-*</code> classes to specify the width of your labels and controls.</p>
+        <p>Use the <code>.form-group--footer</code> class on the last form-group containing the form submit button to achieve proper vertical spacing.</p>
 
         <form>
           <div class="form-group row">
@@ -522,11 +523,14 @@
               <input type="text" id="textDefault3" class="form-control" value="Valid Entry">
             </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group is-invalid row">
             <label for="textDefault4" class="col-2">Text Field</label>
             <div class="col-10">
               <input type="text" id="textDefault4" class="form-control" value="Invalid Entry">
             </div>
+            <div class="form-feedback">
+                Error!
+              </div>  
           </div>
           <div class="form-group row">
             <label for="text60" class="col-2">Text Area</label>
@@ -534,7 +538,7 @@
               <textarea type="text" id="text60" class="form-control" rows="5">Lorem Ipsum...</textarea>
             </div>
           </div>          
-          <div class="form-group row">
+          <div class="form-group form-group--footer row">
             <div class="col-2"></div>
             <div class="col-10">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -557,13 +561,22 @@
                 <input type="text" id="textDefault2a" placeholder="Input 2" class="form-control">
               </div>
             </div>
-            <div class="form-group row">
-              <label for="text6" class="col-2">Text Area</label>
+            <div class="form-group is-invalid row">
+              <label for="textDefault3a" class="col-2">Label 3</label>
               <div class="col-10">
-                <textarea type="text" id="text6" class="form-control" rows="5">Lorem Ipsum...</textarea>
+                <input type="text" id="textDefault3a" placeholder="Input 3" class="form-control" value="Invalid Text">
               </div>
+              <div class="form-feedback">
+                Error!
+              </div>              
             </div>            
             <div class="form-group row">
+              <label for="text6a" class="col-2">Text Area</label>
+              <div class="col-10">
+                <textarea type="text" id="text6a" class="form-control" rows="5">Lorem Ipsum...</textarea>
+              </div>
+            </div>            
+            <div class="form-group form-group--footer row">
               <div class="col-2"></div>
               <div class="col-10">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -631,11 +644,6 @@
           </div>
 
           <div class="form-group">
-            <label for="textarea1">Textarea</label>
-            <textarea id="textarea1" placeholder="Placeholder text" class="form-control"></textarea>
-          </div>
-
-          <div class="form-group">
             <label for="file1">File Field</label>
             <input id="file1" type="file">
             <small class="form-text">Example block-level help text here.</small>
@@ -668,10 +676,7 @@
               <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
             </div>
           </div>
-        </form>
-
-        <h5 class="docs-subtitle">Note About Select Elements</h5>
-        <p>This theme is using the <a href="https://harvesthq.github.io/chosen/" target="_blank">Chosen</a> library to enhance native select tags.  By default, any <code>select.form-control</code> elements are targeted and initialized on page load.  If you want to avoid this, add the <code>data-no-chosen</code> attribute to your select tag and it will be left alone.</p>      
+        </form>    
 
         <h2 id="docs-page-elements" class="docs-title">Page Elements</h2>
 
@@ -835,14 +840,31 @@
 
         <h5 id="docs-minimal-input" class="docs-subtitle">Minimal Input</h5>
         <div class="docs-well">
-          <div class="minimal-input-box">
-            <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
-            <button type="submit" class="minimal-input-box__submit">
-              {% include 'icon-arrow' %}
-              <span class="icon-fallback-text">Submit</span>
-            </button>
-          </div>
+          <form>
+            <div class="minimal-input-box">
+              <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+              <button type="submit" class="minimal-input-box__submit">
+                {% include 'icon-arrow' %}
+                <span class="icon-fallback-text">Submit</span>
+              </button>
+            </div>
+          </form>
         </div>
+
+        <br/>
+        <p class="p2">Use inside <code>form.form-inverted</code> to get the light version for dark backgrounds</p>
+
+        <div class="docs-well docs-well--dark">
+          <form class="form-inverted">
+            <div class="minimal-input-box">
+              <input type="search" placeholder="{{ 'general.search.placeholder' | t }}" class="minimal-input-box__input" />
+              <button type="submit" class="minimal-input-box__submit">
+                {% include 'icon-arrow' %}
+                <span class="icon-fallback-text">Submit</span>
+              </button>
+            </div>
+          </form>
+        </div>        
 
         <h5 id="docs-dots" class="docs-subtitle">Dots</h5>
 
