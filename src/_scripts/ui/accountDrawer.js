@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Drawer from './drawer';
+import CustomerForm from '../lib/customerForm';
 
 const selectors = {
   showContents: '[data-show-contents]'
@@ -21,14 +22,16 @@ class AccountDrawer extends Drawer {
       this.show();
     });
 
+    $('form', this.$el).each((i, form) => new CustomerForm(form));
+
     this.$el.on('click', selectors.showContents, this.onShowContentsClick.bind(this));
   }
 
   onShowContentsClick(e) {
     const idToShow = $(e.currentTarget).data('show-contents');
 
-    this.$drawerBodies.filter(':visible').fadeOut(250, 'easeInOutCubic', () => {
-      $(idToShow).fadeIn(400, 'easeInOutCubic');
+    this.$drawerBodies.filter(':visible').fadeOut(350, 'easeOutCubic', () => {
+      $(idToShow).fadeIn(450, 'easeOutCubic');
     });
   }
 

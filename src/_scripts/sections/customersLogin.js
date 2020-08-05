@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import BaseSection from './base';
+import CustomerForm from '../lib/customerForm';
 
 const selectors = {
   recoverPasswordForm: '#RecoverPassword',
@@ -22,6 +23,8 @@ export default class CustomersLoginSection extends BaseSection {
       // show success message
       $('#ResetSuccess').removeClass('hide');
     }
+
+    $('form', this.$container).each((i, form) => new CustomerForm(form));
 
     this.$container.on('click', selectors.recoverPasswordForm, this.onShowHidePasswordForm.bind(this));
     this.$container.on('click', selectors.hideRecoverPasswordLink, this.onShowHidePasswordForm.bind(this));

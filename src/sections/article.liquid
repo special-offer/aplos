@@ -1,8 +1,3 @@
-{% assign has_image = false %}
-{% if article.image %}
-  {% assign has_image = true %}
-{% endif %}
-
 {% capture article_date %}{{ article.published_at | time_tag: format: 'month_day' }}{% endcapture %}
 {% capture subtitle %}{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: article_date }}{% endcapture %}
 
@@ -12,13 +7,7 @@
     <article role="article" itemscope itemtype="http://schema.org/Article">
 
       <div class="container-fluid-max">
-        {% include 'page-hero',
-                    ph_id: article.id,
-                    ph_background_image: article.image,
-                    ph_light_text: has_image,
-                    ph_title: article.title,
-                    ph_subtitle: subtitle
-        %}
+        <h1 class="page-title">{{ article.title }}</h1>
       </div>
       
       <div class="container">
