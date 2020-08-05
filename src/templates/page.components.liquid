@@ -15,7 +15,6 @@
           <li><a href="#docs-content-card" style="text-decoration: line-through;">Content Card</a></li>
           <li><a href="#docs-overlay-card" style="text-decoration: line-through;">Overlay Card</a></li>
           <li><a href="#docs-banners">Banners</a></li>
-          <li><a href="#docs-page-hero">Page Hero</a></li>
           <li><a href="#docs-promo">Promo</a></li>
           <li><a href="#docs-modals">Modals</a></li>
           <li><a href="#docs-overlays" style="text-decoration: line-through;">Overlays</a></li>
@@ -274,24 +273,7 @@
                       bp_text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                       bp_light_text: false
           %}  
-        </div>
-
-        <h3 id="docs-page-hero" class="docs-title">Page Hero</h3>
-        <p>Page heroes function similar to banners but should only be used at the top of a page.  They are typically used as an enhancement over the text-only <code>.page-header</code> element when we want to display text over a background image.  Although their base styling is similar, they are built separately from banners to allow more flexibility.  The snippet API is also slightly different to support different features.</p>
-        
-        <p><strong>Note</strong>: Because of the limitations of liquid code and the fact that the page-hero snippet is built to accept an image object as opposed to an image file url, it is impossible to pass a theme image asset to the snippet in order to show a fully featured example.  The example below shows the page hero without a background image, but one can be easily passed in as as a section setting (<code>section.settings.image</code>) or a reference from another object (<code>product.featured_image</code>).</p>
-
-        {% assign subtitle = 'Subtext goes down here' %}
-
-        {% include 'page-hero',
-                    ph_id: 'page-hero-123',
-                    ph_title: 'Page Hero Title',
-                    ph_toptitle: 'Introductory text goes here',
-                    ph_subtitle: 'Subtext goes down here',
-                    ph_cta_url: '/collections/all',
-                    ph_cta_text: 'Call to action link goes here',
-                    ph_light_text: false
-        %}        
+        </div>        
 
         <h3 id="docs-promo" class="docs-title">Promo</h3>
         <p>Promos consist of an image and text laid out vertically on mobile and horizontally on desktop.  Listed below are the available options that affect layout / styling.</p>

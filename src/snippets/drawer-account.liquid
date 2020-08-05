@@ -12,13 +12,13 @@
         {% form 'customer_login', class: 'form-inverted' %}
           <h3 class="drawer__body-title">Account Login</h3>
 
-          <div class="form-group row">
+          <div class="form-group row {% if form.errors contains 'email' %}is-invalid{% endif %}">
             <label for="ad-customer-email" class="col-4 col-lg-3">E&mdash;Mail</label>
             <div class="col-8 col-lg-9">
               <input type="email"
                 name="customer[email]"
                 id="ad-customer-email"
-                class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
+                class="form-control"
                 spellcheck="false"
                 autocomplete="off"
                 autocapitalize="off">
@@ -26,13 +26,13 @@
           </div>
 
           {% if form.password_needed %}
-            <div class="form-group row">
+            <div class="form-group row {% if form.errors contains 'password' %}is-invalid{% endif %}">
               <label for="ad-customer-password" class="col-4 col-lg-3">Password</label>
               <div class="col-8 col-lg-9">
                 <input type="password"
                   name="customer[password]"
                   id="ad-customer-password"
-                  class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}">
+                  class="form-control">
               </div>
             </div>
           {% endif %}        
@@ -66,8 +66,7 @@
               <input type="text"
                 name="customer[first_name]"
                 id="ad-create-firstname"
-                class="form-control"
-                {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+                class="form-control">
             </div>
           </div>
 
@@ -84,15 +83,15 @@
             </div>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row {% if form.errors contains 'email' %}is-invalid{% endif %}">
             <label for="ad-create-email" class="col-4 col-lg-3">
-              E-Mail
+              E&mdash;Mail
             </label>
             <div class="col-8 col-lg-9">
               <input type="email"
                 name="customer[email]"
                 id="ad-create-email"
-                class="form-control {% if form.errors contains 'email' %}is-invalid{% endif %}"
+                class="form-control"
                 value="{% if form.email %}{{ form.email }}{% endif %}"
                 spellcheck="false"
                 autocomplete="off"
@@ -100,7 +99,7 @@
             </div>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row  {% if form.errors contains 'password' %}is-invalid{% endif %}">
             <label for="ad-create-password" class="col-4 col-lg-3">
               Password
             </label>
@@ -108,19 +107,19 @@
               <input type="password"
                 name="customer[password]"
                 id="ad-create-password"
-                class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}">
+                class="form-control">
             </div>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row {% if form.errors contains 'password' %}is-invalid{% endif %}">
             <label for="ad-create-passconfirm" class="col-4 col-lg-3">
               Confirm
             </label>
             <div class="col-8 col-lg-9">
               <input type="password"
-                name="customer[password]"
+                name="customer[password_confirm]"
                 id="ad-create-passconfirm"
-                class="form-control {% if form.errors contains 'password' %}is-invalid{% endif %}">
+                class="form-control">
             </div>
           </div>    
 

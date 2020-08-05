@@ -176,6 +176,7 @@
     "login": {
       "title": "Login or Create an Account",
       "subtitle": "Sign in for access to convenient features and quick checkout.",
+      "login": "Login",
       "email": "Email",
       "password": "Password",
       "forgot_password": "Forgot your password?",
