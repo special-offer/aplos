@@ -43,3 +43,31 @@
     object-fit: cover;
   }
 }
+
+.page-navigation-placement {
+  position: fixed;
+  bottom: 100px;
+  width: 100%;
+  max-width: 230px;
+
+  display: none;
+
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
+
+  @include media-breakpoint-up(lg) {
+    max-width: 300px;
+  }  
+}
+
+.page-navigation {
+  @include p2;
+  border-top: 1px solid $body-color;
+}
+
+.page-navigation__link {
+  display: block;
+  padding: 9px 0;
+  border-bottom: 1px solid $body-color;
+}
