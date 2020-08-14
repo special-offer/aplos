@@ -2,18 +2,26 @@
   <div class="footer__upper">
     <div class="aplos-container">
       <div class="row">
-        <div class="col-6 col-xl-7" style="display: flex; align-items: flex-end;">
-          {% if section.settings.footer_text != blank %}
-            <div class="footer-text">
-              {{ section.settings.footer_text | replace: '&nbsp;', ' ' | strip }}
-            </div>
-          {% endif %}
+        <div class="col-6 col-xl-7">
+          {% comment %} Blank Space {% endcomment %}
         </div>
         <div class="col-12 col-md-6 col-xl-5">
           {% if section.settings.upper_linklist and linklists[section.settings.upper_linklist].links.size > 0 %}
             <ul class="footer-menu">
               {% for link in linklists[section.settings.upper_linklist].links %}
-                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% assign title = link.title | downcase %}
+                {% if title contains 'account' or link.url contains 'account' %}
+                  {% comment %} Add login / account link {% endcomment %}
+                  {% if shop.customer_accounts_enabled %}
+                    {% if customer %}
+                      <li><a href="/account">Account</a></li>
+                    {% else %}
+                      <li><a href="/account/login" data-account-drawer-trigger>Login</a></li>
+                    {% endif %}
+                  {% endif %}
+                {% else %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endif %}
               {% endfor %}
             </ul>
           {% endif %}
@@ -52,10 +60,8 @@
     <div class="aplos-container">
       <div class="row">
         <div class="col-6 col-xl-7 d-none d-md-block">
-          {% if section.settings.contact_email != blank %}
-            <a href="mailto:{{ section.settings.contact_email }}" target="_blank" title="Email Us">
-              {{ section.settings.contact_email }}
-            </a>
+          {% if section.settings.footer_text != blank %}
+            {{ section.settings.footer_text }}
           {% endif %}
         </div>
         <div class="col-12 col-md-6 col-xl-5" style="display: flex; justify-content: space-between;">
@@ -97,19 +103,14 @@
         "label": "Menu"
       },
       {
-        "type": "richtext",
-        "id": "footer_text",
-        "label": "Footer Text"
-      },
-      {
         "type": "header",
         "content": "Lower Footer"
       },
       {
-        "type": "text",
-        "id": "contact_email",
-        "label": "Contact Email"
-      },
+        "type": "richtext",
+        "id": "footer_text",
+        "label": "Footer Text"
+      },      
       {
         "type": "richtext",
         "id": "copyright_text",
