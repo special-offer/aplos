@@ -1,0 +1,63 @@
+<div data-section-id="{{ section.id }}" data-section-type="aplos-row">
+  <div class="aplos-row aplos-row--fixed aplos-row--{{ section.blocks.size }}-block {{ section.settings.height | prepend: 'aplos-row--' }}">
+    {% for block in section.blocks %}
+      {% render 'aplos-block'
+                attributes: block.shopify_attributes,
+                bg_image: block.settings.background_image,
+                bg_video_file_url: block.settings.background_video_file_url
+      %}
+    {% endfor %}
+  </div>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Aplos Row",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Design"
+      },
+      {
+        "type": "select",
+        "id": "height",
+        "options": [
+          { "value": "tall", "label": "Tall"},
+          { "value": "medium", "label": "Medium"},
+          { "value": "short", "label": "Short"}
+        ],
+        "label": "Row Height",
+        "default": "tall"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "media",
+        "name": "Media",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Design"
+          },
+          {
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Background Image"
+          },
+          {
+            "type": "url",
+            "id": "background_video_file_url",
+            "label": "Background Video File URL"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Aplos Row",
+      "category": "Content",
+      "settings": {}
+    }]
+  }
+{% endschema %}

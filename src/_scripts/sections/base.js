@@ -1,4 +1,9 @@
 import $ from 'jquery';
+import AplosBlock from '../components/aplosBlock';
+
+const selectors = {
+  aplosBlock: '.aplos-block'
+};
 
 export default class BaseSection {
   constructor(container, name) {
@@ -15,6 +20,8 @@ export default class BaseSection {
       MOUSEENTER: `mouseenter${this.namespace}`,
       MOUSELEAVE: `mouseleave${this.namespace}`
     };
+
+    this.aplosBlocks = $.map($(selectors.aplosBlock, this.$container), el => new AplosBlock(el));
   }
 
   onUnload(e) {

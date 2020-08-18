@@ -17,30 +17,58 @@
   }
 }
 
-.swiper-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  width: 40px;
+.swiper-navigation {
+  @extend .aplos-container;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+}
+
+.swiper-navigation__controls {
+  position: relative;
+}
+
+.swiper-prev,
+.swiper-next {
   position: absolute;
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
-  cursor: pointer;
-
-  &--prev {
-    left: 0;
-    transform: translateY(-50%) rotate(180deg);
-  }
-
-  &--next {
-    right: 0;
-  }
-
-  .icon-arrow-right {
-    position: relative;
-    top: -1px;
-    width: 12px;
-  }
 }
+
+.swiper-prev {
+  left: 0;
+}
+
+.swiper-next {
+  right: 0;
+}
+
+// .swiper-arrow {
+//   display: inline-flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 40px;
+//   width: 40px;
+//   position: absolute;
+//   z-index: 1;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   cursor: pointer;
+
+//   &--prev {
+//     left: 0;
+//     transform: translateY(-50%) rotate(180deg);
+//   }
+
+//   &--next {
+//     right: 0;
+//   }
+
+//   .icon-arrow-right {
+//     position: relative;
+//     top: -1px;
+//     width: 12px;
+//   }
+// }

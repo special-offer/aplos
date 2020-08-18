@@ -1,12 +1,20 @@
 <div data-section-id="{{ section.id }}" data-section-type="showcase">
-  <div class="aplos-4side-container" style="position: relative; min-height: 150vh;">
+  {% assign light_text = false %}
+  {% if section.settings.color == 'light' %}
+    {% assign light_text = true %}
+  {% endif %}
+
+  {% capture block_content %}
     {% if section.settings.title != blank %}
-      <div class="h1">
+      <h2 class="h1{% if light_text %} text-white{% endif %}">
         {{ section.settings.title }}
-      </div>
+      </h2>
+    {% endif %}
+    {% if section.settings.subtitle != blank %}
+      <div class="p2{% if light_text %} text-white{% endif %}">{{ section.settings.subtitle }}</div>
     {% endif %}
     {% if section.settings.content != blank %}
-      <div class="rte" style="max-width: 25em;">
+      <div class="rte{% if light_text %} text-white{% endif %}" style="max-width: 25em;">
         {{ section.settings.content }}
       </div>
     {% endif %}
@@ -24,20 +32,28 @@
               {{ current_variant.price | money_without_trailing_zeros }} USD
             </button>
           {% endif %}
-          <a href="{{ related_product.url }}" class="btn btn-primary" style="background-color: white;">Learn More</a>
+          <a href="{{ related_product.url }}" class="btn{% if light_text %} btn-light-outline{% else %} btn-primary-alt{% endif %} d-none d-md-inline-block">Learn More</a>
         </div>
 
         <input type="hidden" name="id" value="{{ current_variant.id }}" />
         <input type="hidden" name="quantity" value="1" />
       </form>
-    {% endif %}
+    {% endif %}        
+  {% endcapture %}  
 
-    {% if section.settings.background_image %}
-      <img src="{{ section.settings.background_image | img_url: '1500x' }}"
-           style="position: absolute; z-index: -1; top: 0; left: 0; height: 100%; width: 100%; object-fit: cover;"
-      />
-    {% endif %}
+  <div class="aplos-row">
+    {% render 'aplos-block'
+              bg_image: section.settings.main_image,
+              bg_video_file_url: section.settings.main_video_file_url
+    %}
+
+    {% render 'aplos-block',
+              content: block_content,
+              bg_image: section.settings.background_image,
+              bg_video_file_url: section.settings.background_video_file_url
+    %}
   </div>
+
 </div>
 
 {% schema %}
@@ -45,10 +61,19 @@
     "name": "Showcase",
     "settings": [
       {
+        "type": "header",
+        "content": "Content"
+      },
+      {
         "type": "text",
         "id": "title",
         "label": "Title"
       },
+      {
+        "type": "richtext",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },      
       {
         "type": "richtext",
         "id": "content",
@@ -61,9 +86,38 @@
         "info": "If set, buttons to view and purchase the product will appear"
       },
       {
+        "type": "header",
+        "content": "Design"
+      },
+      {
+        "type": "select",
+        "id": "color",
+        "options": [
+          { "value": "light", "label": "Light"},
+          { "value": "dark", "label": "Dark"}
+        ],
+        "label": "Content Color",
+        "default": "light"
+      },   
+      {
+        "type": "image_picker",
+        "id": "main_image",
+        "label": "Main Image"
+      },
+      {
+        "type": "url",
+        "id": "main_video_file_url",
+        "label": "Main Video File URL"
+      },       
+      {
         "type": "image_picker",
         "id": "background_image",
         "label": "Background Image"
+      },
+      {
+        "type": "url",
+        "id": "background_video_file_url",
+        "label": "Background Video File URL"
       }
     ],
     "presets": [{

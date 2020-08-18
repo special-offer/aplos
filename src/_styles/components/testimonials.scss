@@ -4,38 +4,52 @@
 
 .testimonals-container {
   // @extend .aplos-container; // I don't think we need horizontal padding
-  padding-top: 64px;
-  padding-bottom: 61px;
+  padding-top: $spacing-ml;
+  padding-bottom: $spacing-ml;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 157px;
+    padding-bottom: 126px;    
+  }
 
   .swiper-wrapper {
     align-items: center;
   }
+
+  .swiper-navigation {
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
 }
-
-.testimonials-title {
-  @extend .p2;
-  text-align: center;
-  margin-bottom: 34px;
-}
-
-// .testimonials-swiper {
-
-// }
 
 .testimonial {
   width: 100%;
-  text-align: center;
-  padding: 0 50px; // make room for side arrows
+  text-align: left;
+  padding: 0 $spacing-ml;
+
+  @include media-breakpoint-up(md) {
+    text-align: center;
+  }
 }
 
 .testimonial__content {
-  @extend .h1;
-  max-width: 15em;
-  line-height: 1;
-  margin: 0 auto;
+  @include h2;
+  max-width: 8.9em;
+
+  @include media-breakpoint-up(md) {
+    @include h1;
+    max-width: 12em;
+    line-height: 1;
+    margin: 0 auto;
+  }
 }
 
 .testimonial__author {
-  @extend .p2;
-  margin-top: 77px;
+  @include p2;
+  margin-top: 30px;
+
+  @include media-breakpoint-up(md) {
+    @include h2;
+  }
 }

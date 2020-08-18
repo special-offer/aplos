@@ -2,42 +2,107 @@
 // Hero
 // -------------------------
 
+// .hero
+//   .hero__fg
+//     .hero__copy
+//       .hero__title
+//       .hero__content
+//     .hero__controls
+//       .btn
+//   .hero__bg
+//     picture
+//     video
+
 .hero {
-  height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
-  justify-content: flex-end; // ?
-  padding-bottom: $spacing-lg;
+  justify-content: flex-end;
   position: relative;
+
+  @include media-breakpoint-up(md) {
+    height: 100vh;
+    flex-direction: column;
+  }
+}
+
+.hero__fg {
+  width: 100%;
+  padding: $spacing-ml $spacing-ml $spacing-md;
+  
+  @include media-breakpoint-up(md) {
+    display: flex;
+    align-items: flex-end;
+    padding: $spacing-lg;
+  }
+}
+
+.hero__copy {
+  flex: 1;
+  // padding: $spacing-lg;
 }
 
 .hero__title,
 .hero__content {
-  color: $white;
+  @include media-breakpoint-up(md) {
+    color: $white;
+  }
 }
 
 .hero__title {
-  @extend .h1;
-  margin-bottom: 2rem;
+  margin-bottom: 0.7rem;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 2rem;
+  }
 }
 
 .hero__content {
-  @extend .rte;
-  max-width: 550px;
-  margin: 0 auto;
-  padding: 0 25px;
-  text-align: center;
 
-  & + .btn {
-    margin-top: 60px;
+  &, p:last-child {
+    margin-bottom: 0;
+  }
+
+  @include media-breakpoint-up(md) {
+    @include h1;
+    max-width: 23em;
+    padding-right: 50px;    
+  }
+
+  @include media-breakpoint-only(md) {
+    font-size: $h2-font-size;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding-right: 100px;
+  }
+}
+
+.hero__controls {
+  margin-top: $spacing-md;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 0;
   }
 }
 
 .hero__bg {
-   z-index: -1;
+  z-index: -1;
+  position: relative;
+  height: 100vh;
+  min-height: 500px;
+  max-height: 750px;
+  width: 100%;
 
-  &, &:before {
+  @include media-breakpoint-up(md) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-height: none;
+  }
+
+  img, video {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,14 +110,17 @@
     width: 100%;
   }
 
-  img {
-    height: 100%;
-    width: 100%;
+  img,
+  video {
     object-fit: cover;
   }
 
-  &.has-gradient:before {
-    content: '';
-    background-image: linear-gradient(155deg, transparentize($white, 0.94), transparentize($black, 0.6));
+  video {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+
+    &.is-playing {
+      opacity: 1;
+    }
   }
 }

@@ -16,8 +16,8 @@ export default class TestimonialsSection extends BaseSection {
 
     this.$slideshow = $(selectors.slideshow, this.$container);
 
-    const $slideshowArrowPrev = this.$slideshow.find('.swiper-arrow--prev');
-    const $slideshowArrowNext = this.$slideshow.find('.swiper-arrow--next');
+    const $slideshowPrev = this.$slideshow.find('.swiper-prev');
+    const $slideshowNext = this.$slideshow.find('.swiper-next');
 
     const swiperOptions = {
       loop: true,
@@ -29,15 +29,15 @@ export default class TestimonialsSection extends BaseSection {
 
     if (isTouch()) {
       swiperOptions.effect = 'slide';
-      $slideshowArrowPrev.remove();
-      $slideshowArrowNext.remove();
+      $slideshowPrev.remove();
+      $slideshowNext.remove();
     }
     else {
       swiperOptions.effect = 'fade';
       swiperOptions.fadeEffect = { crossFade: true };
       swiperOptions.navigation = {
-        prevEl: $slideshowArrowPrev.get(0),
-        nextEl: $slideshowArrowNext.get(0)
+        prevEl: $slideshowPrev.get(0),
+        nextEl: $slideshowNext.get(0)
       };
     }
 

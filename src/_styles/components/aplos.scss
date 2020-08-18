@@ -1,0 +1,98 @@
+// ------------
+// Aplos
+// ------------
+
+.aplos-row {
+  display: flex;
+  flex-direction: column;
+
+  // Fixed rows are non-responsive
+  &--fixed {
+    flex-direction: row;
+  }
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    min-height: 100vh;
+    min-height: var(#{'--viewport-height'});
+    
+    &--short {
+      min-height: 50vh;
+    }
+
+    &--medium {
+      min-height: 66vh;
+    }
+  } 
+}
+
+.aplos-block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: $spacing-ml $spacing-ml $spacing-md;
+  min-height: 100vw; // make everything square
+
+  // For fixed rows with multiple blocks, the blocks can be shorter
+  .aplos-row--fixed.aplos-row--2-block &,
+  .aplos-row--fixed.aplos-row--3-block & {
+    min-height: 50vw;
+  } 
+
+  @include media-breakpoint-up(md) {
+    min-height: 0;
+    padding: $spacing-lg;
+    align-items: flex-end; // Needs to be configurable
+  }
+}
+
+.aplos-block__title {
+  @include h2;
+  line-height: 1.4;
+
+  @include media-breakpoint-up(md) {
+    @include h1;
+  }
+}
+
+.aplos-block__top-title {
+  @include h2;
+  margin-bottom: 1rem;
+}
+
+.aplos-block__bottom-title {
+  @include h6;
+  margin-top: 1rem;
+}
+
+.aplos-block__bg {
+  &,
+  video,
+  img {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  video,
+  img {
+    object-fit: cover;
+    transition: opacity 0.6s ease-out;
+
+    &[data-src] {
+      opacity: 0;
+    }    
+  }
+
+  video {
+    opacity: 0;
+
+    &.is-loaded {
+      opacity: 1;
+    }
+  }
+}

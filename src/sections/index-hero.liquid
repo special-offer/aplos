@@ -7,7 +7,7 @@
             cta_style: section.settings.cta_style,
             bg_image_desktop: section.settings.bg_image,
             bg_image_mobile: section.settings.bg_image_mobile,
-            bg_gradient: true
+            bg_video_file_url: section.settings.bg_video_file_url
   %}
 </div>
 
@@ -16,16 +16,9 @@
     "name": "Hero",
     "settings": [
       {
-        "type": "image_picker",
-        "id": "bg_image",
-        "label": "Background Image (Desktop)"
+        "type": "header",
+        "content": "Content"
       },
-      {
-        "type": "image_picker",
-        "id": "bg_image_mobile",
-        "label": "Background Image (Mobile)",
-        "info": "Will fallback to desktop if left empty"
-      },      
       {
         "type": "text",
         "id": "title",
@@ -45,7 +38,27 @@
         "type": "url",
         "id": "cta_url",
         "label": "CTA Link"
+      },      
+      {
+        "type": "header",
+        "content": "Design"
+      },      
+      {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background Image (Desktop)"
       },
+      {
+        "type": "image_picker",
+        "id": "bg_image_mobile",
+        "label": "Background Image (Mobile)",
+        "info": "Will fallback to desktop if left empty"
+      },
+      {
+        "type": "url",
+        "id": "bg_video_file_url",
+        "label": "Background Video File URL"
+      },   
       {
         "type": "select",
         "id": "cta_style",

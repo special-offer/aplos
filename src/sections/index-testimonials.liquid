@@ -1,29 +1,33 @@
 <div data-section-id="{{ section.id }}" data-section-type="testimonials">
-  <div class="bg-butter">
+  <div class="bg-butter-dark">
     <div class="testimonals-container">
-      {% if section.settings.title != blank %}
-        <div class="testimonials-title">
-          {{ section.settings.title }}
-        </div>
-      {% endif %}
       {% if section.blocks.size > 0 %}
         <div id="slideshow-{{ section.id }}" class="swiper-container" data-slideshow>
           <div class="swiper-wrapper">
             {% for block in section.blocks %}
+              {% assign pre = '' %}
+              {% assign post = '' %}
+              {% if block.settings.quotes_enabled %}
+                {% assign pre = '<span class="d-none d-md-inline">&ldquo;</span>' %}
+                {% assign post = '<span class="d-none d-md-inline">&rdquo;</span>' %}
+              {% endif %}
+
               <div class="swiper-slide" {{ block.shopify_attributes }} data-block-id="{{ block.id }}">
                 <div class="testimonial">
-                  <div class="testimonial__content">{{ block.settings.content }}</div>
+                  <div class="testimonial__content">
+                  {{ block.settings.content | prepend: pre | append: post }}
+                  </div>
                   <div class="testimonial__author">{{ block.settings.author }}</div>
                 </div>
               </div>
             {% endfor %}
           </div>
-          <span class="swiper-arrow swiper-arrow--prev">
-            {% include 'icon-arrow-right' %}
-          </span>
-          <span class="swiper-arrow swiper-arrow--next">
-            {% include 'icon-arrow-right' %}
-          </span>
+          <div class="swiper-navigation">
+            <div class="swiper-navigation__controls">
+              <a href="#" class="swiper-prev animated-link">Previous</a>
+              <a href="#" class="swiper-next animated-link">Next</a>
+            </div>
+          </div>
         </div>
       {% endif %}
     </div>
@@ -34,13 +38,7 @@
   {
     "name": "Testimonials",
     "max_blocks": 6,
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title"
-      }
-    ],
+    "settings": [],
     "blocks": [
       {
         "type": "testimonial",
@@ -55,6 +53,12 @@
             "type": "text",
             "id": "author",
             "label": "Author"
+          },
+          {
+            "type": "checkbox",
+            "id": "quotes_enabled",
+            "label": "Wrap with quotation marks",
+            "default": true
           }
         ]
       }
@@ -62,9 +66,7 @@
     "presets": [{
       "name": "Testimonials",
       "category": "Content",
-      "settings": {
-        "title": "Testimonials"
-      },
+      "settings": {},
       "blocks": [
         {
           "type": "testimonial",
