@@ -6,7 +6,7 @@ import {
   whichTransitionEnd
 } from '../core/utils';
 import BaseSection from './base';
-import AJAXCartDrawer from '../ui/ajaxCartDrawer';
+import AJAXCartDrawer from '../components/ajaxCartDrawer';
 
 const $window = $(window);
 

@@ -25,14 +25,11 @@ By default, the gulp development task _only_ watches this theme.js file as this 
 
 When adding javascript to the theme, you need to determine the purpose of the script and how it will be used, this will determine where it should live.  Here is a brief explanation of the script subdirectories.
 
+- __Components__ - Reusable functionality, typically tied to a UI element.
 - __Core__ - Core functionality that is used across all pages on the site.  Typically these files contain helper functions, API shortcuts and commons variables.
 - __Lib__ - Any useful functionality that serves a specific purpose but is not related to core site feature set.
-- __Managers__ - Singletons that manage multiple instances of functionality.  They can be imported and used in any file.
-- __Models__ - Classes that don't fall into any other subdirectory
 - __Sections__ - Scripts that map to files in `src/sections`
 - __Templates__ - If you need to run javascript on a specific template.  Better to use sections if possible.
-- __UI__ - Modules that exist on multiple pages and represent a unit of UI (i.e. dropdown, popup, etc..).
-- __View__ - Functionality specific to an area of the site (isn't shared across different pages).
 
 __Note:__ If writing something global that is independent of a module, then write it inside of `theme.js`.  Examples of this could be scrolling effects, analytics, user cookies, etc..
 

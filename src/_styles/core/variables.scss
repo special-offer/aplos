@@ -760,9 +760,8 @@ $zindex-header:                     2100 !default;
 $zindex-pencil-banner:              2101 !default;
 $zindex-drawer-backdrop:            2200 !default;
 $zindex-drawer:                     2201 !default;
-$zindex-overlay:                    2400 !default;
-$zindex-modal-backdrop:             2500 !default;
-$zindex-modal:                      3000 !default;
+// $zindex-modal-backdrop:             2500 !default;
+// $zindex-modal:                      3000 !default;
 $zindex-popover:                    3500 !default;
 $zindex-tooltip:                    4000 !default;
 $z-index-skip-to-content:           9999 !default; // really high to be safe of app markup
@@ -1033,11 +1032,6 @@ $panel-border:                          1px solid #efefef;
 $panel-expand-icon-size:                20px;
 $panel-expand-icon-stroke-width:        2px;
 
-
-// Overlays
-
-$overlay-bg-color:                     $body-bg;
-$overlay-transition-duration:          $transition-duration-base;
 
 
 // Dots

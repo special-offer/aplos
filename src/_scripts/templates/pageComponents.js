@@ -1,11 +1,8 @@
 import $ from 'jquery';
 import BaseTemplate from './base';
-import Tabs from '../ui/tabs';
-import NewsletterForm from '../ui/newsletterForm';
-import VideoPlayer from '../ui/videoPlayer';
+import NewsletterForm from '../components/newsletterForm';
   
 const selectors = {
-  tabContainer: '[data-tab-container]',
   qaToggleEnabled: '[data-qa-toggle-enabled]',
   qa: '[data-quantity-adjuster]',
   newsletterForm: '#newsletter-form',
@@ -20,9 +17,6 @@ class PageComponentsTemplate extends BaseTemplate {
   }
 
   addEventHandlers() {
-    // Tabs
-    new Tabs($(selectors.tabContainer));
-
     $(selectors.qaToggleEnabled).on('click', (e) => {
       const $qaInput = $(selectors.qa).find('input[type="number"]');
       $qaInput.attr('disabled', !$qaInput.is(':disabled'));
@@ -36,8 +30,6 @@ class PageComponentsTemplate extends BaseTemplate {
     $(selectors.newsletterTriggerSubscribed).on('click', () => { this.newsletterForm.onSubscribeSuccess({ data: { is_subscribed: true }}); })
     $(selectors.newsletterTriggerFail).on('click', () => { this.newsletterForm.onSubscribeFail(); })
     /* eslint-enable */
-
-    VideoPlayer.refresh();
 
     $(document).on('click', 'a[href="#"]', e => e.preventDefault());
   }

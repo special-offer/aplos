@@ -1,17 +1,18 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
 import BaseSection from './base';
-import ProductForm from '../view/product/productForm';
-import StoryPopup from '../view/product/storyPopup';
-import TransactionBar from '../view/product/transactionBar';
-import YotpoReviewsWidget from '../view/product/yotpoReviewsWidget';
+import ProductForm from '../components/productForm';
+import StoryPopup from '../components/storyPopup';
+import TransactionBar from '../components/transactionBar';
+import AmbientVideo from '../components/ambientVideo';
+import YotpoReviewsWidget from '../components/yotpoReviewsWidget';
 
 const selectors = {
   productForm: 'form[data-product-form]',
   storyPopup: '[data-story-popup]',
   transactionBar: '[data-transaction-bar]',
+  ambientVideo: '[data-ambient-video]',
   yotpoReviewsWidget: '.yotpo-main-widget'
-  // productGrid: '.product-grid'
 };
 
 const $window = $(window);
@@ -19,8 +20,6 @@ const $window = $(window);
 export default class ProductSection extends BaseSection {
   constructor(container) {
     super(container, 'product');
-
-    // this.$productGrids = $(selectors.productGrid);
 
     // @TODO - Don't really need to create these instance vars?
     this.$productForm    = $(selectors.productForm, this.$container).first();
@@ -32,6 +31,7 @@ export default class ProductSection extends BaseSection {
     this.storyPopup  = new StoryPopup(this.$storyPopup);
     this.transactionBar = new TransactionBar(this.$transactionBar);
     this.$yotpoReviewsWidgets.each((i, el) => new YotpoReviewsWidget($(el))); // One on desktop + one inside the story popup
+    this.ambientVideos = $.map($(selectors.ambientVideo, this.$container), el => new AmbientVideo(el));
 
     this.throttledOnScroll = throttle(50, this.onScroll.bind(this));
     this.throttledOnResize = throttle(300, this.onResize.bind(this));

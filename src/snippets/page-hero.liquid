@@ -5,8 +5,9 @@
 
   Usage:
 
-  {% render 'hero',
+  {% render 'page-hero',
              title: { string }
+             title_tag: { string } - optional - defaults to h1
              bg_image_desktop: { image }
              bg_image_mobile: { image }
   %}
@@ -21,10 +22,14 @@
   {% assign bg_image_mobile = bg_image_desktop %}
 {% endif %}
 
+{% if title_tag == blank %}
+  {% assign title_tag = 'h1' %}
+{% endif %}
+
 <div class="page-hero">
   <div class="aplos-container">
     {% if title != blank %}
-      <h1 class="page-hero__title">{{ title }}</h1>
+      <{{ title_tag }} class="page-hero__title">{{ title }}</{{ title_tag }}>
     {% endif %}
   </div>
 

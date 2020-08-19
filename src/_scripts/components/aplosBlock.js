@@ -1,7 +1,8 @@
 import $ from 'jquery';
+import AmbientVideo from './ambientVideo';
 
-const classes = {
-  videoLoaded: 'is-loaded'
+const selectors = {
+  ambientVideo: '[data-ambient-video]'
 };
 
 export default class AplosBlock {
@@ -13,7 +14,6 @@ export default class AplosBlock {
     this.type = this.$el.data('type');
     this.$content = this.$el.find('.aplos-block__content');
     this.$backgroundImage = this.$el.find('.aplos-block__bg img');
-    this.$backgroundVideo = this.$el.find('.aplos-block__bg video');
 
     // Lazy load in all the images in the block
     $('[data-src]', this.$el).each((i, img) => {
@@ -22,15 +22,12 @@ export default class AplosBlock {
       $img.attr('src', $img.data('src'));
     });
 
-    this.$backgroundVideo.one('loadeddata play', () => {
-      this.$backgroundVideo.addClass(classes.videoLoaded);
-      const p = this.$backgroundVideo.get(0).play(); // in case autoplay didn't work
-
-      p && p.catch(e => console.log(e));
-    });
+    if ($(selectors.ambientVideo, this.$el).length > 0) {
+      this.ambientVideo = new AmbientVideo($(selectors.ambientVideo, this.$el).first());
+    }
   }
 
   hasBackgroundMedia() {
-    return this.$backgroundImage.length > 0 || this.$backgroundVideo.length > 0;
+    return this.$backgroundImage.length > 0 || !!this.ambientVideo;
   }
 }

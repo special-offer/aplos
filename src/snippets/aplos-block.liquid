@@ -19,31 +19,12 @@
   <div class="aplos-block__content">
     {{ content }}
   </div>
-  <div class="aplos-block__bg {% if bg_image %}bg-black{% else %}bg-butter-dark{% endif %">
+  <div class="aplos-block__bg {% if bg_image %}bg-black{% else %}bg-butter-dark{% endif %}">
     {% if bg_image %}
       <img data-src="{{ bg_image | img_url: '1500x'}}" /> 
     {% endif %}
-    {% if bg_video_file_url %}
-      {% assign video_type = '' %}
-
-      {% if bg_video_file_url contains '.mp4' %}
-        {% assign video_type = 'mp4' %}
-      {% elsif bg_video_file_url contains '.og' %}
-        {% assign video_type = 'ogg' %}
-      {% elsif bg_video_file_url contains '.avi' %}
-        {% assign video_type = 'avi' %}
-      {% elsif bg_video_file_url contains '.webm' %}
-        {% assign video_type = 'webm' %}
-      {% endif %}
-
-      {% if video_type == '' %}
-        <!-- Video is invalid -->
-        {% comment %} ALERT: Your video is invalid {% endcomment %}
-      {% else %}
-        <video muted playsinline autoplay loop>
-          <source src="{{ bg_video_file_url }}" type="video/{{ video_type }}" />
-        </video>
-      {% endif %}            
+    {% if bg_video_file_url != blank %}
+      {% render 'ambient-video', url: bg_video_file_url %}
     {% endif %}
   </div>
 </div>

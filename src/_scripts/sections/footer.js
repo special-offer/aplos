@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import BaseSection from './base';
 import AJAXKlaviyoForm from '../lib/ajaxKlaviyoForm';
-import NewsletterForm from '../ui/newsletterForm';
+import NewsletterForm from '../components/newsletterForm';
 
 const selectors = {
   newsletterForm: '[data-newsletter-form]'

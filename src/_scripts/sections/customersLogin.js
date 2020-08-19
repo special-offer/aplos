@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import BaseSection from './base';
-import CustomerForm from '../lib/customerForm';
+import CustomerForm from '../components/customerForm';
 
 const selectors = {
   recoverPasswordForm: '#RecoverPassword',

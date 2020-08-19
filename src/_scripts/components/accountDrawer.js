@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Drawer from './drawer';
-import CustomerForm from '../lib/customerForm';
+import CustomerForm from './customerForm';
 
 const selectors = {
   showContents: '[data-show-contents]'

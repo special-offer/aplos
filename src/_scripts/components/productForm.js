@@ -1,9 +1,9 @@
 import $ from 'jquery';
-import { chosenSelects } from '../../core/utils';
+import { chosenSelects } from '../core/utils';
 import {
   formatMoney,
   stripZeroCents
-} from '../../core/currency';
+} from '../core/currency';
 import Variants from './variants';
 
 const selectors = {

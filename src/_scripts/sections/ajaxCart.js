@@ -2,8 +2,8 @@ import $ from 'jquery';
 import BaseSection from './base';
 import CartAPI from '../core/cartAPI';
 import { getQueryParams } from '../core/utils';
-import AJAXFormManager from '../managers/ajaxForm';
-import AJAXCartDrawer from '../ui/ajaxCartDrawer';
+import AJAXFormManager from '../core/ajaxFormManager';
+import AJAXCartDrawer from '../components/ajaxCartDrawer';
 
 const $window = $(window);
 

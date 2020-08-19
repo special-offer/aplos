@@ -6,7 +6,7 @@ import BaseSection from './base';
 const selectors = {
   philosophiesJSON: '#philosophies-json',
   slotTemplate: '[data-slot-template]'
-}
+};
 
 export default class PagePhilosophySection extends BaseSection {
   constructor(container) {

@@ -63,13 +63,6 @@ export default class YotpoReviewsWidget {
     $writeReviewButton.find('.yotpo-icon-button-text').text('Leave Feedback');
     $writeReviewButton.detach().appendTo($footer); // put it in the footer
 
-    // Nicer widget title
-    const header = document.createElement('h3');
-    
-    header.innerText = 'Feedback';
-
-    $('.yotpo-bottomline-2-boxes', this.$el).prepend(header);
-
     // Update the "write review" heading
     $('.write-review .yotpo-header-title').text('Leave Feedback');
 

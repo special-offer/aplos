@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import BaseSection from './base';
-import Drawer from '../ui/drawer';
 import AJAXKlaviyoForm from '../lib/ajaxKlaviyoForm';
-import NewsletterForm from '../ui/newsletterForm';
+import Drawer from '../components/drawer';
+import NewsletterForm from '../components/newsletterForm';
 
 const selectors = {
   toggle: '[data-mobile-menu-toggle]',

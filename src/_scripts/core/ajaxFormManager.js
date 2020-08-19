@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import { getPropByString } from '../core/utils';
-import CartAPI from '../core/cartAPI';
+import { getPropByString } from './utils';
+import CartAPI from './cartAPI';
 
 const selectors = {
   addForm: 'form[action^="/cart/add"]',

@@ -6,7 +6,7 @@ import { throttle } from 'throttle-debounce';
 
 // Bootstrap JS
 import 'bootstrap/js/dist/collapse';
-import 'bootstrap/js/dist/modal';
+// import 'bootstrap/js/dist/modal';
 
 // Core
 import {
@@ -23,11 +23,9 @@ import { pageLinkFocus } from './core/a11y';
 import * as Animations  from './core/animations';
 import * as Breakpoints from './core/breakpoints';
 
-// UI - Import all to enable data API
-import './ui/drawer';
-import './ui/overlay';
-import './ui/tabs';
-import './ui/quantityAdjuster';
+// Components
+import './components/quantityAdjuster'; // Needs to be imported to enable data API
+import AccountDrawer from './components/accountDrawer'; // This exists outside of any section
 
 // Sections
 import SectionManager                from './sections/sectionManager';
@@ -46,8 +44,6 @@ import PagePhilosophySection         from './sections/pagePhilosophy';
 import ShowcaseSection               from './sections/showcase';
 import AplosRowSection               from './sections/aplosRow';
 import HeroSection                   from './sections/hero';
-// import SlideshowSection              from './sections/slideshow';
-// import VideoSection                  from './sections/video';
 import CustomersLoginSection         from './sections/customersLogin';
 import CustomersAccountSection       from './sections/customersAccount';
 import CustomersAccountOrdersSection from './sections/customersAccountOrders';
@@ -57,9 +53,6 @@ import CustomersOrderSection         from './sections/customersOrder';
 // Templates
 import './templates/pageStyles';
 import './templates/pageComponents';
-
-// UI
-import AccountDrawer from './ui/accountDrawer'; // This exists outside of any section
 
 // Do this ASAP
 Animations.initialize();
@@ -87,8 +80,6 @@ Breakpoints.initialize();
   sectionManager.register('showcase', ShowcaseSection);
   sectionManager.register('aplos-row', AplosRowSection);
   sectionManager.register('hero', HeroSection);
-  // sectionManager.register('slideshow', SlideshowSection);
-  // sectionManager.register('video', VideoSection);
   sectionManager.register('customers-login', CustomersLoginSection);
   sectionManager.register('customers-account', CustomersAccountSection);
   sectionManager.register('customers-account-orders', CustomersAccountOrdersSection);

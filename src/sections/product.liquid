@@ -25,26 +25,7 @@
 {% endcapture %}
 
 {% capture background_video_html %}
-  {% assign src = block.settings.product_background_video_file_url %}
-  {% assign video_type = '' %}
-
-  {% if src != blank %}
-    {% if src contains '.mp4' %}  
-      {% assign video_type = 'mp4' %} 
-    {% elsif src contains '.og' %}  
-      {% assign video_type = 'ogg' %} 
-    {% elsif src contains '.avi' %} 
-      {% assign video_type = 'avi' %} 
-    {% elsif src contains '.webm' %}  
-      {% assign video_type = 'webm' %}  
-    {% endif %}  
-  {% endif %}
-
-  {% unless video_type == '' %}
-    <video autoplay loop muted> 
-      <source src="{{ src }}" type="video/{{ video_type }}" />  
-    </video>
-  {% endunless %}
+  {% render 'ambient-video' url: block.settings.product_background_video_file_url %}
 {% endcapture %}
 
 <div data-section-id="{{ section.id }}" data-section-type="product" itemscope itemtype="http://schema.org/Product">
@@ -158,8 +139,13 @@ This provides more control and a more predictable experience.
       </div>
 
       {% unless block.settings.reviews_enabled == false %}
+        {% render 'page-hero',
+                   title: block.settings.reviews_title,
+                   title_tag: 'h2',
+                   bg_image_desktop: block.settings.reviews_image
+        %}      
         <div class="bg-butter-gray" style="padding: 50px 0;">
-          <div class="aplos-4side-container">
+          <div class="aplos-container">
             {% render 'yotpo-reviews-widget' %}        
           </div>
         </div>
@@ -267,7 +253,18 @@ This provides more control and a more predictable experience.
             "id": "reviews_enabled",
             "label": "Reviews Section Enabled",
             "default": true
-          },   
+          },
+          {
+            "type": "text",
+            "id": "reviews_title",
+            "label": "Reviews Section Title",
+            "default": "Feedback"
+          },
+          {
+            "type": "image_picker",
+            "id": "reviews_image",
+            "label": "Reviews Section Hero Image"
+          },
           {
             "type": "header",
             "content": "Imagery"

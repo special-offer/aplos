@@ -208,14 +208,15 @@ $yotpo-icon-star-half:   false !default;
 
   .yotpo-bottomline.yotpo-bottomline-2-boxes {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     border: none;
     margin-bottom: $spacer*2;
     padding: 0;
     text-align: left;
 
     .yotpo-clr,
-    .write-review-button {
+    .write-review-button,
+    .yotpo-stars {
       display: none !important;
     }
   }
@@ -231,15 +232,10 @@ $yotpo-icon-star-half:   false !default;
     text-align: right !important;
     float: none !important;
 
-    .yotpo-stars {
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
     .yotpo-sum-reviews {
       display: block !important;
       padding: 0;
-      margin: 30px 0 0 !important;
+      margin: 0 !important;
     }
   }
 
