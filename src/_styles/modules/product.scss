@@ -22,18 +22,15 @@
 }
 
 .product-grid__col {
+  height: 100%;
+  min-height: 110vh;
 
-  // @TODO - Target these better?
-  &:first-child {
+  &.product-grid__col--sticky {
     position: sticky;
     top: 0;
     height: 100vh;
+    min-height: 0;
     overflow: hidden; // Hide blurred image overflow?
-  }
-
-  &:last-child {
-    height: 100%;
-    min-height: 110vh;
   }
 }
 
@@ -55,6 +52,24 @@
   }
 }
 
+.product-highlights {
+  margin-top: 4.5rem;
+}
+
+.product-highlight {
+  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 2rem;
+  border-top: 1px solid black;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
 
 .product-mobile {
   height: 100vh;

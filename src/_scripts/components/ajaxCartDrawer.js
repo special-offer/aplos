@@ -132,8 +132,10 @@ class AJAXCartDrawer extends Drawer {
   render(cart, slot) {
     const templateData = $.extend(this.templateData, cart);
 
-    // If the cart is empty, we just add a class which displays the empty cart state
-    if (cart.item_count > 0) {
+    if (cart.item_count === 0) {
+      // this.$body.empty();
+    }
+    else {
       if (slot === 'body') {
         this.$body.empty().append(this.bodyTemplate(templateData));
       }
@@ -180,7 +182,7 @@ class AJAXCartDrawer extends Drawer {
     // item_count is line items * quantity for each
     if (e.cart) {
       this.$el.toggleClass(classes.cartIsEmpty, e.cart.item_count === 0);
-      this.$el.toggleClass(classes.cartHasSingleItem, e.cart.items.length === 1);
+      this.$el.toggleClass(classes.cartHasSingleItem, e.cart.items.length <= 1); // It's okay for 1 *or* 0
     }
 
     QuantityAdjuster.refresh(this.$el);

@@ -24,7 +24,7 @@ class CartAPI {
     cart.total_price = formatMoney(cart.total_price, theme.moneyFormat);
 
     cart.items.map((item) => {
-      item.image      = getSizedImageUrl(item.image, '400x');
+      item.image      = getSizedImageUrl(item.image, '600x');
       item.price      = formatMoney(item.price, theme.moneyFormat);
       item.line_price = formatMoney(item.line_price, theme.moneyFormat);
 
