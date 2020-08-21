@@ -17,12 +17,12 @@
           <div class="drawer__footer">
             <div class="ajax-cart__footer">
               <div class="ajax-cart__footer-row">
-                <div>
+                <div class="d-none d-md-block">
                   Taxes & Shipping<br />calculated at checkout
                 </div>
                 <div>
-                  <span style="display: inline-block; margin-right: 15px;">Subtotal:</span>
-                  <span style="display: inline-block; min-width: 50px; text-align: right;" data-ajax-cart-total>{{ total_price }}</span>
+                  <span class="ajax-cart__footer-total-label">Subtotal:</span>
+                  <span class="ajax-cart__footer-total" data-ajax-cart-total>{{ total_price }}</span>
                 </div>
               </div>
 
@@ -73,11 +73,30 @@
             <img src="{{ image }}">
           </div>
           <div class="ajax-cart__item-contents">
-            <h3 class="ajax-cart__item-header">
-              <a href="{{ url }}" class="ajax-cart__item-title">{{ product_title }}</a>
-            </h3>
-            <div class="ajax-cart__item-body">
-              <div class="ajax-cart__item-body-price">
+            <div class="ajax-cart__item-upper">
+              <h4 class="ajax-cart__item-header">{{ product_title }}</h4>
+              <div class="ajax-cart__item-body">
+                <div class="ajax-cart__item-price">
+                  {{ price }}
+                  {% endraw %}
+                  {% if section.settings.item_text %}
+                    <br />
+                    {{ section.settings.item_text }}
+                  {% endif %}
+                  {% raw %}
+                </div>
+                <div class="quantity-adjuster" data-quantity-adjuster>
+                  <button class="quantity-adjuster__decrement" data-decrement>-</button>
+                  <input type="number" value="{{ quantity }}" min="0" />
+                  <button class="quantity-adjuster__increment" data-increment>+</button>
+                </div>
+                <div class="ajax-cart__item-lineprice">
+                  {{ line_price }}
+                </div>              
+              </div>
+            </div>
+            <div class="ajax-cart__item-footer">
+              <div class="ajax-cart__item-price">
                 {{ price }}
                 {% endraw %}
                 {% if section.settings.item_text %}
@@ -86,16 +105,9 @@
                 {% endif %}
                 {% raw %}
               </div>
-              <div class="ajax-cart__item-body-controls">
-                <div class="quantity-adjuster" data-quantity-adjuster>
-                  <button class="quantity-adjuster__decrement" data-decrement>-</button>
-                  <input type="number" value="{{ quantity }}" min="0" />
-                  <button class="quantity-adjuster__increment" data-increment>+</button>
-                </div>                
-                <div class="ajax-cart__item-body-line-price">
-                  {{ line_price }}
-                </div>
-              </div>
+              <div class="ajax-cart__item-lineprice">
+                {{ line_price }}
+              </div>               
             </div>
           </div>
         </li>
