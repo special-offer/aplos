@@ -43,6 +43,11 @@
   //     @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
   //   }
   // }
+
+  &.btn-tall {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
 
 // Future-proof disabling of clicks on `<a>` elements
@@ -91,11 +96,21 @@ fieldset:disabled a.btn {
   border-color: $gray;
   background-color: $white;
   padding: 20px 50px 18px;
+
+  &.btn-tall {
+    padding-top: 26px;
+    padding-bottom: 24px;
+  }  
 }
 
 .btn-tertiary {
   border-color: $black;
   padding: 19px 30px 15px;
+
+  &.btn-tall {
+    padding-top: 25px;
+    padding-bottom: 22px;
+  }
 }
 
 .btn-light-outline {
@@ -140,6 +155,7 @@ fieldset:disabled a.btn {
 //
 // Alternate buttons
 //
+
 
 // @each $color, $value in $btn-colors {
 //   .btn-#{$color} {
