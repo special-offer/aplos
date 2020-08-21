@@ -15,6 +15,7 @@
 
         {% if block.settings[slot_enabled_setting_handle] == true %}
           {% render 'aplos-block'
+                    classes: 'aplos-block--philosophy',
                     type: block.settings[slot_type_setting_handle],
                     bg_image: block.settings[slot_bg_image_setting_handle],
                     bg_video_file_url: block.settings[slot_bg_video_setting_handle]

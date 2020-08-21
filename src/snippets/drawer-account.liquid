@@ -35,22 +35,30 @@
                   class="form-control">
               </div>
             </div>
+
+            <div class="form-group text-right d-md-none">
+              <br />
+              <a href="#" class="form-text" data-show-contents="#ad-password">Forgot Password?</a>
+            </div>
           {% endif %}        
           
           <div class="form-group form-group--footer row">
-            <div class="col-4 col-lg-3"></div>
-            <div class="col-8 col-lg-9">
-              <button type="submit" class="btn btn-primary-white btn-block">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+              <button type="submit" class="btn btn-primary-white btn-block btn-tall">
                 Login
               </button>
             </div>
           </div>
 
           <div class="drawer__body-footer">
+            <a href="#" class="btn btn-light-outline btn-tertiary btn-block d-md-none" data-show-contents="#ad-create-account">
+              Create An Account
+            </a>
             {% if form.password_needed %}
-              <a href="#" class="p2" data-show-contents="#ad-password">Forgot Password?</a>
+              <a href="#" class="p2 d-none d-md-block" data-show-contents="#ad-password">Forgot Password?</a>
             {% endif %}
-            <a href="#" class="p2" data-show-contents="#ad-create-account">Create An Account</a>
+            <a href="#" class="p2 d-none d-md-block" data-show-contents="#ad-create-account">Create An Account</a>
           </div>
         {% endform %}        
       </div>
@@ -124,8 +132,8 @@
           </div>    
 
           <div class="form-group form-group--footer row">
-            <div class="col-4 col-lg-3"></div>
-            <div class="col-8 col-lg-9">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
               <button type="submit" class="btn btn-primary-white btn-block">
                 Create an Account
               </button>
@@ -157,8 +165,8 @@
           </div>
       
           <div class="form-group form-group--footer row">
-            <div class="col-4 col-lg-3"></div>
-            <div class="col-8 col-lg-9">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
               <button type="submit" class="btn btn-primary-white btn-block">
                 Submit
               </button>

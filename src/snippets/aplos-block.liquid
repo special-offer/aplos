@@ -7,6 +7,7 @@
 
   {% include 'aplos-block',
               type: { string } - optional
+              classes: { string } - optional
               attributes: { string } - optional
               content: { string }
               bg_image: { image } - optional
@@ -15,7 +16,7 @@
 
 {% endcomment -%}
 
-<div class="aplos-block" {% if type %}data-type="{{ type }}" {% endif %}{{ attributes }}>
+<div class="aplos-block{% if classes %} {{ classes }}{% endif %}" {% if type %}data-type="{{ type }}" {% endif %}{{ attributes }}>
   <div class="aplos-block__content">
     {{ content }}
   </div>

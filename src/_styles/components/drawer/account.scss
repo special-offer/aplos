@@ -6,4 +6,10 @@
   form {
     margin-top: 135px;
   }
+
+  .drawer__body-footer {
+    @include media-breakpoint-down(sm) {
+      margin-top: 25px;
+    }
+  }
 }
