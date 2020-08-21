@@ -18,7 +18,7 @@
             <div class="ajax-cart__footer">
               <div class="ajax-cart__footer-row">
                 <div class="d-none d-md-block">
-                  Taxes & Shipping<br />calculated at checkout
+                  {{ section.settings.subtotal_text }}
                 </div>
                 <div>
                   <span class="ajax-cart__footer-total-label">Subtotal:</span>
@@ -125,8 +125,14 @@
       {
         "id": "item_text",
         "type": "text",
-        "label": "Item Text",
+        "label": "Additional Item Text",
         "info": "Shows on every item.  E.g. 'Ships Sept 20, 2021'"
+      },
+      {
+        "id": "subtotal_text",
+        "type": "textarea",
+        "label": "Subtotal Text",
+        "info": "Shows near the subtotal on larger screens"
       },
       {
         "type": "header",
