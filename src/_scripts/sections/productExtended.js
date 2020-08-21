@@ -36,7 +36,7 @@ export default class ProductExtendedSection extends BaseSection {
     this.$yotpoReviewsWidgets.each((i, el) => new YotpoReviewsWidget($(el))); // One on desktop + one inside the story popup
     this.ambientVideos = $.map($(selectors.ambientVideo, this.$container), el => new AmbientVideo(el));
 
-    if (this.$recipeSlideshow.length) {
+    if (this.$recipeSlideshow.length && this.$recipeSlideshow.find('.swiper-slide').length > 1) {
       this.swiper = new Swiper(this.$recipeSlideshow.get(0), {
         loop: true,
         speed: 500,
