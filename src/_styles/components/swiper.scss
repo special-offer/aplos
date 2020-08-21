@@ -1,6 +1,7 @@
 // -------------------------
 // Swiper styles
 // -------------------------
+
 .swiper-pagination-bullet {
   height: $swiper-bullet-size;
   width: $swiper-bullet-size;  
@@ -15,6 +16,10 @@
     opacity: $swiper-bullet-active-opacity;
     transition: opacity $transition-duration-fast $transition-timing-function-in;  
   }
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+   margin: 0 $swiper-bullet-spacing/2;
 }
 
 .swiper-navigation {

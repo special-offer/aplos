@@ -30,17 +30,17 @@
     opacity: 1;
   }
 
-  .swiper-pagination-bullet {
-    height: 8px;
-    width: 8px;
-  }
+  // .swiper-pagination-bullet {
+  //   height: 8px;
+  //   width: 8px;
+  // }
 
-  .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0 8px;
-  }
+  // .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  //   margin: 0 8px;
+  // }
 
   .swiper-pagination {
-    left: $spacing-md - 8px;
+    left: $spacing-md - $swiper-bullet-size;
     bottom: 19px;
     width: auto;
     transition-delay: 0.5s;

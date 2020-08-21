@@ -102,19 +102,14 @@
     border: 1px solid $black;
     transition: background-color 0.15s ease-in;
 
+    &:first-child {
+      margin-left: 0;
+    }    
+
     &.swiper-pagination-bullet-active {
       background-color: $black;
     }
   }
-
-  .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-    height: 8px;
-    width: 8px;
-
-    &:first-child {
-      margin-left: 0;
-    }
-  }  
 }
 
 .product-mobile {

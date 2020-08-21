@@ -1,5 +1,9 @@
 import $ from 'jquery';
 import Swiper from 'swiper';
+import {
+  isTouch,
+  isThemeEditor
+} from '../core/utils';
 import BaseSection from './base';
 import ProductForm from '../components/productForm';
 
@@ -18,14 +22,31 @@ export default class ProductSection extends BaseSection {
 
     this.productForm = new ProductForm(this.$productForm);
 
-    this.swiper = new Swiper(this.$slideshow.get(0), {
+    const swiperOptions = {
       loop: true,
-      speed: 500,
+      speed: 1200,
+      autoplay: {
+        delay: 3500
+      },
       pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
         clickable: true
-      }
-    });     
+      },
+      simulateTouch: false,
+      disableOnInteraction: false
+    };
+
+    if (isTouch()) {
+      swiperOptions.effect = 'slide';
+    }
+    else {
+      swiperOptions.effect = 'fade';
+      swiperOptions.fadeEffect = { crossFade: true };
+    }    
+
+    this.swiper = new Swiper(this.$slideshow.get(0), swiperOptions);
+
+    this.swiper.autoplay.start();
   }
 }

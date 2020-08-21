@@ -24,7 +24,9 @@ export default class TestimonialsSection extends BaseSection {
       speed: 1200,
       autoplay: {
         delay: 3500
-      }
+      },
+      simulateTouch: false,
+      disableOnInteraction: false
     };
 
     if (isTouch()) {
