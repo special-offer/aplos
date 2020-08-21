@@ -92,6 +92,16 @@ body.drawer-open {
   }
 }
 
+.drawer__close,
+.drawer__header {
+  opacity: 0;
+  transition: opacity $transition-duration-slow ease-out $transition-duration-slow/2;
+
+  .is-visible & {
+    opacity: 1;
+  }
+}
+
 .drawer__close {
   position: absolute;
   z-index: 5;
