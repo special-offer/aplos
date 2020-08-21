@@ -17,28 +17,33 @@
 
 .product-grid {
   position: relative;
-  display: grid;
-  grid-template-columns: 50% 50%;
+  display: flex;
+  align-items: flex-start;
+
+  .product-detail-form {
+    @include media-breakpoint-up(md) {
+      max-width: calc(1440px/2 - #{$spacing-lg*2}); // @TODO - variable-ize 1440
+    }
+  }
 }
 
 .product-grid__col {
-  height: 100%;
+  flex: 1;
+  width: 50%;
+  // height: 100%;
   min-height: 110vh;
 
   &.product-grid__col--sticky {
     position: sticky;
     top: 0;
-    height: 100vh;
-    min-height: 0;
-    overflow: hidden; // Hide blurred image overflow?
+    min-height: 100vh;
+    // min-height: 0;
   }
-}
 
-.product-grid {
-  .product-detail-form {
-    @include media-breakpoint-up(md) {
-      max-width: calc(1440px/2 - #{$spacing-lg*2}); // @TODO - variable-ize 1440
-    }
+  // Aplos rows are used for accent imagery
+  // Since they contain 2 images and are inside a 50vw column, setting the height to 25vw makes each aplos block square
+  .aplos-row {
+    min-height: 25vw;
   }  
 }
 
@@ -49,6 +54,10 @@
     padding: $spacing-lg;
     padding-top: $spacing-lg + 100px;
     background-color: $white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 }
 
@@ -69,6 +78,38 @@
   &:last-child {
     padding-bottom: 0;
   }
+}
+
+.product-recipes {
+  .rte {
+    margin-bottom: $spacing-ml;
+  }
+
+  .swiper-pagination {
+    position: relative;
+    text-align: left;
+    margin-top: $spacer*5;
+  }
+
+  .swiper-pagination-bullet {
+    opacity: 1;
+    background-color: $white;
+    border: 1px solid $black;
+    transition: background-color 0.15s ease-in;
+
+    &.swiper-pagination-bullet-active {
+      background-color: $black;
+    }
+  }
+
+  .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    height: 8px;
+    width: 8px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }  
 }
 
 .product-mobile {

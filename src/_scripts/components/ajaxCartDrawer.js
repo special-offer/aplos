@@ -132,10 +132,9 @@ class AJAXCartDrawer extends Drawer {
   render(cart, slot) {
     const templateData = $.extend(this.templateData, cart);
 
-    if (cart.item_count === 0) {
-      // this.$body.empty();
-    }
-    else {
+    // If cart.item_count == 0 we don't need to do anything.  this.onRender will trigger the empty state for us
+
+    if (cart.item_count > 0) {
       if (slot === 'body') {
         this.$body.empty().append(this.bodyTemplate(templateData));
       }

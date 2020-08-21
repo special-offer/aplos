@@ -244,6 +244,11 @@ $yotpo-icon-star-half:   false !default;
     display: none;
   }
 
+  // 'Be the first to write a review' text
+  .yotpo-first-review {
+    display: none;
+  }
+
   // Form Styling
 
   input, .y-input {
@@ -726,10 +731,21 @@ $yotpo-icon-star-half:   false !default;
     justify-content: space-between;    
     border-top: 1px solid $hr-border-color;
     padding-top: 30px;
+    transition: opacity 0.5s ease-out;
 
     .write-button {
       float: none;
     }
+  }
+
+  .yotpo-no-reviews .main-widget-footer {
+    justify-content: center;
+    border-top: none;
   }  
+
+  .write-review-wrapper.visible + .main-widget-footer {
+    opacity: 0;
+    pointer-events: none;
+  }
 
 }

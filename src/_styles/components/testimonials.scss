@@ -3,9 +3,8 @@
 // -------------------------
 
 .testimonals-container {
-  // @extend .aplos-container; // I don't think we need horizontal padding
-  padding-top: $spacing-ml;
-  padding-bottom: $spacing-ml;
+  padding-top: 76px;
+  padding-bottom: 76px;
 
   @include media-breakpoint-up(md) {
     padding-top: 157px;
@@ -35,6 +34,7 @@
 
 .testimonial__content {
   @include h2;
+  line-height: 1.4;
   max-width: 8.9em;
 
   @include media-breakpoint-up(md) {
@@ -47,9 +47,10 @@
 
 .testimonial__author {
   @include p2;
-  margin-top: 30px;
+  margin-top: 34px;
 
   @include media-breakpoint-up(md) {
     @include h2;
+    margin-top: 30px;
   }
 }

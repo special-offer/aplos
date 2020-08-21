@@ -53,7 +53,17 @@
               <div class="gallery-image gallery-image--foreground">
                 <img src="{{ block.settings.product_image | img_url: '1600x' }}" />
               </div>  
-            </div>            
+            </div>
+            {% if block.settings.accent_image_3 != blank or block.settings.accent_image_4 != blank %}
+              <div class="aplos-row aplos-row--fixed">
+                {% if block.settings.accent_image_3 != blank %}
+                  {% include 'aplos-block', bg_image: block.settings.accent_image_3 %}
+                {% endif %}
+                {% if block.settings.accent_image_4 != blank %}
+                  {% include 'aplos-block', bg_image: block.settings.accent_image_4 %}
+                {% endif %}
+              </div>
+            {% endif %}
           </div>
         </div>
 
@@ -66,6 +76,16 @@
                        submit_button_contents: submit_button_contents
             %}
           </div>
+          {% if block.settings.accent_image_1 != blank or block.settings.accent_image_2 != blank %}
+            <div class="aplos-row aplos-row--fixed">
+              {% if block.settings.accent_image_1 != blank %}
+                {% include 'aplos-block', bg_image: block.settings.accent_image_1 %}
+              {% endif %}
+              {% if block.settings.accent_image_2 != blank %}
+                {% include 'aplos-block', bg_image: block.settings.accent_image_2 %}
+              {% endif %}
+            </div>
+          {% endif %}
           {% if block.settings.highlights_enabled %}
             <div class="aplos-4side-container bg-butter">
               <h2>{{ block.settings.highlights_title }}</h2>
@@ -111,12 +131,12 @@
       </div>
 
       {% if block.settings.recipes_enabled %}
-        <div class="product-grid">
-          <div class="product-grid__col">
+        <div class="product-grid" style="align-items: stretch">
+          <div class="product-grid__col" style="min-height: 0;">
             <div class="product-detail__child">
-              <div class="aplos-4side-container">
+              <div class="product-recipes aplos-4side-container">
                 <h2>{{ block.settings.recipes_title }}</h2>
-                <div class="rte" style="margin-bottom: 60px;">
+                <div class="rte">
                   {{ block.settings.recipes_content }}
                 </div>
 
@@ -130,9 +150,9 @@
                       {% if article %}
                         <div class="swiper-slide">
                           <div class="row p2">
-                            <div class="col-4" style="display: flex; flex-direction: column;">
+                            <div class="col-4 flex flex-column">
                               <div style="max-width: 10em">{{ article.title }}</div>
-                              <div style="padding-top: 20px; margin-top: auto;">Ingredients list</div>
+                              <div style="padding-top: 20px; margin-top: auto;">Ingredients list goes here</div>
                             </div>
                             <div class="col-8">
                               <div>{{ article.content }}</div>
@@ -142,15 +162,19 @@
                       {% endif %}
                     {% endfor %}
                   </div>
-                  <div class="swiper-pagination" style="position: static; text-align: left"></div>
+                  <div class="swiper-pagination"></div>
                 </div>
               </div>
             </div>          
           </div>
-          <div class="product-grid__col product-grid__col--sticky">
+          <div class="product-grid__col product-grid__col--sticky" style="min-height: 0; max-height: 100vh;">
             <div class="product-detail__child product-detail__child--gallery" style="background-color: black;">
               {% if block.settings.recipe_image %}
-                <img src="{{ block.settings.recipe_image | img_url: 'x800' }}" style="height: 100%; width: 100%; object-fit: cover" />
+                <div class="product-detail-gallery" style="height: 100%">
+                  <div class="gallery-image gallery-image--background">              
+                    <img src="{{ block.settings.recipe_image | img_url: 'x800' }}" />
+                  </div>
+                </div>
               {% endif %}
             </div>
           </div>
@@ -411,7 +435,31 @@
             "type": "image_picker",
             "id": "recipe_image",
             "label": "Main Recipe Image"
-          },          
+          },
+          {
+            "type": "header",
+            "content": "Accent Images"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image_1",
+            "label": "Image #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image_2",
+            "label": "Image #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image_3",
+            "label": "Image #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image_4",
+            "label": "Image #4"
+          },                    
           {
             "type": "header",
             "content": "Reviews Section"
@@ -421,7 +469,7 @@
             "id": "reviews_enabled",
             "label": "Enabled",
             "default": true
-          },
+          },        
           {
             "type": "text",
             "id": "reviews_title",
