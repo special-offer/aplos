@@ -1,0 +1,63 @@
+// -------------------------
+// Showcase
+// -------------------------
+
+// Showcase section is just a really fancy aplos block
+
+.showcase {
+  margin: auto 0;
+  padding-top: 25px;
+  padding-bottom: 28px;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 175px;
+    padding-bottom: 100px;    
+  }
+
+  &--light {    
+    .showcase__title,
+    .showcase__subtitle,
+    .rte,
+    .rte a {
+      color: $white;
+    }
+  }
+
+  .rte {
+    max-width: 22em;
+  }
+
+  form {
+    margin-top: auto;
+  }
+}
+
+.showcase__title {
+  @include media-breakpoint-up(md) {
+    @include h1;
+  }
+}
+
+.showcase__subtitle {
+  margin: $spacer 0 $spacer*2.5;
+
+  @include media-breakpoint-up(md) {
+    margin: $spacer*2 0;
+  }
+}
+
+.showcase__controls {
+  display: flex;
+  justify-content: space-between;
+  margin-left: -11px;
+  margin-right: -11px;
+}
+
+.showcase__control {
+  padding-left: 11px;
+  padding-right: 11px;
+
+  @include media-breakpoint-up(md) {
+    max-width: 400px;
+  }
+}

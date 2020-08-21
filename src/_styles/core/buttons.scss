@@ -193,6 +193,10 @@ fieldset:disabled a.btn {
 .btn-block {
   display: block;
   width: 100%;
+  // Block buttons don't need a bunch of horizontal padding to define their horizontal size
+  // So reduce it which allows them to fit better (less text wrapping)
+  padding-left: 10px;
+  padding-right: 10px;
 
   // Vertically space out multiple block buttons
   + .btn-block {

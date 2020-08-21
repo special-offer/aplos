@@ -77,4 +77,8 @@
       margin-top: $spacer*1.7;
     }    
   }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }

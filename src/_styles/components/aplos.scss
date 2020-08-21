@@ -28,8 +28,6 @@
 
 .aplos-block {
   position: relative;
-  display: flex;
-  align-items: center;
   flex: 1;
   padding: $spacing-ml $spacing-ml $spacing-md;
   min-height: 100vw; // make everything square
@@ -41,9 +39,23 @@
   } 
 
   @include media-breakpoint-up(md) {
-    min-height: 0;
     padding: $spacing-lg;
-    align-items: flex-end; // Needs to be configurable
+    min-height: 0;
+  }
+}
+
+.aplos-block__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 580px;
+
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.54, 0.01, 0.68, 1.02);
+
+  .is-ready & {
+    opacity: 1;
   }
 }
 

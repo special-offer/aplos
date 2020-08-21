@@ -75,7 +75,7 @@
 
   &--title {
     // @TODO - Hide on lg-down if it's a subscription product?
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       display: none;
     }
   }
@@ -83,7 +83,7 @@
   &--subtitle {
     // flex: 0 0 auto;
     
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       display: none;
     }
   }

@@ -1,0 +1,488 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+{% assign block = blank %}
+{% for b in section.blocks %}
+  {% if b.settings.product == product.handle %}
+    {% assign block = b %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% capture submit_button_contents %}
+  <span data-add-to-cart-text>
+    {% if current_variant.available %}
+      {{ 'products.product.add_to_cart' | t }}              
+    {% else %}
+      {{ 'products.product.sold_out' | t }}
+    {% endif %}
+  </span>
+  <span class="emdash"></span>
+  <span data-product-price>
+    {{ current_variant.price | money_without_trailing_zeros }}
+  </span>
+  <span class="currency">USD</span>
+{% endcapture %}
+
+{% capture background_video_html %}
+  {% render 'ambient-video' url: block.settings.product_background_video_file_url %}
+{% endcapture %}
+
+<div data-section-id="{{ section.id }}" data-section-type="product-extended" itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+  <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+  <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+  <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+
+  <form action="/cart/add" method="post" enctype="multipart/form-data" data-product-form>
+
+    <!-- Product Grids -->
+    <div class="product-grids drawer-shifter">
+      <div class="product-grid">
+        <div class="product-grid__col product-grid__col--sticky">
+          <div class="product-detail__child product-detail__child--gallery">
+            <div class="product-detail-gallery">
+              <div class="gallery-image gallery-image--background">
+                <img src="{{ block.settings.product_background_image | img_url: '1600x' }}" />
+                {{ background_video_html }}
+              </div>
+              <div class="gallery-image gallery-image--foreground">
+                <img src="{{ block.settings.product_image | img_url: '1600x' }}" />
+              </div>  
+            </div>
+            {% if block.settings.accent_image_3 != blank or block.settings.accent_image_4 != blank %}
+              <div class="aplos-row aplos-row--fixed">
+                {% if block.settings.accent_image_3 != blank %}
+                  {% include 'aplos-block', bg_image: block.settings.accent_image_3 %}
+                {% endif %}
+                {% if block.settings.accent_image_4 != blank %}
+                  {% include 'aplos-block', bg_image: block.settings.accent_image_4 %}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="product-grid__col" style="height: auto;">
+          <div class="product-detail__child product-detail__child--form">
+            {% render 'product-detail-form',
+                       product: product,
+                       current_variant: current_variant,
+                       block: block,
+                       submit_button_contents: submit_button_contents
+            %}
+          </div>
+          {% if block.settings.accent_image_1 != blank or block.settings.accent_image_2 != blank %}
+            <div class="aplos-row aplos-row--fixed">
+              {% if block.settings.accent_image_1 != blank %}
+                {% include 'aplos-block', bg_image: block.settings.accent_image_1 %}
+              {% endif %}
+              {% if block.settings.accent_image_2 != blank %}
+                {% include 'aplos-block', bg_image: block.settings.accent_image_2 %}
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if block.settings.highlights_enabled %}
+            <div class="aplos-4side-container bg-butter">
+              <h2>{{ block.settings.highlights_title }}</h2>
+
+              {%- capture highlights -%}
+                {% for i in (1..3) %}
+                  {% assign highlight_title_setting   = 'highlight_title_' | append: i %}
+                  {% assign highlight_content_setting = 'highlight_content_' | append: i %}
+                  
+                  {% capture highlight_body %}
+                    {% if block.settings[highlight_title_setting] != blank %}
+                      <div class="col-3 col-xl-4 p2">
+                        0{{ i }}.
+                        <br />
+                        {{ block.settings[highlight_title_setting] }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings[highlight_content_setting] != blank %}
+                      <div class="col-9 col-xl-8 rte">
+                        {{ block.settings[highlight_content_setting] }}
+                      </div>
+                    {% endif %}
+                  {% endcapture %}
+
+                  {% if highlight_body != blank %}
+                    <div class="product-highlight">
+                      <div class="row">
+                        {{ highlight_body }}
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {%- endcapture -%}
+
+              {% if highlights != blank %}
+                <div class="product-highlights">
+                  {{ highlights }}
+                </div>
+              {% endif %}
+            </div>          
+          {% endif %}
+        </div>
+      </div>
+
+      {% if block.settings.recipes_enabled %}
+        <div class="product-grid" style="align-items: stretch">
+          <div class="product-grid__col" style="min-height: 0;">
+            <div class="product-detail__child">
+              <div class="product-recipes aplos-4side-container">
+                <h2>{{ block.settings.recipes_title }}</h2>
+                <div class="rte">
+                  {{ block.settings.recipes_content }}
+                </div>
+
+                <div class="swiper-container" data-recipe-slideshow>
+                  <div class="swiper-wrapper">
+                    {% for i in (1..3) %}
+                      {% assign article_setting = 'recipes_article_' | append: i %}
+                      {% assign article_handle = block.settings[article_setting] %}
+                      {% assign article = articles[article_handle] %}
+
+                      {% if article %}
+                        <div class="swiper-slide">
+                          <div class="row p2">
+                            <div class="col-4 flex flex-column">
+                              <div style="max-width: 10em">{{ article.title }}</div>
+                              <div style="padding-top: 20px; margin-top: auto;">Ingredients list goes here</div>
+                            </div>
+                            <div class="col-8">
+                              <div>{{ article.content }}</div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <div class="swiper-pagination"></div>
+                </div>
+              </div>
+            </div>          
+          </div>
+          <div class="product-grid__col product-grid__col--sticky" style="min-height: 0; max-height: 100vh;">
+            <div class="product-detail__child product-detail__child--gallery" style="background-color: black;">
+              {% if block.settings.recipe_image %}
+                <div class="product-detail-gallery" style="height: 100%">
+                  <div class="gallery-image gallery-image--background">              
+                    <img src="{{ block.settings.recipe_image | img_url: 'x800' }}" />
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% unless block.settings.reviews_enabled == false %}
+        {% render 'page-hero',
+                   title: block.settings.reviews_title,
+                   title_tag: 'h2',
+                   bg_image_desktop: block.settings.reviews_image
+        %}      
+        <div class="bg-butter-gray" style="padding: 50px 0;">
+          <div class="aplos-container">
+            {% render 'yotpo-reviews-widget' %}        
+          </div>
+        </div>
+      {% endunless %}
+    </div>
+    <!-- END Product Grid -->
+
+    <!-- Producct Mobile-->
+    <div class="product-mobile drawer-shifter">
+      <div class="product-mobile__imagery">
+        <div class="product-mobile__imagery-bg">
+          <img src="{{ block.settings.product_background_image | img_url: '800x' }}" />
+          {{ background_video_html }}
+        </div>
+        <div class="product-mobile__imagery-fg">
+          <img src="{{ block.settings.product_image | img_url: '800x' }}" />
+        </div>
+        <div class="product-mobile__imagery-cover"></div>
+      </div>
+      <div class="product-mobile__titles">
+        <div class="h1" style="margin: 0; font-size: 36px;">{{ product.title }}</div>
+
+        {% if block.settings.subtitle != blank %}
+          <div class="p2" style="margin-top: 1.1rem;">
+            {{ block.settings.subtitle }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <!-- END Product Mobile-->
+
+    <!-- Story Popup -->
+    {% render 'story-popup',
+               product: product
+               block: block
+    %}
+
+    <!-- Transaction Bar -->
+    {% render 'transaction-bar'
+               product: product,
+               current_variant: current_variant,
+               subtitle: block.settings.subtitle,
+               submit_button_contents: submit_button_contents
+    %}
+
+    <!-- Bare form elements, hidden for JS enabled browsers -->
+    <!-- Is this where itemprop="offers" is supposed to go? -->
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <select name="id" class="no-js" data-product-select>
+        {% for variant in product.variants %}
+          <option
+            {% if variant == current_variant %}selected="selected"{% endif %}
+            {% unless variant.available %}disabled="disabled"{% endunless %}
+            value="{{ variant.id }}">
+              {{ variant.title }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <input type="number" name="quantity" value="1" class="no-js" data-product-quantity>     
+    </div>   
+
+    <script type="application/json" data-product-json>
+      {% render 'product-json', product: product %}
+    </script>
+  </form>
+</div>
+
+{% schema %}
+  {
+    "name": "Extended Product Page",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "product_info",
+        "name": "Product Info",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product",
+            "info": "The settings below with only display for the product selected here"
+          },
+          {
+            "type": "header",
+            "content": "Product Information"
+          },
+          {
+            "type": "checkbox",
+            "id": "hide_product_title",
+            "label": "Hide Product Title",
+            "default": false
+          },
+          {
+            "type": "richtext",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "textarea",
+            "id": "subtitle_mobile",
+            "label": "Subtitle (Mobile)",
+            "info": "Displays inside the popup card."
+          },
+          {
+            "type": "header",
+            "content": "Imagery"
+          },
+          {
+            "type": "image_picker",
+            "id": "product_image",
+            "label": "Product Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "product_background_image",
+            "label": "Product Background Image"
+          },
+          { 
+            "type": "url",  
+            "id": "product_background_video_file_url",  
+            "label": "Product Background Video File URL",  
+            "info": "Accepted file formats: mp4, ogg, avi, webm"  
+          },
+          {
+            "type": "header",
+            "content": "Additional Details",
+            "info": "These details display as an expandable list"
+          },
+          {
+            "type": "text",
+            "id": "detail_title_1",
+            "label": "Detail #1 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "detail_content_1",
+            "label": "Detail #1 Content"
+          },
+          {
+            "type": "text",
+            "id": "detail_title_2",
+            "label": "Detail #2 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "detail_content_2",
+            "label": "Detail #2 Content"
+          },
+          {
+            "type": "text",
+            "id": "detail_title_3",
+            "label": "Detail #3 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "detail_content_3",
+            "label": "Detail #3 Content"
+          },
+          {
+            "type": "header",
+            "content": "Highlights"
+          },
+          {
+            "type": "checkbox",
+            "id": "highlights_enabled",
+            "label": "Enabled",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "highlights_title",
+            "label": "Title",
+            "default": "Learn More"
+          },
+          {
+            "type": "text",
+            "id": "highlight_title_1",
+            "label": "Highlight #1 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "highlight_content_1",
+            "label": "Highlight #1 Content"
+          },
+          {
+            "type": "text",
+            "id": "highlight_title_2",
+            "label": "Highlight #2 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "highlight_content_2",
+            "label": "Highlight #2 Content"
+          },
+          {
+            "type": "text",
+            "id": "highlight_title_3",
+            "label": "Highlight #3 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "highlight_content_3",
+            "label": "Highlight #3 Content"
+          },           
+          {
+            "type": "header",
+            "content": "Recipes Section",
+            "info": "Recipes are stores as blog articles"
+          },
+          {
+            "type": "checkbox",
+            "id": "recipes_enabled",
+            "label": "Enabled",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "recipes_title",
+            "label": "Title",
+            "default": "How To Enjoy"
+          },
+          {
+            "type": "richtext",
+            "id": "recipes_content",
+            "label": "Content"
+          },
+          {
+             "type": "article",
+             "id": "recipes_article_1",
+             "label": "Recipe #1"
+          },
+          {
+             "type": "article",
+             "id": "recipes_article_2",
+             "label": "Recipe #2"
+          },
+          {
+             "type": "article",
+             "id": "recipes_article_3",
+             "label": "Recipe #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "recipe_image",
+            "label": "Main Recipe Image"
+          },
+          {
+            "type": "header",
+            "content": "Accent Images"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image_1",
+            "label": "Image #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image_2",
+            "label": "Image #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image_3",
+            "label": "Image #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image_4",
+            "label": "Image #4"
+          },                    
+          {
+            "type": "header",
+            "content": "Reviews Section"
+          },
+          {
+            "type": "checkbox",
+            "id": "reviews_enabled",
+            "label": "Enabled",
+            "default": true
+          },        
+          {
+            "type": "text",
+            "id": "reviews_title",
+            "label": "Title",
+            "default": "Feedback"
+          },
+          {
+            "type": "image_picker",
+            "id": "reviews_image",
+            "label": "Hero Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

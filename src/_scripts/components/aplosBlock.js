@@ -5,6 +5,10 @@ const selectors = {
   ambientVideo: '[data-ambient-video]'
 };
 
+const classes = {
+  ready: 'is-ready'
+};
+
 export default class AplosBlock {
   constructor(el) {
     this.name = 'aplosBlock';
@@ -25,6 +29,8 @@ export default class AplosBlock {
     if ($(selectors.ambientVideo, this.$el).length > 0) {
       this.ambientVideo = new AmbientVideo($(selectors.ambientVideo, this.$el).first());
     }
+
+    this.$el.addClass(classes.ready);
   }
 
   hasBackgroundMedia() {

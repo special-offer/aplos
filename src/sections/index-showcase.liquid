@@ -1,38 +1,40 @@
 <div data-section-id="{{ section.id }}" data-section-type="showcase">
-  {% assign light_text = false %}
-  {% if section.settings.color == 'light' %}
-    {% assign light_text = true %}
-  {% endif %}
-
   {% capture block_content %}
-    {% if section.settings.title != blank %}
-      <h2 class="h1{% if light_text %} text-white{% endif %}">
-        {{ section.settings.title }}
-      </h2>
-    {% endif %}
-    {% if section.settings.subtitle != blank %}
-      <div class="p2{% if light_text %} text-white{% endif %}">{{ section.settings.subtitle }}</div>
-    {% endif %}
-    {% if section.settings.content != blank %}
-      <div class="rte{% if light_text %} text-white{% endif %}" style="max-width: 25em;">
-        {{ section.settings.content }}
-      </div>
-    {% endif %}
+    <div class="showcase{% if section.settings.color == 'light' %} showcase--light{% endif %}">
+      {% if section.settings.title != blank %}
+        <h2 class="showcase__title">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <div class="showcase__subtitle p2">{{ section.settings.subtitle }}</div>
+      {% endif %}
+      {% if section.settings.content != blank %}
+        <div class="rte">
+          {{ section.settings.content }}
+        </div>
+      {% endif %}
+    </div>
     {% if section.settings.related_product != blank %}
       {% assign related_product = all_products[section.settings.related_product] %}
       {% assign current_variant = related_product.selected_or_first_available_variant %}
       <form action="/cart/add" method="post" enctype="multipart/form-data">
-        <div>
+        <div class="showcase__controls">
           {% if related_product.available %}
-            <button type="submit" name="add" class="btn btn-primary" data-add-to-cart>
-              <span data-add-to-cart-text>
-                {{ 'products.product.add_to_cart' | t }}              
-              </span>
-              <span class="emdash"></span>
-              {{ current_variant.price | money_without_trailing_zeros }} USD
-            </button>
+            <div class="showcase__control" style="flex: 1.5;">
+              <button type="submit" name="add" class="btn btn-primary btn-block" data-add-to-cart>
+                <span data-add-to-cart-text>
+                  {{ 'products.product.add_to_cart' | t }}              
+                </span>
+                <span class="emdash"></span>
+                {{ current_variant.price | money_without_trailing_zeros }} USD
+              </button>
+            </div>
           {% endif %}
-          <a href="{{ related_product.url }}" class="btn{% if light_text %} btn-light-outline{% else %} btn-primary-alt{% endif %} d-none d-md-inline-block">Learn More</a>
+            
+          <div class="showcase__control{% if related_product.available %} d-none d-lg-inline-block{% endif %}" style="flex: 1;">
+            <a href="{{ related_product.url }}" class="btn btn-block{% if section.settings.color == 'light' %} btn-light-outline{% else %} btn-primary-alt{% endif %}">Learn More</a>
+          </div>
         </div>
 
         <input type="hidden" name="id" value="{{ current_variant.id }}" />

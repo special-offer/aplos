@@ -35,8 +35,8 @@
         </div>
       </div>      
 
-      <!-- if product is subscription product -->
-      {% if true %}
+      {% comment %}
+        <!-- if product is subscription product -->        
         <style>
           .transaction-bar__unit svg {
             stroke: black;
@@ -59,13 +59,15 @@
             </div>
           </div>
         </div>
-        <div class="transaction-bar__unit transaction-bar__unit--subscription d-none d-md-inline-block">
+        <div class="transaction-bar__unit transaction-bar__unit--subscription d-none d-md-inline-block" style="display: none !important">
           <div class="transaction-bar__pad">
             <div class="pill is-active" style="margin: 0 5px; padding-top: 11px; padding-bottom: 8px;">Purchase Once</div>
             <div class="pill" style="margin: 0 5px; padding-top: 11px; padding-bottom: 8px;">Recurring Order</div>
           </div>
-        </div>         
-      {% elsif subtitle != blank %}
+        </div>
+        {% endcomment %}
+
+      {% if subtitle != blank %}
         <div class="transaction-bar__unit transaction-bar__unit--subtitle">
           <div class="transaction-bar__pad">
             <div class="p2">
@@ -75,6 +77,7 @@
         </div>  
       {% endif %}
 
+      {% comment %}
       <div class="transaction-bar__unit transaction-bar__unit--quantity-desktop">
         <div class="transaction-bar__pad">
           <div class="dot-group">
@@ -89,6 +92,7 @@
           </div>
         </div>
       </div>
+      {% endcomment %}
       <div class="transaction-bar__unit transaction-bar__unit--add-to-cart">
         <button
           type="submit"
