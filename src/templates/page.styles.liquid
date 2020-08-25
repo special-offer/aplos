@@ -21,8 +21,6 @@
       <li><a href="#docs-buttons">Buttons</a></li>
       <li><a href="#docs-forms">Forms</a></li>
       <li><a href="#docs-page-elements">Page Elements</a></li>
-      <li><a href="#docs-frames">Frames</a></li>
-      <li><a href="#docs-cards">Cards</a></li>
       <li><a href="#docs-misc-elements">Miscellaneous elements</a></li>
       <li><a href="#docs-iconography">Iconography</a></li>
       <li>
@@ -284,7 +282,7 @@
           </tr>
           <tr>
             <th class="text-nowrap" scope="row">Gutter width</th>
-            <td colspan="6">30px (15px on each side of a column)</td>
+            <td colspan="6">24px (12px on each side of a column) on screen sizes below the medium breakpoint.  48px (24px on each side of a column) on screen sizes above the medium breakpoint</td>
           </tr>
           <tr>
             <th class="text-nowrap" scope="row">Nestable</th>
@@ -316,10 +314,23 @@
       <div class="col-md-6">.col-md-6</div>
     </div>
 
+    <h5 class="docs-subtitle">Aplós Container</h5>
+    <p>The Aplós container is a more responsive container type.  It has outer padding that scales through 4 different sizes based on screen size.  There are two versions -- one for horizontal padding and one for both horizontal <em>and</em> vertical padding.  Resize the browser to see how the elements below respond.</p>
+    <br />
+    
+    <div class="aplos-container" style="border: 1px solid black;">
+      <div class="bg-butter" style="border: 1px solid #EBE583; padding: 5px;">I'm text contained in a normal <code>.aplos-container</code> element.</div>
+    </div>
+    
+    <br /><br />
+
+    <div class="aplos-4side-container" style="border: 1px solid black;">
+      <div class="bg-butter" style="border: 1px solid #EBE583; padding: 5px;">I'm text contained in a <code>.aplos-4side-container</code> element.</div>
+    </div>
+
     <h2 id="docs-content-grid" class="docs-title">Content Grid</h2>
     <p>The content grid is an alternative way to layout content similar to the Bootstrap grid but it doesn't rely on rows and columns.  It used the same sizing and gutters to ensure layout consistency, but the usage is slightly different.</p>
     <p>The content grid relies on a parent <code>.content-grid</code> element with any number of direct child <code>.content-grid__item</code> elements.  The child element sizing is parent on the parent grid element and any modifier classes it may have.  The default grid is responsive and initially displays 1 item per row and expands to show 2, and 3 items per row as the screen crosses the <code>small</code> and <code>large</code> breakpoints respectively.</p>
-    <p>Responsive modifier classes are available to generate 1 -> 6 columns per breakpoint and work similar to Bootstrap responsive utilities.  Any breakpoint class applies to that breakpoint and <em>up</em>.  If you add another class for a larger breakpoint it will override any ones applying at smaller breakpoints.</p>
 
     <p>Below is an example of the default content grid.</p>
 
@@ -329,19 +340,7 @@
           <div>Grid item {{ i }}</div>
         </div>
       {% endfor %}
-    </div>
-
-    <h5 class="docs-subtitle">Responsive Content Grid Layouts</h5>
-    <p>Modifier classes are available to create alternate grid layouts</p>
-
-    <p>Use <code>.content-grid--sm-3-col.content-grid--xxl-6-col</code> to create a 3 column grid on screens large than the <code>sm</code> breakpoint and a 6 column grid on screens larger than the <code>xxl</code> breakpoint.</p>
-    <div class="content-grid content-grid--sm-3-col content-grid--xxl-6-col show-grid">
-      {% for i in (1..6) %}
-        <div class="content-grid__item">
-          <div>Grid item {{ i }}</div>
-        </div>
-      {% endfor %}
-    </div>       
+    </div>     
 
     <h2 id="docs-tables" class="docs-title">Tables</h2>
     <h5 class="docs-subtitle">Base Tables</h5>
@@ -656,67 +655,6 @@
 
     <p>The page header is a hidden element.  Use it when you need to output an <code>h1</code> and optional subtitle for SEO purposes but you don't need it displayed on the page</p>
 
-    <h2 id="docs-frames" class="docs-title">Frames</h2>
-    <p>Use frames to create elements with defined aspect ratios.  All frames require the <code>.frame</code> base class and a modifier class to define their aspect ratio.  See <code>/_styles/components/frames.scss</code> to adjust available ratios.</p>
-    <p>There is also a child element <code>.frame__inner</code> that is positioned absolutely and stretches the full dimensions of the frame.</p>
-    <div class="row">
-      {% assign ratios = '16x9 6x4 4x3 1x1 3x4 4x6 9x16' | split: " " %}
-      {% for ratio in ratios %}
-        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-          <div style="margin-bottom: 30px;">
-            <div class="frame frame--{{ ratio }}" style="background-color: white; border: 1px solid #d8d8d8">
-              <div class="frame__inner flex align-items-center justify-content-center">
-                {{ ratio }}
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-    <h5 class="docs-subtitle">Responsive Frames</h5>
-    <p>Responsive frame sizing is available and works similar to Bootstrap responsive utilities, any breakpoint class applies to that breakpoint and <em>up</em>.  If you add another class for a larger breakpoint it will override any ones applying at smaller breakpoints.  Frame sizing being applied to screen sizes smaller than <code>$grid-breakpoints('sm')</code> do not need a responsive class.</p>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="frame frame--16x9 frame--sm-6x4 frame--md-1x1 frame--lg-3x4 frame--xl-4x6 frame--xxl-4x6" style="border: 1px solid #d8d8d8">
-            <div class="frame__inner flex flex-column align-items-center justify-content-center text-center" style="padding: 10px;">
-              <code>.frame</code><br />
-              <code>.frame--16x9</code><br />
-              <code>.frame--sm-6x4</code><br />
-              <code>.frame--md-1x1</code><br />
-              <code>.frame--lg-3x4</code><br />
-              <code>.frame--xl-4x6</code>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!--
-    <h2 id="docs-cards" class="docs-title">Cards</h2>
-
-    <p><em class="text-muted">From Bootstrap:</em> A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content, contextual background colors, and powerful display.  See the <a href="https://getbootstrap.com/docs/4.1/components/card/" target="_blank">official documentation</a> for full list of options.</p>
-    <p>Use these in conjunction with the <code>collapse.js</code> plugin markup to create elements with toggle-able visibility and accordion-like behavior.  See the <a href="/pages/components#docs-collapse">collapse component</a> for implementation.</p>
-
-    <div class="docs-well">
-      <div class="card">
-        <h3 class="card-header">
-          <span class="card-header__title">
-            Featured
-            <span class="card-header__title-icon">{% include 'icon-rss' %}</span>
-          </span>
-        </h3>            
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        <div class="card-footer">
-          Card Footer
-        </div>
-      </div>
-    </div>    
-
-    <p><span class="font-weight-bold">NOTE:</span> These elements have nothing in common with the more specific card snippets that we have created as Shopify theme components (<code>.article-card</code>, <code>.product-card</code>, etc..).  It is just an unfortunate naming clash as these elements were created before switching over to Bootstrap 4.</p>
-    -->
 
     <h2 id="docs-misc-elements" class="docs-title">Miscellaneous elements</h2>
 

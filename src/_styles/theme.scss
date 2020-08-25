@@ -30,9 +30,9 @@
 @import 'core/transitions';
 // @import 'core/button-group';
 @import 'core/custom-forms';
-@import 'core/card';
+// @import 'core/card';
 @import 'core/alert';
-@import 'core/close';
+// @import 'core/close';
 // @import 'core/modal';
 @import 'core/utilities';
 
@@ -43,10 +43,10 @@
  *
  */
 @import 'components/icon';
-@import 'components/tabs';
+// @import 'components/tabs';
 @import 'components/drawer';
 // @import 'components/breadcrumbs';
-@import 'components/panel';
+// @import 'components/panel';
 @import 'components/page';
 @import 'components/rte';
 @import 'components/pagination';
@@ -58,7 +58,7 @@
 @import 'components/minimal-input';
 @import 'components/quantity-adjuster';
 @import 'components/dots';
-@import 'components/promo';
+// @import 'components/promo';
 // @import 'components/frame';
 // @import 'components/arrows';
 @import 'components/expandable-list';
@@ -93,7 +93,6 @@
  * Try to use the body template class as a CSS hook
  *
  */
-@import 'templates/collection';
 @import 'templates/404';
 @import 'templates/gift-card';
 @import 'templates/customer';
@@ -109,23 +108,4 @@
 
 html {
   padding-bottom: 0 !important;
-}
-
-.pill {
-  @extend .p2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 13px 18px 11px;
-  border: 1px solid $black;
-  border-radius: 20px;
-  cursor: pointer;
-
-  opacity: 0.25;
-  transition: opacity 150ms ease-out;
-
-  &.is-active {
-    opacity: 1;
-  }
 }

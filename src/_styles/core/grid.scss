@@ -73,36 +73,50 @@
   margin-right: auto;
   margin-left: auto;
 
-  @include media-breakpoint-up(sm) {
+  // @include media-breakpoint-up(sm) {
+  //   padding-right: $spacing-smd;
+  //   padding-left: $spacing-smd;
+  // }
+
+  @include media-breakpoint-up(md) {
     padding-right: $spacing-smd;
     padding-left: $spacing-smd;
   }
 
-  @include media-breakpoint-up(md) {
-    padding-right: $spacing-md;
+  @include media-breakpoint-up(lg) {
     padding-left: $spacing-md;
+    padding-right: $spacing-md;
   }
 
   @include media-breakpoint-up(xl) {
-    padding-right: $spacing-lg;
     padding-left: $spacing-lg;
-  }  
+    padding-right: $spacing-lg;
+  }   
+
+  // @include media-breakpoint-up(xl) {
+  //   padding-right: $spacing-lg;
+  //   padding-left: $spacing-lg;
+  // }  
 }
 
 .aplos-4side-container {
   width: 100%;
-  padding-right: $spacing-sm;
-  padding-left: $spacing-sm;
+  // padding-right: $spacing-sm;
+  // padding-left: $spacing-sm;
   margin-right: auto;
   margin-left: auto;  
   padding: $spacing-sm;
 
-  @include media-breakpoint-up(sm) {
-    padding: $spacing-smd;
-  }
+  // @include media-breakpoint-up(sm) {
+  //   padding: $spacing-smd;
+  // }
 
   @include media-breakpoint-up(md) {
-    padding: $spacing-md;
+    padding: $spacing-smd; // $spacing-md;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: $spacing-md; 
   }
 
   @include media-breakpoint-up(xl) {

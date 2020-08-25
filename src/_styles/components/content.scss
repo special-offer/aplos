@@ -50,20 +50,6 @@ $content-grid-item-vertical-spacing-desktop: 32px;
     max-width: percentage(1/3);
   }
 
-  // Generate a base class for each ratio at each breakpoint (including reverse ratios)
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix-rear($breakpoint, $grid-breakpoints);
-
-      @for $i from 1 through 6 {
-        .content-grid--#{$infix}#{$i}-col & {
-          flex-basis: percentage(1/$i);
-          max-width: percentage(1/$i);
-        }
-      }
-    }
-  }
-
   // Allow some grid items to always be full width no matter what
   &.content-grid__item--full {
     flex-basis: percentage(1);

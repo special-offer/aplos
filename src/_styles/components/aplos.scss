@@ -32,11 +32,14 @@
   padding: $spacing-ml $spacing-ml $spacing-md;
   min-height: 100vw; // make everything square
 
-  // For fixed rows with multiple blocks, the blocks can be shorter
-  .aplos-row--fixed.aplos-row--2-block &,
-  .aplos-row--fixed.aplos-row--3-block & {
-    min-height: 50vw;
-  } 
+  // For short rows or fixed rows with multiple blocks, the blocks can be shorter
+  @include media-breakpoint-down(sm) {
+    .aplos-row--short &,
+    .aplos-row--fixed.aplos-row--2-block &,
+    .aplos-row--fixed.aplos-row--3-block & {
+      min-height: 50vw;
+    }
+  }
 
   @include media-breakpoint-up(md) {
     padding: $spacing-lg;
