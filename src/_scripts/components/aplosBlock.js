@@ -15,7 +15,6 @@ export default class AplosBlock {
     this.namespace = `.${this.name}`;
 
     this.$el = $(el);
-    this.type = this.$el.data('type');
     this.$content = this.$el.find('.aplos-block__content');
     this.$backgroundImage = this.$el.find('.aplos-block__bg img');
 
@@ -33,7 +32,7 @@ export default class AplosBlock {
     this.$el.addClass(classes.ready);
   }
 
-  hasBackgroundMedia() {
-    return this.$backgroundImage.length > 0 || !!this.ambientVideo;
-  }
+  // hasBackgroundMedia() {
+  //   return this.$backgroundImage.length > 0 || !!this.ambientVideo;
+  // }
 }

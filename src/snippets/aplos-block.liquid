@@ -6,21 +6,30 @@
   Usage:
 
   {% include 'aplos-block',
-              type: { string } - optional
               classes: { string } - optional
               attributes: { string } - optional
               content: { string }
+              bg_color: { string } - optional
               bg_image: { image } - optional
               bg_video_file_url: { string } - optional
   %}
 
 {% endcomment -%}
 
-<div class="aplos-block{% if classes %} {{ classes }}{% endif %}" {% if type %}data-type="{{ type }}" {% endif %}{{ attributes }}>
+{% assign light_text = true %}
+{% if bg_color == 'butter' or bg_color == 'butter-dark' %}
+  {% assign light_text = false %}
+{% endif %}
+
+{% if bg_image != blank or bg_video_file_url != blank %}
+  {% assign light_text = true %}
+{% endif %}
+
+<div class="aplos-block{% if light_text %} aplos-block--light{% endif %}{% if classes %} {{ classes }}{% endif %}" {{ attributes }}>
   <div class="aplos-block__content">
     {{ content }}
   </div>
-  <div class="aplos-block__bg {% if bg_image %}bg-black{% else %}bg-butter-dark{% endif %}">
+  <div class="aplos-block__bg{% if bg_color != blank %} bg-{{ bg_color }}{% endif %}">
     {% if bg_image %}
       <img data-src="{{ bg_image | img_url: '1500x'}}" /> 
     {% endif %}

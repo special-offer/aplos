@@ -42,6 +42,14 @@
     padding: $spacing-lg;
     min-height: 0;
   }
+
+  &--light {
+    .aplos-block__content,
+    .aplos-block__top-title,
+    .aplos-block__bottom-title {
+      color: $white;
+    }
+  }
 }
 
 .aplos-block__content {
@@ -65,11 +73,20 @@
 
   @include media-breakpoint-up(md) {
     @include h1;
+    font-size: $font-size-xxl;
+    line-height: $line-height-smaller;
+  }
+
+  p {
+    margin-bottom: 2.5rem;
+    &:last-child {
+      margin: 0;
+    }
   }
 }
 
 .aplos-block__top-title {
-  @include h2;
+  @include h6;
   margin-bottom: 1rem;
 }
 
@@ -79,6 +96,8 @@
 }
 
 .aplos-block__bg {
+  background-color: $black;
+
   &, img {
     position: absolute;
     z-index: -1;

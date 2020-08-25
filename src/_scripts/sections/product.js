@@ -1,9 +1,6 @@
 import $ from 'jquery';
 import Swiper from 'swiper';
-import {
-  isTouch,
-  isThemeEditor
-} from '../core/utils';
+import { isTouch } from '../core/utils';
 import BaseSection from './base';
 import ProductForm from '../components/productForm';
 

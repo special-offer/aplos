@@ -1,0 +1,48 @@
+<div data-section-id="{{ section.id }}" data-section-type="reviews">
+  {% render 'page-hero',
+             title: section.settings.hero_title,
+             title_tag: 'h2',
+             bg_image_desktop: section.settings.hero_image
+  %}
+  {% if section.settings.product != blank %}
+    {% assign product = all_products[section.settings.product] %}
+    <div class="bg-butter-gray" style="padding: 50px 0;">
+      <div class="aplos-container">
+        {% render 'yotpo-reviews-widget', product: product %}        
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Reviews",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Review Product"
+      },
+      {
+        "type": "header",
+        "content": "Hero"
+      },
+      {
+        "type": "text",
+        "id": "hero_title",
+        "label": "Title",
+        "default": "Reviews"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Image"
+      }      
+    ],
+    "presets": [{
+      "name": "Reviews",
+      "category": "Content",
+      "settings": {}
+    }]
+  }
+{% endschema %}

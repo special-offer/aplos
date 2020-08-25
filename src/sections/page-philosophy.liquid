@@ -9,14 +9,29 @@
     <div class="aplos-row {{ block.settings.height | prepend: 'aplos-row--' }}" {{ block.shopify_attributes }}>
       {% for i in (1..3) %}
         {% assign slot_enabled_setting_handle  = 'slot_' | append: i | append: '_enabled' %}
-        {% assign slot_type_setting_handle     = 'slot_' | append: i | append: '_type' %}
+        {% assign slot_heading_setting_handle  = 'slot_' | append: i | append: '_heading' %}
+        {% assign slot_content_setting_handle  = 'slot_' | append: i | append: '_content' %}
+        {% assign slot_bg_color_setting_handle = 'slot_' | append: i | append: '_background_color' %}
         {% assign slot_bg_image_setting_handle = 'slot_' | append: i | append: '_background_image' %}
         {% assign slot_bg_video_setting_handle = 'slot_' | append: i | append: '_background_video_file_url' %}
 
         {% if block.settings[slot_enabled_setting_handle] == true %}
+          {%- capture block_content -%}
+            {% if block.settings[slot_heading_setting_handle] != blank %}
+              <div class="aplos-block__top-title d-none d-md-block">{{ block.settings[slot_heading_setting_handle] }}</div>
+            {% endif %}
+            {% if block.settings[slot_content_setting_handle] != blank %}
+              <div class="aplos-block__title">{{ block.settings[slot_content_setting_handle] }}</div>
+            {% endif %}
+            {% if block.settings[slot_heading_setting_handle] != blank %}
+              <div class="aplos-block__bottom-title d-md-none">{{ block.settings[slot_heading_setting_handle] }}</div>
+            {% endif %}
+          {%- endcapture -%}
+
           {% render 'aplos-block'
                     classes: 'aplos-block--philosophy',
-                    type: block.settings[slot_type_setting_handle],
+                    content: block_content,
+                    bg_color: block.settings[slot_bg_color_setting_handle],
                     bg_image: block.settings[slot_bg_image_setting_handle],
                     bg_video_file_url: block.settings[slot_bg_video_setting_handle]
           %}
@@ -24,20 +39,6 @@
       {% endfor %}
     </div>
   {% endfor %}
-
-  {% raw %}
-    <script type="text/x-handlebars-template" data-slot-template>
-      {{#if heading}}
-        <div class="aplos-block__top-title d-none d-md-block{{#if light_text }} text-white{{/if}}">{{ heading }}</div>
-      {{/if}}
-      {{#if title}}
-        <div class="aplos-block__title{{#if light_text }} text-white{{/if}}">{{ title }}</div>
-      {{/if}}
-      {{#if heading}}
-        <div class="aplos-block__bottom-title d-md-none{{#if light_text }} text-white{{/if}}">{{ heading }}</div>
-      {{/if}}      
-    </script>
-  {% endraw %}  
 </div>
 
 
@@ -63,11 +64,6 @@
         "type": "image_picker",
         "id": "hero_bg_image_mobile",
         "label": "Background Image (Mobile)"
-      },
-      {
-        "type": "header",
-        "content": "Rows",
-        "info": "Row text content will be supplied by the 'Philosophies' entered in the section above"
       }
     ],
     "blocks": [
@@ -85,7 +81,7 @@
             ],
             "label": "Height",
             "default": "tall"
-          },     
+          },
           {
             "type": "header",
             "content": "Slot 1"
@@ -97,15 +93,25 @@
             "default": false
           },
           {
+            "type": "text",
+            "id": "slot_1_heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "slot_1_content",
+            "label": "Content"
+          },          
+          {
             "type": "select",
-            "id": "slot_1_type",
+            "id": "slot_1_background_color",
             "options": [
-              { "value": "media", "label": "Media"},
-              { "value": "text", "label": "Text"}
+              { "value": "butter-dark", "label": "Yellow"},
+              { "value": "black", "label": "Black"}
             ],
-            "label": "Type",
-            "default": "media"
-          },     
+            "label": "Background Color",
+            "default": "butter-dark"
+          }, 
           {
             "type": "image_picker",
             "id": "slot_1_background_image",
@@ -128,15 +134,25 @@
             "default": false
           },
           {
+            "type": "text",
+            "id": "slot_2_heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "slot_2_content",
+            "label": "Content"
+          },           
+          {
             "type": "select",
-            "id": "slot_2_type",
+            "id": "slot_2_background_color",
             "options": [
-              { "value": "media", "label": "Media"},
-              { "value": "text", "label": "Text"}
+              { "value": "butter-dark", "label": "Yellow"},
+              { "value": "black", "label": "Black"}
             ],
-            "label": "Type",
-            "default": "media"
-          },        
+            "label": "Background Color",
+            "default": "butter-dark"
+          }, 
           {
             "type": "image_picker",
             "id": "slot_2_background_image",
@@ -159,15 +175,25 @@
             "default": false
           },
           {
+            "type": "text",
+            "id": "slot_3_heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "slot_3_content",
+            "label": "Content"
+          },           
+          {
             "type": "select",
-            "id": "slot_3_type",
+            "id": "slot_3_background_color",
             "options": [
-              { "value": "media", "label": "Media"},
-              { "value": "text", "label": "Text"}
+              { "value": "butter-dark", "label": "Yellow"},
+              { "value": "black", "label": "Black"}
             ],
-            "label": "Type",
-            "default": "media"
-          },        
+            "label": "Background Color",
+            "default": "butter-dark"
+          },                 
           {
             "type": "image_picker",
             "id": "slot_3_background_image",
