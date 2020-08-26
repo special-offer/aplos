@@ -4,60 +4,98 @@
 
 @import 'product/product-detail-gallery';
 @import 'product/product-detail-form';
-@import 'product/story-popup';
+// @import 'product/story-popup';
 @import 'product/transaction-bar';
 
 .product-grids {
-  display: none;
-
-  @include media-breakpoint-up(md) {
-    display: block;
-  }
 }
 
 .product-grid {
   position: relative;
-  display: flex;
-  align-items: flex-start;
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+    align-items: flex-start;
+  }
 
   .product-detail-form {
     @include media-breakpoint-up(md) {
       max-width: calc(1440px/2 - #{$spacing-lg*2}); // @TODO - variable-ize 1440
     }
   }
+
+  &--recipes {
+    align-items: stretch;
+
+    .product-grid__col--sticky {
+      min-height: 0;
+      max-height: 100vh;
+    }
+
+    .product-detail-gallery {
+      height: 100%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      .product-detail__child--gallery {
+        height: 100vw;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row-reverse;
+    }
+  }
 }
 
 .product-grid__col {
-  flex: 1;
-  width: 50%;
-  // height: 100%;
-  min-height: 110vh;
+  @include media-breakpoint-up(md) {
+    flex: 1;
+    width: 50%;
+    min-height: 110vh;
+    // height: 100%
+  }
 
   &.product-grid__col--sticky {
-    position: sticky;
-    top: 0;
-    min-height: 100vh;
-    // min-height: 0;
+    @include media-breakpoint-up(md) {
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      // min-height: 0;
+    }
   }
 
   // Aplos rows are used for accent imagery
   // Since they contain 2 images and are inside a 50vw column, setting the height to 25vw makes each aplos block square
   .aplos-row {
-    min-height: 25vw;
-  }  
+    min-height: 50vw;
+    
+    @include media-breakpoint-up(md) {
+      min-height: 25vw;
+    } 
+  }
+
+  // When used on this page outside of a row
+  // Let the content determine the height
+  .aplos-block {
+    min-height: 0;
+  }
 }
 
 .product-detail__child {
   height: 100%;
 
   &--form {
-    padding: $spacing-lg;
-    padding-top: $spacing-lg + 100px;
-    background-color: $white;
-    min-height: 100vh;
+    // padding: $spacing-md $spacing-lg $spacing-lg;
+    // background-color: $white;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    // flex-direction: column;
+    // justify-content: flex-end;
+
+    @include media-breakpoint-up(md) {
+      padding-top: $spacing-lg + 100px;
+      min-height: 100vh;
+    }
   }
 }
 
@@ -67,9 +105,18 @@
 
 .product-highlight {
   margin-top: 50px;
-  padding-top: 50px;
-  padding-bottom: 2rem;
-  border-top: 1px solid black;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: $black;
+    transform: translateX(-#{$spacing-ml/2});
+  }
 
   &:first-child {
     margin-top: 0;
@@ -78,9 +125,47 @@
   &:last-child {
     padding-bottom: 0;
   }
+
+  @include media-breakpoint-up(md) {
+    padding-top: 50px;
+    padding-bottom: 2rem;
+    border-top: 1px solid $black;
+
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.product-highlight__title {
+  margin-bottom: $spacing-smd;
+
+  @include media-breakpoint-down(sm) {
+    br {
+      display: none;
+    }
+  }
+}
+
+.product-highlight__title-index {
+  padding-right: 10px;
 }
 
 .product-recipes {
+
+  @include media-breakpoint-down(sm) {
+    background-color: $black;
+
+    h2,
+    .rte {
+      color: $white;
+    }
+
+    .swiper-container {
+      display: none;
+    }
+  }
+
   .rte {
     margin-bottom: $spacing-ml;
   }
@@ -112,81 +197,11 @@
   }
 }
 
-.product-mobile {
-  height: 100vh;
-  height: var(#{'--viewport-height'});
-  display: flex;
-  flex-direction: column;
-  background-color: $butter;
 
+.product-reviews {
   @include media-breakpoint-up(md) {
-    display: none;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: $butter-gray;
   }
-}
-
-.product-mobile__imagery {
-  position: relative;
-  height: 68vh;
-
-  img {
-    height: 100%;
-    width: 100%;
-  }
-}
-
-.product-mobile__imagery-bg img,
-.product-mobile__imagery-bg video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.product-mobile__imagery-fg {
-  position: absolute;
-  z-index: 1; // Push above the titles that come below it
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  padding: 118px 20px 0;
-  mix-blend-mode: multiply;
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: auto;
-  }
-}
-
-// @TODO - This is temp, for the demo
-.product-mobile__imagery-cover {
-  position: absolute;
-  z-index: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 16%; // Make it align with the label
-  background: $butter;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 21%;
-    background-color: #ffffffb8;
-    -webkit-transform: translate(-50%, -49%);
-    transform: translate(-50%, -49%);
-  }
-}
-
-.product-mobile__titles {
-  height: 32vh;
-  flex: 1;
-  padding: 33px $spacing-sm 0;
-  text-align: center;
 }

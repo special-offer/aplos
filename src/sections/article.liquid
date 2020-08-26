@@ -1,33 +1,24 @@
 {% capture article_date %}{{ article.published_at | time_tag: format: 'month_day' }}{% endcapture %}
 {% capture subtitle %}{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: article_date }}{% endcapture %}
 
-<div class="layout-content-wrapper flush-top" data-section-id="{{ section.id }}" data-section-type="article">
-
-  <div class="article-content-wrapper" data-article-content-wrapper>
+<div class="layout-content-wrapper{% if article.image %} flush-top{% endif %}" data-section-id="{{ section.id }}" data-section-type="article">
+  {% if article.image %}
+    {% render 'page-banner'
+            image: article.image
+    %}
+  {% endif %}
+  <div class="aplos-container drawer-shifter">
     <article role="article" itemscope itemtype="http://schema.org/Article">
 
-      <div class="container-fluid-max">
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-3">
         <h1 class="page-title">{{ article.title }}</h1>
+        {% include 'recipe-content', recipe: article.content, target: 'ingredients' %}
       </div>
-      
-      <div class="container">
 
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            {% if article.tags.size > 0 %}
-              <ul class="list-inline">
-                {% for tag in article.tags %}
-                  <li>
-                    <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}        
-
-            <div class="rte" itemprop="articleBody" data-article-content>
-              {{ article.content }}
-            </div>
-          </div>
+      <div class="col-12 col-md-8 col-lg-7 offset-lg-2">
+        <div class="rte">
+          {% include 'recipe-content', recipe: article.content, target: 'recipe' %}
         </div>
       </div>
     </article>

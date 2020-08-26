@@ -10,19 +10,27 @@
 
 .page-hero {
   height: 100vh;
+  max-height: 500px;
+  max-height: 100vw;
   display: flex;
   align-items: center;
   position: relative;
-  text-align: center;
+  padding: 0 $spacing-ml;
 
   @include media-breakpoint-up(md) {
-    text-align: left;
+    max-height: none;
+    padding: 0 $spacing-lg;
   }
 }
 
 .page-hero__title {
+  width: 100%;
   margin-bottom: 0;
   color: $white;
+
+  .page-hero--align-center & {
+    text-align: center;
+  }
 }
 
 .page-hero__bg {

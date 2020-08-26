@@ -52,7 +52,12 @@
               </div>
               <div class="gallery-image gallery-image--foreground">
                 <img src="{{ block.settings.product_image | img_url: '1600x' }}" />
-              </div>  
+              </div>
+              {% if block.settings.subtitle != blank %}
+                <div class="gallery-subtitle">
+                  {{ block.settings.subtitle }}
+                </div>
+              {% endif %}
             </div>
             {% if block.settings.accent_image_3 != blank or block.settings.accent_image_4 != blank %}
               <div class="aplos-row aplos-row--fixed">
@@ -68,7 +73,7 @@
         </div>
 
         <div class="product-grid__col" style="height: auto;">
-          <div class="product-detail__child product-detail__child--form">
+          <div class="product-detail__child product-detail__child--form aplos-block">
             {% render 'product-detail-form',
                        product: product,
                        current_variant: current_variant,
@@ -77,17 +82,19 @@
             %}
           </div>
           {% if block.settings.accent_image_1 != blank or block.settings.accent_image_2 != blank %}
-            <div class="aplos-row aplos-row--fixed">
-              {% if block.settings.accent_image_1 != blank %}
-                {% include 'aplos-block', bg_image: block.settings.accent_image_1 %}
-              {% endif %}
-              {% if block.settings.accent_image_2 != blank %}
-                {% include 'aplos-block', bg_image: block.settings.accent_image_2 %}
-              {% endif %}
+            <div class="d-none d-md-block">
+              <div class="aplos-row aplos-row--fixed">
+                {% if block.settings.accent_image_1 != blank %}
+                  {% include 'aplos-block', bg_image: block.settings.accent_image_1 %}
+                {% endif %}
+                {% if block.settings.accent_image_2 != blank %}
+                  {% include 'aplos-block', bg_image: block.settings.accent_image_2 %}
+                {% endif %}
+              </div>
             </div>
           {% endif %}
           {% if block.settings.highlights_enabled %}
-            <div class="aplos-4side-container bg-butter">
+            <div class="aplos-block bg-butter">
               <h2>{{ block.settings.highlights_title }}</h2>
 
               {%- capture highlights -%}
@@ -97,15 +104,19 @@
                   
                   {% capture highlight_body %}
                     {% if block.settings[highlight_title_setting] != blank %}
-                      <div class="col-3 col-xl-4 p2">
-                        0{{ i }}.
-                        <br />
-                        {{ block.settings[highlight_title_setting] }}
+                      <div class="col-md-3 col-xl-4 p2">
+                        <div class="product-highlight__title">
+                          <span class="product-highlight__title-index">0{{ i }}.</span>
+                          <br />
+                          {{ block.settings[highlight_title_setting] }}
+                        </div>
                       </div>
                     {% endif %}
                     {% if block.settings[highlight_content_setting] != blank %}
-                      <div class="col-9 col-xl-8 rte">
-                        {{ block.settings[highlight_content_setting] }}
+                      <div class="col-md-9 col-xl-8">
+                        <div class="rte">
+                          {{ block.settings[highlight_content_setting] }}
+                        </div>
                       </div>
                     {% endif %}
                   {% endcapture %}
@@ -131,10 +142,21 @@
       </div>
 
       {% if block.settings.recipes_enabled %}
-        <div class="product-grid" style="align-items: stretch">
+        <div class="product-grid product-grid--recipes">
+          <div class="product-grid__col product-grid__col--sticky">
+            <div class="product-detail__child product-detail__child--gallery">
+              {% if block.settings.recipe_image %}
+                <div class="product-detail-gallery">
+                  <div class="gallery-image gallery-image--background">              
+                    <img src="{{ block.settings.recipe_image | img_url: 'x800' }}" />
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>          
           <div class="product-grid__col" style="min-height: 0;">
             <div class="product-detail__child">
-              <div class="product-recipes aplos-4side-container">
+              <div class="product-recipes aplos-block">
                 <h2>{{ block.settings.recipes_title }}</h2>
                 <div class="rte">
                   {{ block.settings.recipes_content }}
@@ -165,6 +187,17 @@
                   {% endfor %}                
                 {% endcapture %}
 
+                {% capture recipe_view_all_link %}
+                  {% if block.settings.recipes_view_all_link != blank and block.settings.recipes_view_all_text %}
+                    <div class="d-md-none">
+                      <a href="{{ block.settings.recipes_view_all_link }}" class="btn btn-block btn-light-outline">{{ block.settings.recipes_view_all_text }}</a>  
+                    </div>
+                    <div class="d-none d-md-block">
+                      <a href="{{ block.settings.recipes_view_all_link }}" class="btn btn-tertiary" style="margin-top: 80px;">{{ block.settings.recipes_view_all_text }}</a>  
+                    </div>                    
+                  {% endif %}
+                {% endcapture %}
+
                 {% if recipe_slides != blank %}
                   <div class="swiper-container" data-recipe-slideshow>
                     <div class="swiper-wrapper">
@@ -175,19 +208,10 @@
                     {% endif %}
                   </div>
                 {% endif %}
+
+                {{ recipe_view_all_link }}
               </div>
             </div>          
-          </div>
-          <div class="product-grid__col product-grid__col--sticky" style="min-height: 0; max-height: 100vh;">
-            <div class="product-detail__child product-detail__child--gallery" style="background-color: black;">
-              {% if block.settings.recipe_image %}
-                <div class="product-detail-gallery" style="height: 100%">
-                  <div class="gallery-image gallery-image--background">              
-                    <img src="{{ block.settings.recipe_image | img_url: 'x800' }}" />
-                  </div>
-                </div>
-              {% endif %}
-            </div>
           </div>
         </div>
       {% endif %}
@@ -198,7 +222,7 @@
                    title_tag: 'h2',
                    bg_image_desktop: block.settings.reviews_image
         %}      
-        <div class="bg-butter-gray" style="padding: 50px 0;">
+        <div class="product-reviews">
           <div class="aplos-container">
             {% render 'yotpo-reviews-widget' %}        
           </div>
@@ -206,36 +230,6 @@
       {% endunless %}
     </div>
     <!-- END Product Grid -->
-
-    <!-- Producct Mobile-->
-    <div class="product-mobile drawer-shifter">
-      <div class="product-mobile__imagery">
-        <div class="product-mobile__imagery-bg">
-          <img src="{{ block.settings.product_background_image | img_url: '800x' }}" />
-          {{ background_video_html }}
-        </div>
-        <div class="product-mobile__imagery-fg">
-          <img src="{{ block.settings.product_image | img_url: '800x' }}" />
-        </div>
-        <div class="product-mobile__imagery-cover"></div>
-      </div>
-      <div class="product-mobile__titles">
-        <div class="h1" style="margin: 0; font-size: 36px;">{{ product.title }}</div>
-
-        {% if block.settings.subtitle != blank %}
-          <div class="p2" style="margin-top: 1.1rem;">
-            {{ block.settings.subtitle }}
-          </div>
-        {% endif %}
-      </div>
-    </div>
-    <!-- END Product Mobile-->
-
-    <!-- Story Popup -->
-    {% render 'story-popup',
-               product: product
-               block: block
-    %}
 
     <!-- Transaction Bar -->
     {% render 'transaction-bar'
@@ -421,6 +415,16 @@
             "id": "recipes_title",
             "label": "Title",
             "default": "How To Enjoy"
+          },
+          {
+            "type": "url",
+            "id": "recipes_view_all_link",
+            "label": "View All Link"
+          },
+          {
+            "type": "text",
+            "id": "recipes_view_all_text",
+            "label": "View All Text"
           },
           {
             "type": "richtext",

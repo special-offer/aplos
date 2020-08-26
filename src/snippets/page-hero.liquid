@@ -8,6 +8,7 @@
   {% render 'page-hero',
              title: { string }
              title_tag: { string } - optional - defaults to h1
+             align: { string } - optional
              bg_image_desktop: { image }
              bg_image_mobile: { image }
   %}
@@ -26,12 +27,10 @@
   {% assign title_tag = 'h1' %}
 {% endif %}
 
-<div class="page-hero">
-  <div class="aplos-container">
-    {% if title != blank %}
-      <{{ title_tag }} class="page-hero__title">{{ title }}</{{ title_tag }}>
-    {% endif %}
-  </div>
+<div class="page-hero{% if align != blank %} page-hero--align-{{ align }}{% endif %}">
+  {% if title != blank %}
+    <{{ title_tag }} class="page-hero__title">{{ title }}</{{ title_tag }}>
+  {% endif %}
 
   {% if bg_image_desktop %}
     <div class="page-hero__bg">

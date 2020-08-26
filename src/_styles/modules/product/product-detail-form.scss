@@ -5,7 +5,34 @@
 .product-detail-form {
   // height: calc(100vh - 250px);
   // min-height: 767px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   // padding-bottom: 40px;
+
+  .rte {
+    margin-bottom: 30px;
+  }
+}
+
+.product-detail-form-width {
+  @include media-breakpoint-up(md) {
+    max-width: 22em;
+  }
+}
+
+.product-titles {
+  margin-bottom: 4.6rem;
+
+  h1 {
+    margin: 0;
+
+    @include media-breakpoint-down(sm) {
+      @include h2;
+    }    
+  }
+
+  .p2 {
+    margin-top: 1.1rem;
+  }
 }

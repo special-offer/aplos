@@ -10,11 +10,13 @@ $content-grid-item-vertical-spacing-desktop: 32px;
   flex-wrap: wrap;
   justify-content: flex-start;
   flex-direction: row;
-  margin-left: -$grid-gutter-width/2;
-  margin-right: -$grid-gutter-width/2;
+  margin-left: -$grid-gutter-width-mobile/2;
+  margin-right: -$grid-gutter-width-mobile/2;
   margin-bottom: -#{$content-grid-item-vertical-spacing-mobile}; // Cancel the bottom margin
 
   @include media-breakpoint-up(md) {
+    margin-left: -$grid-gutter-width/2;
+    margin-right: -$grid-gutter-width/2;    
     margin-bottom: -#{$content-grid-item-vertical-spacing-desktop};
   }
 
@@ -33,10 +35,11 @@ $content-grid-item-vertical-spacing-desktop: 32px;
   flex-basis: percentage(1);
   max-width: percentage(1);
   margin-bottom: $content-grid-item-vertical-spacing-mobile;
-  padding: 0 $grid-gutter-width/2;
+  padding: 0 $grid-gutter-width-mobile/2;
 
   @include media-breakpoint-up(md) {
     margin-bottom: $content-grid-item-vertical-spacing-desktop;
+    padding: 0 $grid-gutter-width/2;
   }  
 
   // Default behavior is 1 -> 2 -> 3 across

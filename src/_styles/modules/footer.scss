@@ -6,13 +6,6 @@
   p:last-child {
     margin-bottom: 0;
   }
-
-  // Don't show on mobile for the product page?  This will make sure that it the page doesn't scroll unnecessarily
-  @include media-breakpoint-down(sm) {
-    .template-product & {
-      display: none;
-    }
-  }
 }
 
 .footer__upper {

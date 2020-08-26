@@ -4,16 +4,16 @@
 
 .product-detail-gallery {
   position: relative;
-  height: 78vh;
-  max-height: calc(100vh - 254px);
+  height: 100vh;
+  height: var(#{'--viewport-height'});
 
-  @include media-breakpoint-up(md) {
-    width: 100%;
-    height: 100vh;
-    // position: sticky;
-    // top: 0px;
-    max-height: none;
-  }
+  // @include media-breakpoint-up(md) {
+  //   width: 100%;
+  //   height: 100vh;
+  //   // position: sticky;
+  //   // top: 0px;
+  //   // max-height: none;
+  // }
 
   .swiper-container {
     height: 100%;
@@ -40,11 +40,19 @@
   // }
 
   .swiper-pagination {
-    left: $spacing-md - $swiper-bullet-size;
     bottom: 19px;
+    left: $spacing-md;
+    right: $spacing-md;
+    text-align: center;
     width: auto;
     transition-delay: 0.5s;
     transition-duration: 1s;
+
+    @include media-breakpoint-up(md) {
+      left: $spacing-md - $swiper-bullet-size;
+      right: auto;
+      text-align: left;
+    }
   }
 
   .gallery-image {
@@ -71,10 +79,15 @@
   // }
 
   .gallery-image--foreground {
+    // height: 78vh;
+    height: calc(100% - 180px);
+    height: calc(var(--viewport-height) - 180px);
     padding: 120px 30px 0;
 
     @include media-breakpoint-up(md) {
       padding: 188px 30px 120px;
+      height: 100%;
+      max-height: none;
     }
 
     img {
@@ -83,5 +96,20 @@
       object-fit: contain;
       mix-blend-mode: multiply;
     }
-  }  
+  }
+
+  .gallery-subtitle {
+    @include p2;
+    color: $white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 90px; // Make room for transaction bar
+    text-align: center;
+    padding: 0 $spacing-sm;
+
+    @include media-breakpoint-up(md) {
+      display: none;
+    }
+  }
 }

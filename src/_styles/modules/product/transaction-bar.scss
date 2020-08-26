@@ -12,6 +12,7 @@
 
   // Above this breakpoint, the bar toggles on / off based on scroll position
   @include media-breakpoint-up(md) {
+    left: 50%;
     pointer-events: none;
     opacity: 0;
     transition: opacity 300ms ease-out;
@@ -31,19 +32,6 @@
       padding-top: 0;
     }   
   }
-
-  .story-popup-trigger {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -37px);
-    transition: opacity 200ms ease-out;
-  }
-
-  .story-popup-open & .story-popup-trigger {
-    opacity: 0;
-    pointer-events: none;
-  }  
 }
 
 .transaction-bar__unit-container {
@@ -54,28 +42,14 @@
   border-radius: $border-radius;
   overflow: hidden;
   background-color: $white;
-  border: 1px solid $black;
-
-  @include media-breakpoint-up(md) {
-    border: none;
-  } 
 }
 
 .transaction-bar__unit {
   flex: 1;
-  border-right: 1px solid $black;
-
-  &:last-child {
-    border-right: none;
-  }
-
-  @include media-breakpoint-up(md) {
-    border-right: none;
-  }
 
   &--title {
     // @TODO - Hide on lg-down if it's a subscription product?
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(lg) {
       display: none;
     }
   }
@@ -83,52 +57,23 @@
   &--subtitle {
     // flex: 0 0 auto;
     
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(xl) {
       display: none;
-    }
-  }
-
-  &--quantity-mobile {
-    flex: 0 0 auto;
-
-    @include media-breakpoint-up(md) {
-      display: none;
-    }
-  }  
-
-  &--quantity-desktop {
-    display: none;
-
-    @include media-breakpoint-up(md) {
-      flex: 0 0 auto;
-      display: flex;
     }
   }
 
   &--add-to-cart {
     align-self: stretch;
     padding: 0;
-
-    @include media-breakpoint-up(md) {
-      flex: 0 0 auto;
-    }
+    width: 100%;
 
     .btn {
       height: 100%;
-      border-radius: 0; // unit container clips the corner for us
-
-      @include media-breakpoint-down(lg) {
-        padding-left: 40px;
-        padding-right: 40px;
-      }      
+      min-width: 250px;
+      border-radius: 0; // unit container clips the corner for us   
 
       @include media-breakpoint-down(sm) {
         padding: 24px 18px 22px;    
-      }
-
-      @include hover {
-        background-color: $black;
-        color: $white;
       }
     }  
   }

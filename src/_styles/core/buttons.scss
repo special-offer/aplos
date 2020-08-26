@@ -125,31 +125,31 @@ fieldset:disabled a.btn {
 }
 
 // primary-alt on mobile, primary reverse on desktop
-.btn-add-to-cart {
-  background-color: $black;
-  color: $white;
+// .btn-add-to-cart {
+//   background-color: $black;
+//   color: $white;
 
-  @include hover {
-    color: $black;
-    background-color: $butter-dark;
-  }
+//   @include hover {
+//     color: $black;
+//     background-color: $butter-dark;
+//   }
 
-  @include media-breakpoint-up(md) {
-    background-color: $butter-dark;
-    color: $black;
+//   @include media-breakpoint-up(md) {
+//     background-color: $butter-dark;
+//     color: $black;
 
-    @include hover {
-      background-color: $butter;
-    }
-  }
+//     @include hover {
+//       background-color: $butter;
+//     }
+//   }
 
-  // On *tiny* screens, hide the price currency
-  .currency {
-    @media (max-width: 399px) {
-      display: none;
-    }
-  }
-}
+//   // On *tiny* screens, hide the price currency
+//   .currency {
+//     @media (max-width: 399px) {
+//       display: none;
+//     }
+//   }
+// }
 
 
 //

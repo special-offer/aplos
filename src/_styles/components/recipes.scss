@@ -9,6 +9,8 @@
 }
 
 .recipe-ingredients {
+  @include p2;
+
   ul {
     margin: 0;
     padding: 0;
@@ -23,5 +25,9 @@
         border-bottom: none;
       }
     }
+  }
+
+  .template-article & {
+    margin-bottom: $spacer*2;
   }
 }

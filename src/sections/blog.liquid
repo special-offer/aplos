@@ -1,51 +1,34 @@
 {% comment %} assign defaults {% endcomment %}
-{% assign page_title = blog.title %}
 
-{% if section.settings.title != blank %}
-  {% assign page_title = section.settings.title %}
-{% endif %}
+{% paginate blog.articles by 16 %}
 
-<div class="layout-content-wrapper flush-top" data-section-id="{{ section.id }}" data-section-type="blog">
-  {% paginate blog.articles by 16 %}
-
-    <div class="container">
-      <h1 class="page-title">{{ page_title }}</h1>
-
-      {% comment %}
-
-      Article Previews
-      ====================
-      {% endcomment %}
-
-      <div class="content-grid">
-        {% for article in blog.articles %}
-          <div class="content-grid__item">
-            {% include 'article-card', article: article, show_author: false, show_tags: false %}
-          </div>
-        {% endfor %}
+<div class="layout-content-wrapper drawer-shifter" data-section-id="{{ section.id }}" data-section-type="blog">
+  <div class="aplos-container">
+    <div class="content-grid">
+      <div class="content-grid__item">
+        <h1 class="page-title">{{ blog.title }}</h1>
       </div>
 
-      {% if paginate.next.is_link %}
-        {% comment %} See _scripts/sections/blog.js {% endcomment %}
-        <div class="text-center" style="padding: 10px 0" data-pagination>
-          <a href="{{ paginate.next.url }}" data-next-page>Load More</a>
+      {% for article in blog.articles %}
+        <div class="content-grid__item">
+          {% include 'article-card', article: article %}
         </div>
-      {% endif %}
-    </div>
+      {% endfor %}
 
-  {% endpaginate %}
+      {% if paginate.pages > 1 %}
+        <hr />
+        {% include 'pagination' %}
+      {% endif %}
+    </div> 
+  </div>
 </div>
+
+{% endpaginate %}
+
 
 {% schema %}
   {
     "name": "Blog",
-    "settings": [   
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title",
-        "info": "Title of the selected blog will be used if blank"
-      }
-    ]
+    "settings": []
   }
 {% endschema %}

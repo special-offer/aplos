@@ -3,14 +3,12 @@ import { throttle } from 'throttle-debounce';
 import Swiper from 'swiper';
 import BaseSection from './base';
 import ProductForm from '../components/productForm';
-import StoryPopup from '../components/storyPopup';
 import TransactionBar from '../components/transactionBar';
 import AmbientVideo from '../components/ambientVideo';
 import YotpoReviewsWidget from '../components/yotpoReviewsWidget';
 
 const selectors = {
   productForm: 'form[data-product-form]',
-  storyPopup: '[data-story-popup]',
   transactionBar: '[data-transaction-bar]',
   ambientVideo: '[data-ambient-video]',
   recipeSlideshow: '[data-recipe-slideshow]',
@@ -25,16 +23,20 @@ export default class ProductExtendedSection extends BaseSection {
 
     // @TODO - Don't really need to create these instance vars?
     this.$productForm    = $(selectors.productForm, this.$container).first();
-    this.$storyPopup     = $(selectors.storyPopup, this.$container).first();
     this.$transactionBar = $(selectors.transactionBar, this.$container).first();
     this.$yotpoReviewsWidgets = $(selectors.yotpoReviewsWidget, this.$container);
     this.$recipeSlideshow = $(selectors.recipeSlideshow, this.$container);
+    this.$firstProductGrid = $('.product-grid').first();
+    this.$lastProductGrid  = $('.product-grid').last();
 
     this.productForm = new ProductForm(this.$productForm);
-    this.storyPopup  = new StoryPopup(this.$storyPopup);
     this.transactionBar = new TransactionBar(this.$transactionBar);
-    this.$yotpoReviewsWidgets.each((i, el) => new YotpoReviewsWidget($(el))); // One on desktop + one inside the story popup
+    this.$yotpoReviewsWidgets.each((i, el) => new YotpoReviewsWidget($(el)));
     this.ambientVideos = $.map($(selectors.ambientVideo, this.$container), el => new AmbientVideo(el));
+    this.measurements = {
+      firstProductGridHeight: 0,
+      productGridsBottom: 0
+    };
 
     if (this.$recipeSlideshow.length && this.$recipeSlideshow.find('.swiper-slide').length > 1) {
       this.swiper = new Swiper(this.$recipeSlideshow.get(0), {
@@ -59,7 +61,7 @@ export default class ProductExtendedSection extends BaseSection {
     $window.on('resize', this.throttledOnResize);
 
     // Hit once when the section loads
-    this.onScroll();
+    this.onResize();
   }
 
   onUnload() {
@@ -68,15 +70,19 @@ export default class ProductExtendedSection extends BaseSection {
   }
 
   onScroll() {
-    // @TODO - Cache the first product grid height 
     const scrollTop = $window.scrollTop();
-    const threshold = $('.product-grid').first().outerHeight() - window.innerHeight;
-    const shouldShow = scrollTop > threshold && scrollTop < (this.$container.outerHeight() - window.innerHeight);
+    const threshold = this.measurements.firstProductGridHeight - window.innerHeight;
+    const shouldShow = scrollTop > threshold && scrollTop < (this.measurements.productGridsBottom + 200 - window.innerHeight);
 
     shouldShow ? this.transactionBar.show() : this.transactionBar.hide();
   }
 
   onResize() {
+    this.measurements = {
+      firstProductGridHeight: this.$firstProductGrid.outerHeight(),
+      productGridsBottom: (this.$lastProductGrid.offset().top + this.$lastProductGrid.outerHeight())
+    };    
+
     this.onScroll();
   }
 }

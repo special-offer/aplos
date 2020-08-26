@@ -21,18 +21,6 @@
         <div class="transaction-bar__pad">
           <h2 class="h1">{{ product.title }}</h2>
         </div>
-      </div>
-
-      <div class="transaction-bar__unit transaction-bar__unit--quantity-mobile">
-        <div class="transaction-bar__pad">
-          <div class="p2">
-            <div class="quantity-adjuster quantity-adjuster--light quantity-adjuster--mini" data-quantity-adjuster>
-              <button class="quantity-adjuster__decrement" data-decrement>-</button>
-              <input type="number" value="1" min="1" />
-              <button class="quantity-adjuster__increment" data-increment>+</button>
-            </div> 
-          </div>
-        </div>
       </div>      
 
       {% comment %}
@@ -71,27 +59,11 @@
         </div>  
       {% endif %}
 
-      {% comment %}
-      <div class="transaction-bar__unit transaction-bar__unit--quantity-desktop">
-        <div class="transaction-bar__pad">
-          <div class="dot-group">
-            <label>
-              Qty:
-            </label>
-            <div class="dots">
-              <div class="dot is-active" data-dot-qty="1">1</div>
-              <div class="dot" data-dot-qty="2">2</div>
-              <div class="dot" data-dot-qty="4">4</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endcomment %}
       <div class="transaction-bar__unit transaction-bar__unit--add-to-cart">
         <button
           type="submit"
           name="add"
-          class="btn btn-add-to-cart btn-block"
+          class="btn btn-primary btn-block"
           data-add-to-cart
           {% unless current_variant.available %}disabled="disabled"{% endunless %}>
           {{ submit_button_contents }}
@@ -99,8 +71,4 @@
       </div>
     </div>
   </div>
-
-  <a href="#" data-story-popup-open class="story-popup-trigger" title="Open Popup">
-    {% render 'icon-caret-down' %}
-  </a>
 </div>
