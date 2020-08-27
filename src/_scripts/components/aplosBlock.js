@@ -31,8 +31,4 @@ export default class AplosBlock {
 
     this.$el.addClass(classes.ready);
   }
-
-  // hasBackgroundMedia() {
-  //   return this.$backgroundImage.length > 0 || !!this.ambientVideo;
-  // }
 }

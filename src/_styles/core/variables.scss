@@ -20,19 +20,19 @@ $butter-gray:  #E1E1BD;
 $butter-dark:  #EBE583;
 $gray:         #B4AEAC;
 
-$blue:    #4e85e6 !default;
-$indigo:  #6610f2 !default;
-$purple:  #8174cd !default;
-$pink:    #d885c1 !default;
-$red:     #dc3545 !default;
-$orange:  #f48d52 !default;
-$yellow:  #eee57a !default;
-$green:   #00a465 !default;
-$teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
-$khaki:   #c0b095 !default;
-$brown:   #816960 !default;
-$tan:     #d3b69f !default;
+// $blue:    #4e85e6 !default;
+// $indigo:  #6610f2 !default;
+// $purple:  #8174cd !default;
+// $pink:    #d885c1 !default;
+// $red:     #dc3545 !default;
+// $orange:  #f48d52 !default;
+// $yellow:  #eee57a !default;
+// $green:   #00a465 !default;
+// $teal:    #20c997 !default;
+// $cyan:    #17a2b8 !default;
+// $khaki:   #c0b095 !default;
+// $brown:   #816960 !default;
+// $tan:     #d3b69f !default;
 
 
 $colors: () !default;
@@ -70,36 +70,36 @@ $colors: map-merge(
   $colors
 );
 
-$primary:       $blue !default;
-$secondary:     $gray !default;
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
+// $primary:       $butter !default;
+// $secondary:     $gray !default;
+// $success:       $green !default;
+// $info:          $cyan !default;
+// $warning:       $yellow !default;
+// $danger:        $red !default;
 
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$theme-colors: map-merge(
-  (
-    "primary":    $primary,
-    "secondary":  $secondary,
-    "success":    $success,
-    "info":       $info,
-    "warning":    $warning,
-    "danger":     $danger
-  ),
-  $theme-colors
-);
+// $theme-colors: map-merge(
+//   (
+//     "primary":    $primary,
+//     "secondary":  $secondary,
+//     "success":    $success,
+//     "info":       $info,
+//     "warning":    $warning,
+//     "danger":     $danger
+//   ),
+//   $theme-colors
+// );
 
 $btn-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$btn-colors: map-merge(
-  (
-    "primary":    $primary,
-    "secondary":  $secondary
-  ),
-  $btn-colors
-);
+// $btn-colors: map-merge(
+//   (
+//     "primary":    $primary,
+//     "secondary":  $secondary
+//   ),
+//   $btn-colors
+// );
 
 
 // Set a specific jump point for requesting color jumps
@@ -270,7 +270,7 @@ $box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
 $box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
 
 $component-active-color:      $white !default;
-$component-active-bg:         theme-color("primary") !default;
+$component-active-bg:         $butter !default;
 
 $caret-width:                 .3em !default;
 $caret-vertical-align:        $caret-width * .85 !default;
@@ -403,8 +403,6 @@ $list-inline-padding:         .5rem !default;
 $mark-bg:                     #fcf8e3 !default;
 
 $hr-margin-y:                 $spacer*5.5 !default;
-
-$breadcrumb-separator:        "\007c";
 
 
 // Tables
@@ -608,7 +606,7 @@ $custom-control-label-disabled-color:           $gray-dark !default;
 
 $custom-control-indicator-checked-color:        $component-active-color !default;
 $custom-control-indicator-checked-bg:           $component-active-bg !default;
-$custom-control-indicator-checked-disabled-bg:  rgba(theme-color("primary"), .5) !default;
+$custom-control-indicator-checked-disabled-bg:  transparentize($component-active-bg, 0.5) !default;
 $custom-control-indicator-checked-box-shadow:   none !default;
 $custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg !default;
 
@@ -802,76 +800,6 @@ $transition-timing-function-in-out-ui:    cubic-bezier(0.42, 0, 0.13, 1.04) !def
 $transition-timing-function-hard-in:      cubic-bezier(0, 0, 0, 1) !default;
 $transition-timing-function-hard-out:     cubic-bezier(1, 0, 1, 1) !default;
 
-// Overlay transition vars
-$transition-duration-overlay:             $transition-duration-slow !default;
-$transition-timing-function-overlay-in:   cubic-bezier(0, 0, 0.23, 1.43) !default;
-$transition-timing-function-overlay-out:  $transition-timing-function-out !default;
-$transition-timing-function-overlay-opacity-in: $transition-timing-function-hard-in !default;
-$transition-timing-function-overlay-opacity-out: $transition-timing-function-hard-out !default;
-
-// Cards
-
-$card-spacer-y:                     $grid-gutter-width/2 !default;
-$card-spacer-x:                     $grid-gutter-width !default;
-$card-border-width:                 $border-width !default;
-$card-border-radius:                0 !default;
-$card-border-color:                 $gray-light !default;
-$card-inner-border-radius:          0 !default;
-$card-cap-bg:                       $white !default;
-$card-cap-color:                    null !default;
-$card-color:                        null !default;
-$card-bg:                           $white !default;
-
-$card-expand-icon-size:             20px;
-$card-expand-icon-stroke-width:     2px;
-
-$card-img-overlay-padding:          1.25rem !default;
-
-$card-group-margin:                 $grid-gutter-width / 2 !default;
-$card-deck-margin:                  $card-group-margin !default;
-
-$card-columns-count:                3 !default;
-$card-columns-gap:                  1.25rem !default;
-$card-columns-margin:               $card-spacer-y !default;
-
-
-// Modals
-
-// Padding applied to the modal body
-$modal-inner-padding:               1rem !default;
-
-$modal-dialog-margin:               .5rem !default;
-$modal-dialog-margin-y-sm-up:       1.75rem !default;
-
-$modal-title-line-height:           $line-height-base !default;
-
-$modal-content-color:               null !default;
-$modal-content-bg:                  $white !default;
-$modal-content-border-color:        rgba($black, .2) !default;
-$modal-content-border-width:        $border-width !default;
-$modal-content-border-radius:       $border-radius-lg !default;
-$modal-content-box-shadow-xs:       0 .25rem .5rem rgba($black, .5) !default;
-$modal-content-box-shadow-sm-up:    0 .5rem 1rem rgba($black, .5) !default;
-
-$modal-backdrop-bg:                 $black !default;
-$modal-backdrop-opacity:            .5 !default;
-$modal-header-border-color:         $border-color !default;
-$modal-footer-border-color:         $modal-header-border-color !default;
-$modal-header-border-width:         $modal-content-border-width !default;
-$modal-footer-border-width:         $modal-header-border-width !default;
-$modal-header-padding-y:            1rem !default;
-$modal-header-padding-x:            1rem !default;
-$modal-header-padding:              $modal-header-padding-y $modal-header-padding-x !default; // Keep this for backwards compatibility
-
-$modal-xl:                          1140px !default;
-$modal-lg:                          800px !default;
-$modal-md:                          500px !default;
-$modal-sm:                          300px !default;
-
-$modal-fade-transform:              translate(0, -5px) !default;
-$modal-show-transform:              none !default;
-$modal-transition:                  transform .3s ease-out !default;
-
 
 // Alerts
 //
@@ -916,7 +844,7 @@ $close-text-shadow:                 0 1px 0 $white !default;
 // Code
 
 $code-font-size:                    87.5% !default;
-$code-color:                        $pink !default;
+$code-color:                        #d885c1 !default;
 
 $kbd-padding-y:                     .2rem !default;
 $kbd-padding-x:                     .4rem !default;
@@ -954,32 +882,6 @@ $header-bg:                             $butter;
 $header-text-color:                     $body-color !default;
 
 
-// Content Card
-
-$content-card-padding-vertical:         $grid-gutter-width * 2;
-$content-card-padding-horizontal:       $grid-gutter-width;
-
-
-// Overlay Card
-
-$overlay-card-padding-vertical:         $grid-gutter-width;
-$overlay-card-padding-horizontal:       $grid-gutter-width;
-$overlay-card-border-radius:            0;
-$overlay-card-bg-overlay-light-color:   transparentize($white, 0.6);
-$overlay-card-bg-overlay-dark-color:    transparentize($black, 0.7);
-$overlay-card-light-text-color:         $white;
-$overlay-card-content-max-width:        30em;
-
-
-// #Banner Panel
-
-$banner-panel-padding-vertical:         150px; // Default vertical padding.  Can be overwritten via snippet options
-$banner-panel-padding-vertical-small:   50px;
-$banner-panel-padding-vertical-large:   $banner-panel-padding-vertical * 2;
-$banner-panel-overlay-light-color:      transparentize($white, 0.7);
-$banner-panel-overlay-dark-color:       transparentize($black, 0.5);
-
-
 // Drawer
 
 $drawer-width:                          85%;
@@ -1001,19 +903,6 @@ $drawer-transition:                     transform $transition-duration-slow cubi
 $drawer-backdrop-transition:            opacity $transition-duration-slow ease-out;
 
 
-// Arrows
-
-$arrow-dimension:                       50px;
-$arrow-padding:                         8px;
-$arrow-border-radius:                   50%;
-$arrow-bg:                              transparentize(#ddd, 0.5);
-$arrow-bg-hover:                        transparentize(#ddd, 0.3);
-$arrow-icon-length:                     ($arrow-dimension - $arrow-padding * 2)/2;
-$arrow-icon-width:                      2px;
-$arrow-icon-color:                      #f00;
-$arrow-icon-tip-length:                 12px;
-$arrow-icon-tip-skew:                   45deg;
-
 
 // Slideshow
 
@@ -1022,17 +911,6 @@ $swiper-bullet-spacing:                    16px;
 $swiper-bullet-color:                      $black;
 $swiper-bullet-opacity:                    0.25;
 $swiper-bullet-active-opacity:             1;
-
-
-// Panel
-
-$panel-padding-vertical:                $grid-gutter-width/2;
-$panel-padding-horizontal:              $grid-gutter-width;
-$panel-margin-vertical:                 $grid-gutter-width;
-$panel-border:                          1px solid #efefef;
-$panel-expand-icon-size:                20px;
-$panel-expand-icon-stroke-width:        2px;
-
 
 
 // Dots
@@ -1045,7 +923,9 @@ $dot-spacing:                           7px;
 $dot-spacing-mobile:                    0;
 $dot-bottom-margin:                     $dot-spacing;
 
-// #Quantity Adjuster
+
+// Quantity Adjuster
+
 $quantity-adjuster-height:             38px;
 $quantity-adjuster-font-size:          $font-size-sm;
 $quantity-adjuster-border-width:       1px;
@@ -1053,6 +933,7 @@ $quantity-adjuster-border-color:       $white;
 $quantity-adjuster-border-radius:      $border-radius-lg;
 $quantity-adjuster-inner-height:       $quantity-adjuster-height - (2*$quantity-adjuster-border-width);
 
-// #Yotpo
+// Yotpo
+
 $yotpo-icon-star:                     #{'{{ "icon-star.svg" | asset_url }}'};
 $yotpo-icon-star-half:                #{'{{ "icon-star-half.svg" | asset_url }}'};

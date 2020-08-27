@@ -749,3 +749,49 @@ $yotpo-icon-star-half:   false !default;
   }
 
 }
+
+/*
+.story-popup .yotpo.yotpo .main-widget {
+  .write-review-button {
+    display: none !important;
+  }
+
+  .yotpo-bottomline {
+    display: flex !important;
+    align-items: flex-end;
+    padding-top: 22px !important;
+    margin-bottom: 2px !important;
+
+    h3 {
+      margin: 0 !important;
+      font-size: $h2-font-size;
+    }
+
+    .yotpo-stars {
+      margin-bottom: -6px !important;
+    }
+
+    .yotpo-stars-and-sum-reviews .yotpo-sum-reviews {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
+  .yotpo-review .yotpo-header .yotpo-header-element {
+    position: sticky;
+    top: 30px;
+    
+    .yotpo-review-stars {
+      margin-top: 4px !important;
+    }
+  }
+
+  .yotpo-pager {
+    margin: 20px 0 !important;
+  }
+
+  .main-widget-footer {
+    display: none !important;
+  }
+}
+*/

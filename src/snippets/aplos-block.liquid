@@ -31,7 +31,7 @@
   </div>
   <div class="aplos-block__bg{% if bg_color != blank %} bg-{{ bg_color }}{% endif %}">
     {% if bg_image %}
-      <img data-src="{{ bg_image | img_url: '1500x'}}" /> 
+      <img data-src="{{ bg_image | img_url: '1200x'}}" /> 
     {% endif %}
     {% if bg_video_file_url != blank %}
       {% render 'ambient-video', url: bg_video_file_url %}

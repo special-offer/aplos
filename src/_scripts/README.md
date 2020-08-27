@@ -8,7 +8,6 @@ Our javascript architecture takes inspiration from Slate, but refactored and mod
 - [Adding A Section](#adding-a-section)
 - [Removing A Section](#removing-a-section)
 - [Adding Vendor Libraries](#adding-vendor-libraries)
-- [Using React](#using-react)
 
 ## Structure
 
@@ -19,7 +18,6 @@ The main entry point for all scripts on the site is `_scripts/theme.js`.  This f
 By default, the gulp development task _only_ watches this theme.js file as this is the main file.  There are additional script files in the project that serve specific purposes.  Edit the `gulp/config.js` to enable these file for watching / compilation during development if needed.  In general, it is best to only watch one file at a time, otherwise the Slate watcher deploy takes long as it has to upload additional files with each save.
 
 - `checkout.js` - This script is included in `layout/checkout.liquid` and contains code specific to the checkout pages.
-- `vendor.js` - This script includes any libraries that need to be loaded _before_ the opening body tag.  They are pulled in via a regular script tag (non defer) so try to keep this as light weight as possible.  Currently, only Modernizr is included as it needs to apply feature-support classes to the document before rendering the page.  If your script doesn't have a reason to be in here, it probably doesn't need to be.
 
 ## Adding JavaScript
 

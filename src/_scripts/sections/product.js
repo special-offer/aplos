@@ -13,7 +13,6 @@ export default class ProductSection extends BaseSection {
   constructor(container) {
     super(container, 'product');
 
-    // @TODO - Don't really need to create this instance var?
     this.$productForm = $(selectors.productForm, this.$container).first();
     this.$slideshow = $(selectors.slideshow, this.$el);
 
@@ -45,5 +44,20 @@ export default class ProductSection extends BaseSection {
     this.swiper = new Swiper(this.$slideshow.get(0), swiperOptions);
 
     this.swiper.autoplay.start();
+
+    // Lazy load images here
+    this.$slideshow.find('img').each((i, img) => {
+      const $img = $(img);
+
+      if ($img.attr('data-src')) {
+        $img.attr('src', $img.attr('data-src'));
+        $img.attr('data-src', null);
+      }
+
+      if ($img.attr('data-srcset')) {
+        $img.attr('src', $img.attr('data-srcset'));
+        $img.attr('data-srcset', null);
+      }      
+    })
   }
 }

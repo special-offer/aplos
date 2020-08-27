@@ -1,18 +1,15 @@
 // jQuery
 import $ from 'jquery';
-import 'chosen-js';
 import 'jquery-unveil';
 import { throttle } from 'throttle-debounce';
 
 // Bootstrap JS
 import 'bootstrap/js/dist/collapse';
-// import 'bootstrap/js/dist/modal';
 
 // Core
 import {
   userAgentBodyClass,
   cookiesEnabled,
-  // chosenSelects,
   getQueryParams
 } from './core/utils';
 import {
@@ -116,9 +113,6 @@ Breakpoints.initialize();
   if (cookiesEnabled()) {
     document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
   }
-
-  // Chosen JS plugin for select boxes
-  // chosenSelects();
 
   // Form event handling / validation
   $body.on('change keydown', '.form-control', (e) => {

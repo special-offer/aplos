@@ -218,7 +218,6 @@ class AJAXCartDrawer extends Drawer {
     this.qaInteractionTimeout = setTimeout(() => {
       this.lockUI();
 
-      // @TODO - Check if qty is 0 => use delete method instead
       CartAPI.changeLineItemQuantityByKey(attrs.key, qty).then((cart) => {
         this.render(cart);
       })

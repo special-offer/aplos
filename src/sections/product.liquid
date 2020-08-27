@@ -46,7 +46,23 @@
                   {% for image in product.images %}
                     <div class="swiper-slide">
                       <div class="gallery-image">
-                        <img src="{{ image | img_url: '1600x' }}" />
+                        {% assign src = 'src' %}
+                        {% assign srcset = 'srcset' %}
+                        
+                        {% unless forloop.first %}
+                          {% assign src = 'data-src' %}
+                          {% assign srcset = 'data-srcset' %}
+                        {% endunless %}
+
+                        <img {% unless forloop.first %}data-{% endunless %}srcset="{{ image | img_url: '800x' }} 800w,
+                                     {{ image | img_url: '1000x' }} 1000w,
+                                     {{ image | img_url: '1200x' }} 1200w,
+                                     {{ image | img_url: '1400x' }} 1400w"
+                             sizes="100vw,
+                                    (min-width: 800px) 50vw"
+                             {% unless forloop.first %}data-{% endunless %}src="{{ image | img_url: '1400x' }}"
+                             alt="{{ image.alt | default: product.title | escape }}"
+                        />                        
                       </div>
                     </div>
                   {% endfor %}

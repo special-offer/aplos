@@ -48,15 +48,12 @@
   flex: 1;
 
   &--title {
-    // @TODO - Hide on lg-down if it's a subscription product?
     @include media-breakpoint-down(lg) {
       display: none;
     }
   }
 
-  &--subtitle {
-    // flex: 0 0 auto;
-    
+  &--subtitle {   
     @include media-breakpoint-down(xl) {
       display: none;
     }

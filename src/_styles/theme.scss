@@ -5,7 +5,6 @@
  *
  */
 @import 'vendor/swiper.scss';
-@import 'vendor/chosen.scss';
 
 /**
  * CORE
@@ -30,10 +29,8 @@
 @import 'core/transitions';
 // @import 'core/button-group';
 @import 'core/custom-forms';
-// @import 'core/card';
 @import 'core/alert';
 // @import 'core/close';
-// @import 'core/modal';
 @import 'core/utilities';
 
 /**
@@ -43,24 +40,16 @@
  *
  */
 @import 'components/icon';
-// @import 'components/tabs';
 @import 'components/drawer';
-// @import 'components/breadcrumbs';
-// @import 'components/panel';
 @import 'components/page';
 @import 'components/rte';
 @import 'components/pagination';
-// @import 'components/chosen';
 @import 'components/content';
 @import 'components/card';
 @import 'components/docs';
-// @import 'components/banner';
 @import 'components/minimal-input';
 @import 'components/quantity-adjuster';
 @import 'components/dots';
-// @import 'components/promo';
-// @import 'components/frame';
-// @import 'components/arrows';
 @import 'components/expandable-list';
 @import 'components/swiper';
 @import 'components/newsletter-form';
@@ -98,6 +87,7 @@
 @import 'templates/customer';
 @import 'templates/challenge';
 
+
 .development-mode {
   /* stylelint-disable-next-line selector-max-id */
   #preview-bar-iframe,
@@ -107,5 +97,5 @@
 }
 
 html {
-  padding-bottom: 0 !important;
+  padding-bottom: 0 !important; // Added by the preview bar which messes things up
 }

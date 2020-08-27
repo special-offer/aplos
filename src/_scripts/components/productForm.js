@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import { chosenSelects } from '../core/utils';
 import {
   formatMoney,
   stripZeroCents
@@ -86,8 +85,6 @@ export default class ProductForm {
     this.$container.on(this.events.CLICK, selectors.variantOptionValue, this.onVariantOptionValueClick.bind(this));
     this.$dotQtys.on('click', this.onDotQuantityClick.bind(this));
 
-    chosenSelects(this.$container);
-
     // For demo
     this.$container.on('click', '.pill', (e) => {
       const $p = $(e.currentTarget);
@@ -102,8 +99,6 @@ export default class ProductForm {
     this.updateProductPrices(variant);
     this.updateAddToCartState(variant);
     this.updateVariantOptionValues(variant);
-
-    this.$singleOptionSelectors.trigger('chosen:updated');
 
     this.settings.onVariantChange(variant);
   }

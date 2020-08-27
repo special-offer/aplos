@@ -21,7 +21,6 @@ export default class ProductExtendedSection extends BaseSection {
   constructor(container) {
     super(container, 'product');
 
-    // @TODO - Don't really need to create these instance vars?
     this.$productForm    = $(selectors.productForm, this.$container).first();
     this.$transactionBar = $(selectors.transactionBar, this.$container).first();
     this.$yotpoReviewsWidgets = $(selectors.yotpoReviewsWidget, this.$container);

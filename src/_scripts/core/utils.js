@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 /**
  * Return an object from an array of objects that matches the provided key and value
  *
@@ -280,16 +278,6 @@ export function hashFromString(string) {
   }
 
   return hash;
-}
-
-export function chosenSelects($container) {
-  const $selects = $container ? $('select.form-control', $container) : $('select.form-control');
-  $selects.not('[data-no-chosen]').chosen();
-
-  // Allows browser autofill to function properly
-  $selects.on('change', () => {
-    $(this).trigger('chosen:updated');
-  });
 }
 
 /**

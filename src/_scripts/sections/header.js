@@ -13,7 +13,7 @@ const $window = $(window);
 const selectors = {
   header: '[data-header]',
   pencilBanner: '[data-pencil-banner]',
-  headerMain: '[data-header-main]', // @TODO - Come up with a better name for this?
+  headerMain: '[data-header-main]',
   cartBadge: '[data-cart-badge]',
   cartBadgeCount: '[data-cart-badge-count]',
   closePencilBanner: '[data-pencil-banner-close]'

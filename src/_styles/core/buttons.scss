@@ -5,7 +5,6 @@
 //
 
 
-// @TODO - Update these values with actual variables
 .btn {
   display: inline-block;
   font-family: $btn-font-family;
@@ -123,51 +122,6 @@ fieldset:disabled a.btn {
     color: $black;
   }
 }
-
-// primary-alt on mobile, primary reverse on desktop
-// .btn-add-to-cart {
-//   background-color: $black;
-//   color: $white;
-
-//   @include hover {
-//     color: $black;
-//     background-color: $butter-dark;
-//   }
-
-//   @include media-breakpoint-up(md) {
-//     background-color: $butter-dark;
-//     color: $black;
-
-//     @include hover {
-//       background-color: $butter;
-//     }
-//   }
-
-//   // On *tiny* screens, hide the price currency
-//   .currency {
-//     @media (max-width: 399px) {
-//       display: none;
-//     }
-//   }
-// }
-
-
-//
-// Alternate buttons
-//
-
-
-// @each $color, $value in $btn-colors {
-//   .btn-#{$color} {
-//     @include button-variant($value, $value);
-//   }
-// }
-
-// @each $color, $value in $btn-colors {
-//   .btn-outline-#{$color} {
-//     @include button-outline-variant($value);
-//   }
-// }
 
 
 //
