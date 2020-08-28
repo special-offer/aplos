@@ -70,6 +70,13 @@ Be sure to fill out all the general theme settings in order to enable all the fe
 - Mailing List settings
 - Yotpo Credentials
 
+## Development
+To begin development on the site, first make sure that the 'deployment' environment inside `config.yml` is set to the correct theme.
+- Open a terminal window and navigate to the project root.
+- If you need to start from a fresh copy of the theme, run `slate start` which will run a full build and then start the watcher.
+- If you know that the theme on the site and the local copy you're working from are in sync, run `slate watch` to begin the watch task
+- Open another terminal window and run `npm run start-dev`.  This will kick off the separate gulp watcher for files in the underscored directories.
+
 ## Deployment
 To deploy a new version of the site, follow these steps:
 
