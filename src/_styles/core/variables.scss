@@ -810,7 +810,7 @@ $alert-padding-x:                   1.25rem !default;
 $alert-margin-bottom:               3rem !default;
 $alert-border-radius:               $border-radius !default;
 // $alert-link-font-weight:            $font-weight-bold !default;
-// $alert-border-width:                $border-width !default;
+$alert-border-width:                $border-width !default;
 
 $alert-bg-level:                    -10 !default;
 $alert-border-level:                -9 !default;
@@ -936,4 +936,3 @@ $quantity-adjuster-inner-height:       $quantity-adjuster-height - (2*$quantity-
 // Yotpo
 
 $yotpo-icon-star:                     #{'{{ "icon-star.svg" | asset_url }}'};
-$yotpo-icon-star-half:                #{'{{ "icon-star-half.svg" | asset_url }}'};

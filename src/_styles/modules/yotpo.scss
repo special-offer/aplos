@@ -94,7 +94,9 @@ $yotpo-icon-star-half:   false !default;
   }
 
   .yotpo-icon-default-star,
-  .yotpo-icon-star {
+  .yotpo-icon-star,
+  .yotpo-icon-default-half-star,
+  .yotpo-icon-half-star {
     &:before {
       background-image: url($yotpo-icon-star);
     }
@@ -105,13 +107,6 @@ $yotpo-icon-star-half:   false !default;
     &:before {
       background-image: url($yotpo-icon-star);
       opacity: 0.19;
-    }
-  }  
-
-  .yotpo-icon-default-half-star,
-  .yotpo-icon-half-star {
-    &:before {
-      background-image: url($yotpo-icon-star-half);
     }
   }
 
@@ -316,11 +311,11 @@ $yotpo-icon-star-half:   false !default;
 
   .form-element {
 
-    margin-bottom: $form-group-margin-bottom;
+    margin-bottom: $form-group-margin-bottom*1.5;
 
     .y-input {
       @extend .form-control;
-      margin-top: 0;
+      margin-top: 7px;
       margin-bottom: 0;
     }
   }
@@ -339,7 +334,7 @@ $yotpo-icon-star-half:   false !default;
     color: $body-color !important;
   }
 
-  // End From Styling
+  // End Form Styling
 
   .yotpo-default-button,
   .primary-color-btn,
@@ -748,50 +743,15 @@ $yotpo-icon-star-half:   false !default;
     pointer-events: none;
   }
 
-}
 
-/*
-.story-popup .yotpo.yotpo .main-widget {
-  .write-review-button {
-    display: none !important;
-  }
+  // Bottomline
+  .standalone-bottomline .star-clickable {
+    flex-direction: column-reverse;
+    margin: $spacing-smd 0;
 
-  .yotpo-bottomline {
-    display: flex !important;
-    align-items: flex-end;
-    padding-top: 22px !important;
-    margin-bottom: 2px !important;
-
-    h3 {
-      margin: 0 !important;
-      font-size: $h2-font-size;
+    .text-m {
+      @include p2;
+      color: $body-color !important;
     }
-
-    .yotpo-stars {
-      margin-bottom: -6px !important;
-    }
-
-    .yotpo-stars-and-sum-reviews .yotpo-sum-reviews {
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-  }
-
-  .yotpo-review .yotpo-header .yotpo-header-element {
-    position: sticky;
-    top: 30px;
-    
-    .yotpo-review-stars {
-      margin-top: 4px !important;
-    }
-  }
-
-  .yotpo-pager {
-    margin: 20px 0 !important;
-  }
-
-  .main-widget-footer {
-    display: none !important;
   }
 }
-*/

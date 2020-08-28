@@ -67,7 +67,9 @@
                     </div>
                   {% endfor %}
                 </div>
-                <div class="swiper-pagination"></div>
+                {% if product.images.size > 1 %}
+                  <div class="swiper-pagination"></div>
+                {% endif %}
               </div> 
             </div>            
           </div>

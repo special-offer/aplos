@@ -7,9 +7,10 @@
 
   {% include 'product-detail-form',
               product: { product } - required
-              current_variant: { variant} - optional
+              current_variant: { variant } - optional
               block: { block } - optional
               submit_button_contents: { string } - required
+              show_star_rating: { bool } optional - defaults to false
   %}
 
 {% endcomment -%}
@@ -18,12 +19,20 @@
   {% assign current_variant = product.selected_or_first_available_variant %}
 {% endif %}
 
+{% if show_star_rating == blank %}
+  {% assign show_star_rating = false %}
+{% endif %}
+
 <div class="product-detail-form" data-product-detail-form>
   <div style="margin-top: auto;">
     <div class="product-titles">
-      <h1 {% if block.settings.hide_product_title %}class="d-block d-md-none"{% endif %}>
+      <h1>
         {{ product.title }}
       </h1>
+
+      {% if show_star_rating %}
+        {% render 'yotpo-star-rating' %} 
+      {% endif %}
 
       {% if block.settings.subtitle != blank %}
         <div class="p2 {% if template.suffix == 'extended' %}d-none d-md-block{% endif %}">

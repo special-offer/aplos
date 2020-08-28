@@ -79,7 +79,8 @@
                          product: product,
                          current_variant: current_variant,
                          block: block,
-                         submit_button_contents: submit_button_contents
+                         submit_button_contents: submit_button_contents,
+                         show_star_rating: block.settings.reviews_enabled
               %}
             </div>
           </div>
@@ -282,12 +283,6 @@
           {
             "type": "header",
             "content": "Product Information"
-          },
-          {
-            "type": "checkbox",
-            "id": "hide_product_title",
-            "label": "Hide Product Title",
-            "default": false
           },
           {
             "type": "richtext",
