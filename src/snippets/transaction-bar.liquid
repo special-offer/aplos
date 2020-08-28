@@ -21,33 +21,7 @@
         <div class="transaction-bar__pad">
           <h2 class="h1">{{ product.title }}</h2>
         </div>
-      </div>      
-
-      {% comment %}
-        <!-- if product is subscription product -->        
-        <style>
-          .transaction-bar__unit svg {
-            stroke: black;
-            transform: rotate(180deg);
-          }
-        </style>
-        <div class="transaction-bar__unit transaction-bar__unit--subscription d-md-none">
-          <div class="transaction-bar__pad p2" style="padding: 0; align-items: stretch; flex-direction: column; justify-content: space-evenly">
-            <div style="color: rgba(0, 0, 0, 0.5); padding: 6px 15px 6px 17px; border-bottom: 1px solid black;">One-Time</div>
-            <div style="padding: 6px 15px 6px 17px; min-width: 116px; display: flex; justify-content: space-between;">
-              Weekly
-              <div style="width: 11px;">
-                {% render 'icon-caret-down' %}
-              </div>
-<!--                 <select>
-                <option>Weekly</option>
-                <option>Monthly</option>
-                <option>Bi-Monthly</option>
-              </select> -->
-            </div>
-          </div>
-        </div>
-        {% endcomment %}
+      </div>
 
       {% if subtitle != blank %}
         <div class="transaction-bar__unit transaction-bar__unit--subtitle">
@@ -58,6 +32,16 @@
           </div>
         </div>  
       {% endif %}
+
+      <div class="transaction-bar__unit transaction-bar__unit--quantity">
+        <div class="transaction-bar__pad">
+          <div class="quantity-adjuster quantity-adjuster--light" data-quantity-adjuster>
+            <button class="quantity-adjuster__decrement" data-decrement>-</button>
+            <input type="number" value="1" min="1" />
+            <button class="quantity-adjuster__increment" data-increment>+</button>
+          </div>
+        </div>
+      </div>
 
       <div class="transaction-bar__unit transaction-bar__unit--add-to-cart">
         <button

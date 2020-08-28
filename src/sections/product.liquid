@@ -74,13 +74,15 @@
         </div>
 
         <div class="product-grid__col" style="height: auto;">
-          <div class="product-detail__child product-detail__child--form aplos-block">
-            {% render 'product-detail-form',
-                       product: product,
-                       current_variant: current_variant,
-                       block: block,
-                       submit_button_contents: submit_button_contents
-            %}
+          <div class="product-detail__child product-detail__child--form">
+            <div class="aplos-block">
+              {% render 'product-detail-form',
+                         product: product,
+                         current_variant: current_variant,
+                         block: block,
+                         submit_button_contents: submit_button_contents
+              %}
+            </div>
           </div>
         </div>
       </div>

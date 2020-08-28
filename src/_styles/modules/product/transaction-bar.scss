@@ -54,10 +54,18 @@
   }
 
   &--subtitle {   
-    @include media-breakpoint-down(xl) {
+    @include media-breakpoint-down(xxl) {
       display: none;
     }
   }
+
+  &--quantity {
+    flex: 0 1 auto;
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }  
 
   &--add-to-cart {
     align-self: stretch;

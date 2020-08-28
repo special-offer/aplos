@@ -57,7 +57,7 @@ export default class ProductSection extends BaseSection {
       if ($img.attr('data-srcset')) {
         $img.attr('src', $img.attr('data-srcset'));
         $img.attr('data-srcset', null);
-      }      
-    })
+      }
+    });
   }
 }

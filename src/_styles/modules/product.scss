@@ -4,7 +4,6 @@
 
 @import 'product/product-detail-gallery';
 @import 'product/product-detail-form';
-// @import 'product/story-popup';
 @import 'product/transaction-bar';
 
 .product-grids {
@@ -86,15 +85,15 @@
   height: 100%;
 
   &--form {
-    // padding: $spacing-md $spacing-lg $spacing-lg;
-    // background-color: $white;
     display: flex;
-    // flex-direction: column;
-    // justify-content: flex-end;
 
     @include media-breakpoint-up(md) {
-      padding-top: $spacing-lg + 100px;
+      padding-top: 100px; // $spacing-lg + 100px;
       min-height: 100vh;
+    }
+
+    .aplos-block {
+      display: flex;
     }
   }
 }

@@ -83,6 +83,19 @@ export default class QuantityAdjuster {
     }
   }
 
+  _clampInputVal() {
+    const currVal = parseInt(this.$input.val());
+    const max = this.max;
+    const min = this.min;
+
+    if (currVal > max) {
+      this.$input.val(max);
+    }
+    else if (currVal < min) {
+      this.$input.val(min);
+    }
+  }  
+
   _changeValue(amount) {
     if (this.$input.is(':disabled') || typeof amount === 'undefined') return;
 
@@ -95,17 +108,11 @@ export default class QuantityAdjuster {
     this.$input.trigger('change');
   }
 
-  _clampInputVal() {
-    const currVal = parseInt(this.$input.val());
-    const max = this.max;
-    const min = this.min;
-
-    if (currVal > max) {
-      this.$input.val(max);
-    }
-    else if (currVal < min) {
-      this.$input.val(min);
-    }
+  // Allow other parts of the application to set the value of the adjuster
+  setVal(value) {
+    this.$input.val(value);
+    this._clampInputVal();
+    this._updateDisabledState();
   }
 
   getVal() {

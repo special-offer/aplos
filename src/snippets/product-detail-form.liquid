@@ -38,7 +38,35 @@
 
     <div style="margin: auto 0;">
       {% unless product.has_only_default_variant %}
-        {% for option in product.options_with_values %}         
+        {% for option in product.options_with_values %}     
+          {% capture option_alt_ui %}
+            {% comment %}
+              To enable alternative variant option value select UI, create your markup here with the following data attributes.
+
+              parent - 'data-option-position="{{ option.position }}" data-variant-option-value-list'
+                child - 'data-variant-option-value="{{ value }}"'
+
+              These data attributes are used to attach click events and update the selected variant when one is clicked.
+              The child element should respond to some sort of 'active' class to reflect the selected value.  You may need to change the actual class or 'active' state logic inside the callback.
+
+              See: `_scripts/components/productForm.js:onVariantOptionValueClick`
+
+              For example, to show a list of sizes..
+
+              {% if option.name == "Size" %}
+                <div data-option-position="{{ option.position }}" data-variant-option-value-list>
+                  {% for value in option.values %}
+                    <span class="{% if option.selected_value == value %} is-active{% endif %}" data-variant-option-value="{{ value }}">
+                      {{ value }}
+                    </span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              If markup is output inside this capture blow, the corresponding select tag is hidden
+            {% endcomment %}
+          {% endcapture %}
+
           <div class="selector-wrapper form-group js">
             <label for="SingleOptionSelector-{{ forloop.index0 }}">
               {{ option.name }}
@@ -48,7 +76,8 @@
               id="SingleOptionSelector-{{ forloop.index0 }}"
               class="form-control"
               data-single-option-selector
-              data-index="option{{ option.position }}">
+              data-index="option{{ option.position }}"
+              {% if option_alt_ui != blank %}style="display: none"{% endif %}>
               {% for value in option.values %}
                 <option
                   value="{{ value | escape }}"
@@ -61,13 +90,11 @@
         {% endfor %}
       {% endunless %}
 
-      <div class="form-group dot-group" style="display: none !important">
-        {% comment %} @TODO - need to check if product is a subscription or not, add "Select" if we have space {% endcomment %}
-        <label>Qty:</label>
-        <div class="dots">
-          <div class="dot is-active" data-dot-qty="1">1</div>
-          <div class="dot" data-dot-qty="2">2</div>
-          <div class="dot" data-dot-qty="4">4</div>
+      <div class="form-group">
+        <div class="quantity-adjuster quantity-adjuster--light" data-quantity-adjuster>
+          <button class="quantity-adjuster__decrement" data-decrement>-</button>
+          <input type="number" value="1" min="1" />
+          <button class="quantity-adjuster__increment" data-increment>+</button>
         </div>
       </div>    
 

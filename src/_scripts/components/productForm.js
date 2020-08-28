@@ -16,14 +16,12 @@ const selectors = {
   variantOptionValueList: '[data-variant-option-value-list][data-option-position]',
   variantOptionValue: '[data-variant-option-value]',
   productQuantity: '[data-product-quantity]',
-  dotQty: '[data-dot-qty]',
   quantityAdjuster: '[data-quantity-adjuster]'
 };
 
 const classes = {
   hide: 'hide',
-  variantOptionValueActive: 'is-active',
-  dotActive: 'is-active'
+  variantOptionValueActive: 'is-active'
 };
 
 export default class ProductForm {
@@ -67,7 +65,7 @@ export default class ProductForm {
     this.$singleOptionSelectors  = $(selectors.singleOptionSelector, this.$container); // Dropdowns for each variant option containing all values for that option
     this.$variantOptionValueList = $(selectors.variantOptionValueList, this.$container); // Alternate UI that takes the place of a single option selector (could be swatches, dots, buttons, whatever..)
     this.$productQuantity        = $(selectors.productQuantity, this.$container); // Hidden quantity input
-    this.$dotQtys                = $(selectors.dotQty, this.$container); // Dot quantity UI, click them to change the selected quantity
+    this.$quantityAdjusters      = $(selectors.quantityAdjuster, this.$container); // 
     /* eslint-enable */
 
     this.productSingleObject  = JSON.parse($(selectors.productJson, this.$container).html());
@@ -83,14 +81,6 @@ export default class ProductForm {
     this.$container.on('change.quantityAdjuster', this.onQuantityAdjusterChange.bind(this));
     this.$container.on('variantChange', this.onVariantChange.bind(this));
     this.$container.on(this.events.CLICK, selectors.variantOptionValue, this.onVariantOptionValueClick.bind(this));
-    this.$dotQtys.on('click', this.onDotQuantityClick.bind(this));
-
-    // For demo
-    this.$container.on('click', '.pill', (e) => {
-      const $p = $(e.currentTarget);
-      $p.siblings().removeClass('is-active');
-      $p.addClass('is-active');
-    });
   }
 
   onVariantChange(evt) {
@@ -155,18 +145,11 @@ export default class ProductForm {
   }
 
   updateQuantity(quantity) {
-    // @TODO - Store quantity as instance var to check against when "changing" ?
-
-    this.$dotQtys
-      .removeClass(classes.dotActive)
-      .filter((i, el) => {
-        return $(el).data('dot-qty') === quantity;
-      })
-      .addClass(classes.dotActive);
-
-    // @TODO - Need to get this working the other way around - update the adjuster
-
-    this.$productQuantity.val(quantity);
+    this.$productQuantity.val(quantity); // The actual quantity that gets sent with the form
+    this.$quantityAdjusters.each((i, el) => {
+      const qa = $(el).data('quantity-adjuster'); // Gets the quantity adjuster instance
+      qa && qa.setVal(quantity);
+    });
   }
 
   /**
@@ -191,14 +174,6 @@ export default class ProductForm {
 
     $option.addClass(classes.variantOptionValueActive);
     $option.siblings().removeClass(classes.variantOptionValueActive);
-  }
-
-  onDotQuantityClick(e) {
-    const $dotQty = $(e.currentTarget);
-
-    if ($dotQty.hasClass(classes.dotActive)) return;
-
-    this.updateQuantity($dotQty.data('dot-qty'));
   }
 
   onQuantityAdjusterChange(e) {
