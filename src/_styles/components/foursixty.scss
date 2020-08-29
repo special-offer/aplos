@@ -1,0 +1,65 @@
+.foursixty {
+  padding-top: $spacing-ml;
+  padding-bottom: $spacing-ml;
+
+  h2 {
+    margin-bottom: 2.5rem;
+  }
+
+  .rte {
+    max-width: 24em;
+    padding-right: 20px;
+  }
+
+  .fs-next-page {
+    display: none !important;
+  }
+
+  .fs-timeline {
+    margin-left: -#{$grid-gutter-width-mobile / 2};
+    margin-right: -#{$grid-gutter-width-mobile / 2};
+
+    @include media-breakpoint-up(xl) {
+      margin-left: -#{$grid-gutter-width / 2};
+      margin-right: -#{$grid-gutter-width / 2};      
+    }
+  }
+
+  .fs-wrapper div.fs-timeline-entry {
+    border-radius: $border-radius;
+    margin: $grid-gutter-width-mobile / 2;
+
+    @include media-breakpoint-up(xl) {
+      margin: $grid-gutter-width / 2;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .fs-mobile .fs-entry-container:last-child:nth-child(2n+1) {
+      display: none; // Hide the last one if it's an orphan
+    }
+  }
+}
+
+.foursixty-subheader {
+  display: flex;
+  flex-direction: column;
+
+  .btn {
+    margin-top: $spacing-smd;
+  }
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    .btn {
+      margin-top: 0;
+    }
+  }
+}
+
+.foursixty-embed {
+  margin-top: $spacing-ml;
+}

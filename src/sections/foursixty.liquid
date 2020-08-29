@@ -1,0 +1,57 @@
+<div class="aplos-block drawer-shifter foursixty">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 col-lg-10 col-xl-8 offset-xl-2">
+      {% if section.settings.title %}
+        <h2 class="h1">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      <div class="foursixty-subheader">
+        <div class="rte">
+          {{ section.settings.content }}
+        </div>
+        {% if section.settings.cta_url != blank or section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_url }}" class="btn btn-primary" {% if section.settings.cta_url contains 'http' %}target="_blank"{% endif %}>{{ section.settings.cta_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  
+  {% if section.settings.embed_code %}
+    <div class="foursixty-embed">
+      {{ section.settings.embed_code }}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Foursixty",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Link"
+      }, 
+      {
+        "type": "textarea",
+        "id": "embed_code",
+        "label": "Embed Code"
+      }
+    ]
+  }
+{% endschema %}
