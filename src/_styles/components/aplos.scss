@@ -16,6 +16,10 @@
     min-height: 100vh;
     min-height: var(#{'--viewport-height'});
     
+    &--shorter {
+      min-height: 35vh;
+    }
+
     &--short {
       min-height: 50vh;
     }
@@ -28,12 +32,14 @@
 
 .aplos-block {
   position: relative;
+  z-index: 1;
   flex: 1;
   padding: $spacing-ml $spacing-ml $spacing-md;
   min-height: 100vw; // make everything square
 
   // For short rows or fixed rows with multiple blocks, the blocks can be shorter
   @include media-breakpoint-down(sm) {
+    .aplos-row--shorter &,
     .aplos-row--short &,
     .aplos-row--fixed.aplos-row--2-block &,
     .aplos-row--fixed.aplos-row--3-block & {
@@ -52,6 +58,10 @@
     .aplos-block__bottom-title {
       color: $white;
     }
+  }
+
+  &--empty {
+    padding: 0 !important;
   }
 }
 
