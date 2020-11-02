@@ -16,13 +16,7 @@
   {% if recipe contains '<ul' %}
     <div class="recipe-content">
       {% assign split_recipe = recipe | split: '<ul' %}
-      {% for piece in split_recipe %}
-        {% if piece contains '</ul>' %}
-          {% comment %} Just skip it {% endcomment %}
-        {% else %}
-          {{ piece }}
-        {% endif %}
-      {% endfor %}
+      {{ recipe }}
     </div>
   {% else %}
     <div class="recipe-content">{{ recipe }}</div>

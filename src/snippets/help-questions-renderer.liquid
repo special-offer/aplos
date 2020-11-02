@@ -11,7 +11,8 @@
 
 {% endcomment -%}
 
-<div data-section-id="{{ section.id }}" data-section-type="help-questions">
+<div data-section-id="{{ section.id }}" data-section-type="help-questions" {% if section.settings.title contains 'Product' %}id="product-faqs"{% endif %}
+>
   <div class="aplos-container">
     <div class="help-questions">
       {% if section.settings.title_image %}

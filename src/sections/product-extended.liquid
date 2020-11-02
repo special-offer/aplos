@@ -59,16 +59,6 @@
                 </div>
               {% endif %}
             </div>
-            {% if block.settings.accent_image_3 != blank or block.settings.accent_image_4 != blank %}
-              <div class="aplos-row aplos-row--fixed">
-                {% if block.settings.accent_image_3 != blank %}
-                  {% include 'aplos-block', bg_image: block.settings.accent_image_3 %}
-                {% endif %}
-                {% if block.settings.accent_image_4 != blank %}
-                  {% include 'aplos-block', bg_image: block.settings.accent_image_4 %}
-                {% endif %}
-              </div>
-            {% endif %}
           </div>
         </div>
 
@@ -97,49 +87,65 @@
             </div>
           {% endif %}
           {% if block.settings.highlights_enabled %}
-            <div class="aplos-block bg-butter">
-              <h2>{{ block.settings.highlights_title }}</h2>
 
-              {%- capture highlights -%}
+            <div class="product-recipes aplos-block">
+              <h2>{{ block.settings.recipes_title }}</h2>
+              <div class="rte">
+                {{ block.settings.recipes_content }}
+              </div>
+
+              {% assign recipe_count = 0 %}
+              {% capture recipe_slides %}
                 {% for i in (1..3) %}
-                  {% assign highlight_title_setting   = 'highlight_title_' | append: i %}
-                  {% assign highlight_content_setting = 'highlight_content_' | append: i %}
-                  
-                  {% capture highlight_body %}
-                    {% if block.settings[highlight_title_setting] != blank %}
-                      <div class="col-md-3 col-xl-4 p2">
-                        <div class="product-highlight__title">
-                          <span class="product-highlight__title-index">0{{ i }}.</span>
-                          <br />
-                          {{ block.settings[highlight_title_setting] }}
-                        </div>
-                      </div>
-                    {% endif %}
-                    {% if block.settings[highlight_content_setting] != blank %}
-                      <div class="col-md-9 col-xl-8">
-                        <div class="rte">
-                          {{ block.settings[highlight_content_setting] }}
-                        </div>
-                      </div>
-                    {% endif %}
-                  {% endcapture %}
+                  {% assign article_setting = 'recipes_article_' | append: i %}
+                  {% assign article_handle = block.settings[article_setting] %}
+                  {% assign article = articles[article_handle] %}
 
-                  {% if highlight_body != blank %}
-                    <div class="product-highlight">
-                      <div class="row">
-                        {{ highlight_body }}
+                  {% if article and article.handle != blank %}
+                    <div class="swiper-slide">
+                      <div class="row p2">
+                        <div class="col-5 col-lg-4 flex flex-column">
+                          <div style="max-width: 10em">{{ article.title }}</div>
+                          {% include 'recipe-content', recipe: article.content, target: 'ingredients' %}
+                        </div>
+                        <div class="col-7 col-lg-8">
+                          {% include 'recipe-content', recipe: article.content, target: 'recipe' %}
+                        </div>
                       </div>
                     </div>
-                  {% endif %}
-                {% endfor %}
-              {%- endcapture -%}
 
-              {% if highlights != blank %}
-                <div class="product-highlights">
-                  {{ highlights }}
+                    {% assign recipe_count = recipe_count | plus: 1 %}
+                  {% endif %}
+                {% endfor %}                
+              {% endcapture %}
+
+              {% capture recipe_view_all_link %}
+                {% if block.settings.recipes_view_all_link != blank and block.settings.recipes_view_all_text %}
+                  <div class="d-md-none">
+                    <a href="{{ block.settings.recipes_view_all_link }}" class="btn btn-block btn-light-outline">{{ block.settings.recipes_view_all_text }}</a>  
+                  </div>
+                  <div class="d-none d-md-block">
+                    <a href="{{ block.settings.recipes_view_all_link }}" class="btn btn-tertiary" style="margin-top: 80px;">{{ block.settings.recipes_view_all_text }}</a>  
+                  </div>                    
+                {% endif %}
+              {% endcapture %}
+
+              {% if recipe_slides != blank %}
+                <div class="swiper-container" data-recipe-slideshow>
+                  <div class="swiper-wrapper">
+                    {{ recipe_slides }}
+                  </div>
+                  {% if recipe_count > 1 %}
+                    <div class="swiper-pagination"></div>
+                  {% endif %}
                 </div>
               {% endif %}
-            </div>          
+
+              {{ recipe_view_all_link }}
+            </div>
+
+            
+                     
           {% endif %}
         </div>
       </div>
@@ -151,69 +157,86 @@
               {% if block.settings.recipe_image %}
                 <div class="product-detail-gallery">
                   <div class="gallery-image gallery-image--background">              
-                    <img src="{{ block.settings.recipe_image | img_url: 'x800' }}" />
+                    <img src="{{ block.settings.recipe_image | img_url: 'master' }}" />
                   </div>
                 </div>
               {% endif %}
             </div>
           </div>          
           <div class="product-grid__col" style="min-height: 0;">
+
+            {% if block.settings.accent_image_3 != blank or block.settings.accent_image_4 != blank %}
+            <div class="aplos-row aplos-row--fixed aplos-row--100vh">
+              {% if block.settings.accent_image_3 != blank %}
+                {% include 'aplos-block', bg_image: block.settings.accent_image_3 %}
+              {% endif %}
+
+
+              {% comment %}
+              {% if block.settings.accent_image_4 != blank %}
+                {% include 'aplos-block', bg_image: block.settings.accent_image_4 %}
+              {% endif %}
+
+              {% endcomment %}
+              
+            </div>
+          {% endif %}
+
             <div class="product-detail__child">
-              <div class="product-recipes aplos-block">
-                <h2>{{ block.settings.recipes_title }}</h2>
-                <div class="rte">
-                  {{ block.settings.recipes_content }}
-                </div>
+              
 
-                {% assign recipe_count = 0 %}
-                {% capture recipe_slides %}
+              <div class="aplos-block">
+                <h2>{{ block.settings.highlights_title }}</h2>
+
+                {%- capture highlights -%}
                   {% for i in (1..3) %}
-                    {% assign article_setting = 'recipes_article_' | append: i %}
-                    {% assign article_handle = block.settings[article_setting] %}
-                    {% assign article = articles[article_handle] %}
-
-                    {% if article and article.handle != blank %}
-                      <div class="swiper-slide">
-                        <div class="row p2">
-                          <div class="col-5 col-lg-4 flex flex-column">
-                            <div style="max-width: 10em">{{ article.title }}</div>
-                            {% include 'recipe-content', recipe: article.content, target: 'ingredients' %}
-                          </div>
-                          <div class="col-7 col-lg-8">
-                            {% include 'recipe-content', recipe: article.content, target: 'recipe' %}
+                    {% assign highlight_title_setting   = 'highlight_title_' | append: i %}
+                    {% assign highlight_content_setting = 'highlight_content_' | append: i %}
+                    
+                    {% capture highlight_body %}
+                      {% if block.settings[highlight_title_setting] != blank %}
+                        <div class="col-2 p2">
+                          <div class="product-highlight__title">
+                            <span class="product-highlight__title-index">0{{ i }}.</span>
                           </div>
                         </div>
+                        <div class="col-10 p2">
+                          <div class="product-highlight__title">
+                            {{ block.settings[highlight_title_setting] }}
+                          </div>
+                        </div>
+
+                      {% endif %}
+                      {% if block.settings[highlight_content_setting] != blank %}
+                        <div class="col-12">
+                          <div class="rte">
+                            {{ block.settings[highlight_content_setting] }}
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endcapture %}
+
+                    {% if highlight_body != blank %}
+                      <div class="product-highlight">
+                        <div class="row">
+                          {{ highlight_body }}
+                        </div>
                       </div>
-
-                      {% assign recipe_count = recipe_count | plus: 1 %}
                     {% endif %}
-                  {% endfor %}                
-                {% endcapture %}
+                  {% endfor %}
+                {%- endcapture -%}
 
-                {% capture recipe_view_all_link %}
-                  {% if block.settings.recipes_view_all_link != blank and block.settings.recipes_view_all_text %}
-                    <div class="d-md-none">
-                      <a href="{{ block.settings.recipes_view_all_link }}" class="btn btn-block btn-light-outline">{{ block.settings.recipes_view_all_text }}</a>  
-                    </div>
-                    <div class="d-none d-md-block">
-                      <a href="{{ block.settings.recipes_view_all_link }}" class="btn btn-tertiary" style="margin-top: 80px;">{{ block.settings.recipes_view_all_text }}</a>  
-                    </div>                    
-                  {% endif %}
-                {% endcapture %}
-
-                {% if recipe_slides != blank %}
-                  <div class="swiper-container" data-recipe-slideshow>
-                    <div class="swiper-wrapper">
-                      {{ recipe_slides }}
-                    </div>
-                    {% if recipe_count > 1 %}
-                      <div class="swiper-pagination"></div>
-                    {% endif %}
+                {% if highlights != blank %}
+                  <div class="product-highlights">
+                    {{ highlights }}
+                    <a href="/pages/help#product-faqs" class="btn btn-tertiary">
+                      <h6
+                      style="margin-bottom:0px;">Learn More</h6></a>
                   </div>
                 {% endif %}
+              </div> 
 
-                {{ recipe_view_all_link }}
-              </div>
+
             </div>          
           </div>
         </div>
@@ -352,7 +375,7 @@
           },
           {
             "type": "header",
-            "content": "Highlights"
+            "content": "Common Questions"
           },
           {
             "type": "checkbox",
@@ -369,32 +392,72 @@
           {
             "type": "text",
             "id": "highlight_title_1",
-            "label": "Highlight #1 Title"
+            "label": "Common Questions #1 Title"
           },
           {
             "type": "richtext",
             "id": "highlight_content_1",
-            "label": "Highlight #1 Content"
+            "label": "Common Questions #1 Content"
           },
           {
             "type": "text",
             "id": "highlight_title_2",
-            "label": "Highlight #2 Title"
+            "label": "Common Questions #2 Title"
           },
           {
             "type": "richtext",
             "id": "highlight_content_2",
-            "label": "Highlight #2 Content"
+            "label": "Common Questions #2 Content"
           },
           {
             "type": "text",
             "id": "highlight_title_3",
-            "label": "Highlight #3 Title"
+            "label": "Common Questions #3 Title"
           },
           {
             "type": "richtext",
             "id": "highlight_content_3",
-            "label": "Highlight #3 Content"
+            "label": "Common Questions #3 Content"
+          },  
+          {
+            "type": "text",
+            "id": "highlight_title_4",
+            "label": "Common Questions #4 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "highlight_content_4",
+            "label": "Common Questions #4 Content"
+          },  
+          {
+            "type": "text",
+            "id": "highlight_title_5",
+            "label": "Common Questions #5 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "highlight_content_5",
+            "label": "Common Questions #5 Content"
+          },  
+          {
+            "type": "text",
+            "id": "highlight_title_6",
+            "label": "Common Questions #6 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "highlight_content_6",
+            "label": "Common Questions #6 Content"
+          },  
+          {
+            "type": "text",
+            "id": "highlight_title_7",
+            "label": "Common Questions #7 Title"
+          },
+          {
+            "type": "richtext",
+            "id": "highlight_content_7",
+            "label": "Common Questions #7 Content"
           },           
           {
             "type": "header",

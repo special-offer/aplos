@@ -42,6 +42,7 @@
   border-radius: $border-radius;
   overflow: hidden;
   background-color: $white;
+  border: 1px solid $black;
 }
 
 .transaction-bar__unit {
@@ -62,6 +63,16 @@
   &--quantity {
     flex: 0 1 auto;
 
+    @include media-breakpoint-up(xl) {
+      .transaction-bar__pad {
+        padding: 0px !important;
+      }
+
+      .quantity-adjuster input[type=number]{
+        width: 16px !important;
+      }
+    }
+
     @include media-breakpoint-down(md) {
       display: none;
     }
@@ -71,6 +82,10 @@
     align-self: stretch;
     padding: 0;
     width: 100%;
+
+    @include media-breakpoint-up(lg) {
+      border: 1px solid $black;
+    }
 
     .btn {
       height: 100%;

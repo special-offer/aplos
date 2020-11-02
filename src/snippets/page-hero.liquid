@@ -73,4 +73,10 @@
       </picture>
     </div>
   {% endif %}
+
+  {% if bg_video_setting_handle != blank %}
+    <video class="ambient-video" muted playsinline autoplay loop data-ambient-video style="opacity:1;">
+      <source src="{{ bg_video_setting_handle }}" type="video/mp4" />
+    </video>
+  {% endif %}
 </div>

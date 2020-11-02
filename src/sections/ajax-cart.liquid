@@ -8,6 +8,7 @@
         <div class="drawer__contents">          
           <div class="drawer__header">
             <h6>{{ 'cart.general.title' | t }}</h6>
+
           </div>
           <div class="drawer__body">
             <div data-ajax-cart-body>
@@ -16,9 +17,14 @@
           </div>
           <div class="drawer__footer">
             <div class="ajax-cart__footer">
+              
+
               <div class="ajax-cart__footer-row">
                 <div class="d-none d-md-block">
                   {{ section.settings.subtotal_text }}
+                  {% if section.settings.promo_text %}
+                    <br/>{{ section.settings.promo_text }}
+                  {% endif %}
                 </div>
                 <div>
                   <span class="ajax-cart__footer-total-label">Subtotal:</span>
@@ -124,6 +130,13 @@
         "type": "text",
         "label": "Additional Item Text",
         "info": "Shows on every item.  E.g. 'Ships Sept 20, 2021'"
+      },
+      {
+        "id": "promo_text",
+        "type": "text",
+        "label": "Promotional Text",
+        "info": "E.g. Complimentary shipping on 2+ bottles.",
+        "default": "Complimentary shipping on 2+ bottles."
       },
       {
         "id": "subtotal_text",

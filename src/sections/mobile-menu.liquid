@@ -15,6 +15,10 @@
                 {% for link in linklists[section.settings.linklist_primary].links %}
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                 {% endfor %}
+
+                {% if shop.customer_accounts_enabled %}
+                  <li><a href="/account">Account</a></li>
+                {% endif %}                   
               </ul>
             {% endif %}
           </div>
@@ -23,18 +27,19 @@
             <ul class="mobile-menu-list mobile-menu-list--secondary">
               {% if section.settings.linklist_secondary and linklists[section.settings.linklist_secondary].links.size > 0 %}                
                 {% for link in linklists[section.settings.linklist_secondary].links %}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% assign title = link.title | downcase %}
+
+                  {% if title contains 'text' %}
+                    <li><a href="sms:8004427567"><span class="fw">Text:</span>{{ link.title | remove: 'Text: '}}</a></li>
+                  {% elsif title contains 'follow' %}
+                    <li><a href="{{ link.url }}"><span class="fw">Follow:</span>{{ link.title  | remove: 'Follow: ' }}</a></li>
+                  {% elsif title contains 'email' %}
+                    <li><a href="{{ link.url }}"><span class="fw">Email:</span>{{ link.title | remove: 'Email: ' }}</a></li>
+                  {% else %}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% endif %}
                 {% endfor %}
               {% endif %}
-
-                {% comment %} Add login / account link {% endcomment %}
-              {% if shop.customer_accounts_enabled %}
-                {% if customer %}
-                  <li><a href="/account">Account</a></li>
-                {% else %}
-                  <li><a href="/account/login">Login</a></li>
-                {% endif %}
-              {% endif %}                
             </ul>
           </div>
         </div>
