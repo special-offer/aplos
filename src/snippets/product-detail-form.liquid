@@ -29,11 +29,9 @@
       <h1>
         {{ product.title }}
       </h1>
-
       {% if show_star_rating %}
         {% render 'yotpo-star-rating' %} 
       {% endif %}
-
       {% if block.settings.subtitle != blank %}
         <div class="p2 {% if template.suffix == 'extended' %}d-none d-md-block{% endif %}">
           {{ block.settings.subtitle }}
@@ -45,7 +43,7 @@
       {{ product.description }}
     </div>
 
-    <div style="margin: auto 0;">
+    <div>
       {% unless product.has_only_default_variant %}
         {% for option in product.options_with_values %}     
           {% capture option_alt_ui %}
@@ -100,23 +98,26 @@
       {% endunless %}
 
       <div class="form-group">
+
         <div class="quantity-adjuster quantity-adjuster--light" data-quantity-adjuster>
           <button class="quantity-adjuster__decrement" data-decrement>-</button>
           <input type="number" value="1" min="1" />
           <button class="quantity-adjuster__increment" data-increment>+</button>
         </div>
-      </div>    
 
-      <div class="product-detail-form-width{% if template.suffix == 'extended' %} d-none d-md-block{% endif %}" style="margin: 69px 0 98px;">
         <button
           type="submit"
           name="add"
           class="btn btn-primary btn-block"
+          style=""
           data-add-to-cart
           {% unless current_variant.available %}disabled="disabled"{% endunless %}>
           {{ submit_button_contents }}
+          
         </button>
-      </div>
+      </div>    
+
+      <div class="product-detail-form-width{% if template.suffix == 'extended' %} d-none d-md-block{% endif %}" style="margin: 2rem 0;"></div>
     </div>    
   </div>
 

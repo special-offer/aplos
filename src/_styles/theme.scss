@@ -101,3 +101,422 @@
 html {
   padding-bottom: 0 !important; // Added by the preview bar which messes things up
 }
+
+
+
+// BDF Changes
+
+.signup-headline{
+/*  margin-top: 4rem;*/
+  margin-bottom: 4rem;
+}
+
+.aplos-block--philosophy a{
+
+  display: inline-block;
+  font-family: Univers, Helvetica, -apple-system, sans-serif;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 25px 93px;
+  font-size: .75rem;
+  line-height: 1;
+  border-radius: 4px;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out
+  
+}
+
+.aplos-block--philosophy a:hover{
+    background-color: white;
+    color: black;
+  }
+
+
+.product-titles .yotpo.yotpo .standalone-bottomline .star-clickable{
+    flex-direction: row-reverse;
+    border-bottom: 1px black solid;
+    margin-top: 24px;
+
+}
+
+.product-titles .yotpo-stars{
+    margin-left: 22px;
+    position: relative;
+    top: -2px;
+    margin-right: 0px !important;
+
+}
+
+
+@media (min-width:768px) {
+
+  .product-detail-form .quantity-adjuster input[type=number],
+  .product-detail-form .quantity-adjuster button,
+  .product-detail-form .quantity-adjuster
+  {
+    height: 64px;
+        border-radius: 4px;
+  }
+
+    .product-detail-form .btn-primary{
+        display: inline-block;width: 66.66%;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.template-product-extended{
+
+    .product-titles{
+
+        @media (min-width:768px) {
+            .yotpo{
+/*                position: absolute;
+                right: 96px;
+                top: 153px;*/
+            }
+        }
+    }
+    .product-detail-form{
+        .form-group{
+            display: flex;
+            justify-content: space-between;
+            button{
+                outline: 0 !important;
+            }
+
+            .btn-primary{
+                border-color: #f5f4b7;
+            }
+        }
+    }
+}
+
+
+
+
+.aplos-row--100vh{
+    height: 100vh;
+}
+
+.aplos-row-big-text{
+
+    p:last-child {
+        margin-bottom: 0
+    }
+
+}
+
+@media (max-width:767.98px) {
+
+    .aplos-row-big-text{
+        display: none !important;
+    }
+
+    .aplos-row--100vh{
+        height: 100vw;
+    }
+
+}
+
+@media (min-width:768px) {
+
+    .aplos-row-big-text{
+        padding: 96px 36px 0px;
+    }
+
+    .aplos-row-big-text p {
+        font-family: Goudy Old Style, serif;
+        font-size: 40px;
+        line-height: 1.05;
+    }
+
+    
+}
+
+@media (min-width:1200px) {
+
+    .aplos-row-big-text{
+        padding: 96px 96px 0px;
+    }
+    
+}
+
+
+
+
+/* SO Mobile Styles */
+
+@media (max-width:767.98px) {
+
+    
+
+    body {
+        font-size: 25px;
+        line-height: 1.125;
+    }
+
+
+
+
+
+    .mp, .aplos-block{
+        padding: 48px 32px !important;
+    }
+
+    *[data-section-id="1597694868259"]{
+
+        .aplos-row--3-block{
+            flex-direction: column;
+        }
+
+        .aplos-row--3-block .aplos-block{
+            height: 50vh;
+        }
+
+        .aplos-block:nth-child(3),
+        .aplos-block:nth-child(2),
+        {
+            display: none !important;
+        }
+
+    }
+
+    .hero__fg{
+        background-color: black;
+    }
+
+
+    .showcase__title,
+    .hero__title,
+    .showcase__subtitle.p2,
+    .testimonals-container h3{
+        font-size: 1rem;
+        line-height: 1.33;
+    }
+
+
+    .footer-inset-nav{
+        display: none !important;
+    }
+
+    .svg-wrap{
+        text-align: center;
+    }
+
+    .footer__upper .aplos-container{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .svg-wrap svg{
+        width: 32px;
+        margin-bottom: 32px;
+    }
+
+/*    .hero__fg{
+        position: absolute;
+        bottom: 0px;
+    }*/
+
+
+
+
+
+
+
+
+
+
+
+
+    /* PDP */
+
+    .h2, h2 {
+        font-family: Univers, Helvetica, -apple-system, sans-serif;
+        font-size: 1rem;
+        line-height: 1.33;
+        margin-bottom: 2rem;
+    }
+
+    .h4, h4{
+        font-size: 25px;
+        line-height: 1.2;
+    }
+
+
+    .product-detail-form .btn-primary{
+        width: 100%;
+    }
+
+    .template-product-extended .product-detail-form .form-group{
+        display: block;
+    }
+
+
+    .product-detail-form .quantity-adjuster input[type=number], .product-detail-form .quantity-adjuster button, .product-detail-form .quantity-adjuster{
+        display: none !important;
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+.template-page-philosophy{
+    .page-hero{
+        background-color: #F5F4B7 !important
+    }
+
+    .aplos-row:first-child{
+        .aplos-block__top-title{
+            margin-top: auto;
+        }
+    }
+}
+
+.fw{
+        width: 50px;
+        display: inline-block;
+    }
+
+
+
+
+.template-article{
+
+    .rte ol{
+        margin-left: 0px;
+        padding-left: 12px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-size: 0.75em;
+        li{
+            margin-bottom: 16px;
+            padding-left: 86px;
+        }
+    }
+}
+
+@media (max-width:1023.98px) {
+
+    .template-article{
+
+        .page-banner{
+            height: 100vw;
+            margin-top: 83px;
+        }
+
+        .page-title{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        article{
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+
+    }
+
+}
+
+@media(max-width: 768px){
+    .template-product-extended{
+
+        #shopify-section-footer{
+          position: relative;
+            z-index: 99;  
+        }
+
+    }
+}
+
+@media (min-width:1024px) {
+
+    .template-article{
+
+        .page-banner{
+            width: 50%;
+            position: fixed;
+            height: 100vh;
+            right: 0px;
+            margin-bottom: 0px;
+        }
+
+        #shopify-section-footer{
+          position: relative;
+            z-index: 99;  
+        }
+        
+
+
+    }
+
+    article{
+        min-height: 100vh;
+        width: 50%;
+        padding-top: 135px;
+        padding-left: 36px;
+        padding-right: 96px;
+    }
+
+
+
+}
+
+
+
+@media (min-width:1200px) {
+
+
+    article{
+        padding-left: 0px;
+        
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,11 +4,8 @@
 
 <div class="layout-content-wrapper drawer-shifter" data-section-id="{{ section.id }}" data-section-type="blog">
   <div class="aplos-container">
+    <h1 hidden>{{ blog.title }}</h1>
     <div class="content-grid">
-      <div class="content-grid__item">
-        <h1 class="page-title">{{ blog.title }}</h1>
-      </div>
-
       {% for article in blog.articles %}
         <div class="content-grid__item">
           {% include 'article-card', article: article %}
