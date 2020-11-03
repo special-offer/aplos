@@ -5,7 +5,7 @@
 {% elsif '404' contains template.name %}
   {% assign header_modifier_class = 'header--white' %}
 {% elsif 'blog' contains template.name %}
-    {% assign header_modifier_class = 'header--white' %}
+    {% assign header_modifier_class = 'header--transparent' %}
 {% elsif 'product' contains template.name %}
   {% assign header_modifier_class = 'header--white-mobile' %}
 {% endif %}

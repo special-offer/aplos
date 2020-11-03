@@ -10,8 +10,10 @@
   position: relative;
   width: 100%;
   margin-bottom: 17px;
-  border-radius: $border-radius;
-  overflow: hidden;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 46px;
+  }
 }
 
 .article-card__gallery-image {
@@ -24,11 +26,16 @@
 .article-card__info {
   h4 {
     margin: 0;
+    font-size: $font-size-lg;
+
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-xxl;
+    }
   }
 }
 
 .article-card__info-title {
-  margin-bottom: 8px;
+  margin-bottom: 20px;
 }
 
 .article-card__info-top {
@@ -38,6 +45,10 @@
 }
 
 .article-card__info-bottom {
-  margin-top: 22px;
+  margin-top: 4px;
   padding-right: 25%;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 13px;
+  }  
 }
