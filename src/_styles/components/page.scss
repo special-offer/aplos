@@ -25,6 +25,10 @@
   .template-blog & {
     height: 60vh;
   }
+
+  .ambient-video {
+    z-index: -1;
+  }
 }
 
 .page-hero__title {

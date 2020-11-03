@@ -747,7 +747,7 @@ $yotpo-icon-star-half:   false !default;
   // Bottomline
   .standalone-bottomline .star-clickable {
     flex-direction: column-reverse;
-    margin: $spacing-smd 0;
+    margin-top: $spacing-smd;
 
     .text-m {
       @include p2;

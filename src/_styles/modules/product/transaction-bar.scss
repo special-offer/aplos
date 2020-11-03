@@ -65,7 +65,7 @@
 
     @include media-breakpoint-up(xl) {
       .transaction-bar__pad {
-        padding: 0px !important;
+        padding-left: 0px !important;
       }
 
       .quantity-adjuster input[type=number]{
@@ -84,7 +84,7 @@
     width: 100%;
 
     @include media-breakpoint-up(lg) {
-      border: 1px solid $black;
+      border-left: 1px solid $black;
     }
 
     .btn {

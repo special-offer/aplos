@@ -89,6 +89,7 @@
 @import 'templates/gift-card';
 @import 'templates/customer';
 @import 'templates/challenge';
+@import 'templates/philosophy';
 
 
 .development-mode {
@@ -140,14 +141,14 @@ html {
   }
 
 
-.product-titles .yotpo.yotpo .standalone-bottomline .star-clickable{
+.product-titles .yotpo.yotpo .standalone-bottomline .star-clickable {
     flex-direction: row-reverse;
     border-bottom: 1px black solid;
     margin-top: 24px;
 
 }
 
-.product-titles .yotpo-stars{
+.product-titles .yotpo-stars {
     margin-left: 22px;
     position: relative;
     top: -2px;
@@ -157,7 +158,6 @@ html {
 
 
 @media (min-width:768px) {
-
   .product-detail-form .quantity-adjuster input[type=number],
   .product-detail-form .quantity-adjuster button,
   .product-detail-form .quantity-adjuster
@@ -169,8 +169,6 @@ html {
     .product-detail-form .btn-primary{
         display: inline-block;width: 66.66%;
     }
-
-
 
 }
 
