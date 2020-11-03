@@ -1,6 +1,14 @@
 <div class="drawer-shifter" data-section-id="{{ section.id }}" data-section-type="page-philosophy">
   
-    {% for block in section.blocks %}
+  {% render 'page-hero',
+            title: section.settings.hero_title,
+            align: 'left',
+            bg_image_desktop: section.settings.hero_bg_image,
+            bg_image_mobile: section.settings.hero_bg_image_mobile,
+            bg_video_setting_handle: section.settings.hero_bg_image_video
+  %}
+
+  {% for block in section.blocks %}
     <div class="aplos-row {{ block.settings.height | prepend: 'aplos-row--' }} {% for i in (1..3) reversed %}{% assign slot_enabled_setting_handle  = 'slot_' | append: i | append: '_enabled' %} {% if block.settings[slot_enabled_setting_handle] == true %}size--{{i}} {% endif %} {% endfor %}" {{ block.shopify_attributes }}>
 
 
@@ -37,14 +45,6 @@
       {% endfor %}
     </div>
   {% endfor %}
-
-  {% render 'page-hero',
-            title: section.settings.hero_title,
-            align: 'center',
-            bg_image_desktop: section.settings.hero_bg_image,
-            bg_image_mobile: section.settings.hero_bg_image_mobile,
-            bg_video_setting_handle: section.settings.hero_bg_image_video
-  %}  
 </div>
 
 

@@ -61,6 +61,7 @@
 @import 'components/showcase';
 @import 'components/recipes';
 @import 'components/foursixty';
+@import 'components/product-promotion';
 
 /**
  * MODULES
@@ -391,10 +392,6 @@ html {
 
 
 .template-page-philosophy{
-    .page-hero{
-        background-color: #F5F4B7 !important
-    }
-
     .aplos-row:first-child{
         .aplos-block__top-title{
             margin-top: auto;

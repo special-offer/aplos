@@ -1,0 +1,101 @@
+<div class="drawer-shifter" data-section-id="{{ section.id }}" data-section-type="product-promotion">
+  <div class="aplos-4side-container">
+    <div class="product-promotion">
+      <div class="product-promotion__col">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | img_url: '800x' }}" style="width: 100%;" />
+        {% endif %}
+      </div>
+      <div class="product-promotion__col">
+        <div class="product-promotion__copy">
+          {% if section.settings.title != blank %}
+            <h4 class="p2">{{ section.settings.title }}</h4>
+          {% endif %}
+
+          {% if section.settings.content != blank %}
+            <div class="h1">
+              {{ section.settings.content }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
+            <a href="{{ section.settings.cta_url }}" class="btn btn-tertiary btn-tall">
+              {{ section.settings.cta_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% capture aplos_blocks %}
+    {% for block in section.blocks %}
+      {% render 'aplos-block'
+                bg_image: block.settings.background_image,
+                bg_video_file_url: block.settings.background_video_file_url,
+                bg_color: 'white'
+      %}
+    {% endfor %}
+  {% endcapture %}
+
+  {% if aplos_blocks != blank %}
+    <div class="aplos-4side-container d-none d-md-block" style="padding-top: 0;">
+      <div class="aplos-row aplos-row--footer aplos-row--fixed aplos-row--shorter">
+        {{ aplos_blocks }}
+      </div>
+    </div>
+  {% endif %}  
+</div>
+
+{% schema %}
+  {
+    "name": "Product Promotion",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Link"
+      },       
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image_block",
+        "name": "Image Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Background Image"
+          },
+          {
+            "type": "url",
+            "id": "background_video_file_url",
+            "label": "Background Video File URL",
+            "info": "Accepted file formats: mp4, ogg, avi, webm"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
