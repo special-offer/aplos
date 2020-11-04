@@ -115,7 +115,7 @@ export default class BlogArticleGrid {
 
     // Add grid items to items obj with handle as the key
     this.$el.find('.article-card').each((i, elm) => {
-      this.items[$(el).data('handle')] = new ArticleGridItem(elm, {
+      this.items[$(elm).data('handle')] = new ArticleGridItem(elm, {
         onOpen: this.onItemOpen.bind(this),
         onOpened: this.onItemOpened.bind(this),
         onClose: this.onItemClose.bind(this),
@@ -160,8 +160,8 @@ export default class BlogArticleGrid {
   onArticleCardContentsClick(e) {
     e.preventDefault();
 
-    const handle = $(e.currentTarget).parents('.article-card[data-handle]').data('handle');
-    const item = this.items[handle];
+    const $card = $(e.currentTarget).parent('.article-card[data-handle]');
+    const item = this.items[$card.data('handle')];
 
     if (!item || this.transitionInProgress) {
       return;
