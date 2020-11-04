@@ -1,6 +1,6 @@
 {% comment %} assign defaults {% endcomment %}
 
-{% paginate blog.articles by 30 %}
+{% paginate blog.articles by 60 %}
 
 {% capture page_hero %}
   {% for block in section.blocks %}
@@ -28,7 +28,7 @@
 
         {% comment %} For Mobile {% endcomment %}
         <div class="container d-md-none">
-            <div class="mp" style="font-size: 21px;">{{ block.settings.content }}</div>
+          <div class="mp" style="font-size: 21px;">{{ block.settings.content }}</div>
         </div>
 
         {% comment %} For Desktop {% endcomment %}
@@ -65,6 +65,7 @@
         {% include 'pagination' %}
       {% endif %}
     </div> 
+    <br /><br /><br />
   </div>
 </div>
 

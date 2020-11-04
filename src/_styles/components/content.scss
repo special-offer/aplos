@@ -2,8 +2,9 @@
 // Content Sections - Grid, Header, Footer
 // -----------------------------------------------------------------------------
 
-$content-grid-item-vertical-spacing-mobile: 24px;
+$content-grid-item-vertical-spacing-mobile: 32px;
 $content-grid-item-vertical-spacing-desktop: 32px;
+$content-grid-item-vertical-spacing-xl-desktop: 72px;
 
 .content-grid {
   display: flex;
@@ -19,6 +20,10 @@ $content-grid-item-vertical-spacing-desktop: 32px;
     margin-right: -$grid-gutter-width/2;    
     margin-bottom: -#{$content-grid-item-vertical-spacing-desktop};
   }
+
+  @include media-breakpoint-up(xl) {
+    margin-bottom: -#{$content-grid-item-vertical-spacing-xl-desktop};
+  }  
 
   &--centered {
     justify-content: center;
@@ -40,7 +45,11 @@ $content-grid-item-vertical-spacing-desktop: 32px;
   @include media-breakpoint-up(md) {
     margin-bottom: $content-grid-item-vertical-spacing-desktop;
     padding: 0 $grid-gutter-width/2;
-  }  
+  }
+
+  @include media-breakpoint-up(xl) {
+    margin-bottom: $content-grid-item-vertical-spacing-xl-desktop;
+  }   
 
   // Default behavior is 1 -> 2 -> 3 across
   @include media-breakpoint-up('sm') {

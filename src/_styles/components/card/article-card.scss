@@ -2,28 +2,79 @@
 // Article Card
 // -------------------------
 
+$transition: height .75s cubic-bezier(0.44, 0.17, 0.08, 1.01);
+$expanded-push-down-height: 175px;
+
 .article-card {
   height: 100%;
+  padding-left: 34px;
+  padding-right: 34px;
+
+  @include media-breakpoint-up(md) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &.is-animating {
+    transition: $transition;
+  }
+
+  .has-expanded-item &:not(.is-expanded) {
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+    filter: grayscale(1);
+  }
+}
+
+.article-card__contents {
+  transition: all 0.75s cubic-bezier(0.51, 0.06, 0.35, 0.98);
+
+  .has-expanded-item .article-card:not(.is-expanded) & {
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+    filter: grayscale(1);
+  }  
 }
 
 .article-card__gallery {
   position: relative;
   width: 100%;
-  margin-bottom: 17px;
+  margin-bottom: 35px;
+  cursor: pointer;
 
   @include media-breakpoint-up(md) {
-    margin-bottom: 46px;
+    margin-bottom: 49px;
   }
 }
 
 .article-card__gallery-image {
-  &,
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+
+  @include media-breakpoint-up(md) {
+    padding-bottom: 150%;    
+  }
+
   img {
+    @include stretch-within;
+    height: 100%;
     width: 100%;
+    object-fit: cover;
   }
 }
 
 .article-card__info {
+  margin-bottom: 5px;
+  cursor: pointer;
+  position: relative;
+  padding-right: 40px; // make room for tray close    
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+
   h4 {
     margin: 0;
     font-size: $font-size-lg;
@@ -31,6 +82,20 @@
     @include media-breakpoint-up(md) {
       font-size: $font-size-xxl;
     }
+  }
+
+  .article-tray__close {
+    top: 0;
+    right: 0;
+    width: 25px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .is-expanded & .article-tray__close {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity .75s cubic-bezier(0.44, 0.17, 0.08, 1.01);
   }
 }
 
@@ -49,6 +114,113 @@
   padding-right: 25%;
 
   @include media-breakpoint-up(md) {
-    margin-top: 13px;
+    margin-top: 8px;
   }  
+}
+
+// Tray styles
+
+.article-tray {
+  position: absolute;
+  z-index: 1;
+  top: auto;
+  left: 0;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+
+  &.is-animating {
+    transition: $transition;
+  }
+}
+
+.article-tray__inner {
+  height: 100%;
+
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.44, 0.17, 0.08, 1.01);
+
+  .is-expanded & {
+    opacity: 1;
+    transition-delay: 400ms;
+    transition-duration: 0.8s;
+  }
+}
+
+.article-tray__contents {
+  padding: 30px 46px 30px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 46px;
+    right: 46px;
+    height: 1px;
+    background-color: $black;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-top: 65px;
+    padding-bottom: 65px;
+    padding-left: 36px;
+    padding-right: 36px;
+
+    &:after {
+      left: 36px;
+      right: 36px;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 96px;
+    padding-right: 96px;
+
+    &:after {
+      left: 96px;
+      right: 96px;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .recipe-content {
+      font-size: $font-size-lg;
+    }
+
+    .recipe-instructions {
+      font-size: $font-size-base;
+    }
+
+    .recipe-ingredients,
+    .recipe-instructions {
+      margin-top: 3rem;
+    }
+  }
+}
+
+.article-tray__close {
+  position: absolute;
+  right: 36px;
+  top: 64px;
+  width: 45px;
+  z-index: 1;
+  cursor: pointer;
+
+  @include media-breakpoint-up(xl) {
+    right: 96px;
+    top: 100px;
+  }
+
+  svg.icon {
+
+    path {
+      stroke: $black;
+
+      @include media-breakpoint-up(md) {
+        stroke-width: 0.5px;
+      }
+    }
+  }
 }
