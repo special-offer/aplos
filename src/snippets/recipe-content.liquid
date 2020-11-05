@@ -67,6 +67,6 @@
   </div>
 {% elsif target == 'instructions' %}
   <div class="recipe-instructions">
-    {{ instructions }}
+    {{ instructions | replace: '<li>', '<li><span class="line">' | replace: '</li>', '</span></li>'}}
   </div>
 {% endif %}

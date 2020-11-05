@@ -94,7 +94,8 @@
       position: relative;
       z-index: 1;
       object-fit: contain;
-      mix-blend-mode: multiply;
+      mix-blend-mode: normal;
+      opacity: 0.9;
     }
   }
 

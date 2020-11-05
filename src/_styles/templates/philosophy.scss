@@ -82,13 +82,11 @@
     height: 50vw;
 
     @include media-breakpoint-up(md) {
-      // padding-left: 96px;
-      // padding-right: 96px;
-      height: 65vh;
+      height: 33vw;
     }
 
     @include media-breakpoint-up(xl) {
-      height: 50vh;
+      height: 37vw;
     }
 
     &.pb-frame-row--reverse {
@@ -142,11 +140,11 @@
     height: auto;
 
     @include media-breakpoint-up(md) {
-      height: 65vh;
+      height: 33vw;
     }
 
     @include media-breakpoint-up(xl) {
-      height: 50vh;
+      height: 37vw;
     }
   }
 
