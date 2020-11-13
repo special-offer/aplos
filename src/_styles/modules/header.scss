@@ -56,6 +56,8 @@
   border-radius: $border-radius;
   background-color: $header-bg;
   color: $header-text-color;
+  transition: background-color 0.3s ease-out,
+              color 0.3s ease-out;
 
   @media (min-width: $header-bp-min) {
     height: $header-height-base;
@@ -257,4 +259,29 @@
   }
 }
 
+// This one is weird, it's yellow on desktop, transparent scrolling down on mobile and white when scrolling up
+.header--scroll-transparent .header-bar {
+  @media (max-width: $header-bp-min - 1px) {
+    background-color: transparent;
+    a, a:hover {
+      color: $white;
+
+      svg {
+        fill: $white;
+      }
+    }
+
+    .scrolling-up & {
+      background-color: $white;
+
+      a, a:hover {
+        color: $black;
+
+        svg {
+          fill: $black;
+        }
+      }        
+    }
+  }
+}
 

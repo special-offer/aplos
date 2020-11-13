@@ -1,7 +1,7 @@
 {% assign header_modifier_class = '' %}
 
 {% if 'index' contains template.name %}
-  {% assign header_modifier_class = 'header--transparent' %}
+  {% assign header_modifier_class = 'header--scroll-transparent' %}
 {% elsif '404' contains template.name %}
   {% assign header_modifier_class = 'header--white' %}
 {% elsif 'blog' contains template.name %}
@@ -13,7 +13,7 @@
 {% if template.name == 'page' and template.suffix == 'help' %}
   {% assign header_modifier_class = 'header--transparent header--white-mobile' %}
 {% elsif template.name == 'page' and template.suffix == 'philosophy' %}
-  {% assign header_modifier_class = 'header--transparent' %}
+  {% assign header_modifier_class = 'header--scroll-transparent' %}
 {% endif %}
 
 {% assign cookie_hash = section.settings.banner_content | append: section.settings.banner_mobile_content | md5 %}
@@ -60,59 +60,61 @@
     {% endif %}
 
     <div class="header-main" data-header-main>
-      <div class="header-bar drawer-shifter">
-        <div class="header-bar__content aplos-container">
-          <nav class="header-nav header-nav--left">
+      <div class="drawer-shifter">
+        <div class="header-bar">
+          <div class="header-bar__content aplos-container">
+            <nav class="header-nav header-nav--left">
 
-            {% comment %} Header nav menu on desktop {% endcomment %}
-            {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
-              <ul class="header-nav__menu for-desktop">
-                {% for link in linklists[section.settings.linklist].links %}
-                  <li class="header-nav__menu-item">        
-                    <a href="{{ link.url }}" {% if link.active %}class="is-active"{% endif %}>{{ link.title }}</a>
-                  </li>
-                {% endfor %}         
-              </ul>
-            {% endif %}
-
-            {% comment %} Header nav menu on mobile {% endcomment %}
-            <ul class="header-nav__menu for-mobile">
-              <li class="header-nav__menu-item">
-                <a href="#" title="Toggle menu" data-mobile-menu-toggle>
-                  Menu
-                </a>
-              </li>
-            </ul>        
-          </nav>
-          
-          {% comment %} Logo {% endcomment %}
-          <div class="header-nav header-nav--center header-nav--logo">
-            {% include 'header-logo' %}
-          </div>
-
-          {% comment %} Cart {% endcomment %}
-          <div class="header-nav header-nav--right">
-            <ul class="header-nav__menu">
-              {% if shop.customer_accounts_enabled %}
-                {% if customer %}
-                  <li class="header-nav__menu-item for-desktop">
-                    <a href="/account">Account</a>
-                  </li>
-                {% else %}
-                  <li class="header-nav__menu-item for-desktop">
-                    <a href="/account/login" data-account-drawer-trigger>Login</a>
-                  </li>
-                {% endif %}
+              {% comment %} Header nav menu on desktop {% endcomment %}
+              {% if section.settings.linklist and linklists[section.settings.linklist].links.size > 0 %}
+                <ul class="header-nav__menu for-desktop">
+                  {% for link in linklists[section.settings.linklist].links %}
+                    <li class="header-nav__menu-item">        
+                      <a href="{{ link.url }}" {% if link.active %}class="is-active"{% endif %}>{{ link.title }}</a>
+                    </li>
+                  {% endfor %}         
+                </ul>
               {% endif %}
-              <li class="header-nav__menu-item">   
-                <a href="/cart" data-ajax-cart-trigger>
-                  <div class="header-cart__badge{% if cart.item_count > 0 %} has-items{% endif %}" data-cart-badge>
-                    {% include 'icon-bloom-4' %}
-                    <span class="header-cart__badge-count p2" data-cart-badge-count>{{ cart.item_count }}</span>
-                  </div>
-                </a>
-              </li>
-            </ul>
+
+              {% comment %} Header nav menu on mobile {% endcomment %}
+              <ul class="header-nav__menu for-mobile">
+                <li class="header-nav__menu-item">
+                  <a href="#" title="Toggle menu" data-mobile-menu-toggle>
+                    Menu
+                  </a>
+                </li>
+              </ul>        
+            </nav>
+            
+            {% comment %} Logo {% endcomment %}
+            <div class="header-nav header-nav--center header-nav--logo">
+              {% include 'header-logo' %}
+            </div>
+
+            {% comment %} Cart {% endcomment %}
+            <div class="header-nav header-nav--right">
+              <ul class="header-nav__menu">
+                {% if shop.customer_accounts_enabled %}
+                  {% if customer %}
+                    <li class="header-nav__menu-item for-desktop">
+                      <a href="/account">Account</a>
+                    </li>
+                  {% else %}
+                    <li class="header-nav__menu-item for-desktop">
+                      <a href="/account/login" data-account-drawer-trigger>Login</a>
+                    </li>
+                  {% endif %}
+                {% endif %}
+                <li class="header-nav__menu-item">   
+                  <a href="/cart" data-ajax-cart-trigger>
+                    <div class="header-cart__badge{% if cart.item_count > 0 %} has-items{% endif %}" data-cart-badge>
+                      {% include 'icon-bloom-4' %}
+                      <span class="header-cart__badge-count p2" data-cart-badge-count>{{ cart.item_count }}</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
