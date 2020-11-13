@@ -163,13 +163,13 @@ html {
   .product-detail-form .quantity-adjuster
   {
     height: 64px;
-        border-radius: 4px;
+    border-radius: 4px;
   }
 
-    .product-detail-form .btn-primary{
-        display: inline-block;width: 66.66%;
-    }
-
+  .product-detail-form .btn-primary{
+    display: inline-block;
+    width: 66.66%;
+  }
 }
 
 
@@ -201,18 +201,25 @@ html {
             }
         }
     }
-    .product-detail-form{
-        .form-group{
-            display: flex;
-            justify-content: space-between;
-            button{
-                outline: 0 !important;
-            }
+    .product-detail-form {
+      .form-group {
+          display: flex;
+          justify-content: space-between;
 
-            .btn-primary{
-                border-color: #f5f4b7;
-            }
+          button{
+              outline: 0 !important;
+          }
+
+          .btn-primary{
+              border-color: #f5f4b7;
+          }
+      }
+
+      .form-group--purchase-options {
+        @include media-breakpoint-down(sm) {
+          display: none;
         }
+      }
     }
 }
 
@@ -369,9 +376,9 @@ html {
         width: 100%;
     }
 
-    .template-product-extended .product-detail-form .form-group{
-        display: block;
-    }
+    // .template-product-extended .product-detail-form .form-group{
+    //     display: block;
+    // }
 
 
     .product-detail-form .quantity-adjuster input[type=number], .product-detail-form .quantity-adjuster button, .product-detail-form .quantity-adjuster{
