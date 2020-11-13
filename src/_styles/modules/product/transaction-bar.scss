@@ -72,20 +72,13 @@
         width: 16px !important;
       }
     }
-
-    @include media-breakpoint-down(md) {
-      display: none;
-    }
   }  
 
   &--add-to-cart {
     align-self: stretch;
     padding: 0;
     width: 100%;
-
-    @include media-breakpoint-up(lg) {
-      border-left: 1px solid $black;
-    }
+    border-left: 1px solid $black;
 
     .btn {
       height: 100%;
