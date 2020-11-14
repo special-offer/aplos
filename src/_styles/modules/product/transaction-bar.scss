@@ -63,13 +63,19 @@
   &--quantity {
     flex: 0 1 auto;
 
+
+    .quantity-adjuster input[type=number]{
+      @include media-breakpoint-up(md) {
+        width: 10px !important;
+      }
+      @include media-breakpoint-up(xl) {
+        width: 16px !important;
+      }      
+    }
+
     @include media-breakpoint-up(xl) {
       .transaction-bar__pad {
         padding-left: 0px !important;
-      }
-
-      .quantity-adjuster input[type=number]{
-        width: 16px !important;
       }
     }
   }  
@@ -105,10 +111,15 @@
   padding: 8px 9px;
 
   @include media-breakpoint-up(md) {
-    padding: 25px 20px;
+    padding: 19px 13px;
   }
 
-  @include media-breakpoint-up(xl) {
-    padding: 19px 20px;
+  @include media-breakpoint-up(lg) {
+    padding-left: 20px;
+    padding-right: 20px;
   }  
+
+  // @include media-breakpoint-up(xl) {
+  //   padding: 19px 20px;
+  // }  
 }
