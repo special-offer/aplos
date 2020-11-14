@@ -110,6 +110,7 @@
 
 .aplos-block__bg {
   background-color: $black;
+  overflow: hidden;
 
   &, img {
     position: absolute;
@@ -127,6 +128,13 @@
     &[data-src] {
       opacity: 0;
     }    
+  }
+
+  .ambient-video {
+    top: -5%;
+    left: -5%;
+    height: 110%;
+    width: 110%;
   }
 }
 
