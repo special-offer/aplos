@@ -36,11 +36,11 @@
             {{ form.errors | default_errors }}
 
             <div class="form-group row{% if form.errors['email'] %} is-invalid{% endif %}">
-              <label for="CustomerEmail" class="col-2">
+              <label for="CustomerEmail" class="col-3 col-sm-2">
                 {{ 'customer.login.email' | t }}
               </label>
 
-              <div class="col-10">
+              <div class="col-9 col-sm-10">
                 <input type="email"
                   name="customer[email]"
                   id="CustomerEmail"
@@ -53,11 +53,11 @@
 
             {% if form.password_needed %}
               <div class="form-group row{% if form.errors['password'] %} is-invalid{% endif %}">
-                <label for="CustomerPassword" class="col-2">
+                <label for="CustomerPassword" class="col-3 col-sm-2">
                   {{ 'customer.login.password' | t }}
                 </label>
 
-                <div class="col-10">
+                <div class="col-9 col-sm-10">
                   <input type="password"
                     name="customer[password]"
                     id="CustomerPassword"
@@ -104,10 +104,10 @@
             {% endif %}
 
             <div class="form-group row">
-              <label for="RecoverEmail" class="col-2">
+              <label for="RecoverEmail" class="col-3 col-sm-2">
                 {{ 'customer.recover_password.email' | t }}
               </label>
-              <div class="col-10">
+              <div class="col-9 col-sm-10">
                 <input type="email"
                   name="email"
                   id="RecoverEmail"

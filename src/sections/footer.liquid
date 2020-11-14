@@ -66,29 +66,36 @@
                           {% endif %}
                         {% endif %}
 
-                      {% elsif title contains 'text' %}
+                      {% elsif title contains 'text' and section.settings.text_phone_number != blank %}
                         <li>
-                          <a href="sms:8004427567">
-                            Text<span class="emdash"></span>
+                          <a href="sms:{{ section.settings.text_phone_number | handle | replace: '-', '' }}">
+                            <span class="footer-menu__contact-link-pretext">Text</span>
+                            <span class="emdash"></span>
                             {{ link.title | remove: 'Text:' | strip }}
                           </a>
                         </li>
                       {% elsif title contains 'follow' %}
                         <li>
-                          <a href="{{ link.url }}">
-                            Follow<span class="emdash"></span>
+                          <a href="{{ link.url }}" {% if link.url contains 'http' %}target="_blank"{% endif %}>
+                            <span class="footer-menu__contact-link-pretext">Follow</span>
+                            <span class="emdash"></span>
                             {{ link.title  | remove: 'Follow:' | strip }}
                           </a>
                         </li>
                       {% elsif title contains 'email' %}
                         <li>
-                          <a href="{{ link.url }}">
-                            Email<span class="emdash"></span>
+                          <a href="{{ link.url }}" target="_blank">
+                            <span class="footer-menu__contact-link-pretext">Email</span>
+                            <span class="emdash"></span>
                             {{ link.title | remove: 'Email:' | strip }}
                           </a>
                         </li>
                       {% else %}
-                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                        <li>
+                          <a href="{{ link.url }}" {% if link.url contains 'http' %}target="_blank"{% endif %}>
+                            {{ link.title }}
+                          </a>
+                        </li>
                       {% endif %}
                     {% endfor %}
                   </ul>
@@ -193,6 +200,11 @@
         "type": "header",
         "content": "Upper Footer"
       },
+      {
+        "type": "text",
+        "id": "text_phone_number",
+        "label": "Text Phone Number"
+      },      
       {
         "type": "text",
         "id": "upper_menu_title_1",

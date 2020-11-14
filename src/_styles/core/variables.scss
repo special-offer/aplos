@@ -606,7 +606,7 @@ $custom-control-indicator-disabled-bg:          transparent; // $input-disabled-
 $custom-control-label-disabled-color:           $gray-dark !default;
 
 $custom-control-indicator-checked-color:        $component-active-color !default;
-$custom-control-indicator-checked-bg:           $component-active-bg !default;
+$custom-control-indicator-checked-bg:           $butter-dark !default; // $component-active-bg
 $custom-control-indicator-checked-disabled-bg:  transparentize($component-active-bg, 0.5) !default;
 $custom-control-indicator-checked-box-shadow:   none !default;
 $custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg !default;

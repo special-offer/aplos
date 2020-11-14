@@ -94,6 +94,11 @@
   }
 }
 
+.footer-menu__contact-link-pretext {
+  display: inline-block;
+  min-width: 57px;
+}
+
 .footer-subscribe-message {
   font-size: $font-size-base * (19/16);
   line-height: 1.2;
