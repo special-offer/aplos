@@ -23,22 +23,19 @@
   <header class="header {{ header_modifier_class }}" role="banner" data-header>
     {% if section.settings.banner_enabled %}
       <div id="pencil-banner" class="pencil-banner drawer-shifter" data-pencil-banner>
-        {% comment %}
-          @TODO
-            - Replace container fluid max?
-            - Make sure content is centered with/without accent text
-        {% endcomment %}
         <div class="aplos-container">
-          <span class="pencil-banner__accent">
-            {{ section.settings.banner_accent_text }}
-          </span>
-          <div>
-            <div class="d-none d-md-block">{{ section.settings.banner_content }}</div>
-            <div class="d-block d-md-none">{{ section.settings.banner_mobile_content | default: section.settings.banner_content }}</div>
+          <div class="pencil-banner__core">
+            <span class="pencil-banner__accent">
+              {{ section.settings.banner_accent_text }}
+            </span>
+            <div class="pencil-banner__content">
+              <div class="d-none  d-md-block">{{ section.settings.banner_content }}</div>
+              <div class="d-block d-md-none">{{ section.settings.banner_mobile_content | default: section.settings.banner_content }}</div>
+            </div>
+            <a href="#" class="pencil-banner__close" title="Close" data-pencil-banner-close>
+              {% include 'icon-close' %}
+            </a>
           </div>
-          <a href="#" class="pencil-banner__close" title="Close" data-pencil-banner-close>
-            {% include 'icon-close' %}
-          </a>
         </div>
       </div>
 

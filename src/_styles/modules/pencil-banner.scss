@@ -9,34 +9,47 @@
   background-color: $butter-dark;
   text-align: center;
 
-  @include media-breakpoint-down(sm) {
-    display: none;
-  }  
-
   @extend .p2;
 
   p:last-child {
     margin-bottom: 0;
   }
+}
 
-  .aplos-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.pencil-banner__core {
+  position: relative;
+}
+
+.pencil-banner__accent,
+.pencil-banner__close {
+  position: absolute;
+  z-index: 1;
+  top: 45%;
+  transform: translateY(-50%);
 }
 
 .pencil-banner__accent {
   @extend .p3;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  line-height: 1;
+  
+  left: 4px;
 }
 
 .pencil-banner__close {
+  display: inline-block;
   width: 13px;
+  height: 13px;
+  right: 4px;
 
   svg {
     stroke: $body-color;
     stroke-width: 2px;
   }
+}
+
+.pencil-banner__content {
+  text-align: center;
+  padding: 0 50px; // make room for close button and notice
 }
