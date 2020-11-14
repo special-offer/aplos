@@ -324,7 +324,7 @@ $item-spacing: 45px;
     .ajax-cart__item-price {
       @include media-breakpoint-up(md) {
         width: auto;
-        align-self: flex-start;
+        margin-bottom: 0;
       }
     }
 
