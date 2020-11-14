@@ -219,17 +219,11 @@
   position: absolute;
   top: 3px;
   right: -12px;
-  opacity: 0;
-  transition: opacity 300ms ease-out;
 
   @include media-breakpoint-down(sm) {
     font-size: $font-size-xs;
     top: 1px;
     right: -9px;
-  }
-
-  .has-items & {
-    opacity: 1;
   }
 }
 
