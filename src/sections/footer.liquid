@@ -2,9 +2,9 @@
 
   <div class="footer__upper">
     {% if template.name == "index" %}
-      <div class="d-none d-md-block" style="margin-bottom: 3rem;">
+      <div style="margin-bottom: 3rem;">
         {% if section.settings.top_content != blank %}
-          <div class="aplos-container bg-black text-white mp">
+          <div class="aplos-4side-container">
             <div class="row">
               <div class="col-lg-9">
                 <div class="aplos-row-big-text">
@@ -25,9 +25,11 @@
         {% endcapture %}
 
         {% if aplos_blocks != blank %}
-          <div class="aplos-container">
-            <div class="aplos-row aplos-row--footer aplos-row--fixed aplos-row--shorter">
-              {{ aplos_blocks }}
+          <div class="d-none d-md-block">
+            <div class="aplos-container">
+              <div class="aplos-row aplos-row--footer aplos-row--fixed aplos-row--shorter">
+                {{ aplos_blocks }}
+              </div>
             </div>
           </div>
         {% endif %}

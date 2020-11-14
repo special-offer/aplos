@@ -26,8 +26,11 @@
     height: 60vh;
   }
 
-  .template-page-philosophy {
-    max-height: none;
+  .template-page-philosophy & {
+    max-height: 75vw;
+    @include media-breakpoint-up(md) {
+      max-height: none;
+    }
   }
 
   .ambient-video {

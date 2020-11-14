@@ -18,8 +18,11 @@
   }
 
   .aplos-row-big-text {
-    font-size: 40px;
-    line-height: 1.05;
+    @include media-breakpoint-up(md) {
+      // font-size: 40px;
+      // line-height: 1.05;
+      @include h1;
+    }
   }
 }
 
@@ -33,6 +36,18 @@
 
   @include media-breakpoint-up(md) {
     padding: 97px 0 70px;
+  }
+
+  .aplos-4side-container {
+    @include media-breakpoint-down(sm) {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 }
 
@@ -84,6 +99,10 @@
   line-height: 1.2;
   max-width: 350px;
   margin-bottom: 3rem;
+
+  @include media-breakpoint-up(sm) {
+    font-size: $font-size-lg; // Match footer-menu
+  }
 }
 
 .footer__lower {

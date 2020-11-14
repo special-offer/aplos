@@ -17,7 +17,7 @@
     <div class="philosophy-block {{ block.type | replace: '_', '-' | handle | prepend: 'philosophy-block--' }}" {{ block.shopify_attributes }}>
       {% case block.type %}
         {% when 'type_a' %}
-          <div class="pb__title">{{ block.settings.title }}</div>
+          <div class="pb__title{% if forloop.index == 1 %} d-none d-md-block{% endif %}">{{ block.settings.title }}</div>
           <div class="row justify-content-center">
             <div class="col-md-9">
               <div class="pb__content">{{ block.settings.content }}</div>
@@ -75,7 +75,7 @@
             <div class="pb__content">{{ block.settings.content }}</div>
           {% endcapture %}
 
-          <div class="pb-frame-row d-md-none" style="height: 110vw">
+          <div class="pb-frame-row d-md-none" style="height: 118vw">
             <div class="pb-frame">
               {% render 'aplos-block'
                         bg_image: block.settings.image_1

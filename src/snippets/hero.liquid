@@ -35,7 +35,7 @@
       {% endif %}
     {% endcapture %}
 
-    {% if copy %}
+    {% if copy != blank %}
       <div class="hero__copy">
         {% if title != blank %}
           <h2 class="hero__title">{{ title }}</h2>
@@ -55,7 +55,7 @@
     {% endif %}
   {% endcapture %}
 
-  {% if fg_content %}
+  {% if fg_content != blank %}
     <div class="hero__fg mp">
       {{ fg_content }}
     </div>

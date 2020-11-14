@@ -307,7 +307,7 @@ $font-family-base:            $font-family-serif !default;
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
 $font-size-xxxl:              $font-size-base * (36/16) !default; // @TODO - This is the mobile responsive h1 font size
 $font-size-xxl:               $font-size-base * (30/16) !default;
-// $font-size-xl:
+$font-size-xl:                $font-size-base * (25/16) !default;
 $font-size-lg:                $font-size-base * (20/16) !default;
 $font-size-md:                $font-size-base * 1.125 !default;
 $font-size-sm:                $font-size-base * (12/16) !default;
@@ -343,7 +343,7 @@ $h2-line-height:              1.2 !default;
 $h3-line-height:              1.2 !default;
 $h4-line-height:              1.2 !default;
 $h5-line-height:              1.2 !default;
-$h6-line-height:              1.2 !default;
+$h6-line-height:              1.333 !default;
 
 $headings-margin-bottom:      $spacer !default;
 $headings-font-family:        null !default;
@@ -351,9 +351,9 @@ $headings-font-weight:        $font-weight-normal !default;
 $headings-line-height:        1.2 !default;
 $headings-color:              $body-color !default;
 
-$body-copy-font-size:         $font-size-lg;
+$body-copy-font-size:         $font-size-xl;
 $body-copy-font-weight:       $font-weight-normal;
-$body-copy-line-height:       1.2;
+$body-copy-line-height:       1.05;
 
 // p{2, 3}
 $p2-font-size:                $font-size-sm;

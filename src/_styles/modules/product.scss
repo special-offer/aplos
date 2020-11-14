@@ -100,40 +100,18 @@
 
 .product-highlights {
   margin-top: 4.5rem;
+
+  .btn {
+    margin-top: $spacing-ssmd;
+  }
 }
 
 .product-highlight {
   margin-top: 50px;
   position: relative;
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 1px;
-    background-color: $black;
-    transform: translateX(-#{$spacing-ml/2});
-  }
-
-  &:first-child {
-    margin-top: 0;
-  }
-
-  &:last-child {
-    padding-bottom: 0;
-  }
-
-  @include media-breakpoint-up(md) {
-    padding-top: 50px;
-    padding-bottom: 2rem;
-    border-top: 1px solid $black;
-
-    &:after {
-      display: none;
-    }
-  }
+  padding-top: 50px;
+  padding-bottom: 2rem;
+  border-top: 1px solid $black;
 }
 
 .product-highlight__title {
@@ -198,9 +176,7 @@
 
 
 .product-reviews {
-  @include media-breakpoint-up(md) {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    background-color: $butter-gray;
-  }
+  background-color: $butter-gray;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
