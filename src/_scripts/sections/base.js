@@ -1,8 +1,11 @@
 import $ from 'jquery';
 import AplosBlock from '../components/aplosBlock';
+import AmbientVideo from '../components/ambientVideo';
 
 const selectors = {
-  aplosBlock: '.aplos-block'
+  aplosBlock: '.aplos-block',
+  pageHero: '.page-hero',
+  ambientVideo: '[data-ambient-video]'
 };
 
 export default class BaseSection {
@@ -22,6 +25,7 @@ export default class BaseSection {
     };
 
     this.aplosBlocks = $.map($(selectors.aplosBlock, this.$container), el => new AplosBlock(el));
+    this.ambientVideos = $.map($(selectors.pageHero, this.$container).find(selectors.ambientVideo), el => new AmbientVideo(el, true)); // Find any videos in the page hero
   }
 
   onUnload(e) {

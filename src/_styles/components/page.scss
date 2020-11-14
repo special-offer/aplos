@@ -33,12 +33,14 @@
     }
   }
 
-  .ambient-video {
-    z-index: -1;
-  }
+  // .ambient-video {
+  //   z-index: -1;
+  // }
 }
 
 .page-hero__title {
+  position: relative;
+  z-index: 1;
   width: 100%;
   margin-bottom: 0;
   color: $white;

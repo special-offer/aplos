@@ -38,7 +38,6 @@
     <{{ title_tag }} class="page-hero__title">{{ title }}</{{ title_tag }}>
   {% endif %}
 
-
   {% capture page_hero_bg_content %}
     {% if bg_image_desktop %}
       <picture>
@@ -128,8 +127,6 @@
   {% endif %}
 
   {% if bg_video_setting_handle != blank %}
-    <video class="ambient-video" muted playsinline autoplay loop data-ambient-video style="opacity:1;">
-      <source src="{{ bg_video_setting_handle }}" type="video/mp4" />
-    </video>
+    {% render 'ambient-video', url: bg_video_setting_handle %}  
   {% endif %}
 </div>
