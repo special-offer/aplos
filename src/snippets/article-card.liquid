@@ -23,8 +23,9 @@
   
   {% comment %} Shopify doesn't have a way to access article.blog directly so we have to parse out the url {% endcomment %}
   {% assign blog_handle = article.url | replace: 'blogs/', '' | replace: '/', ' ' | split: ' ' | first %}
+  {% assign share_url = blog.url | append: '?handle=' | append: article.handle %}
 
-  <div class="article-card" data-handle="{{ article.handle }}">
+  <div class="article-card" data-handle="{{ article.handle }}" data-share-url="{{ share_url }}">
     <div class="article-card__contents">
       {% if article.image %}
         <div class="article-card__gallery">
@@ -64,7 +65,11 @@
                             recipe: article.content
                             target: 'recipe'
                 %}
-              </div>       
+              </div>
+
+              <div class="d-none d-md-block" style="margin-top: 64px;">
+                {% render 'article-share' url: share_url %}
+              </div>
             </div>
             <div class="col-md-4 col-xl-3">
               {% include 'recipe-content',
@@ -76,7 +81,11 @@
               {% include 'recipe-content',
                           recipe: article.content
                           target: 'instructions'
-              %}               
+              %}
+
+              <div class="d-md-none" style="margin-top: 64px;">
+                {% render 'article-share' url: share_url %}
+              </div>   
             </div>
           </div>
         </div>

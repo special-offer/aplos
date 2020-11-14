@@ -13,7 +13,7 @@ export default class BlogSection extends BaseSection {
   constructor(container) {
     super(container, 'blog');
 
-    this.blogArticleGrid = new BlogArticleGrid($('.content-grid', this.$container));
+    this.blogArticleGrid = new BlogArticleGrid($('.content-grid', this.$container), this.$container.data('base-url'));
 
     this.$container.on('click', selectors.nextPageLink, this.onNextPageLinkClick.bind(this));
   }

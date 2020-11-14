@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
+import { getQueryParams } from '../core/utils'
 
 const classes = {
   gridHasExpandedItem: 'has-expanded-item',
@@ -26,6 +27,7 @@ class ArticleGridItem {
     this.$tray = this.$el.find('.article-tray');
     this.$trayContents = this.$el.find('.article-tray__contents');
     this.isOpen = false;
+    this.shareUrl = this.$el.data('share-url')
 
     this.$el.on('click', '[data-close]', this.onCloseClick.bind(this));
   }
@@ -77,7 +79,7 @@ class ArticleGridItem {
     setTimeout(() => {
       this.$tray.removeClass(classes.trayIsAnimating);
       this.$el.removeClass(classes.itemIsAnimating);
-      this.settings.onOpened();
+      this.settings.onOpened(this);
     }, TRANSITION_DURATION);    
   }
 
@@ -104,12 +106,13 @@ class ArticleGridItem {
 }
 
 export default class BlogArticleGrid {
-  constructor(el) {
+  constructor(el, baseUrl) {
     this.name = 'blogArticleGrid';
     this.namespace = `.${this.name}`;
 
     this.$el = $(el);
 
+    this.baseUrl = baseUrl;
     this.transitionInProgress = false;
     this.items = {};
 
@@ -126,6 +129,16 @@ export default class BlogArticleGrid {
     this.$el.on('click', '.article-card__contents', this.onArticleCardContentsClick.bind(this));
 
     $(window).on('resize', throttle(150, this.onResize.bind(this)));
+
+    // Check if we're coming from a share url
+    // if we are, then wait a second and then open it up
+    const queryHandleItem = this.items[getQueryParams()['handle']]
+
+    if (queryHandleItem) {
+      setTimeout(() => {
+        queryHandleItem.open()
+      }, 1500);
+    }
   }
 
   getOpenItem() {
@@ -157,6 +170,14 @@ export default class BlogArticleGrid {
     }
   }
 
+  updateHistory(url) {
+    const newUrl = url || this.baseUrl;
+
+    if (window.history && newUrl) {
+      window.history.replaceState({}, '', newUrl);
+    }
+  }
+
   onArticleCardContentsClick(e) {
     e.preventDefault();
 
@@ -179,6 +200,7 @@ export default class BlogArticleGrid {
   onItemOpen(gridItem) {
     this.$el.addClass(classes.gridHasExpandedItem);
     this.transitionInProgress = true;
+    this.updateHistory(gridItem.shareUrl);
 
     const offset = gridItem.$trayContents.offset().top - (window.innerHeight * 0.15);
 
@@ -197,6 +219,7 @@ export default class BlogArticleGrid {
   }
 
   onItemClosed() {
+    this.updateHistory();
     this.transitionInProgress = false;
   }
 

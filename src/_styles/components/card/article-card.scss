@@ -224,3 +224,34 @@ $expanded-push-down-height: 175px;
     }
   }
 }
+
+// Sharing
+.article-share {
+  @include p2;
+  padding: 10px 0;
+}
+
+.article-share__title {
+  padding-right: 17px;
+}
+
+.article-share__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+  transition: opacity 500ms ease-out;
+
+  li {
+    display: inline-block;
+    margin: 0 3px;
+  }
+
+  @include media-breakpoint-up(md) {
+    opacity: 0;
+
+    .article-share:hover & {
+      opacity: 1;
+    }
+  }
+}

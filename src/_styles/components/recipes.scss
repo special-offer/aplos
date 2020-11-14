@@ -44,8 +44,8 @@
 .recipe-instructions {
   ol {
     margin: 0;
-    padding: 0 0 0 1.5em;
-    list-style-type: decimal-leading-zero;
+    padding: 0;
+    list-style: none;
 
     li {
       margin-bottom: 10px;
@@ -53,13 +53,6 @@
       &:last-child {
         margin-bottom: 0;
       }
-    }  
-
-    .line {
-      display: inline-block;
-      text-indent: 3.4em;
-      margin-left: -1.5em;
-      vertical-align: top;
     }  
   }
 }

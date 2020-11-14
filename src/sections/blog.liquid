@@ -17,7 +17,11 @@
   {% endfor %}
 {% endcapture %}
 
-<div class="drawer-shifter" data-section-id="{{ section.id }}" data-section-type="blog">
+<div class="drawer-shifter"
+     data-section-id="{{ section.id }}"
+     data-section-type="blog"
+     data-base-url="{{ blog.url }}"
+>
   {{ page_hero }}
 
   <div class="aplos-4side-container bg-butter-gray">
