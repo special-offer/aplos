@@ -82,6 +82,10 @@
     @include media-breakpoint-only(md) {
       padding: $spacing-md;
     }
+
+    @include media-breakpoint-only(lg) {
+      padding: $spacing-ml;
+    }
   }
 }
 
@@ -92,8 +96,12 @@
     display: flex;
 
     @include media-breakpoint-up(md) {
-      padding-top: 100px; // $spacing-lg + 100px;
+      padding-top: 120px;
       min-height: 100vh;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding-top: 100px;
     }
 
     .aplos-block {
