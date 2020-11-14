@@ -259,18 +259,18 @@
   }
 }
 
-// This one is weird, it's yellow on desktop, transparent scrolling down on mobile and white when scrolling up
+// transparent scrolling down, white scrolling up but only on mobile
 .header--scroll-transparent .header-bar {
-  @media (max-width: $header-bp-min - 1px) {
-    background-color: transparent;
-    a, a:hover {
-      color: $white;
+  background-color: transparent;
+  a, a:hover {
+    color: $white;
 
-      svg {
-        fill: $white;
-      }
+    svg {
+      fill: $white;
     }
+  }
 
+  @media (max-width: $header-bp-min - 1px) {
     .scrolling-up & {
       background-color: $white;
 
