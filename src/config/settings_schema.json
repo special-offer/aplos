@@ -68,6 +68,17 @@
     ]
   },
   {
+    "name": "Contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_phone_number",
+        "label": "Phone Number",
+        "info": "Used to create links to send text messages"
+      }
+    ]
+  },  
+  {
     "name": "Mailing List",
     "settings": [
       {

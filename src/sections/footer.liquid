@@ -66,9 +66,9 @@
                           {% endif %}
                         {% endif %}
 
-                      {% elsif title contains 'text' and section.settings.text_phone_number != blank %}
+                      {% elsif title contains 'text' and settings.contact_phone_number != blank %}
                         <li>
-                          <a href="sms:{{ section.settings.text_phone_number | handle | replace: '-', '' }}">
+                          <a href="sms:{{ settings.contact_phone_number | handle | replace: '-', '' }}">
                             <span class="footer-menu__contact-link-pretext">Text</span>
                             <span class="emdash"></span>
                             {{ link.title | remove: 'Text:' | strip }}
@@ -199,12 +199,7 @@
       {
         "type": "header",
         "content": "Upper Footer"
-      },
-      {
-        "type": "text",
-        "id": "text_phone_number",
-        "label": "Text Phone Number"
-      },      
+      },    
       {
         "type": "text",
         "id": "upper_menu_title_1",
