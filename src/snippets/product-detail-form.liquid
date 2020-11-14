@@ -122,12 +122,19 @@
   </div>
 
   {% if block %}
+    {% assign has_nutrition_label = false %}
+    {% if block.settings.product_nutrition_label != blank %}
+      {% assign has_nutrition_label = true %}
+    {% endif %}
+
     {% capture expandable_details_html %}
       {% for i in (1..3) %}
         {% assign detail_title_handle = 'detail_title_' | append: i %}
         {% assign detail_content_handle = 'detail_content_' | append: i %}
+        {% assign detail_nutrition_facts_handle = 'detail_nutrition_facts_' | append: i %}        
         {% assign detail_title = block.settings[detail_title_handle] %}
         {% assign detail_content = block.settings[detail_content_handle] %}
+        {% assign detail_nutrition_facts = block.settings[detail_nutrition_facts_handle] %}
         {% assign expandable_id = 'expand-' | append: block.id | append: '-' | append: i %}
 
         {% if detail_title != blank or detail_content != blank %}
@@ -147,6 +154,10 @@
             <div id="{{ expandable_id }}" class="collapse">
               <div class="expandable-list__body">
                 {{ detail_content }}
+
+                {% if has_nutrition_label and detail_nutrition_facts == true %}
+                  <a href="#nutrition-label" class="btn btn-tertiary" style="margin-top: 40px;">See Nutrition Facts</a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -155,5 +166,9 @@
     {% endcapture %}
 
     {{ expandable_details_html }}
+
+    {% if has_nutrition_label %}
+      <img id="nutrition-label" src="{{ block.settings.product_nutrition_label | img_url: '800x'}}" style="display: none" />
+    {% endif %}
   {% endif %}
 </div>
