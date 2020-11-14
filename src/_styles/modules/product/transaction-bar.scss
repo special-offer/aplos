@@ -64,13 +64,24 @@
     flex: 0 1 auto;
 
 
-    .quantity-adjuster input[type=number]{
-      @include media-breakpoint-up(md) {
-        width: 10px !important;
+    .quantity-adjuster {
+      @include media-breakpoint-down(sm) {        
+        button {
+          width: 32px;
+        }
       }
-      @include media-breakpoint-up(xl) {
-        width: 16px !important;
-      }      
+      
+      input[type=number] {
+        width: 10px !important;
+
+        @include media-breakpoint-down(sm) {
+          height: 36px;
+        }
+
+        @include media-breakpoint-up(xl) {
+          width: 16px !important;
+        }
+      }     
     }
 
     @include media-breakpoint-up(xl) {

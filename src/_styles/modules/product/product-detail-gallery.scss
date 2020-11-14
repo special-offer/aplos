@@ -6,6 +6,7 @@
   position: relative;
   height: 100vh;
   height: var(#{'--viewport-height'});
+  transition: height 0.8s ease-out;
 
   // @include media-breakpoint-up(md) {
   //   width: 100%;
@@ -81,7 +82,7 @@
   .gallery-image--foreground {
     // height: 78vh;
     height: calc(100% - 180px);
-    height: calc(var(--viewport-height) - 180px);
+    // height: calc(var(--viewport-height) - 180px);
     padding: 120px 30px 0;
 
     @include media-breakpoint-up(md) {

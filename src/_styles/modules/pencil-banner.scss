@@ -5,11 +5,17 @@
 .pencil-banner {
   position: relative;
   z-index: $zindex-pencil-banner;
-  padding: 19px 0 16px;
+  padding: 14px 0 10px;
   background-color: $butter-dark;
   text-align: center;
 
-  @extend .p2;
+  @include p3;
+
+  @include media-breakpoint-up(md) {
+    padding: 19px 0 16px;
+    @include p2;
+  }
+
 
   p:last-child {
     margin-bottom: 0;
@@ -24,7 +30,7 @@
 .pencil-banner__close {
   position: absolute;
   z-index: 1;
-  top: 45%;
+  top: 50%;
   transform: translateY(-50%);
 }
 
@@ -34,14 +40,22 @@
   letter-spacing: 0.05em;
   line-height: 1;
   
-  left: 4px;
+  left: 24px;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 9px;
+  }
 }
 
 .pencil-banner__close {
   display: inline-block;
   width: 13px;
   height: 13px;
-  right: 4px;
+  right: 24px;
+
+  @include media-breakpoint-down(sm) {
+    margin-top: -2px;
+  }  
 
   svg {
     stroke: $body-color;
@@ -51,5 +65,5 @@
 
 .pencil-banner__content {
   text-align: center;
-  padding: 0 50px; // make room for close button and notice
+  padding: 0 69px; // make room for close button and notice
 }
