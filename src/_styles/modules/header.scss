@@ -93,6 +93,12 @@
     height: 100%;
     width: 100%;
   }
+
+  @media (min-width: $header-bp-min) {
+    svg {
+      width: auto;
+    }
+  }
 }
 
 // .header-container > .header-nav
@@ -141,7 +147,7 @@
 
 .header-nav__menu-item {
   display: inline-block;
-  margin: 0 13px;
+  margin: 0 19px;
 
   @include media-breakpoint-up(lg) {
     margin: 0 30px;
