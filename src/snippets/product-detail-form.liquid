@@ -165,7 +165,11 @@
       {% endfor %}
     {% endcapture %}
 
-    {{ expandable_details_html }}
+    {% if expandable_details_html != blank %}
+      <div class="expandable-lists">
+        {{ expandable_details_html }}
+      </div>
+    {% endif %}
 
     {% if has_nutrition_label %}
       <img id="nutrition-label" src="{{ block.settings.product_nutrition_label | img_url: '800x'}}" style="display: none" />
