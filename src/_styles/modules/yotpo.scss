@@ -665,6 +665,11 @@ $yotpo-icon-star-half:   false !default;
     .yotpo-bottomline.yotpo-bottomline-2-boxes {
       height: auto;
     }
+
+    .main-widget-footer .yotpo-hidden-mobile.write-review-button,
+    .main-widget-footer .yotpo-icon-button-text {
+      display: block !important;
+    }
   }
 
   .yotpo-tool-tip,
