@@ -1,0 +1,56 @@
+{% render 'help-questions-renderer',
+            section: section
+%}
+
+{% schema %}
+  {
+    "name": "Help Questions - 3",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "title_image",
+        "label": "Title Image",
+        "info": "Only displays on mobile"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "question",
+        "name": "Question",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "answer",
+            "label": "Answer"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Note",
+            "info": "Image blocks are only visible on desktop"
+          },          
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
