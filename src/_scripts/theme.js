@@ -5,6 +5,7 @@ import { throttle } from 'throttle-debounce';
 
 // Bootstrap JS
 import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/modal';
 
 // Core
 import {

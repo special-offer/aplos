@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { throttle } from 'throttle-debounce';
-import { getQueryParams } from '../core/utils'
+import { getQueryParams } from '../core/utils';
 
 const classes = {
   gridHasExpandedItem: 'has-expanded-item',
@@ -27,7 +27,7 @@ class ArticleGridItem {
     this.$tray = this.$el.find('.article-tray');
     this.$trayContents = this.$el.find('.article-tray__contents');
     this.isOpen = false;
-    this.shareUrl = this.$el.data('share-url')
+    this.shareUrl = this.$el.data('share-url');
 
     this.$el.on('click', '[data-close]', this.onCloseClick.bind(this));
   }
@@ -132,11 +132,11 @@ export default class BlogArticleGrid {
 
     // Check if we're coming from a share url
     // if we are, then wait a second and then open it up
-    const queryHandleItem = this.items[getQueryParams()['handle']]
+    const queryHandleItem = this.items[getQueryParams().handle];
 
     if (queryHandleItem) {
       setTimeout(() => {
-        queryHandleItem.open()
+        queryHandleItem.open();
       }, 1500);
     }
   }

@@ -11,6 +11,7 @@
               block: { block } - optional
               submit_button_contents: { string } - required
               show_star_rating: { bool } optional - defaults to false
+              nutrition_label_modal_id: { string } - optional
   %}
 
 {% endcomment -%}
@@ -122,11 +123,6 @@
   </div>
 
   {% if block %}
-    {% assign has_nutrition_label = false %}
-    {% if block.settings.product_nutrition_label != blank %}
-      {% assign has_nutrition_label = true %}
-    {% endif %}
-
     {% capture expandable_details_html %}
       {% for i in (1..3) %}
         {% assign detail_title_handle = 'detail_title_' | append: i %}
@@ -155,8 +151,15 @@
               <div class="expandable-list__body">
                 {{ detail_content }}
 
-                {% if has_nutrition_label and detail_nutrition_facts == true %}
-                  <a href="#nutrition-label" class="btn btn-tertiary" style="margin-top: 40px;">See Nutrition Facts</a>
+                {% if nutrition_label_modal_id != blank and detail_nutrition_facts == true %}
+                  <a href="#"
+                     data-toggle="modal"
+                     data-target="#{{ nutrition_label_modal_id }}"
+                     class="btn btn-tertiary"
+                     style="margin-top: 40px;"
+                  >
+                    See Nutrition Facts
+                  </a>
                 {% endif %}
               </div>
             </div>
@@ -169,10 +172,6 @@
       <div class="expandable-lists">
         {{ expandable_details_html }}
       </div>
-    {% endif %}
-
-    {% if has_nutrition_label %}
-      <img id="nutrition-label" src="{{ block.settings.product_nutrition_label | img_url: '800x'}}" style="display: none" />
     {% endif %}
   {% endif %}
 </div>
