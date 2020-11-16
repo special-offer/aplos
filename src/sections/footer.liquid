@@ -122,11 +122,12 @@
                   data-newsletter-form
                   data-klaviyo-list-id="{{ settings.klaviyo_list_id }}"
                   data-klaviyo-source="Footer"
+                  autocomplete="off"
             >
               <div class="newsletter-form-contents" data-form-contents>
                 <div class="newsletter-form-inputs">
                   <div class="minimal-input-box">
-                    <input type="email" placeholder="Email Address" class="minimal-input-box__input" />
+                    <input type="email" placeholder="Email Address" class="minimal-input-box__input" autocomplete="off" />
                     <button type="submit" class="minimal-input-box__submit">
                       {% include 'icon-arrow' %}
                       <span class="icon-fallback-text">Submit</span>

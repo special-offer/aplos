@@ -58,7 +58,9 @@
   }
 }
 
+#shopify-section-help-navigation {
+  height: 100%;
+}
 .template-page-help .page-navigation-placement {
-  width: 25vw;
-  max-width: 235px;
+  padding-bottom: 48px; // Match help card bottom margin
 }

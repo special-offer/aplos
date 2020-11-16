@@ -119,8 +119,8 @@
 }
 
 .page-navigation-placement {
-  position: fixed;
-  bottom: 100px;
+  position: sticky;
+  top: 76vh;
   width: 100%;
   max-width: 230px;
 
