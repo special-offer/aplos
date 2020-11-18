@@ -85,7 +85,7 @@
 .header-logo__image {
   display: inline-block;
   height: 100%;
-  transform: translateY(-5%); // Logo has an accent at the top that we need to avvount for visually
+  transform: translateY(-5%); // Logo has an accent at the top that we need to account for visually
 
   svg {
     // iOS safari has trouble with height: 100%; width: auto;
@@ -95,6 +95,8 @@
   }
 
   @media (min-width: $header-bp-min) {
+    width: 125px; // Couldn't figure out how to get firefox to display this correctly without setting the width explicitly.
+
     svg {
       width: auto;
     }
