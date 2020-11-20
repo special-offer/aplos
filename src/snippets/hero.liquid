@@ -23,8 +23,8 @@
 {% endif %}
 
 <div class="hero">
-  <div class="hero__fg mp">
-    <div class="hero__copy">
+  {% capture fg_content %}
+    {% capture copy %}
       {% if title != blank %}
         <h2 class="hero__title">{{ title }}</h2>
       {% endif %}
@@ -33,13 +33,33 @@
           {{ content }}
         </div>
       {% endif %}
-    </div>
+    {% endcapture %}
+
+    {% if copy != blank %}
+      <div class="hero__copy">
+        {% if title != blank %}
+          <h2 class="hero__title">{{ title }}</h2>
+        {% endif %}
+        {% if content != blank %}
+          <div class="hero__content">
+            {{ content }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
     {% if cta_url != blank or cta_text != blank %}
       <div class="hero__controls">
         <a href="{{ cta_url }}" class="btn btn-block {{ cta_style }}">{{ cta_text }}</a>
       </div>
     {% endif %}
-  </div>
+  {% endcapture %}
+
+  {% if fg_content != blank %}
+    <div class="hero__fg mp">
+      {{ fg_content }}
+    </div>
+  {% endif %}
 
   {% if bg_image_desktop %}
     <div class="hero__bg">

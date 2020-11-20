@@ -63,18 +63,31 @@
   &--quantity {
     flex: 0 1 auto;
 
-    @include media-breakpoint-up(xl) {
-      .transaction-bar__pad {
-        padding: 0px !important;
-      }
 
-      .quantity-adjuster input[type=number]{
-        width: 16px !important;
+    .quantity-adjuster {
+      @include media-breakpoint-down(sm) {        
+        button {
+          width: 32px;
+        }
       }
+      
+      input[type=number] {
+        width: 10px !important;
+
+        @include media-breakpoint-down(sm) {
+          height: 36px;
+        }
+
+        @include media-breakpoint-up(xl) {
+          width: 16px !important;
+        }
+      }     
     }
 
-    @include media-breakpoint-down(md) {
-      display: none;
+    @include media-breakpoint-up(xl) {
+      .transaction-bar__pad {
+        padding-left: 0px !important;
+      }
     }
   }  
 
@@ -82,10 +95,7 @@
     align-self: stretch;
     padding: 0;
     width: 100%;
-
-    @include media-breakpoint-up(lg) {
-      border: 1px solid $black;
-    }
+    border-left: 1px solid $black;
 
     .btn {
       height: 100%;
@@ -112,10 +122,15 @@
   padding: 8px 9px;
 
   @include media-breakpoint-up(md) {
-    padding: 25px 20px;
+    padding: 19px 13px;
   }
 
-  @include media-breakpoint-up(xl) {
-    padding: 19px 20px;
+  @include media-breakpoint-up(lg) {
+    padding-left: 20px;
+    padding-right: 20px;
   }  
+
+  // @include media-breakpoint-up(xl) {
+  //   padding: 19px 20px;
+  // }  
 }

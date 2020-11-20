@@ -56,6 +56,8 @@
   border-radius: $border-radius;
   background-color: $header-bg;
   color: $header-text-color;
+  transition: background-color 0.3s ease-out,
+              color 0.3s ease-out;
 
   @media (min-width: $header-bp-min) {
     height: $header-height-base;
@@ -83,13 +85,21 @@
 .header-logo__image {
   display: inline-block;
   height: 100%;
-  transform: translateY(-5%); // Logo has an accent at the top that we need to avvount for visually
+  transform: translateY(-5%); // Logo has an accent at the top that we need to account for visually
 
   svg {
     // iOS safari has trouble with height: 100%; width: auto;
     display: block;
     height: 100%;
     width: 100%;
+  }
+
+  @media (min-width: $header-bp-min) {
+    width: 125px; // Couldn't figure out how to get firefox to display this correctly without setting the width explicitly.
+
+    svg {
+      width: auto;
+    }
   }
 }
 
@@ -139,7 +149,7 @@
 
 .header-nav__menu-item {
   display: inline-block;
-  margin: 0 13px;
+  margin: 0 19px;
 
   @include media-breakpoint-up(lg) {
     margin: 0 30px;
@@ -217,17 +227,11 @@
   position: absolute;
   top: 3px;
   right: -12px;
-  opacity: 0;
-  transition: opacity 300ms ease-out;
 
   @include media-breakpoint-down(sm) {
     font-size: $font-size-xs;
     top: 1px;
     right: -9px;
-  }
-
-  .has-items & {
-    opacity: 1;
   }
 }
 
@@ -257,4 +261,29 @@
   }
 }
 
+// transparent scrolling down, white scrolling up but only on mobile
+.header--scroll-transparent .header-bar {
+  background-color: transparent;
+  a, a:hover {
+    color: $white;
+
+    svg {
+      fill: $white;
+    }
+  }
+
+  @media (max-width: $header-bp-min - 1px) {
+    .scrolling-up & {
+      background-color: $white;
+
+      a, a:hover {
+        color: $black;
+
+        svg {
+          fill: $black;
+        }
+      }        
+    }
+  }
+}
 

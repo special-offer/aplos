@@ -7,6 +7,10 @@
   height: 100vh;
   height: var(#{'--viewport-height'});
 
+  @include media-breakpoint-down(md) {
+    transition: height 0.8s ease-out;
+  }
+
   // @include media-breakpoint-up(md) {
   //   width: 100%;
   //   height: 100vh;
@@ -81,20 +85,34 @@
   .gallery-image--foreground {
     // height: 78vh;
     height: calc(100% - 180px);
-    height: calc(var(--viewport-height) - 180px);
+    // height: calc(var(--viewport-height) - 180px);
     padding: 120px 30px 0;
 
     @include media-breakpoint-up(md) {
       padding: 188px 30px 120px;
+      padding-bottom: 13vh;
       height: 100%;
       max-height: none;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 170px;
+      padding-bottom: 68px;
+      padding-bottom: 11vh;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding-top: 160px;
+      // padding-bottom: 60px;
+      // padding-bottom: 11vh;
     }
 
     img {
       position: relative;
       z-index: 1;
       object-fit: contain;
-      mix-blend-mode: multiply;
+      mix-blend-mode: normal;
+      opacity: 0.9;
     }
   }
 

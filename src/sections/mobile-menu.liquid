@@ -29,8 +29,12 @@
                 {% for link in linklists[section.settings.linklist_secondary].links %}
                   {% assign title = link.title | downcase %}
 
-                  {% if title contains 'text' %}
-                    <li><a href="sms:8004427567"><span class="fw">Text:</span>{{ link.title | remove: 'Text: '}}</a></li>
+                  {% if title contains 'text' and settings.contact_phone_number != blank %}
+                    <li>
+                      <a href="sms:{{ settings.contact_phone_number | handle | replace: '-', '' }}">
+                        <span class="fw">Text:</span>{{ link.title | remove: 'Text: '}}
+                      </a>
+                    </li>
                   {% elsif title contains 'follow' %}
                     <li><a href="{{ link.url }}"><span class="fw">Follow:</span>{{ link.title  | remove: 'Follow: ' }}</a></li>
                   {% elsif title contains 'email' %}

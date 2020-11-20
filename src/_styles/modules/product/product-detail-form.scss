@@ -13,6 +13,27 @@
   .rte {
     margin-bottom: 30px;
   }
+
+  @include media-breakpoint-up(md) {
+    .quantity-adjuster {
+      &,
+      input[type="number"],
+      button {
+        height: 64px;
+      }
+    }
+
+    .btn-primary{
+      display: inline-block;
+      width: 66.66%;
+    }
+  }
+
+  @include media-breakpoint-between(md, lg) {
+    .quantity-adjuster input[type="number"] {
+      width: 16px;
+    }
+  }
 }
 
 .product-detail-form-width {
@@ -26,14 +47,6 @@
 
   @include media-breakpoint-up(md) {
     margin-bottom: 4.6rem;
-  }
-
-  h1 {
-    margin: 0;
-
-    @include media-breakpoint-down(sm) {
-      @include h2;
-    }    
   }
 
   .p2 {

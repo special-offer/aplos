@@ -21,9 +21,26 @@
     max-height: none;
     padding: 0 $spacing-lg;
   }
+
+  .template-blog & {
+    height: 60vh;
+  }
+
+  .template-page-philosophy & {
+    max-height: 75vw;
+    @include media-breakpoint-up(md) {
+      max-height: none;
+    }
+  }
+
+  // .ambient-video {
+  //   z-index: -1;
+  // }
 }
 
 .page-hero__title {
+  position: relative;
+  z-index: 1;
   width: 100%;
   margin-bottom: 0;
   color: $white;
@@ -35,6 +52,7 @@
 
 .page-hero__bg {
   z-index: -1;
+  display: flex;
 
   &, &:before {
     position: absolute;
@@ -44,10 +62,23 @@
     width: 100%;
   }
 
+  picture {
+    flex: 1;
+  }
+
   img {
     height: 100%;
     width: 100%;
     object-fit: cover;
+  }
+
+  @include media-breakpoint-down(sm) {
+    // If we have two images, only show the second one on small screens
+    picture {
+      &:first-child:not(:only-child) {
+        display: none;
+      }
+    }
   }
 }
 
@@ -88,8 +119,8 @@
 }
 
 .page-navigation-placement {
-  position: fixed;
-  bottom: 100px;
+  position: sticky;
+  top: 76vh;
   width: 100%;
   max-width: 230px;
 

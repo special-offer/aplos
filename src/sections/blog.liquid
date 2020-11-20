@@ -1,10 +1,62 @@
 {% comment %} assign defaults {% endcomment %}
 
-{% paginate blog.articles by 16 %}
+{% paginate blog.articles by 60 %}
 
-<div class="layout-content-wrapper drawer-shifter" data-section-id="{{ section.id }}" data-section-type="blog">
-  <div class="aplos-container">
+{% capture page_hero %}
+  {% for block in section.blocks %}
+    {% if block.settings.blog == blog.handle %}
+      {% render 'page-hero',
+                 bg_image_desktop: block.settings.hero_image_1_desktop,
+                 bg_image_mobile: block.settings.hero_image_1_mobile,
+                 bg_image_desktop_2: block.settings.hero_image_2_desktop,
+                 bg_image_mobile_2: block.settings.hero_image_2_mobile           
+      %}
+
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+<div class="drawer-shifter"
+     data-section-id="{{ section.id }}"
+     data-section-type="blog"
+     data-base-url="{{ blog.url }}"
+>
+  {{ page_hero }}
+
+  <div class="aplos-4side-container bg-butter-gray">
     <h1 hidden>{{ blog.title }}</h1>
+
+    {% for block in section.blocks %}
+      {% if block.settings.blog == blog.handle %}
+
+        {% comment %} For Mobile {% endcomment %}
+        <div class="container d-md-none">
+          <div class="mp" style="font-size: 21px;">{{ block.settings.content }}</div>
+        </div>
+
+        {% comment %} For Desktop {% endcomment %}
+        <div class="container d-none d-md-block">
+          <div class="row" style="margin-top: 50px; margin-bottom: 160px; margin-bottom: 12vw;">
+            <div class="col-md-4">
+              <div style="max-width: 93px; margin-top: -93px;">
+                {% include 'icon-dandelion' %}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h4 style="font-size: 30px;">{{ block.settings.title | default: blog.title }}</h4>
+            </div>
+            <div class="col-md-4">
+              <div class="p2">
+                {{ block.settings.content }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
     <div class="content-grid">
       {% for article in blog.articles %}
         <div class="content-grid__item">
@@ -17,6 +69,7 @@
         {% include 'pagination' %}
       {% endif %}
     </div> 
+    <br /><br /><br />
   </div>
 </div>
 
@@ -26,6 +79,54 @@
 {% schema %}
   {
     "name": "Blog",
-    "settings": []
+    "settings": [],
+    "blocks": [
+      {
+        "type": "blog_settings",
+        "name": "Settings",
+        "settings": [
+          {
+            "type": "blog",
+            "id": "blog",
+            "label": "Blog",
+            "info": "Select the blog for these settings to apply to"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "header",
+            "content": "Page Hero"
+          },
+          {
+            "type": "image_picker",
+            "id": "hero_image_1_desktop",
+            "label": "Image 1 (Desktop)"
+          },
+          {
+            "type": "image_picker",
+            "id": "hero_image_1_mobile",
+            "label": "Image 1 (Mobile)"
+          },
+          {
+            "type": "image_picker",
+            "id": "hero_image_2_desktop",
+            "label": "Image 2 (Desktop)"
+          },
+          {
+            "type": "image_picker",
+            "id": "hero_image_2_mobile",
+            "label": "Image 2 (Mobile)"
+          }
+        ]
+      }
+    ]
   }
 {% endschema %}

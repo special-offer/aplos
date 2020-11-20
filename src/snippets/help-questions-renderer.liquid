@@ -13,47 +13,40 @@
 
 <div data-section-id="{{ section.id }}" data-section-type="help-questions" {% if section.settings.title contains 'Product' %}id="product-faqs"{% endif %}
 >
-  <div class="aplos-container">
-    <div class="help-questions">
-      {% if section.settings.title_image %}
-        <img src="{{ section.settings.title_image | img_url: '800x' }}" class="help-questions__title-image" />
-      {% endif %}
-      
-      <div class="row">
-        <div class="col-md-3">
-          <h2 class="page-title">{{ section.settings.title }}</h2>
-        </div>
-        <div class="col-md-9 col-xxl-8">
-          <div class="help-card-grid">
-            {% assign question_count = 0 %}
-            {% for block in section.blocks %}
-              <div class="help-card-grid__item{% if block.type == 'image' %} d-none d-md-block{% endif %}">
-                <div class="help-card help-card--{{ block.type }}" data-help-card {{ block.shopify_attributes }}>
-                  {% if block.type == 'question' %}
-                    {% assign question_count = question_count | plus: 1 %}
+  <div class="help-questions">
+    {% if section.settings.title_image %}
+      <img src="{{ section.settings.title_image | img_url: '800x' }}" class="help-questions__title-image" />
+    {% endif %}
 
-                    <div class="help-card__content">
-                      <div class="help-card__content-title">
-                        {% if question_count < 10 %}0{% endif %}{{ question_count }}.
-                      </div>
-                      <h4>{{ block.settings.title }}</h4>
-                      <div class="help-card__reveal">
-                        <div class="help-card__detail p2">
-                          {{ block.settings.answer }}
-                        </div>
-                      </div>
-                    </div>
-                  {% elsif block.type == 'image' %}
-                    {% if block.settings.image != blank %} 
-                      <img src="{{ block.settings.image | img_url: '400x' }}" />
-                    {% endif %}
-                  {% endif %}
+    <h2 class="page-title">{{ section.settings.title }}</h2>
+    
+    <div class="help-card-grid">
+      {% assign question_count = 0 %}
+      {% for block in section.blocks %}
+        <div class="help-card-grid__item{% if block.type == 'image' %} d-none d-md-block{% endif %}">
+          <div class="help-card help-card--{{ block.type }}" data-help-card {{ block.shopify_attributes }}>
+            {% if block.type == 'question' %}
+              {% assign question_count = question_count | plus: 1 %}
+
+              <div class="help-card__content">
+                <div class="help-card__content-title">
+                  {% if question_count < 10 %}0{% endif %}{{ question_count }}.
+                </div>
+                <h4>{{ block.settings.title }}</h4>
+                <div class="help-card__reveal">
+                  <div class="help-card__detail p2">
+                    {{ block.settings.answer }}
+                  </div>
                 </div>
               </div>
-            {% endfor %}
+            {% elsif block.type == 'image' %}
+              {% if block.settings.image != blank %} 
+                <img src="{{ block.settings.image | img_url: '400x' }}" />
+              {% endif %}
+            {% endif %}
           </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </div>

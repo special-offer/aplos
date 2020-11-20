@@ -1,50 +1,118 @@
 <div class="drawer-shifter" data-section-id="{{ section.id }}" data-section-type="page-philosophy">
   
-    {% for block in section.blocks %}
-    <div class="aplos-row {{ block.settings.height | prepend: 'aplos-row--' }} {% for i in (1..3) reversed %}{% assign slot_enabled_setting_handle  = 'slot_' | append: i | append: '_enabled' %} {% if block.settings[slot_enabled_setting_handle] == true %}size--{{i}} {% endif %} {% endfor %}" {{ block.shopify_attributes }}>
-
-
-
-      {% for i in (1..3) %}
-        {% assign slot_enabled_setting_handle  = 'slot_' | append: i | append: '_enabled' %}
-        {% assign slot_heading_setting_handle  = 'slot_' | append: i | append: '_heading' %}
-        {% assign slot_content_setting_handle  = 'slot_' | append: i | append: '_content' %}
-        {% assign slot_bg_color_setting_handle = 'slot_' | append: i | append: '_background_color' %}
-        {% assign slot_bg_image_setting_handle = 'slot_' | append: i | append: '_background_image' %}
-        {% assign slot_bg_video_setting_handle = 'slot_' | append: i | append: '_background_video_file_url' %}
-
-        {% if block.settings[slot_enabled_setting_handle] == true %}
-          {%- capture block_content -%}
-            {% if block.settings[slot_heading_setting_handle] != blank %}
-              <div class="aplos-block__top-title d-none d-md-block">{{ block.settings[slot_heading_setting_handle] }}</div>
-            {% endif %}
-            {% if block.settings[slot_content_setting_handle] != blank %}
-              <div class="aplos-block__title">{{ block.settings[slot_content_setting_handle] }}</div>
-            {% endif %}
-            {% if block.settings[slot_heading_setting_handle] != blank %}
-              <div class="aplos-block__bottom-title d-md-none">{{ block.settings[slot_heading_setting_handle] }}</div>
-            {% endif %}
-          {%- endcapture -%}
-
-          {% render 'aplos-block'
-                    classes: 'aplos-block--philosophy',
-                    content: block_content,
-                    bg_color: block.settings[slot_bg_color_setting_handle],
-                    bg_image: block.settings[slot_bg_image_setting_handle],
-                    bg_video_file_url: block.settings[slot_bg_video_setting_handle]
-          %}
-        {% endif %}
-      {% endfor %}
-    </div>
-  {% endfor %}
-
   {% render 'page-hero',
             title: section.settings.hero_title,
-            align: 'center',
+            align: 'left',
             bg_image_desktop: section.settings.hero_bg_image,
             bg_image_mobile: section.settings.hero_bg_image_mobile,
             bg_video_setting_handle: section.settings.hero_bg_image_video
-  %}  
+  %}
+
+  {% for block in section.blocks %}
+    {% capture block_content %}
+      <div class="pb__title">{{ block.settings.title }}</div>
+      <div class="pb__content">{{ block.settings.content }}</div>
+    {% endcapture %}
+
+    <div class="philosophy-block {{ block.type | replace: '_', '-' | handle | prepend: 'philosophy-block--' }}" {{ block.shopify_attributes }}>
+      {% case block.type %}
+        {% when 'type_a' %}
+          <div class="pb__title{% if forloop.index == 1 %} d-none d-md-block{% endif %}">{{ block.settings.title }}</div>
+          <div class="row justify-content-center">
+            <div class="col-md-9">
+              <div class="pb__content">{{ block.settings.content }}</div>
+            </div>
+          </div>
+        {% when 'type_b' %}
+          <div class="pb-frame-row">
+            <div class="pb-frame">
+              {% render 'aplos-block'
+                        bg_image: block.settings.image_1,
+                        bg_video_file_url: block.settings.background_video_file_url_1
+              %}
+            </div>
+            <div class="pb-frame">
+              {% render 'aplos-block'
+                        bg_image: block.settings.image_2,
+                        bg_video_file_url: block.settings.background_video_file_url_2
+              %}
+            </div>
+            <div class="pb-frame d-none d-md-block">
+              {% render 'aplos-block' %}
+            </div>
+          </div>
+          <div class="pb-frame-row pb-frame-row--reverse">
+            <div class="pb-frame">
+              {% render 'aplos-block'
+                        bg_image: block.settings.image_3,
+                        bg_video_file_url: block.settings.background_video_file_url_3
+              %}
+            </div>
+            <div class="pb-frame d-md-none">
+              {% render 'aplos-block' %}
+            </div>            
+            <div class="pb-frame d-none d-md-block">
+              {% render 'aplos-block'
+                        bg_image: block.settings.image_4,
+                        bg_video_file_url: block.settings.background_video_file_url_4
+              %}
+            </div>
+
+            <div class="pb-frame pb-frame--content d-none d-md-block">
+              {% render 'aplos-block'
+                        content: block_content
+              %}
+            </div>            
+          </div>
+          <div class="d-md-none">
+            {% render 'aplos-block'
+                      content: block_content
+            %}
+          </div>
+        {% when 'type_c' %}
+          {% capture block_content %}
+            <div class="pb__title">{{ block.settings.title }}</div>
+            <div class="pb__content">{{ block.settings.content }}</div>
+          {% endcapture %}
+
+          <div class="pb-frame-row d-md-none" style="height: 118vw">
+            <div class="pb-frame">
+              {% render 'aplos-block'
+                        bg_image: block.settings.image_1
+              %}
+            </div>
+          </div>
+
+          <div class="pb-frame-row">
+            <div class="pb-frame d-none d-md-block">
+              {% render 'aplos-block'
+                        bg_image: block.settings.image_1,
+                        bg_video_file_url: block.settings.background_video_file_url_1
+              %}            
+            </div>
+            <div class="pb-frame" style="flex: 2;">
+              {% render 'aplos-block'
+                        content: block_content
+              %}
+            </div>
+          </div>  
+
+          <div class="pb-frame-row d-md-none" style="height: 50vw">
+            {% render 'aplos-block'
+                      bg_image: block.settings.image_2,
+                      bg_video_file_url: block.settings.background_video_file_url_2
+            %}            
+            {% render 'aplos-block' %}
+          </div>
+        {% when 'type_d' %}
+          {% render 'aplos-block'
+                    content: block_content,
+                    bg_image: block.settings.background_image,
+                    bg_video_file_url: block.settings.background_video_file_url
+          %}
+      {% endcase %}
+    </div>
+  {% endfor %}
 </div>
 
 
@@ -80,140 +148,141 @@
     ],
     "blocks": [
       {
-        "type": "row",
-        "name": "Row",
+        "type": "type_a",
+        "name": "Block - Type A",
         "settings": [
           {
-            "type": "select",
-            "id": "height",
-            "options": [
-              { "value": "tall", "label": "Tall"},
-              { "value": "medium", "label": "Medium"},
-              { "value": "short", "label": "Short"}
-            ],
-            "label": "Height",
-            "default": "tall"
-          },
-          {
-            "type": "header",
-            "content": "Slot 1"
-          },
-          {
-            "type": "checkbox",
-            "id": "slot_1_enabled",
-            "label": "Enabled",
-            "default": false
-          },
-          {
             "type": "text",
-            "id": "slot_1_heading",
-            "label": "Heading"
+            "id": "title",
+            "label": "Title"
           },
           {
             "type": "richtext",
-            "id": "slot_1_content",
+            "id": "content",
             "label": "Content"
-          },          
+          }
+        ]
+      },
+      {
+        "type": "type_b",
+        "name": "Block - Type B",
+        "settings": [
           {
-            "type": "select",
-            "id": "slot_1_background_color",
-            "options": [
-              { "value": "butter", "label": "Yellow"},
-              { "value": "black", "label": "Black"}
-            ],
-            "label": "Background Color",
-            "default": "butter"
-          }, 
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
           {
             "type": "image_picker",
-            "id": "slot_1_background_image",
-            "label": "Background Image"
+            "id": "image_1",
+            "label": "Image"
           },
           {
             "type": "url",
-            "id": "slot_1_background_video_file_url",
+            "id": "background_video_file_url_1",
             "label": "Background Video File URL",
             "info": "Accepted file formats: mp4, ogg, avi, webm"
           },          
           {
-            "type": "header",
-            "content": "Slot 2"
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
           },
           {
-            "type": "checkbox",
-            "id": "slot_2_enabled",
-            "label": "Enabled",
-            "default": false
-          },
-          {
-            "type": "text",
-            "id": "slot_2_heading",
-            "label": "Heading"
-          },
-          {
-            "type": "richtext",
-            "id": "slot_2_content",
-            "label": "Content"
-          },           
-          {
-            "type": "select",
-            "id": "slot_2_background_color",
-            "options": [
-              { "value": "butter", "label": "Yellow"},
-              { "value": "black", "label": "Black"}
-            ],
-            "label": "Background Color",
-            "default": "butter"
+            "type": "url",
+            "id": "background_video_file_url_2",
+            "label": "Background Video File URL",
+            "info": "Accepted file formats: mp4, ogg, avi, webm"
           }, 
           {
             "type": "image_picker",
-            "id": "slot_2_background_image",
-            "label": "Background Image"
+            "id": "image_3",
+            "label": "Image"
           },
           {
             "type": "url",
-            "id": "slot_2_background_video_file_url",
+            "id": "background_video_file_url_3",
             "label": "Background Video File URL",
             "info": "Accepted file formats: mp4, ogg, avi, webm"
-          },  
+          }, 
           {
-            "type": "header",
-            "content": "Slot 3"
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image"
           },
           {
-            "type": "checkbox",
-            "id": "slot_3_enabled",
-            "label": "Enabled",
-            "default": false
-          },
+            "type": "url",
+            "id": "background_video_file_url_4",
+            "label": "Background Video File URL",
+            "info": "Accepted file formats: mp4, ogg, avi, webm"
+          }         
+        ]
+      },
+      {
+        "type": "type_c",
+        "name": "Block - Type C",
+        "settings": [
           {
             "type": "text",
-            "id": "slot_3_heading",
-            "label": "Heading"
+            "id": "title",
+            "label": "Title"
           },
           {
             "type": "richtext",
-            "id": "slot_3_content",
+            "id": "content",
             "label": "Content"
-          },           
-          {
-            "type": "select",
-            "id": "slot_3_background_color",
-            "options": [
-              { "value": "butter", "label": "Yellow"},
-              { "value": "black", "label": "Black"}
-            ],
-            "label": "Background Color",
-            "default": "butter"
-          },                 
+          },
           {
             "type": "image_picker",
-            "id": "slot_3_background_image",
+            "id": "image_1",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "background_video_file_url_1",
+            "label": "Background Video File URL",
+            "info": "Accepted file formats: mp4, ogg, avi, webm"
+          },         
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "background_video_file_url_2",
+            "label": "Background Video File URL",
+            "info": "Accepted file formats: mp4, ogg, avi, webm"
+          }
+        ]
+      },
+      {
+        "type": "type_d",
+        "name": "Block - Type D",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "image_picker",
+            "id": "background_image",
             "label": "Background Image"
           },
           {
             "type": "url",
-            "id": "slot_3_background_video_file_url",
+            "id": "background_video_file_url",
             "label": "Background Video File URL",
             "info": "Accepted file formats: mp4, ogg, avi, webm"
           }

@@ -15,19 +15,44 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    border-top: 2px solid $black;
+    border-bottom: 2px solid $black;
 
     li {
       padding: 11px 0;
       border-bottom: 1px solid;
+      display: flex;
 
       &:last-child {
-        padding-bottom: 0;
         border-bottom: none;
+      }
+
+      strong {
+        display: inline-block;
+        width: 82px;
+        padding-right: 10px;
+        font-weight: normal;
       }
     }
   }
 
   .template-article & {
     margin-bottom: $spacer*2;
+  }
+}
+
+.recipe-instructions {
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }  
   }
 }

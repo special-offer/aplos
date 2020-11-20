@@ -1,36 +1,7 @@
-{% render 'page-banner'
-          image: section.settings.header_image
-%}
-
-<div class="aplos-container">
-  <h2 class="page-title">{{ section.settings.title }}</h2>
-
-  <div class="help-rows">
-    {% for block in section.blocks %}
-      {%- capture display_index -%}
-        {% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}.
-      {%- endcapture -%}
-
-      <div class="help-row" {{ block.shopify_attributes }}>
-        <div class="row">
-          <div class="d-none d-sm-block col-sm-2 col-md-3">
-            <span class="p2">{{ display_index }}</span>
-          </div>
-          <div class="col-sm-3">
-            <span class="p2">
-              <span class="d-sm-none">{{ display_index }}</span>
-              {{ block.settings.title }}
-            </span>
-          </div>
-          <div class="col-sm-7 col-md-6 col-xxl-5">
-            <div class="rte">
-              {{ block.settings.content }}
-            </div>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+<div class="drawer-shifter">
+  {% render 'page-banner'
+            image: section.settings.header_image
+  %}
 </div>
 
 {% schema %}
@@ -41,29 +12,6 @@
         "type": "image_picker",
         "id": "header_image",
         "label": "Header Image"
-      },   
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title"
-      }
-    ],
-    "blocks": [
-      {
-        "type": "info_block",
-        "name": "Info Block",
-        "settings": [
-          {
-            "type": "text",
-            "id": "title",
-            "label": "Title"
-          },
-          {
-            "type": "richtext",
-            "id": "content",
-            "label": "Content"
-          }
-        ]
       }
     ]
   }

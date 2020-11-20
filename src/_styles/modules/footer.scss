@@ -6,6 +6,24 @@
   p:last-child {
     margin-bottom: 0;
   }
+
+  h6 {
+    @include media-breakpoint-up(md) {
+      margin-bottom: 2.4rem;
+    }
+  } 
+
+  .aplos-row {
+    margin: 6rem 0 10rem;
+  }
+
+  .aplos-row-big-text {
+    @include media-breakpoint-up(md) {
+      // font-size: 40px;
+      // line-height: 1.05;
+      @include h1;
+    }
+  }
 }
 
 .footer__upper {
@@ -19,37 +37,56 @@
   @include media-breakpoint-up(md) {
     padding: 97px 0 70px;
   }
+
+  .aplos-4side-container {
+    @include media-breakpoint-down(sm) {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
 }
 
 .footer-text {
   @extend .p2; 
 }
 
+.footer-menus {
+  @include media-breakpoint-up(md) {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.footer-menu-wrap {
+  & + & {
+    margin-top: 2rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    & + & {
+      margin-top: 0;
+      margin-left: 11%;
+    }
+  }
+}
+
 .footer-menu {
-  @include list-inline;
-  @include body-copy;
-  line-height: 1.1;
-  display: flex;
-  flex-wrap: wrap;
   margin: 0;
+  padding: 0;
+  list-style: none;
 
   @include media-breakpoint-up(sm) {
     font-size: $font-size-lg;
-    font-weight: $font-weight-normal;
     line-height: 1.2;
   }
 
   li {
-    flex: 1;
-    flex-basis: percentage(1/2);
-    max-width: percentage(1/2);
     margin-bottom: 2px;
-    padding-right: 15px;
-
-    @include media-breakpoint-up(xl) {
-      flex-basis: percentage(1/3);
-      max-width: percentage(1/3);      
-    }
   }
 
   + .newsletter-form {
@@ -57,9 +94,25 @@
   }
 }
 
+.footer-menu__contact-link-pretext {
+  display: inline-block;
+  min-width: 57px;
+}
+
+.footer-subscribe-message {
+  font-size: $font-size-base * (19/16);
+  line-height: 1.2;
+  max-width: 350px;
+  margin-bottom: 3rem;
+
+  @include media-breakpoint-up(sm) {
+    font-size: $font-size-lg; // Match footer-menu
+  }
+}
+
 .footer__lower {
   padding: 19px 0 14px;
-  background-color: $butter;
+  background-color: $white;
   @extend .p2;
 
   @include media-breakpoint-down(sm) {
@@ -68,5 +121,13 @@
     &, a, h1, h2, h3, h4, h5, h6 {
       color: $white;
     }
+  }
+}
+
+.footer__lower-content {
+  text-align: center;
+
+  @include media-breakpoint-up(md) {
+    text-align: right;
   }
 }

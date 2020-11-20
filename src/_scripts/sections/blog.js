@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import BaseSection from './base';
+import BlogArticleGrid from '../components/blogArticleGrid';
 
 const selectors = {
   contentGrid: '.content-grid',
@@ -11,6 +12,8 @@ const selectors = {
 export default class BlogSection extends BaseSection {
   constructor(container) {
     super(container, 'blog');
+
+    this.blogArticleGrid = new BlogArticleGrid($('.content-grid', this.$container), this.$container.data('base-url'));
 
     this.$container.on('click', selectors.nextPageLink, this.onNextPageLinkClick.bind(this));
   }

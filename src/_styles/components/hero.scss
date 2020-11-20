@@ -54,9 +54,9 @@
 
 .hero__title,
 .hero__content {
-  @include media-breakpoint-up(md) {
+  // @include media-breakpoint-up(md) {
     color: $white;
-  }
+  // }
 }
 
 .hero__title {
@@ -89,7 +89,7 @@
 }
 
 .hero__controls {
-  margin-top: $spacing-md;
+  margin-top: $spacing-ssmd;
 
   @include media-breakpoint-up(md) {
     margin-top: 0;
@@ -108,8 +108,7 @@
 .hero__bg {
   z-index: -1;
   position: relative;
-  height: 100vh;
-  min-height: 500px;
+  height: 100vw;
   max-height: 750px;
   width: 100%;
 

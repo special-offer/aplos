@@ -186,6 +186,10 @@ a {
   text-decoration: $link-decoration;
   background-color: transparent; // Remove the gray background on active links in IE 10.
 
+  &:focus {
+    outline: none;
+  }
+
   // make nested svg icons inside anchor tags to be the same color
   svg {
     fill: $link-color;

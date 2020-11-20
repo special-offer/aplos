@@ -40,11 +40,11 @@
 }
 
 @mixin body-copy {
-  @include media-breakpoint-up(sm) {
+  // @include media-breakpoint-up(sm) {
     font-size: $body-copy-font-size;
     font-weight: $body-copy-font-weight;
     line-height: $body-copy-line-height;
-  }
+  // }
 }
 
 // @mixin p1 {

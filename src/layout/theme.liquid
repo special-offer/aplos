@@ -23,6 +23,32 @@
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
 
+  <!-- Bloom Styles -->
+  <style>
+    .img--bloom{
+        display: block;
+      transform: scale(0.25);
+      margin-left: 0px;
+      transform-origin: left;
+      position: absolute;
+      
+    }
+    
+    .img--bloom.bloom-1{
+      top: 25%;
+      left: 75%;
+      transform: scale(0.125);
+    }
+    
+    .img--bloom.bloom-2{
+      top: 64px;
+    }
+    
+    .img--bloom.bloom-3{
+      top: 40%;
+    }
+  </style>  
+
   <script>
     document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 

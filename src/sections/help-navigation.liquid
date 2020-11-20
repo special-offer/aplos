@@ -1,0 +1,57 @@
+{% assign page_blocks_nav_html = '' %}
+
+<div class="drawer-shifter">
+  <h1 class="page-title">{{ section.settings.title }}</h1>
+
+  {% for block in section.blocks %}
+    {% if block.settings.title != blank %}
+      {%- capture page_block_nav_html -%}
+        <a href="#shopify-section-help-questions-{{ forloop.index }}" class="page-navigation__link" data-page-nav>
+          <span class="d-inline-block" style="margin-right: 30px;">0{{ forloop.index }}.</span>
+          {{ block.settings.title }}
+        </a>
+      {%- endcapture -%}
+
+      {% assign page_blocks_nav_html = page_blocks_nav_html | append: page_block_nav_html %}
+    {% endif %}
+  {% endfor %}  
+</div>
+
+{% if page_blocks_nav_html != blank %}
+  <div class="page-navigation-placement">
+    <div class="page-navigation drawer-shifter">
+      {{ page_blocks_nav_html }}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Help - Navigation",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "Navigation Blocks",
+        "info": "Match the title and ordering to the sections below"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "navigation",
+        "name": "Navigation",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

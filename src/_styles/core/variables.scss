@@ -15,9 +15,9 @@ $gray-darkest: #212529 !default;
 $black:        #000 !default;
 
 // Aplos Colors
-$butter:       #FAFAD6;
+$butter:       #F5F4B7; // #FAFAD6;
 $butter-gray:  #E1E1BD;
-$butter-dark:  #EBE583;
+$butter-dark:  #F0EE5D; // #EBE583; We changed this color now it's a misnomer - it's actually bright
 $gray:         #B4AEAC;
 
 // $blue:    #4e85e6 !default;
@@ -172,6 +172,7 @@ $sizes: map-merge(
 // @TODO - Maybe spread these out a little more?
 // sm - 12, md - 24, lg - 36, xl - 48, xxl - 96? 
 $spacing-sm:  12px;
+$spacing-ssmd: 32px;
 $spacing-smd: 36px;
 $spacing-md:  48px;
 $spacing-ml:  64px;
@@ -277,7 +278,7 @@ $caret-vertical-align:        $caret-width * .85 !default;
 $caret-spacing:               $caret-width * .85 !default;
 
 $transition-base:             all .2s ease-in-out !default;
-$transition-fade:             opacity .15s linear !default;
+$transition-fade:             opacity 0.6s ease-out !default;
 $transition-collapse:         height .23s ease-out !default;
 
 $embed-responsive-aspect-ratios: () !default;
@@ -306,7 +307,7 @@ $font-family-base:            $font-family-serif !default;
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
 $font-size-xxxl:              $font-size-base * (36/16) !default; // @TODO - This is the mobile responsive h1 font size
 $font-size-xxl:               $font-size-base * (30/16) !default;
-// $font-size-xl:
+$font-size-xl:                $font-size-base * (25/16) !default;
 $font-size-lg:                $font-size-base * (20/16) !default;
 $font-size-md:                $font-size-base * 1.125 !default;
 $font-size-sm:                $font-size-base * (12/16) !default;
@@ -342,7 +343,7 @@ $h2-line-height:              1.2 !default;
 $h3-line-height:              1.2 !default;
 $h4-line-height:              1.2 !default;
 $h5-line-height:              1.2 !default;
-$h6-line-height:              1.2 !default;
+$h6-line-height:              1.333 !default;
 
 $headings-margin-bottom:      $spacer !default;
 $headings-font-family:        null !default;
@@ -350,9 +351,9 @@ $headings-font-weight:        $font-weight-normal !default;
 $headings-line-height:        1.2 !default;
 $headings-color:              $body-color !default;
 
-$body-copy-font-size:         $font-size-lg;
+$body-copy-font-size:         $font-size-xl;
 $body-copy-font-weight:       $font-weight-normal;
-$body-copy-line-height:       1.2;
+$body-copy-line-height:       1.05;
 
 // p{2, 3}
 $p2-font-size:                $font-size-sm;
@@ -605,7 +606,7 @@ $custom-control-indicator-disabled-bg:          transparent; // $input-disabled-
 $custom-control-label-disabled-color:           $gray-dark !default;
 
 $custom-control-indicator-checked-color:        $component-active-color !default;
-$custom-control-indicator-checked-bg:           $component-active-bg !default;
+$custom-control-indicator-checked-bg:           $butter-dark !default; // $component-active-bg
 $custom-control-indicator-checked-disabled-bg:  transparentize($component-active-bg, 0.5) !default;
 $custom-control-indicator-checked-box-shadow:   none !default;
 $custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg !default;
@@ -759,8 +760,8 @@ $zindex-header:                     2100 !default;
 $zindex-pencil-banner:              2101 !default;
 $zindex-drawer-backdrop:            2200 !default;
 $zindex-drawer:                     2201 !default;
-// $zindex-modal-backdrop:             2500 !default;
-// $zindex-modal:                      3000 !default;
+$zindex-modal-backdrop:             2500 !default;
+$zindex-modal:                      3000 !default;
 $zindex-popover:                    3500 !default;
 $zindex-tooltip:                    4000 !default;
 $z-index-skip-to-content:           9999 !default; // really high to be safe of app markup
@@ -799,6 +800,49 @@ $transition-timing-function-out:          ease-in !default;
 $transition-timing-function-in-out-ui:    cubic-bezier(0.42, 0, 0.13, 1.04) !default;
 $transition-timing-function-hard-in:      cubic-bezier(0, 0, 0, 1) !default;
 $transition-timing-function-hard-out:     cubic-bezier(1, 0, 1, 1) !default;
+
+
+// Modals
+
+// Padding applied to the modal body
+$modal-inner-padding:               $spacer !default;
+
+// Margin between elements in footer, must be lower than or equal to 2 * $modal-inner-padding
+$modal-footer-margin-between:       .5rem !default;
+
+$modal-dialog-margin:               .5rem !default;
+$modal-dialog-margin-y-sm-up:       1.75rem !default;
+
+$modal-title-line-height:           $line-height-base !default;
+
+$modal-content-color:               null !default;
+$modal-content-bg:                  $white !default;
+$modal-content-border-color:        rgba($black, .2) !default;
+$modal-content-border-width:        $border-width !default;
+$modal-content-border-radius:       $border-radius-lg !default;
+$modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;
+$modal-content-box-shadow-xs:       $box-shadow-sm !default;
+$modal-content-box-shadow-sm-up:    $box-shadow !default;
+
+$modal-backdrop-bg:                 $butter !default;
+$modal-backdrop-opacity:            1 !default;
+$modal-header-border-color:         $border-color !default;
+$modal-footer-border-color:         $modal-header-border-color !default;
+$modal-header-border-width:         $modal-content-border-width !default;
+$modal-footer-border-width:         $modal-header-border-width !default;
+$modal-header-padding-y:            $modal-inner-padding !default;
+$modal-header-padding-x:            $modal-inner-padding !default;
+$modal-header-padding:              $modal-header-padding-y $modal-header-padding-x !default; // Keep this for backwards compatibility
+
+$modal-sm:                          300px !default;
+$modal-md:                          600px !default;
+$modal-lg:                          800px !default;
+$modal-xl:                          1140px !default;
+
+$modal-fade-transform:              translate(0, -50px) !default;
+$modal-show-transform:              none !default;
+$modal-transition:                  transform .3s ease-out !default;
+$modal-scale-transform:             scale(1.02) !default;
 
 
 // Alerts

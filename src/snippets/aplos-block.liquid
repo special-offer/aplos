@@ -17,7 +17,7 @@
 {% endcomment -%}
 
 {% assign light_text = true %}
-{% if bg_color == 'butter' or bg_color == 'butter-dark' %}
+{% if bg_color == 'butter' or bg_color == 'butter-dark' or 'bg_color' == 'white' %}
   {% assign light_text = false %}
 {% endif %}
 
@@ -25,7 +25,7 @@
   {% assign light_text = true %}
 {% endif %}
 
-<div class="aplos-block{% if light_text %} aplos-block--light{% endif %}{% if classes %} {{ classes }}{% endif %}" {{ attributes }}>
+<div class="aplos-block{% if light_text %} aplos-block--light{% endif %}{% if content == blank %} aplos-block--empty{% endif %}{% if classes %} {{ classes }}{% endif %}" {{ attributes }}>
   <div class="aplos-block__content">
     {{ content }}
   </div>

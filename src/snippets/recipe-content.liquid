@@ -7,31 +7,66 @@
 
   {% include 'recipe-content',
               recipe: { string }, - article.content
-              target: { string } - one of 'recipe' or 'ingredients'
+              target: { string } - one of 'recipe' or 'ingredients' or 'instructions'
   %}
 
 {% endcomment -%}
 
-{% if target == 'recipe' %}
-  {% if recipe contains '<ul' %}
-    <div class="recipe-content">
-      {% assign split_recipe = recipe | split: '<ul' %}
-      {{ recipe }}
-    </div>
-  {% else %}
-    <div class="recipe-content">{{ recipe }}</div>
-  {% endif %}
-{% elsif target == 'ingredients' %}
-  {% if recipe contains '<ul' %}
-    {% assign split_recipe = recipe | split: '<ul' %}
+{% capture ingredients %}
+  {% assign split_recipe = recipe | split: '<ul' %}
+  {% for piece in split_recipe %}
+    {% if piece contains '</ul>' %}
+      {{ piece | prepend: '<ul' }}
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+{% capture instructions %}
+  {% assign split_recipe = recipe | split: '<ol' %}
+  {% for piece in split_recipe %}
+    {% if piece contains '</ol>' %}
+      {{ piece | prepend: '<ol' }}
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+{% capture recipe_content %}
+  {% assign step_1_string = '' %}
+  {% assign step_2_string = '' %}
+
+  {% assign split_recipe = recipe | split: '<ul' %}
+  {% for piece in split_recipe %}
+    {% unless piece contains '</ul>' %}
+      {% assign step_1_string = step_1_string | append: piece %}
+    {% endunless %}
+  {% endfor %}
+
+  {% assign split_string = step_1_string | split: '<ol' %}
     {% for piece in split_recipe %}
-      {% if piece contains '</ul>' %}
-        <div class="recipe-ingredients">
-          {{ piece | prepend: '<ul'}}
-        </div>
-      {% endif %}
-    {% endfor %}
-  {% endif%}
-{% else %}
-  <div class="recipe-content">{{ recipe }}</div>
+    {% unless piece contains '</ol>' %}
+      {% assign step_2_string = step_2_string | append: piece %}
+    {% endunless %}
+  {% endfor %}
+
+  {{ step_2_string | strip }}
+{% endcapture %}
+
+{% assign ingredients  = ingredients  | strip | strip_newlines %}
+{% assign instructions = instructions | strip | strip_newlines %}
+
+{% assign ingredients = ingredients | replace: instructions %}
+{% assign instructions = instructions | replace: ingredients %}
+
+{% if target == 'recipe' %}
+  <div class="recipe-content">
+    {{ recipe_content }}
+  </div>
+{% elsif target == 'ingredients' %}
+  <div class="recipe-ingredients">
+    {{ ingredients }}
+  </div>
+{% elsif target == 'instructions' %}
+  <div class="recipe-instructions">
+    {{ instructions | replace: '<li>', '<li><span class="line">' | replace: '</li>', '</span></li>'}}
+  </div>
 {% endif %}

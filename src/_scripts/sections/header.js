@@ -9,6 +9,7 @@ import BaseSection from './base';
 import AJAXCartDrawer from '../components/ajaxCartDrawer';
 
 const $window = $(window);
+const $body = $(document.body);
 
 const selectors = {
   header: '[data-header]',
@@ -45,12 +46,12 @@ export default class HeaderSection extends BaseSection {
     // Cache these values because we use them in the scroll handler
     this.prevScrollTop      = 0;
     this.dirChangeScrollTop = 0; // Scrolltop value when the user changes scroll direction
-    this.scrollDirection    = 'down';
+    this.scrollDirection    = null; // up / down
     this.headerHeight       = 0;
     this.pencilBannerHeight = 0;
 
     // Bind these events so we can remove them
-    this.throttledOnScroll = throttle(50, this.onScroll.bind(this));
+    this.throttledOnScroll = this.onScroll.bind(this); // throttle(50, this.onScroll.bind(this));
     this.throttledOnResize = throttle(100, this.onResize.bind(this));
     this.onAJAXCartRender = this.onAJAXCartRender.bind(this);
 
@@ -113,6 +114,17 @@ export default class HeaderSection extends BaseSection {
     if (scrollTop <= 0) {
       hideHeader = false;
     }
+
+    // Update body class to reflect scroll state
+    if (scrollTop <= 0) {
+      $body.removeClass('scrolling-up');
+      $body.removeClass('scrolling-down');
+    }
+    else if (direction !== this.scrollDirection) {
+      $body
+        .removeClass(`scrolling-${this.scrollDirection}`)
+        .addClass(`scrolling-${direction}`);
+    }    
 
     requestAnimationFrame(() => {
       this.$header.toggleClass(classes.headerHidden, hideHeader);

@@ -1,0 +1,28 @@
+{%- comment %}
+
+  Article Share
+  ------------------------------------------------------------------------------
+
+  Usage:
+
+  {% render 'article-share',
+             url: { string }
+  %}
+
+{% endcomment -%}
+
+{% if url != blank %}
+  {% assign full_url = shop.url | append: url %}
+
+  <div class="article-share">
+    <span class="article-share__title">Share</span>
+    <ul class="article-share__links">
+      <li>
+        <a href="http://twitter.com/share?url={{ full_url | url_encode }}" target="_blank" title="Share to Twitter">TW</a>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ full_url | url_encode }}" target="_blank" title="share to Facebook">FB</a>
+      </li>      
+    </ul>
+  </div>
+{% endif %}

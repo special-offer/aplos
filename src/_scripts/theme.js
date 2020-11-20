@@ -5,6 +5,7 @@ import { throttle } from 'throttle-debounce';
 
 // Bootstrap JS
 import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/modal';
 
 // Core
 import {
@@ -37,8 +38,8 @@ import BlogSection                   from './sections/blog';
 import ArticleSection                from './sections/article';
 import TestimonialsSection           from './sections/testimonials';
 import HelpQuestionsSection          from './sections/helpQuestions';
-import PageSection                   from './sections/page';
 import PagePhilosophySection         from './sections/pagePhilosophy';
+import ProductPromotionSection       from './sections/productPromotion';
 import ShowcaseSection               from './sections/showcase';
 import AplosRowSection               from './sections/aplosRow';
 import HeroSection                   from './sections/hero';
@@ -75,8 +76,8 @@ Breakpoints.initialize();
   sectionManager.register('article', ArticleSection);
   sectionManager.register('testimonials', TestimonialsSection);
   sectionManager.register('help-questions', HelpQuestionsSection);
-  sectionManager.register('page', PageSection);
   sectionManager.register('page-philosophy', PagePhilosophySection);
+  sectionManager.register('product-promotion', ProductPromotionSection);
   sectionManager.register('showcase', ShowcaseSection);
   sectionManager.register('aplos-row', AplosRowSection);
   sectionManager.register('hero', HeroSection);
@@ -113,6 +114,19 @@ Breakpoints.initialize();
   if (cookiesEnabled()) {
     document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
   }
+
+  // Inner page links get animated scroll to
+  $('[data-page-nav]').on('click', (e) => {
+    const $scrollTo = $(e.currentTarget.getAttribute('href'));
+
+    if ($scrollTo.length === 0) return;
+
+    e.preventDefault();
+
+    const scrollTop = $scrollTo.offset().top - 120;
+
+    $('html, body').animate({ scrollTop }, 500, 'easeInOutQuart');
+  });
 
   // Form event handling / validation
   $body.on('change keydown', '.form-control', (e) => {

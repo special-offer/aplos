@@ -28,6 +28,29 @@
   {% render 'ambient-video' url: block.settings.product_background_video_file_url %}
 {% endcapture %}
 
+{% if block and block.settings.product_nutrition_label != blank %}
+  {% assign nutrition_label_modal_id = 'nutrition-label-modal-' | append: block.id %}
+
+  {% capture nutrition_label_modal %}
+    <div id="{{ nutrition_label_modal_id }}" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">    
+          <img
+            src="{{ block.settings.product_nutrition_label | img_url: '800x'}}"
+            style="height: auto; width: 100%;"
+          />
+        </div>
+      </div>
+
+      <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">
+          {% include 'icon-close' %}
+        </span>
+      </a>
+    </div>
+  {% endcapture %}  
+{% endif %}
+
 <div data-section-id="{{ section.id }}" data-section-type="product-extended" itemscope itemtype="http://schema.org/Product">
   <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
   <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
@@ -70,7 +93,8 @@
                          current_variant: current_variant,
                          block: block,
                          submit_button_contents: submit_button_contents,
-                         show_star_rating: block.settings.reviews_enabled
+                         show_star_rating: block.settings.reviews_enabled,
+                         nutrition_label_modal_id: nutrition_label_modal_id
               %}
             </div>
           </div>
@@ -143,9 +167,7 @@
 
               {{ recipe_view_all_link }}
             </div>
-
-            
-                     
+  
           {% endif %}
         </div>
       </div>
@@ -183,7 +205,6 @@
           {% endif %}
 
             <div class="product-detail__child">
-              
 
               <div class="aplos-block">
                 <h2>{{ block.settings.highlights_title }}</h2>
@@ -236,7 +257,6 @@
                 {% endif %}
               </div> 
 
-
             </div>          
           </div>
         </div>
@@ -286,6 +306,8 @@
       {% render 'product-json', product: product %}
     </script>
   </form>
+
+  {{ nutrition_label_modal }}
 </div>
 
 {% schema %}
@@ -340,6 +362,16 @@
           },
           {
             "type": "header",
+            "content": "Nutrition Label",
+            "info": "Specify which detail to use for display in the next section"
+          },
+          {
+            "type": "image_picker",
+            "id": "product_nutrition_label",
+            "label": "Image"
+          },
+          {
+            "type": "header",
             "content": "Additional Details",
             "info": "These details display as an expandable list"
           },
@@ -354,6 +386,12 @@
             "label": "Detail #1 Content"
           },
           {
+            "type": "checkbox",
+            "id": "detail_nutrition_facts_1",
+            "label": "Show Nutrition Label",
+            "default": false
+          },          
+          {
             "type": "text",
             "id": "detail_title_2",
             "label": "Detail #2 Title"
@@ -364,6 +402,12 @@
             "label": "Detail #2 Content"
           },
           {
+            "type": "checkbox",
+            "id": "detail_nutrition_facts_2",
+            "label": "Show Nutrition Label",
+            "default": false
+          },           
+          {
             "type": "text",
             "id": "detail_title_3",
             "label": "Detail #3 Title"
@@ -373,6 +417,12 @@
             "id": "detail_content_3",
             "label": "Detail #3 Content"
           },
+          {
+            "type": "checkbox",
+            "id": "detail_nutrition_facts_3",
+            "label": "Show Nutrition Label",
+            "default": false
+          },           
           {
             "type": "header",
             "content": "Common Questions"

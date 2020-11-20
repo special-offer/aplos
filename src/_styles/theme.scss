@@ -51,6 +51,7 @@
 @import 'components/quantity-adjuster';
 @import 'components/dots';
 @import 'components/expandable-list';
+@import 'components/modal';
 @import 'components/swiper';
 @import 'components/newsletter-form';
 @import 'components/testimonials';
@@ -61,6 +62,7 @@
 @import 'components/showcase';
 @import 'components/recipes';
 @import 'components/foursixty';
+@import 'components/product-promotion';
 
 /**
  * MODULES
@@ -88,6 +90,7 @@
 @import 'templates/gift-card';
 @import 'templates/customer';
 @import 'templates/challenge';
+@import 'templates/philosophy';
 
 
 .development-mode {
@@ -139,57 +142,20 @@ html {
   }
 
 
-.product-titles .yotpo.yotpo .standalone-bottomline .star-clickable{
+.product-titles .yotpo.yotpo .standalone-bottomline .star-clickable {
     flex-direction: row-reverse;
     border-bottom: 1px black solid;
     margin-top: 24px;
 
 }
 
-.product-titles .yotpo-stars{
+.product-titles .yotpo-stars {
     margin-left: 22px;
     position: relative;
     top: -2px;
     margin-right: 0px !important;
 
 }
-
-
-@media (min-width:768px) {
-
-  .product-detail-form .quantity-adjuster input[type=number],
-  .product-detail-form .quantity-adjuster button,
-  .product-detail-form .quantity-adjuster
-  {
-    height: 64px;
-        border-radius: 4px;
-  }
-
-    .product-detail-form .btn-primary{
-        display: inline-block;width: 66.66%;
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .template-product-extended{
 
     .product-titles{
@@ -202,18 +168,25 @@ html {
             }
         }
     }
-    .product-detail-form{
-        .form-group{
-            display: flex;
-            justify-content: space-between;
-            button{
-                outline: 0 !important;
-            }
+    .product-detail-form {
+      .form-group {
+          display: flex;
+          justify-content: space-between;
 
-            .btn-primary{
-                border-color: #f5f4b7;
-            }
+          button{
+              outline: 0 !important;
+          }
+
+          .btn-primary{
+              border-color: #f5f4b7;
+          }
+      }
+
+      .form-group--purchase-options {
+        @include media-breakpoint-down(sm) {
+          display: none;
         }
+      }
     }
 }
 
@@ -224,19 +197,15 @@ html {
     height: 100vh;
 }
 
-.aplos-row-big-text{
+// .aplos-row-big-text{
 
-    p:last-child {
-        margin-bottom: 0
-    }
+//     p:last-child {
+//         margin-bottom: 0
+//     }
 
-}
+// }
 
 @media (max-width:767.98px) {
-
-    .aplos-row-big-text{
-        display: none !important;
-    }
 
     .aplos-row--100vh{
         height: 100vw;
@@ -246,26 +215,26 @@ html {
 
 @media (min-width:768px) {
 
-    .aplos-row-big-text{
-        padding: 96px 36px 0px;
-    }
+    // .aplos-row-big-text{
+    //     padding: 96px 36px 0px;
+    // }
 
-    .aplos-row-big-text p {
-        font-family: Goudy Old Style, serif;
-        font-size: 40px;
-        line-height: 1.05;
-    }
+    // .aplos-row-big-text {
+    //     font-family: Goudy Old Style, serif;
+    //     font-size: 40px;
+    //     line-height: 1.05;
+    // }
 
     
 }
 
-@media (min-width:1200px) {
+// @media (min-width:1200px) {
 
-    .aplos-row-big-text{
-        padding: 96px 96px 0px;
-    }
+//     .aplos-row-big-text{
+//         padding: 96px 96px 0px;
+//     }
     
-}
+// }
 
 
 
@@ -329,11 +298,6 @@ html {
         text-align: center;
     }
 
-    .footer__upper .aplos-container{
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-
     .svg-wrap svg{
         width: 32px;
         margin-bottom: 32px;
@@ -374,9 +338,9 @@ html {
         width: 100%;
     }
 
-    .template-product-extended .product-detail-form .form-group{
-        display: block;
-    }
+    // .template-product-extended .product-detail-form .form-group{
+    //     display: block;
+    // }
 
 
     .product-detail-form .quantity-adjuster input[type=number], .product-detail-form .quantity-adjuster button, .product-detail-form .quantity-adjuster{
@@ -395,10 +359,6 @@ html {
 
 
 .template-page-philosophy{
-    .page-hero{
-        background-color: #F5F4B7 !important
-    }
-
     .aplos-row:first-child{
         .aplos-block__top-title{
             margin-top: auto;
